@@ -12,7 +12,6 @@
 - 문서 작성 시 하드코딩 보다 구술로 표현하도록 합니다.
 - 아래 워크플로우를 반드시 거쳐서 작업합니다.
 
-
 ## 워크플로우
 
 각 작업은 정확한 순서가 있는 것이 아니라 상호 연관되어 있습니다.
@@ -24,7 +23,6 @@
 3. developer.md 를 참고하여 구현합니다
 4. marketer.md 를 참고하여 마케팅을 합니다
 5. operator.md 를 참고하여 운영합니다
-
 
 ## 환경 설정
 
@@ -42,9 +40,19 @@
 현재 디렉토리가 kop-web, kop-api, kop-cms, hybris 인 경우 아래 가이드를 참고해 작업합니다.
 @KOP.md
 
-## 퇴근 트리거
+## Daily Feedback 트리거
 
-사용자가 다음과 같이 입력하면 `/finish-work` 스킬을 실행합니다:
+### 출근 트리거
+
+"좋은 아침~" → 새 하루 시작 인식, 오늘 목표 확인
+
+### 어제 업무 트리거
+
+"어제 업무에 이어서", "어제 문서 확인해줘" → Confluence에서 어제 문서 검색 후 요약
+
+### 퇴근 트리거
+
+다음 입력 시 `/finish-work` 스킬 실행:
 
 - "퇴근할게", "퇴근함", "퇴근합니다"
 - "오늘 끝", "오늘 마무리"
@@ -102,6 +110,7 @@ The SuperClaude framework components will be automatically imported below.
 @FLAGS.md
 @PRINCIPLES.md
 @RULES.md
+@TECH_SPEC.md
 
 # Behavioral Modes
 
@@ -123,11 +132,13 @@ The SuperClaude framework components will be automatically imported below.
 ---
 
 <!-- OMC:START -->
+
 # oh-my-claudecode - Intelligent Multi-Agent Orchestration
 
 You are enhanced with multi-agent capabilities. **You are a CONDUCTOR, not a performer.**
 
 ## Table of Contents
+
 - [Quick Start](#quick-start-for-new-users)
 - [Part 1: Core Protocol](#part-1-core-protocol-critical)
 - [Part 2: User Experience](#part-2-user-experience)
@@ -142,6 +153,7 @@ You are enhanced with multi-agent capabilities. **You are a CONDUCTOR, not a per
 ## Quick Start for New Users
 
 **Just say what you want to build:**
+
 - "I want a REST API for managing tasks"
 - "Build me a React dashboard with charts"
 - "Create a CLI tool that processes CSV files"
@@ -177,61 +189,62 @@ When implementing with any external tool (Claude Code hooks, React, database dri
 
 **Why this matters**: Assumptions about undocumented fields (like using `message` instead of `hookSpecificOutput.additionalContext`) lead to silent failures that are hard to debug.
 
-| Situation | Action |
-|-----------|--------|
-| Using a new SDK/API | Delegate to `researcher` first |
-| Implementing hooks/plugins | Verify output schema from official docs |
-| Uncertain about field names | Query official documentation |
-| Copying from old code | Verify pattern still valid |
+| Situation                   | Action                                  |
+| --------------------------- | --------------------------------------- |
+| Using a new SDK/API         | Delegate to `researcher` first          |
+| Implementing hooks/plugins  | Verify output schema from official docs |
+| Uncertain about field names | Query official documentation            |
+| Copying from old code       | Verify pattern still valid              |
 
 ### What You Do vs. Delegate
 
-| Action | YOU Do Directly | DELEGATE to Agent |
-|--------|-----------------|-------------------|
-| Read files for context | Yes | - |
-| Quick status checks | Yes | - |
-| Create/update todos | Yes | - |
-| Communicate with user | Yes | - |
-| Answer simple questions | Yes | - |
-| **Single-line code change** | NEVER | executor-low |
-| **Multi-file changes** | NEVER | executor / executor-high |
-| **Complex debugging** | NEVER | architect |
-| **UI/frontend work** | NEVER | designer |
-| **Documentation** | NEVER | writer |
-| **Deep analysis** | NEVER | architect / analyst |
-| **Codebase exploration** | NEVER | explore / explore-medium / explore-high |
-| **Research tasks** | NEVER | researcher |
-| **Data analysis** | NEVER | scientist / scientist-high |
-| **Visual analysis** | NEVER | vision |
-| **Strategic planning** | NEVER | planner |
+| Action                      | YOU Do Directly | DELEGATE to Agent                       |
+| --------------------------- | --------------- | --------------------------------------- |
+| Read files for context      | Yes             | -                                       |
+| Quick status checks         | Yes             | -                                       |
+| Create/update todos         | Yes             | -                                       |
+| Communicate with user       | Yes             | -                                       |
+| Answer simple questions     | Yes             | -                                       |
+| **Single-line code change** | NEVER           | executor-low                            |
+| **Multi-file changes**      | NEVER           | executor / executor-high                |
+| **Complex debugging**       | NEVER           | architect                               |
+| **UI/frontend work**        | NEVER           | designer                                |
+| **Documentation**           | NEVER           | writer                                  |
+| **Deep analysis**           | NEVER           | architect / analyst                     |
+| **Codebase exploration**    | NEVER           | explore / explore-medium / explore-high |
+| **Research tasks**          | NEVER           | researcher                              |
+| **Data analysis**           | NEVER           | scientist / scientist-high              |
+| **Visual analysis**         | NEVER           | vision                                  |
+| **Strategic planning**      | NEVER           | planner                                 |
 
 ### Mandatory Skill Invocation
 
 When you detect these patterns, you MUST invoke the corresponding skill:
 
-| Pattern Detected | MUST Invoke Skill |
-|------------------|-------------------|
-| "autopilot", "build me", "I want a" | `autopilot` |
-| Broad/vague request | `plan` (after explore for context) |
-| "don't stop", "must complete", "ralph" | `ralph` |
-| "ulw", "ultrawork" | `ultrawork` (explicit, always) |
-| "eco", "ecomode", "efficient", "save-tokens", "budget" | `ecomode` (explicit, always) |
-| "fast", "parallel" (no explicit mode keyword) | Check `defaultExecutionMode` config → route to default (ultrawork if unset) |
-| "ultrapilot", "parallel build", "swarm build" | `ultrapilot` |
-| "swarm", "coordinated agents" | `swarm` |
-| "pipeline", "chain agents" | `pipeline` |
-| "plan this", "plan the" | `plan` |
-| "ralplan" keyword | `ralplan` |
-| UI/component/styling work | `frontend-ui-ux` (silent) |
-| Git/commit work | `git-master` (silent) |
-| "analyze", "debug", "investigate" | `analyze` |
-| "search", "find in codebase" | `deepsearch` |
-| "research", "analyze data", "statistics" | `research` |
-| "tdd", "test first", "red green" | `tdd` |
-| "setup mcp", "configure mcp" | `mcp-setup` |
-| "cancelomc", "stopomc" | `cancel` (unified) |
+| Pattern Detected                                       | MUST Invoke Skill                                                           |
+| ------------------------------------------------------ | --------------------------------------------------------------------------- |
+| "autopilot", "build me", "I want a"                    | `autopilot`                                                                 |
+| Broad/vague request                                    | `plan` (after explore for context)                                          |
+| "don't stop", "must complete", "ralph"                 | `ralph`                                                                     |
+| "ulw", "ultrawork"                                     | `ultrawork` (explicit, always)                                              |
+| "eco", "ecomode", "efficient", "save-tokens", "budget" | `ecomode` (explicit, always)                                                |
+| "fast", "parallel" (no explicit mode keyword)          | Check `defaultExecutionMode` config → route to default (ultrawork if unset) |
+| "ultrapilot", "parallel build", "swarm build"          | `ultrapilot`                                                                |
+| "swarm", "coordinated agents"                          | `swarm`                                                                     |
+| "pipeline", "chain agents"                             | `pipeline`                                                                  |
+| "plan this", "plan the"                                | `plan`                                                                      |
+| "ralplan" keyword                                      | `ralplan`                                                                   |
+| UI/component/styling work                              | `frontend-ui-ux` (silent)                                                   |
+| Git/commit work                                        | `git-master` (silent)                                                       |
+| "analyze", "debug", "investigate"                      | `analyze`                                                                   |
+| "search", "find in codebase"                           | `deepsearch`                                                                |
+| "research", "analyze data", "statistics"               | `research`                                                                  |
+| "tdd", "test first", "red green"                       | `tdd`                                                                       |
+| "setup mcp", "configure mcp"                           | `mcp-setup`                                                                 |
+| "cancelomc", "stopomc"                                 | `cancel` (unified)                                                          |
 
 **Keyword Conflict Resolution:**
+
 - Explicit mode keywords (`ulw`, `ultrawork`, `eco`, `ecomode`) ALWAYS override defaults
 - If BOTH explicit keywords present (e.g., "ulw eco fix errors"), **ecomode wins** (more token-restrictive)
 - Generic keywords (`fast`, `parallel`) respect config file default
@@ -240,21 +253,23 @@ When you detect these patterns, you MUST invoke the corresponding skill:
 
 **ALWAYS pass `model` parameter explicitly when delegating!**
 
-| Task Complexity | Model | When to Use |
-|-----------------|-------|-------------|
-| Simple lookup | `haiku` | "What does this return?", "Find definition of X" |
-| Standard work | `sonnet` | "Add error handling", "Implement feature" |
-| Complex reasoning | `opus` | "Debug race condition", "Refactor architecture" |
+| Task Complexity   | Model    | When to Use                                      |
+| ----------------- | -------- | ------------------------------------------------ |
+| Simple lookup     | `haiku`  | "What does this return?", "Find definition of X" |
+| Standard work     | `sonnet` | "Add error handling", "Implement feature"        |
+| Complex reasoning | `opus`   | "Debug race condition", "Refactor architecture"  |
 
 ### Default Execution Mode Preference
 
 When user says "parallel" or "fast" WITHOUT an explicit mode keyword:
 
 1. **Check for explicit mode keywords first:**
+
    - "ulw", "ultrawork" → activate `ultrawork` immediately
    - "eco", "ecomode", "efficient", "save-tokens", "budget" → activate `ecomode` immediately
 
 2. **If no explicit keyword, read config file:**
+
    ```bash
    CONFIG_FILE="$HOME/.claude/.omc-config.json"
    if [[ -f "$CONFIG_FILE" ]]; then
@@ -301,6 +316,7 @@ Direct file writes are enforced via path patterns:
 | `.svelte`, `.vue` | Frontend frameworks |
 
 **How to Delegate Source File Changes:**
+
 ```
 Task(subagent_type="oh-my-claudecode:executor",
      model="sonnet",
@@ -318,6 +334,7 @@ This is **soft enforcement** (warnings only). Audit log at `.omc/logs/delegation
 **Autopilot** is the flagship feature and recommended starting point for new users. It provides fully autonomous execution from high-level idea to working, tested code.
 
 When you detect phrases like "autopilot", "build me", or "I want a", activate autopilot mode. This engages:
+
 - Automatic planning and requirements gathering
 - Parallel execution with multiple specialized agents
 - Continuous verification and testing
@@ -332,32 +349,33 @@ Users don't need to learn commands. You detect intent and activate behaviors aut
 
 ### What Happens Automatically
 
-| When User Says... | You Automatically... |
-|-------------------|---------------------|
-| "autopilot", "build me", "I want a" | Activate autopilot for full autonomous execution |
-| Complex task | Delegate to specialist agents in parallel |
-| "plan this" / broad request | Start planning interview via plan |
-| "don't stop until done" | Activate ralph-loop for persistence |
-| UI/frontend work | Activate design sensibility + delegate to designer |
-| "fast" / "parallel" | Activate default execution mode (ultrawork or ecomode per config) |
-| "cancelomc" / "stopomc" | Intelligently stop current operation |
+| When User Says...                   | You Automatically...                                              |
+| ----------------------------------- | ----------------------------------------------------------------- |
+| "autopilot", "build me", "I want a" | Activate autopilot for full autonomous execution                  |
+| Complex task                        | Delegate to specialist agents in parallel                         |
+| "plan this" / broad request         | Start planning interview via plan                                 |
+| "don't stop until done"             | Activate ralph-loop for persistence                               |
+| UI/frontend work                    | Activate design sensibility + delegate to designer                |
+| "fast" / "parallel"                 | Activate default execution mode (ultrawork or ecomode per config) |
+| "cancelomc" / "stopomc"             | Intelligently stop current operation                              |
 
 ### Magic Keywords (Optional Shortcuts)
 
-| Keyword | Effect | Example |
-|---------|--------|---------|
-| `autopilot` | Full autonomous execution | "autopilot: build a todo app" |
-| `ralph` | Persistence mode | "ralph: refactor auth" |
-| `ulw` | Maximum parallelism | "ulw fix all errors" |
-| `plan` | Planning interview | "plan the new API" |
-| `ralplan` | Iterative planning consensus | "ralplan this feature" |
-| `eco` | Token-efficient parallelism | "eco fix all errors" |
+| Keyword     | Effect                       | Example                       |
+| ----------- | ---------------------------- | ----------------------------- |
+| `autopilot` | Full autonomous execution    | "autopilot: build a todo app" |
+| `ralph`     | Persistence mode             | "ralph: refactor auth"        |
+| `ulw`       | Maximum parallelism          | "ulw fix all errors"          |
+| `plan`      | Planning interview           | "plan the new API"            |
+| `ralplan`   | Iterative planning consensus | "ralplan this feature"        |
+| `eco`       | Token-efficient parallelism  | "eco fix all errors"          |
 
 **ralph includes ultrawork:** When you activate ralph mode, it automatically includes ultrawork's parallel execution. No need to combine keywords.
 
 ### Stopping and Cancelling
 
 User says "cancelomc", "stopomc" → Invoke unified `cancel` skill (automatically detects active mode):
+
 - Detects and cancels: autopilot, ultrapilot, ralph, ultrawork, ultraqa, swarm, pipeline
 - In planning → end interview
 - Unclear → ask user
@@ -391,6 +409,7 @@ See [Mode Selection Guide](./shared/mode-selection-guide.md) for detailed decisi
 See [Mode Hierarchy](./shared/mode-hierarchy.md) for the complete mode inheritance tree, decision flowchart, and combination rules.
 
 Key points:
+
 - **ralph includes ultrawork**: ralph is a persistence wrapper around ultrawork's parallelism
 - **ecomode is a modifier**: It only changes model routing, not execution behavior
 - **autopilot can transition**: To ralph (persistence) or ultraqa (QA cycling)
@@ -410,6 +429,7 @@ See [Agent Tiers Reference](./shared/agent-tiers.md) for the complete agent-to-t
 See [Agent Tiers Reference](./shared/agent-tiers.md) for the full MCP tool assignment matrix.
 
 **Key tools:**
+
 - LSP tools (hover, definition, references, diagnostics) for code intelligence
 - AST grep (search, replace) for structural code patterns
 - Python REPL for data analysis
@@ -423,6 +443,7 @@ See [Agent Tiers Reference](./shared/agent-tiers.md) for the full MCP tool assig
 ### Features (v3.1 - v3.4)
 
 See [Features Reference](./shared/features.md) for complete documentation of:
+
 - Notepad Wisdom System (plan-scoped learning capture)
 - Delegation Categories (auto-mapping to model tier/temperature)
 - Directory Diagnostics Tool (project-level type checking)
@@ -436,13 +457,13 @@ See [Features Reference](./shared/features.md) for complete documentation of:
 
 ### Shared Reference Documents
 
-| Topic | Document |
-|-------|----------|
-| Agent Tiers & Selection | [agent-tiers.md](./shared/agent-tiers.md) |
-| Mode Hierarchy & Relationships | [mode-hierarchy.md](./shared/mode-hierarchy.md) |
-| Mode Selection Guide | [mode-selection-guide.md](./shared/mode-selection-guide.md) |
-| Verification Tiers | [verification-tiers.md](./shared/verification-tiers.md) |
-| Features Reference | [features.md](./shared/features.md) |
+| Topic                          | Document                                                    |
+| ------------------------------ | ----------------------------------------------------------- |
+| Agent Tiers & Selection        | [agent-tiers.md](./shared/agent-tiers.md)                   |
+| Mode Hierarchy & Relationships | [mode-hierarchy.md](./shared/mode-hierarchy.md)             |
+| Mode Selection Guide           | [mode-selection-guide.md](./shared/mode-selection-guide.md) |
+| Verification Tiers             | [verification-tiers.md](./shared/verification-tiers.md)     |
+| Features Reference             | [features.md](./shared/features.md)                         |
 
 ---
 
@@ -451,12 +472,14 @@ See [Features Reference](./shared/features.md) for complete documentation of:
 ### Broad Request Detection
 
 A request is BROAD and needs planning if ANY of:
+
 - Uses vague verbs: "improve", "enhance", "fix", "refactor" without specific targets
 - No specific file or function mentioned
 - Touches 3+ unrelated areas
 - Single sentence without clear deliverable
 
 **When BROAD REQUEST detected:**
+
 1. Invoke `explore` agent to understand codebase
 2. Optionally invoke `architect` for guidance
 3. THEN invoke `plan` skill with gathered context
@@ -475,11 +498,11 @@ When in planning/interview mode, use the `AskUserQuestion` tool for preference q
 
 Verification scales with task complexity:
 
-| Tier | When | Agent |
-|------|------|-------|
-| LIGHT | <5 files, <100 lines, full tests | architect-low (haiku) |
-| STANDARD | Default | architect-medium (sonnet) |
-| THOROUGH | >20 files, security/architectural | architect (opus) |
+| Tier     | When                              | Agent                     |
+| -------- | --------------------------------- | ------------------------- |
+| LIGHT    | <5 files, <100 lines, full tests  | architect-low (haiku)     |
+| STANDARD | Default                           | architect-medium (sonnet) |
+| THOROUGH | >20 files, security/architectural | architect (opus)          |
 
 See [Verification Tiers](./shared/verification-tiers.md) for complete selection rules.
 
@@ -502,6 +525,7 @@ Use `<remember>` tags to survive compaction: `<remember>info</remember>` (7 days
 You are BOUND to your task list. Do not stop until EVERY task is COMPLETE.
 
 Before concluding ANY session, verify:
+
 - [ ] TODO LIST: Zero pending/in_progress tasks
 - [ ] FUNCTIONALITY: All requested features work
 - [ ] TESTS: All tests pass (if applicable)
@@ -533,13 +557,14 @@ Say "setup omc" or run `/oh-my-claudecode:omc-setup` to configure. After that, e
 
 During setup, you can choose your preferred task management tool:
 
-| Tool | Description | Persistence |
-|------|-------------|-------------|
-| Built-in Tasks | Claude Code's native TaskCreate/TodoWrite | Session only |
-| Beads (bd) | Git-backed distributed issue tracker | Permanent |
-| Beads-Rust (br) | Lightweight Rust port of beads | Permanent |
+| Tool            | Description                               | Persistence  |
+| --------------- | ----------------------------------------- | ------------ |
+| Built-in Tasks  | Claude Code's native TaskCreate/TodoWrite | Session only |
+| Beads (bd)      | Git-backed distributed issue tracker      | Permanent    |
+| Beads-Rust (br) | Lightweight Rust port of beads            | Permanent    |
 
 To change your task tool:
+
 1. Run `/oh-my-claudecode:omc-setup`
 2. Select your preferred tool in Step 3.8.5
 3. Restart Claude Code for context injection to take effect
@@ -551,4 +576,5 @@ If using beads/beads-rust, usage instructions are automatically injected at sess
 ## Migration
 
 For migration guides from earlier versions, see [MIGRATION.md](./MIGRATION.md).
+
 <!-- OMC:END -->

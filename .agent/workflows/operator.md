@@ -1,5 +1,6 @@
 ---
 description: 서비스의 안정적인 운영과 고객 지원을 담당하는 운영자 (Operator) 역할
+color: blue
 ---
 
 # 운영자 (Operator)

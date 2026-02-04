@@ -1,5 +1,6 @@
 ---
 description: 기획된 내용을 실제 동작하는 코드로 구현하는 개발자 (Developer) 역할
+color: green
 ---
 
 # 개발자 (Developer)
@@ -54,12 +55,12 @@ description: 기획된 내용을 실제 동작하는 코드로 구현하는 개�
 
 워크플로우 실행 시 다음 산출물을 생성합니다:
 
-| 산출물 | 경로 | 내용 |
-|--------|------|------|
-| **아키텍처** | `docs/dev/ARCHITECTURE.md` | 기술 스택, 디렉토리 구조, 설계 결정 |
-| **디자인 시스템** | `docs/dev/DESIGN_SYSTEM.md` | 컬러, 타이포, 컴포넌트 규칙 |
-| **ERD** | `docs/dev/ERD.md` | 데이터 모델, 테이블 관계 |
-| **API 명세** | `docs/dev/API.md` | 엔드포인트, 요청/응답 스키마 |
+| 산출물            | 경로                        | 내용                                |
+| ----------------- | --------------------------- | ----------------------------------- |
+| **아키텍처**      | `docs/dev/ARCHITECTURE.md`  | 기술 스택, 디렉토리 구조, 설계 결정 |
+| **디자인 시스템** | `docs/dev/DESIGN_SYSTEM.md` | 컬러, 타이포, 컴포넌트 규칙         |
+| **ERD**           | `docs/dev/ERD.md`           | 데이터 모델, 테이블 관계            |
+| **API 명세**      | `docs/dev/API.md`           | 엔드포인트, 요청/응답 스키마        |
 
 ### 생성 순서
 
@@ -80,13 +81,14 @@ description: 기획된 내용을 실제 동작하는 코드로 구현하는 개�
 
 **`/frontend-design` 스킬을 사용**하여 UI/UX 설계를 진행합니다.
 
-| 상황 | 스킬 활용 |
-|------|----------|
+| 상황                  | 스킬 활용                                               |
+| --------------------- | ------------------------------------------------------- |
 | DESIGN_SYSTEM.md 작성 | `/frontend-design` 호출하여 컴포넌트, 컬러, 타이포 설계 |
-| STORYBOARD.md 작성 | `/frontend-design` 호출하여 화면 흐름 및 인터랙션 설계 |
-| 실제 UI 구현 | `/frontend-design` 호출하여 프로덕션급 컴포넌트 생성 |
+| STORYBOARD.md 작성    | `/frontend-design` 호출하여 화면 흐름 및 인터랙션 설계  |
+| 실제 UI 구현          | `/frontend-design` 호출하여 프로덕션급 컴포넌트 생성    |
 
 **호출 예시:**
+
 ```
 /frontend-design BRAND.md를 참조하여 측정일기 앱의 디자인 시스템을 설계해줘
 ```
@@ -95,13 +97,14 @@ description: 기획된 내용을 실제 동작하는 코드로 구현하는 개�
 
 Stitch를 활용한 디자인 및 컴포넌트 개발 스킬:
 
-| 스킬 | 용도 | 호출 |
-|------|------|------|
-| **design-md** | Stitch 프로젝트 분석 → DESIGN.md 생성 | `/design-md` |
-| **reactcomponents** | Stitch 디자인 → React 컴포넌트 변환 | `/reactcomponents` |
-| **stitch-loop** | 자율 반복 빌드 패턴으로 웹사이트 구축 | `/stitch-loop` |
+| 스킬                | 용도                                  | 호출               |
+| ------------------- | ------------------------------------- | ------------------ |
+| **design-md**       | Stitch 프로젝트 분석 → DESIGN.md 생성 | `/design-md`       |
+| **reactcomponents** | Stitch 디자인 → React 컴포넌트 변환   | `/reactcomponents` |
+| **stitch-loop**     | 자율 반복 빌드 패턴으로 웹사이트 구축 | `/stitch-loop`     |
 
 **워크플로우 예시:**
+
 ```
 1. /stitch-loop 로 디자인 프로토타입 생성
 2. /design-md 로 DESIGN.md 추출
@@ -110,19 +113,19 @@ Stitch를 활용한 디자인 및 컴포넌트 개발 스킬:
 
 ### Stitch MCP 직접 사용
 
-| 도구 | 용도 |
-|------|------|
-| `mcp__stitch__create_project` | 프로젝트 생성 |
-| `mcp__stitch__generate_screen_from_text` | 텍스트로 화면 생성 |
-| `mcp__stitch__list_screens` | 화면 목록 조회 |
-| `mcp__stitch__get_screen` | 특정 화면 상세 조회 |
+| 도구                                     | 용도                |
+| ---------------------------------------- | ------------------- |
+| `mcp__stitch__create_project`            | 프로젝트 생성       |
+| `mcp__stitch__generate_screen_from_text` | 텍스트로 화면 생성  |
+| `mcp__stitch__list_screens`              | 화면 목록 조회      |
+| `mcp__stitch__get_screen`                | 특정 화면 상세 조회 |
 
 ### Magic MCP (21st.dev)
 
 컴포넌트 빌드 및 인스피레이션 검색:
 
-| 도구 | 용도 |
-|------|------|
-| `mcp__magic__21st_magic_component_builder` | AI 컴포넌트 생성 |
+| 도구                                           | 용도                     |
+| ---------------------------------------------- | ------------------------ |
+| `mcp__magic__21st_magic_component_builder`     | AI 컴포넌트 생성         |
 | `mcp__magic__21st_magic_component_inspiration` | 디자인 인스피레이션 검색 |
-| `mcp__magic__21st_magic_component_refiner` | 컴포넌트 개선 |
+| `mcp__magic__21st_magic_component_refiner`     | 컴포넌트 개선            |
