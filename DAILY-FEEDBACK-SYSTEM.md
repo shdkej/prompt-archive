@@ -1,7 +1,8 @@
 ---
 description: 일일 업무 대화 관리 및 Confluence 자동 문서화
 argument-hint: (선택) 추가 메모 또는 "어제"
-allowed-tools: ["Read", "Grep", "Glob", "Bash", "mcp__plugin_atlassian_atlassian__*"]
+allowed-tools:
+  ["Read", "Grep", "Glob", "Bash", "mcp__plugin_atlassian_atlassian__*"]
 ---
 
 # Daily Feedback System
@@ -13,24 +14,30 @@ allowed-tools: ["Read", "Grep", "Glob", "Bash", "mcp__plugin_atlassian_atlassian
 ## 설정
 
 ```yaml
-mode: session  # session | conversation
+mode: session # session | conversation
 ```
 
-| 항목 | 값 |
-|------|-----|
-| 사용자명 | seonghonoh |
-| Space Key | `~63561b381cc605b1fd15aca2` |
-| Parent Page ID | `182943745` |
-| 플랫폼 | purpleio.atlassian.net |
+| 항목           | 값                                     |
+| -------------- | -------------------------------------- |
+| 사용자명       | seonghonoh                             |
+| Cloud ID       | `7989a082-e844-4dc0-b5f6-d441f5855741` |
+| Space ID       | `27754725`                             |
+| Space Key      | `~63561b381cc605b1fd15aca2`            |
+| Parent Page ID | `182943745`                            |
+| 플랫폼         | purpleio.atlassian.net                 |
 
 ### 프로젝트 분류
 
-| 분류 | 경로 패턴 | Confluence |
-|------|----------|------------|
-| 업무 | `~/dev/` | 업로드 |
-| 개인 | `~/workspace/` | 로컬만 |
+| 분류 | 경로 패턴      | Confluence |
+| ---- | -------------- | ---------- |
+| 업무 | `~/dev/`       | 업로드     |
+| 개인 | `~/workspace/` | 로컬만     |
 
 > 설정 파일: `~/.claude/project-categories.json`
+
+### 도구
+
+- confluence는 MCP를 사용하여 접근합니다.
 
 ---
 
@@ -41,6 +48,7 @@ mode: session  # session | conversation
 **트리거**: "좋은 아침~"
 
 **동작**:
+
 - 새 하루 업무 시작 인식
 - 이전 대화는 참고용으로만 (과도한 참조 금지)
 - 오늘 주요 업무/목표 확인
@@ -50,22 +58,27 @@ mode: session  # session | conversation
 ### 어제 업무 이어가기
 
 **트리거**:
+
 - "어제 업무에 이어서", "어제 작업 이어서"
 - "어제 문서 확인해줘", "어제 업무 요약해줘"
 
 **동작**:
+
 1. 어제 날짜 계산 (주말 시 금요일로)
 2. Confluence에서 `[MM/DD]` 포함 문서 검색
 3. 요약 제공
 
 **응답 형식**:
+
 ```markdown
 ## 어제 ({날짜}) 업무 요약
 
 ### 어제의 주요 내용
+
 {요약}
 
 ### 오늘 이어갈 내용
+
 {다음 액션}
 ```
 
@@ -74,22 +87,25 @@ mode: session  # session | conversation
 ### 퇴근
 
 **트리거**:
+
 - "퇴근할게~", "퇴근한다", "오늘 업무 끝"
 - `/finish-work`
 
 **지연 퇴근 트리거**:
+
 - "어제 퇴근할게~", "퇴근 정리 깜빡했네"
 - `/finish-work 어제`
 
 #### 날짜 판별
 
-| 시간대 | 판별 |
-|--------|------|
-| 오전 (09-12시) | 전날 가능성 95% |
-| 새벽 (00-06시) | 전날 가능성 90% |
+| 시간대              | 판별            |
+| ------------------- | --------------- |
+| 오전 (09-12시)      | 전날 가능성 95% |
+| 새벽 (00-06시)      | 전날 가능성 90% |
 | 오후/저녁 (12-24시) | 당일 가능성 80% |
 
 **애매한 경우**:
+
 ```
 어느 날 업무 정리를 도와드릴까요?
 1 - 어제({날짜}) 업무 정리
@@ -100,8 +116,8 @@ mode: session  # session | conversation
 
 ### 주기별 요약
 
-| 트리거 | 동작 |
-|--------|------|
+| 트리거             | 동작      |
+| ------------------ | --------- |
 | "이번 주 정리해줘" | 주간 요약 |
 | "이번 달 정리해줘" | 월간 요약 |
 
@@ -114,6 +130,7 @@ mode: session  # session | conversation
 **데이터 소스**: `~/.claude/projects/*/` 세션 파일 (JSONL)
 
 **처리**:
+
 1. 오늘 수정된 세션 파일 탐색
 2. 프로젝트 경로로 업무/개인 분류
 3. 각 세션에서 추출: 요청 작업, 수행 작업, 결정 사항
@@ -123,13 +140,16 @@ mode: session  # session | conversation
 **제외**: 코드 변경사항(git diff), 상세 코드
 
 **출력**:
+
 ```markdown
 # 오늘 작업 요약 - YYYY-MM-DD
 
 ## 업무 (Confluence 업로드됨)
+
 - kop-web: 기능 A 구현
 
 ## 개인
+
 - my-telegram-bot: 아키텍처 문서화
 ```
 
@@ -140,8 +160,10 @@ mode: session  # session | conversation
 **데이터 소스**: 당일 대화 내용
 
 **Step 1**: 하루 요약
+
 ```markdown
 ## 오늘 하루 요약
+
 - **주요 작업**: {핵심 업무}
 - **완료사항**: {완료된 것}
 - **진행사항**: {진행 중}
@@ -149,6 +171,7 @@ mode: session  # session | conversation
 ```
 
 **Step 2**: 간단 회고 (선택적)
+
 1. "오늘 가장 잘 해결한 문제나 성과가 있다면?"
 2. "오늘 어려웠던 점이나 내일 해결해야 할 게 있나?"
 3. "오늘 새로 깨달은 점이나 다음에 적용할 만한 게 있어?"
@@ -163,29 +186,39 @@ mode: session  # session | conversation
 
 ### 일일 업무
 
+**제목 형식**: `[MM/DD] {프로젝트1 주요작업} 및 {프로젝트2 주요작업}`
+
+- 예: `[02/04] AI Legal Advisor UI 개선 및 Hybris 파일처리 로직 개선`
+
 ```markdown
-# [MM/DD] {오늘의 주요 작업}
+# [MM/DD] {프로젝트1 주요작업} 및 {프로젝트2 주요작업}
 
 ## 오늘의 주요 논의사항
+
 - {토픽}
 
 ## 주요 결정사항 및 배운점
+
 - {결정 및 인사이트}
 
 ## 진행 상황
+
 - 완료: {완료 항목}
 - 진행 중: {진행 항목}
 - 이슈: {이슈}
 
 ## 다음 액션 아이템
+
 - [ ] 단기 (1-3일)
 - [ ] 중기 (1-2주)
 - [ ] 장기 (1개월+)
 
 ## 내일 이어갈 내용
+
 - {다음 주제}
 
 ---
+
 **작성자**: seonghonoh
 **작성일**: {날짜}
 ```
@@ -196,11 +229,13 @@ mode: session  # session | conversation
 # [MM/DD] {업무 내용} (늦은 정리)
 
 ## 작성 노트
+
 > 이 문서는 {작성일}에 작성된 {업무일} 업무 정리입니다.
 
 {일반 템플릿 내용}
 
 ---
+
 **업무일**: {업무일} (늦은 정리)
 ```
 
@@ -210,10 +245,13 @@ mode: session  # session | conversation
 # Week {주차} ({시작일} - {종료일})
 
 ## 이번 주 주요 성과
+
 ## 프로젝트 진행 현황
+
 - 진행률: {%} / 완료: {개}개 / 진행 중: {개}개
 
 ## 다음 주 우선순위
+
 1. High Priority
 2. Medium Priority
 ```
@@ -224,9 +262,11 @@ mode: session  # session | conversation
 # {년월} 월간 요약
 
 ## 월간 주요 성과
+
 - 달성률: {%}
 
 ## 심층 분석
+
 - 잘한 점 / 개선점 / 학습 포인트
 
 ## 다음 달 핵심 목표 Top 3
@@ -237,6 +277,7 @@ mode: session  # session | conversation
 ## 예외 상황
 
 ### 기존 문서 존재 시
+
 ```
 어제({날짜}) 문서가 이미 존재합니다.
 1 - 기존 문서에 업데이트
@@ -245,6 +286,7 @@ mode: session  # session | conversation
 ```
 
 ### 연휴 후 복귀
+
 ```
 며칠간 대화가 없었습니다. 어느 날 업무를 정리하시겠습니까?
 - 1: {날짜1}
@@ -258,7 +300,9 @@ mode: session  # session | conversation
 
 ```javascript
 // 한국 시간대
-const koreaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Seoul"});
+const koreaTime = new Date().toLocaleString("en-US", {
+  timeZone: "Asia/Seoul",
+});
 
 // 주말 처리: 전날 계산 시
 // 일요일(0) → 금요일로 (-2일 추가)
@@ -277,8 +321,8 @@ const koreaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Seoul"});
 
 ## 에러 처리
 
-| 상황 | 처리 |
-|------|------|
-| 세션 파일 없음 | "오늘 작업한 세션이 없습니다" |
-| Confluence 연결 실패 | 로컬에 요약 출력 |
-| 설정 파일 없음 | 기본값 사용 |
+| 상황                 | 처리                          |
+| -------------------- | ----------------------------- |
+| 세션 파일 없음       | "오늘 작업한 세션이 없습니다" |
+| Confluence 연결 실패 | 로컬에 요약 출력              |
+| 설정 파일 없음       | 기본값 사용                   |

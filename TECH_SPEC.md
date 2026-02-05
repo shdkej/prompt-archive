@@ -26,13 +26,17 @@
   - prometheus metric 처리
 - 필수 기능에 대한 간단한 테스트 작성
 - 피처플래그를 통한 관리
+- 코드로 모든게 구성되어야 하고 명령어를 치면 복구
 - 인프라 관련
   - CI/CD github workflows로 설정
   - dockerize
     - 작은 컨테이너 이미지, 빠른 스타트
   - stateless 우선
+  - 큐 활용 가능
 
 ## 📋 아키텍처 원칙
+
+각 이름은 참고용이고 프론트엔드는 그에 맞게 만들어서 진행한다.
 
 ### 1. Controller (Lambda Handler)
 
