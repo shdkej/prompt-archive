@@ -238,89 +238,36 @@ Operator: 실패 케이스 대응, 문의 감소, 모니터링 지표
 ## 워크플로우 로그 관리
 
 모든 워크플로우 실행은 **로그 파일로 기록**합니다.
+포맷은 자유, **태그만 지키면 됩니다.** 상세 가이드: `WORKFLOW_DEBUG_GUIDE.md`
 
-### 🚨 자동 생성 규칙 (필수)
-
-**워크플로우 시작 시 반드시 로그 파일을 먼저 생성합니다.**
+### 자동 생성 규칙
 
 ```bash
-# 워크플로우 시작 전 필수 실행
 mkdir -p .agent/logs
 touch .agent/logs/workflow_{날짜}_{프로젝트명}.log
 ```
 
-| 규칙 | 설명 |
-|------|------|
-| **시작 시 생성** | 워크플로우 시작과 동시에 로그 파일 생성 |
-| **실시간 기록** | 각 단계 완료 시마다 로그 추가 |
-| **완료 조건** | 로그 파일 없이 워크플로우 완료 불가 |
+### 세션 시작 시
 
-### 로그 파일 규칙
+1. `.agent/logs/`에서 `INCOMPLETE` 상태 워크플로우 스캔 → 있으면 이어서 할지 물음
+2. `lessons-learned.md`에서 현재 작업 관련 교훈 확인
 
-**저장 위치:** `.agent/logs/`
-**파일명 형식:** `workflow_{날짜}_{프로젝트명}.log`
-**예시:** `workflow_2025-02-03_total-tracker.log`
+### 로그 태그
 
-### 로그 기록 시점
+기존 태그 (`WORKFLOW:START`, `REQUEST`, `JUDGE`, `END`, `STATUS`, `SUMMARY` 등)에 더해 다음 태그를 상황에 맞게 사용합니다:
 
-| 시점              | 기록 내용                            | 필수 |
-| ----------------- | ------------------------------------ | ---- |
-| 워크플로우 시작   | 요청 내용, 판단 결과                 | ✅   |
-| 패널 토론         | 각 역할 관점, 교집합/충돌, 통합 방향 | ✅   |
-| 브레인스토밍      | 아이디어 목록, 수렴 결과             | ✅   |
-| 각 단계 시작/종료 | 작업 내용, 산출물                    | ✅   |
-| 크로스 리뷰       | 각 역할 검토 결과 (PASS/WARN/FAIL)   | ✅   |
-| 수정 반영         | 수정 항목 목록                       | ⚪   |
-| 워크플로우 종료   | 상태, 요약, 산출물 목록              | ✅   |
+| 태그 | 언제 | 비고 |
+|------|------|------|
+| `[WORKFLOW:CONTEXT]` | 환경/제약/이전 워크플로우 관계가 있을 때 | `CONTINUES_FROM:` 으로 이전 로그 연결 가능 |
+| `[WORKFLOW:DECISION]` | 방향전환(Pivot) 시 | 상황, 선택지, 결정, 근거를 기록 |
+| `[WORKFLOW:LEARNING]` | 재사용 가능한 교훈 발생 시 | `lessons-learned.md`에 적재. `#{카테고리}` 태깅 |
+| `[WORKFLOW:METRICS]` | 종료 시 정량 요약 | 소요시간, 산출물 수, 리뷰 건수 등 |
+| `[WORKFLOW:NEXT]` | INCOMPLETE로 끝날 때 | 다음 세션 인수인계용. INCOMPLETE 시 필수 |
+| `[VERIFY:{TYPE}]` | 빌드/테스트/수동검증 결과 | PASS/FAIL + 실행 내용 요약 |
 
-### 로그 형식
+### 교훈 적재
 
-```
-[CATEGORY:ACTION] 메시지
-```
-
-**카테고리:** WORKFLOW, PANEL, BRAINSTORM, PLANNER, DEVELOPER, MARKETER, OPERATOR, REVIEW
-**액션:** START, END, JUDGE, ANALYZE, RESULT, OUTPUT, REVISE, WARN, FAIL 등
-
-### 워크플로우 시작 템플릿
-
-```
-============================================================
-[WORKFLOW:START] {날짜}
-[WORKFLOW:REQUEST] "{요청 내용}"
-============================================================
-
-[WORKFLOW:JUDGE] 요청: "{요청 요약}"
-[WORKFLOW:JUDGE] 판단 조건: {조건}
-[WORKFLOW:JUDGE] 결정: {PANEL_DISCUSSION | BRAINSTORM | SEQUENTIAL}
-```
-
-### 워크플로우 종료 템플릿
-
-```
-============================================================
-[WORKFLOW:END] {날짜}
-[WORKFLOW:STATUS] {SUCCESS | PARTIAL | FAILED}
-[WORKFLOW:SUMMARY]
-- 패널 토론: {결과}
-- 기획: {결과}
-- 개발: {결과}
-- 마케팅: {결과}
-- 운영: {결과}
-============================================================
-
-## 산출물 목록
-- {파일경로1}
-- {파일경로2}
-```
-
-### 디버깅 활용
-
-로그 파일을 통해:
-
-- 어느 단계에서 문제가 발생했는지 추적
-- 크로스 리뷰에서 어떤 피드백이 있었는지 확인
-- 의사결정 근거 회고
+`[WORKFLOW:LEARNING]` 태그가 있으면 워크플로우 종료 시 `.agent/logs/lessons-learned.md`에 추가합니다.
 
 **상세 가이드:** `WORKFLOW_DEBUG_GUIDE.md` 참조
 
