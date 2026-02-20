@@ -13,6 +13,7 @@
   - 서버리스 우선
     - 서버 필요할 경우 AWS ECS
   - upstash redis
+- UI : shadcn/ui
 - SEO, GEO(Generative Engine Optimization) 적용 고려
   - SSG 사용
 - 인증

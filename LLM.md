@@ -11,7 +11,8 @@
 - DOC 기반으로 작업합니다. 계획과 실제사항을 모두 작성하고 변경사항은 기록합니다.
 - 문서 작성 시 하드코딩 보다 구술로 표현하도록 합니다.
 - 아래 워크플로우를 반드시 거쳐서 작업합니다.
-- 만약 애매한 게 있다면 모든게 해소 될 때까지 나한테 질문해라
+- 만약 애매한 게 있다면 모든게 해소 될 때까지 나한테 질문하세요.
+- 필요하면 반박하세요. 더 단순한 접근이 있다면 반드시 말해주세요.
 
 ## 워크플로우
 
@@ -35,6 +36,26 @@
 ## 테스트
 
 - 테스트는 별도의 안내가 없다면 반드시 실행합니다
+
+## Power Automate 작업
+
+PA(Power Automate) Flow 작업 시 아래 규칙을 따릅니다:
+
+- E3 라이선스 기준 Standard 커넥터만 사용 (HTTP Premium 불가)
+- 산출물 구성:
+  - **코드 보기용 JSON** (flow-N-codeview.json): PA 디자이너 "코드" 보기에 붙여넣기용
+  - **단계별 구축 가이드** (step-by-step-guide.md): 디자이너에서 수동 구축용
+  - **원본 정의 JSON** (flow-N-\*.json): 전체 연결정보 포함 참조용
+- 코드 보기 JSON 포맷 (definition 부분만):
+  ```json
+  {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "triggers": { ... },
+    "actions": { ... }
+  }
+  ```
+- ZIP 패키지 가져오기는 PA에서 직접 내보낸 것만 인식하므로 사용하지 않음
 
 ## KOP 작업
 
