@@ -1,5 +1,5 @@
 ---
-description: 일일 업무 대화 관리 및 Confluence 자동 문서화
+description: 출근, 퇴근 시 일일 회고 관리 시스템. 일일 업무 대화 관리 및 Confluence 자동 문서화
 argument-hint: (선택) 추가 메모 또는 "어제"
 allowed-tools:
   ["Read", "Grep", "Glob", "Bash", "mcp__plugin_atlassian_atlassian__*"]
@@ -35,9 +35,20 @@ mode: session # session | conversation
 
 > 설정 파일: `~/.claude/project-categories.json`
 
+### Obsidian
+
+| 항목       | 값                                |
+| ---------- | --------------------------------- |
+| Vault      | Obsidian (로컬)                   |
+| Vault 경로 | `~/Obsidian`                      |
+| 다이어리   | `~/Obsidian/purple/diary/`        |
+| 파일 형식  | `YYYY-MM.md` (월별 단일 파일)     |
+| 항목 형식  | `## MM-DD` 헤더 아래 불릿 리스트  |
+
 ### 도구
 
 - confluence는 MCP를 사용하여 접근합니다.
+- Obsidian vault는 마크다운 파일 직접 읽기/쓰기로 접근합니다.
 
 ---
 
@@ -49,9 +60,28 @@ mode: session # session | conversation
 
 **동작**:
 
-- 새 하루 업무 시작 인식
-- 이전 대화는 참고용으로만 (과도한 참조 금지)
-- 오늘 주요 업무/목표 확인
+1. 새 하루 업무 시작 인식
+2. 어제 회고 검색 (두 소스를 확인, 어느 쪽이든 있으면 표시)
+   - **Obsidian**: `~/Obsidian/purple/diary/YYYY-MM.md`에서 어제 날짜(`## MM-DD`) 항목의 `#### 회고` 섹션 읽기
+   - **Confluence**: 어제(주말 시 금요일) 문서에서 "오늘의 회고" 섹션 검색
+   - 둘 다 없으면 생략 (에러 아님)
+3. 이전 대화는 참고용으로만 (과도한 참조 금지)
+4. 오늘 주요 업무/목표 확인
+
+**응답 형식**:
+
+```markdown
+## 좋은 아침!
+
+### 어제 회고 ({날짜})
+- 배움: {핵심 1-2줄}
+- 개선: {핵심 1-2줄}
+- 이어갈 것: {액션 아이템}
+
+### 오늘 어떤 작업을 할 예정인가요?
+```
+
+> 어제 회고 문서가 없으면 "어제 회고" 섹션은 생략하고 바로 오늘 목표를 물어본다.
 
 ---
 
@@ -89,12 +119,12 @@ mode: session # session | conversation
 **트리거**:
 
 - "퇴근할게~", "퇴근한다", "오늘 업무 끝"
-- `/finish-work`
+- `/daily-feedback-system`
 
 **지연 퇴근 트리거**:
 
 - "어제 퇴근할게~", "퇴근 정리 깜빡했네"
-- `/finish-work 어제`
+- `/daily-feedback-system 어제`
 
 #### 날짜 판별
 
@@ -127,15 +157,39 @@ mode: session # session | conversation
 
 ### Mode: session
 
-**데이터 소스**: `~/.claude/projects/*/` 세션 파일 (JSONL)
+**세션 수집 스크립트**: `~/workspace/prompt-archive/.agent/scripts/daily-sessions.py`
 
 **처리**:
 
-1. 오늘 수정된 세션 파일 탐색
-2. 프로젝트 경로로 업무/개인 분류
-3. 각 세션에서 추출: 요청 작업, 수행 작업, 결정 사항
-4. **업무용만** Confluence 업로드
-5. 전체 요약 터미널 출력
+1. 스크립트 실행하여 세션 목록 수집
+   - 오늘: `python3 ~/workspace/prompt-archive/.agent/scripts/daily-sessions.py`
+   - 어제: `python3 ~/workspace/prompt-archive/.agent/scripts/daily-sessions.py {어제날짜}`
+   - 특정일: `python3 ~/workspace/prompt-archive/.agent/scripts/daily-sessions.py YYYY-MM-DD`
+2. 스크립트 출력(프로젝트명, 분류, 사용자 메시지)을 기반으로 각 세션의 핵심 작업 요약
+3. 필요시 개별 세션 JSONL 파일을 읽어 상세 내용 보강
+4. **회고 추출** (AI가 세션 내용 분석하여 초안 자동 생성)
+   - 오늘의 배움: 새로 알게 된 기술, 패턴, 도구 사용법
+   - 개선할 점: 다음에 더 잘할 수 있는 것, 반복되는 비효율
+   - 내일 이어갈 것: 미완료 작업, 다음 액션
+5. **사용자 확인**: 회고 초안을 보여주고 "추가할 내용 있어?" 한 번만 물어봄
+   - "없어" / "빠르게 넘어갈게" → 초안 그대로 사용
+   - 추가 입력 → 반영
+6. **기술 교훈 연동** (선택): 기술적 배움이 있으면 `lessons-learned.md` 적재 제안
+   - "이 배움을 lessons-learned에 기록할까요?" → "응" → 적재
+   - 강제 아님, 자연스럽게 제안만
+7. **Obsidian 저장**: `~/Obsidian/purple/diary/YYYY-MM.md`의 해당 날짜 항목에 작업 요약 + 회고 추가
+   - 해당 날짜 항목(`## MM-DD`)이 이미 있으면 기존 내용 아래에 추가
+   - 없으면 파일 최상단에 새 항목 생성
+   - 회고는 `#### 회고` 하위에 배움/개선할 점/내일 이어갈 것 형식으로 작성
+8. **업무용만** Confluence 업로드 (회고 섹션 포함)
+9. 전체 요약 터미널 출력
+
+**스크립트가 없는 경우 수동 절차**:
+
+1. `~/.claude/projects/*/` 에서 대상 날짜에 수정된 `.jsonl` 파일 탐색 (subagents 제외)
+2. 각 JSONL 파일에서 `role: user`인 메시지의 텍스트 추출 (시스템 태그 `<` 시작 제외)
+3. 프로젝트 디렉토리명에서 원래 경로 복원 (예: `-Users-seongho-noh-dev-kop-web` → `/Users/seongho-noh/dev/kop-web`)
+4. `~/.claude/project-categories.json`의 patterns로 업무/개인 분류
 
 **제외**: 코드 변경사항(git diff), 상세 코드
 
@@ -216,6 +270,17 @@ mode: session # session | conversation
 ## 내일 이어갈 내용
 
 - {다음 주제}
+
+## 오늘의 회고
+
+### 배움
+- {새로 알게 된 기술, 패턴, 도구 사용법}
+
+### 개선할 점
+- {다음에 더 잘할 수 있는 것, 반복되는 비효율}
+
+### 내일 이어갈 것
+- {미완료 작업, 다음 액션}
 
 ---
 
