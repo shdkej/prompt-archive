@@ -301,11 +301,7 @@ ORDER BY last_visit_time DESC;
     - 없으면: 당일 내용으로 `/tmp/diary-YYYY-MM.md` 생성 → `gog drive upload /tmp/diary-YYYY-MM.md --parent 1NiKzp9l9IHbQ2dOAN6cUd7qDDSyGyvDa --name YYYY-MM.md`
     - 임시 파일 삭제
 11. 전체 요약 터미널 출력
-12. (OpenClaw) 사용자가 회고를 요청한 경우, 헤드라인을 Google Calendar에도 기록
-    - 제목: `Daily Headline - YYYY-MM-DD`
-    - 설명: 헤드라인 + 한 줄 요약
-    - 이벤트 길이: 기본 5분
-13. 회고 작성 시 업무 외 항목도 가능하면 함께 반영
+12. 회고 작성 시 업무 외 항목도 가능하면 함께 반영
     - 영상 시청 경향/인사이트
     - 일상 리듬/생활 회고
 
