@@ -110,6 +110,32 @@ ORDER BY last_visit_time DESC;
 2. 영상 제목으로 주제 분류 (학습/뉴스/엔터테인먼트 등)
 3. 데일리 로그의 "오늘 본 것" 섹션에 요약 추가
 
+#### 3. Netflix 시청 기록 (자동 수집)
+
+| 항목      | 값                                                            |
+| --------- | ------------------------------------------------------------- |
+| 소스      | Chrome 브라우저 히스토리 DB (YouTube와 동일)                   |
+| 추출 방식 | DB 복사 후 SQLite 쿼리 (Chrome 잠금 회피)                     |
+
+**추출 쿼리**:
+
+```sql
+-- /tmp에 DB 복사 후 실행
+SELECT title, url,
+  datetime(last_visit_time/1000000-11644473600, 'unixepoch', 'localtime') as visit_time
+FROM urls
+WHERE url LIKE '%netflix.com/watch%'
+  AND date(last_visit_time/1000000-11644473600, 'unixepoch', 'localtime') = date('now', 'localtime')
+ORDER BY last_visit_time DESC;
+```
+
+**퇴근 시 처리**:
+
+1. 당일 Netflix 시청 기록 추출
+2. title이 "넷플릭스"만 표시되는 경우, 같은 날 browse 페이지(`?jbv=`)의 title에서 작품명 매칭 시도
+3. 작품명을 알 수 없으면 "Netflix 시청"으로만 기록
+4. 데일리 로그의 "오늘 본 것" 섹션에 추가
+
 ---
 
 ## 트리거
