@@ -175,7 +175,7 @@ Operator: 실패 케이스 대응, 문의 감소, 모니터링 지표
 
 ### 1. 상태 점검 (Check Status)
 
-시작할 때 항상 `PRODUCT_CONTEXT.md`를 읽으세요. 없으면 프로젝트 루트에 생성합니다.
+각 에이전트는 시작할 때 항상 `PRODUCT_CONTEXT.md`를 읽으세요. 없으면 워크플로우 마스터가 프로젝트 루트에 생성합니다.
 
 - 비전과 현재 상태가 일치하는지 확인합니다.
 - 각 역할(Role Updates)의 진행 상황을 검토하고, 충돌이나 지연이 없는지 파악합니다.
@@ -185,33 +185,6 @@ Operator: 실패 케이스 대응, 문의 감소, 모니터링 지표
 각 에이전트가 무엇을 잘하는지 이해하고, 해당 목표에 맞는 에이전트의 역량을 최대한 끌어냅니다.
 
 - 예 : 기능 개발이라고 개발 에이전트에만 할당하는게 아니라 마케터의 브랜드 아이덴티티에 대한 지식을 접목하는 등 최대한 다양한 에이전트가 서로 업무 공유를 하도록 합니다.
-
-### 스킬 활용 가이드
-
-특정 작업에는 전문 스킬을 활용합니다:
-
-| 작업                    | 스킬               | 설명                                   |
-| ----------------------- | ------------------ | -------------------------------------- |
-| 프론트엔드 UI/UX 설계   | `/frontend-design` | 디자인 시스템, 컴포넌트, 화면 설계     |
-| 디자인 → DESIGN.md      | `/design-md`       | Stitch 프로젝트에서 디자인 시스템 추출 |
-| 디자인 → React 컴포넌트 | `/reactcomponents` | Stitch 디자인을 React 코드로 변환      |
-| 자율 웹사이트 빌드      | `/stitch-loop`     | 반복 빌드 패턴으로 웹사이트 구축       |
-| 컴포넌트 생성           | Magic MCP          | AI 기반 컴포넌트 빌드                  |
-
-**Developer 단계에서 프론트엔드 작업 시:**
-
-```
-[DEVELOPER:FRONTEND] 디자인 워크플로우
-
-옵션 1: 문서 기반
-→ /frontend-design 호출
-→ DESIGN_SYSTEM.md, STORYBOARD.md 생성
-
-옵션 2: Stitch 기반 (프로토타입 → 코드)
-→ /stitch-loop 로 프로토타입 생성
-→ /design-md 로 DESIGN.md 추출
-→ /reactcomponents 로 컴포넌트 변환
-```
 
 ### 3. 업무 지시 (Assign Tasks)
 
@@ -248,44 +221,6 @@ Operator: 실패 케이스 대응, 문의 감소, 모니터링 지표
 
 > "이 기능의 사용성을 개선하고 싶어"
 > -> 마케터가 브랜드 아이덴티티 관련 문서 업데이트 및 방향 제시 -> 기획자가 사용자 관점에서 기획 후 ERD 문서 업데이트 -> 개발자가 ERD 기반으로 개발 -> `PRODUCT_CONTEXT` 업데이트 및 히스토리 관련 문서 업데이트
-
-## 워크플로우 로그 관리
-
-모든 워크플로우 실행은 **로그 파일로 기록**합니다.
-포맷은 자유, **태그만 지키면 됩니다.** 상세 가이드: `WORKFLOW_DEBUG_GUIDE.md`
-
-### 자동 생성 규칙
-
-```bash
-mkdir -p .agent/logs
-touch .agent/logs/workflow_{날짜}_{프로젝트명}.log
-```
-
-### 세션 시작 시
-
-1. `.agent/logs/`에서 `INCOMPLETE` 상태 워크플로우 스캔 → 있으면 이어서 할지 물음
-2. `lessons-learned.md`에서 현재 작업 관련 교훈 확인
-
-### 로그 태그
-
-기존 태그 (`WORKFLOW:START`, `REQUEST`, `JUDGE`, `END`, `STATUS`, `SUMMARY` 등)에 더해 다음 태그를 상황에 맞게 사용합니다:
-
-| 태그                  | 언제                                     | 비고                                            |
-| --------------------- | ---------------------------------------- | ----------------------------------------------- |
-| `[WORKFLOW:CONTEXT]`  | 환경/제약/이전 워크플로우 관계가 있을 때 | `CONTINUES_FROM:` 으로 이전 로그 연결 가능      |
-| `[WORKFLOW:DECISION]` | 방향전환(Pivot) 시                       | 상황, 선택지, 결정, 근거를 기록                 |
-| `[WORKFLOW:LEARNING]` | 재사용 가능한 교훈 발생 시               | `lessons-learned.md`에 적재. `#{카테고리}` 태깅 |
-| `[WORKFLOW:METRICS]`  | 종료 시 정량 요약                        | 소요시간, 산출물 수, 리뷰 건수 등               |
-| `[WORKFLOW:NEXT]`     | INCOMPLETE로 끝날 때                     | 다음 세션 인수인계용. INCOMPLETE 시 필수        |
-| `[VERIFY:{TYPE}]`     | 빌드/테스트/수동검증 결과                | PASS/FAIL + 실행 내용 요약                      |
-
-### 교훈 적재
-
-`[WORKFLOW:LEARNING]` 태그가 있으면 워크플로우 종료 시 `.agent/logs/lessons-learned.md`에 추가합니다.
-
-**상세 가이드:** `WORKFLOW_DEBUG_GUIDE.md` 참조
-
----
 
 ## 피드백 루프
 

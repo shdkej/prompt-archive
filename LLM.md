@@ -20,7 +20,7 @@
 
 각 작업은 정확한 순서가 있는 것이 아니라 상호 연관되어 있습니다.
 예를 들어 마케팅 포인트를 먼저 잡고 기획하여 성과 확인 후 구현을 할 수 있습니다.
-이를 workflow_master 가 지휘하도록 합니다.
+이를 workflow-master 가 지휘하도록 합니다.
 
 1. workflow_master.md 는 지휘자입니다. 전체적인 작업 계획을 세웁니다
 2. planner.md 를 참고하여 구체적인 작업을 세웁니다
@@ -138,6 +138,8 @@ PA(Power Automate) Flow 작업 시 아래 규칙을 따릅니다:
 
 - 내 설계 취향은 @TECH_SPEC.md 에 있으므로 설계 시 참고할 것
 - 복잡한 업무를 할 경우 아래 omc 스킬을 참조할 것 @OMC.md
+- /Users/seongho-noh/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main 이 위치에 나의 노트가 저장되어 있으니 필요할 경우 참고할 것
+
 
 ## MCP Documentation
 

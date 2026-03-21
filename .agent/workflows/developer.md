@@ -256,6 +256,33 @@ DESIGN_SYSTEM.md를 참조하여 코드 작성:
 4. 필요시 Pencil로 시각화하여 정리
 ```
 
+### 스킬 활용 가이드
+
+특정 작업에는 전문 스킬을 활용합니다:
+
+| 작업                    | 스킬               | 설명                                   |
+| ----------------------- | ------------------ | -------------------------------------- |
+| 프론트엔드 UI/UX 설계   | `/frontend-design` | 디자인 시스템, 컴포넌트, 화면 설계     |
+| 디자인 → DESIGN.md      | `/design-md`       | Stitch 프로젝트에서 디자인 시스템 추출 |
+| 디자인 → React 컴포넌트 | `/reactcomponents` | Stitch 디자인을 React 코드로 변환      |
+| 자율 웹사이트 빌드      | `/stitch-loop`     | 반복 빌드 패턴으로 웹사이트 구축       |
+| 컴포넌트 생성           | Magic MCP          | AI 기반 컴포넌트 빌드                  |
+
+**Developer 단계에서 프론트엔드 작업 시:**
+
+```
+[DEVELOPER:FRONTEND] 디자인 워크플로우
+
+옵션 1: 문서 기반
+→ /frontend-design 호출
+→ DESIGN_SYSTEM.md, STORYBOARD.md 생성
+
+옵션 2: Stitch 기반 (프로토타입 → 코드)
+→ /stitch-loop 로 프로토타입 생성
+→ /design-md 로 DESIGN.md 추출
+→ /reactcomponents 로 컴포넌트 변환
+```
+
 ---
 
 ## Pencil MCP 도구 레퍼런스
