@@ -10,16 +10,6 @@ allowed-tools: ["Read", "Grep", "Glob", "Bash"]
 
 ---
 
-## 설정
-
-```yaml
-mode: session # session | conversation
-```
-
-| 항목     | 값         |
-| -------- | ---------- |
-| 사용자명 | seonghonoh |
-
 ### 프로젝트 분류
 
 | 분류 | 경로 패턴      |
@@ -83,7 +73,7 @@ mode: session # session | conversation
 3. 데일리 로그의 해당 섹션에 통합
 4. 처리 완료 후 inbox 내용 비우기 (헤더만 남김)
 
-#### 2. YouTube 시청 기록 (자동 수집)
+#### 2. 미디어 시청 기록 (자동 수집 — YouTube, Netflix 통합)
 
 | 항목      | 값                                                              |
 | --------- | --------------------------------------------------------------- |
@@ -91,49 +81,31 @@ mode: session # session | conversation
 | DB 경로   | `~/Library/Application Support/Google/Chrome/Profile 1/History` |
 | 추출 방식 | DB 복사 후 SQLite 쿼리 (Chrome 잠금 회피)                       |
 
-**추출 쿼리**:
+**추출 쿼리** (단일 쿼리로 모든 플랫폼 수집):
 
 ```sql
 -- /tmp에 DB 복사 후 실행
-SELECT title, url,
+SELECT
+  CASE
+    WHEN url LIKE '%youtube.com/watch%' THEN 'YouTube'
+    WHEN url LIKE '%netflix.com/watch%' THEN 'Netflix'
+  END AS platform,
+  title, url,
   datetime(last_visit_time/1000000-11644473600, 'unixepoch', 'localtime') as visit_time
 FROM urls
-WHERE url LIKE '%youtube.com/watch%'
+WHERE (url LIKE '%youtube.com/watch%' OR url LIKE '%netflix.com/watch%')
   AND date(last_visit_time/1000000-11644473600, 'unixepoch', 'localtime') = date('now', 'localtime')
 ORDER BY last_visit_time DESC;
 ```
 
 **퇴근 시 처리**:
 
-1. 당일 YouTube 시청 목록 추출
+1. 당일 시청 기록 추출 (플랫폼별 자동 분류)
 2. 영상 제목으로 주제 분류 (학습/뉴스/엔터테인먼트 등)
-3. 데일리 로그의 "오늘 본 것" 섹션에 요약 추가
+3. Netflix title이 "넷플릭스"만 표시되는 경우, 같은 날 browse 페이지(`?jbv=`)의 title에서 작품명 매칭 시도. 알 수 없으면 "Netflix 시청"으로 기록
+4. 데일리 로그의 "오늘 본 것" 섹션에 플랫폼별 그룹핑하여 추가
 
-#### 3. Netflix 시청 기록 (자동 수집)
-
-| 항목      | 값                                           |
-| --------- | -------------------------------------------- |
-| 소스      | Chrome 브라우저 히스토리 DB (YouTube와 동일) |
-| 추출 방식 | DB 복사 후 SQLite 쿼리 (Chrome 잠금 회피)    |
-
-**추출 쿼리**:
-
-```sql
--- /tmp에 DB 복사 후 실행
-SELECT title, url,
-  datetime(last_visit_time/1000000-11644473600, 'unixepoch', 'localtime') as visit_time
-FROM urls
-WHERE url LIKE '%netflix.com/watch%'
-  AND date(last_visit_time/1000000-11644473600, 'unixepoch', 'localtime') = date('now', 'localtime')
-ORDER BY last_visit_time DESC;
-```
-
-**퇴근 시 처리**:
-
-1. 당일 Netflix 시청 기록 추출
-2. title이 "넷플릭스"만 표시되는 경우, 같은 날 browse 페이지(`?jbv=`)의 title에서 작품명 매칭 시도
-3. 작품명을 알 수 없으면 "Netflix 시청"으로만 기록
-4. 데일리 로그의 "오늘 본 것" 섹션에 추가
+> 새 플랫폼 추가 시: CASE 절과 WHERE 절에 `url LIKE '%{도메인}%'` 조건만 추가
 
 ---
 
@@ -160,9 +132,9 @@ ORDER BY last_visit_time DESC;
 
 ### 어제 회고 ({날짜})
 
-- Cut: {제거/위임한 것 또는 할 것}
-- Core: {핵심 원인 한 줄}
-- Logic: {적용 중인 새 규칙} `L-MMDD-순번`
+- Cut: {반복된 행동/판단 패턴 — 있을 때만}
+- Core: {어떤 상황에서 어떤 판단을 내렸는지}
+- Logic: {삶에 남기는 규칙 — 있을 때만} `L-MMDD-순번`
 
 ### 리마인드
 
@@ -261,9 +233,8 @@ ORDER BY last_visit_time DESC;
 
 ---
 
-## 퇴근 처리 모드
+## 퇴근 처리
 
-### Mode: session
 
 **세션 수집 스크립트**: `~/workspace/prompt-archive/.agent/scripts/daily-sessions.py`
 
@@ -284,28 +255,56 @@ ORDER BY last_visit_time DESC;
    - 탐지된 결정마다 Context/Options/Decision/Reasoning/Trade-off 구조로 정리
    - **업무/개인 분류**: 세션의 프로젝트 분류(`~/dev/` → 업무, `~/workspace/` → 개인)를 기준으로 결정도 자동 분류. inbox 메모는 내용으로 판단
    - 결정이 없는 루틴 작업 세션은 "새로운 결정 없음"으로 표기
-7. **회고 추출 - Minimalist Feedback Loop** (AI가 세션 내용 분석하여 초안 자동 생성)
-   - **Cut** (Noise Reduction): 오늘 에너지를 갉아먹은 불필요한 변수 식별 → 내일 제거/위임 대상
-   - **Core** (Data Extraction): 오늘 발생한 결과 중 인과관계가 가장 명확한 핵심 사건 → 성공/실패 원인을 한 줄로 정의
-   - **Logic** (System Upgrade): 위 원인을 바탕으로 내일부터 적용할 시스템 규칙 업데이트 (Leverage 또는 Antifragile)
-     - 새 Logic에 자동 ID 부여: `L-MMDD-순번` (예: `L-0309-1`)
-     - MMDD는 해당 날짜, 순번은 당일 내 1부터 증가
-8. **사용자 확인**: 결정 로그 + 회고 초안 + 오늘 본 영상을 함께 보여주고 "추가할 내용 있어?" 한 번만 물어봄
-   - "없어" / "빠르게 넘어갈게" → 초안 그대로 사용
-   - 추가 입력 → 반영
-9. **기술 교훈 연동** (선택): 기술적 배움이 있으면 `lessons-learned.md` 적재 제안
-   - "이 배움을 lessons-learned에 기록할까요?" → "응" → 적재
-   - 강제 아님, 자연스럽게 제안만
+7. **회고 추출 - Life Feedback Loop** (AI가 세션 + 오프라인 소스를 분석하여 초안 자동 생성)
+
+   > **원칙**: 나중에 나를 증명해 주는 것은 '버튼을 바꿨다'는 사실이 아니라, '갈등 상황에서 데이터 기반으로 의사결정을 조율했다'는 맥락이다. 기술 디테일이 아니라 **상황-판단-결과의 맥락**을 기록한다.
+
+   - **헤드라인** (신문 기사 헤드라인): 하루를 한 줄 기사 제목처럼. **상황(갈등/도전) + 대응(어떻게 조율했는지)**
+     - 좋은 예: "영업팀의 무리한 일정 요구, '기술 부채 리스트'로 방어"
+     - 좋은 예: "결제 이탈률 10% 감소를 위해, 개발팀과 '3단계 가설'을 수립"
+     - 좋은 예: "디자인 시안 전면 수정 위기, '우선순위 쳐내기'로 오픈 일정 사수"
+     - 나쁜 예: "ZeroTier로 사내망 뚫기 성공" (작업 로그)
+     - 나쁜 예: "법무 배분 UI 수정 및 ms-graph 전환" (할 일 목록)
+   - **Cut** (내가 반복하는 패턴): 구체적 상황에서 드러난 **행동/판단 패턴**. 기술 실수가 아니라 "왜 그 상황이 반복되는가"
+     - 좋은 예: "도구 3개를 번갈아 시도하며 2시간 소모 — '확정하지 못하는' 패턴. 되는 걸 확인했으면 멈춰야 했다"
+     - 좋은 예: "요구사항 변경에 바로 코드 수정 들어감 — 영향 범위 확인 없이 반응하는 패턴"
+     - 나쁜 예: "YAML 스펙 확인 없이 배포" (기술 실수)
+     - 나쁜 예: "확신 없이 시작했는데 오히려 빨랐다" (뜬구름)
+     - 반복 패턴이 없는 날은 생략
+   - **Core** (오늘의 진짜 성과): **맥락이 있는 의사결정이나 전환점**. 무엇을 했는지가 아니라 어떤 상황에서 어떤 판단을 내렸는지
+     - 좋은 예: "PM이 3개 기능 동시 요청 → 사용자 데이터 기반으로 1개만 먼저 하자고 설득, 수용됨"
+     - 좋은 예: "프로토타입 시연에서 '이거 진짜 쓸 수 있겠다' 피드백 → 만드는 것에서 쓰이게 하는 것으로 전환"
+     - 나쁜 예: "네트워크 보안 구조 먼저 확정하니 구현이 수월했음" (작업 후기)
+     - 특별한 의사결정 없는 루틴 날은 간략히
+   - **Logic** (삶에 남기는 규칙): 진짜 배운 게 있을 때만. **매일 강제 생성 X**
+     - 좋은 예: "되는 걸 확인하면 더 나은 걸 찾지 말고 확정하고 넘어가기 `L-0317-1`"
+     - 좋은 예: "요구사항 변경 시 코드 전에 영향 범위부터 그리기 `L-0317-2`"
+     - 나쁜 예: "k8s manifest 변경 시 helm template으로 렌더링 검증" (기술 규칙)
+     - 없는 날은 "오늘은 새로운 Logic 없음"
+     - 있을 경우 자동 ID 부여: `L-MMDD-순번`
+
+8. **Planner Agent 리뷰**: 회고 초안을 `planner` agent(`~/.claude/agents/planner.md`)에게 전달하여 품질 검증
+   - Agent 호출: `Agent(subagent_type="planner", prompt=...)`
+   - planner에게 전달하는 내용:
+     - `~/Obsidian/diary/review-patterns.md` (사용자 톤/취향 패턴 — 반드시 먼저 읽기)
+     - 회고 초안
+     - 최근 7일 회고 (패턴 비교용)
+   - planner는 패턴 파일의 Good/Bad 예시를 기준으로 초안을 검증하고, 개선된 초안을 반환
+   - planner가 "충분히 좋다"고 판단하면 그대로 통과
+
+9. **사용자 확인**: 결정 로그 + planner 리뷰 반영된 회고 + 오늘 본 영상을 함께 보여주고 "추가할 내용 있어?" 한 번만 물어봄
+   - "없어" / "빠르게 넘어갈게" → 초안 그대로 사용, planner 초안을 Good 패턴으로 `review-patterns.md`에 추가
+   - 사용자가 수정 → 수정 전후 차이를 `review-patterns.md`에 기록 (원본 → Bad, 수정본 → Good, 왜 거부됐는지 추론 메모)
 10. **Obsidian 저장**: `~/Obsidian/diary/YYYY-MM.md`의 해당 날짜 항목에 작업 요약 + 회고 추가
     - 해당 날짜 항목(`## MM-DD`)이 이미 있으면 기존 내용 아래에 추가
     - 없으면 파일 최상단에 새 항목 생성
-    - 헤드라인은 `#### 헤드라인` 하위에 하루를 한 줄로 요약 (예: "SSR 전환 결정한 날 — 속도가 전환율이다")
+    - 헤드라인은 `#### 헤드라인` 하위에 신문 기사 헤드라인 스타일로 작성 (예: "디자인 시안 전면 수정 위기, '우선순위 쳐내기'로 오픈 일정 사수")
     - `#### 업무` 하위에 업무 세션 요약 + 업무 결정
     - `#### 개인` 하위에 개인 세션 요약 + 개인 결정
     - `#### 인사이트` 하위에 다이어리 '기타' 섹션의 업무 외 인사이트/메모 중 의미 있는 것 정리 (업무와 무관한 생활 메모는 `#### 리마인드`로 분류)
     - 오늘 본 영상은 `#### 오늘 본 것` 하위에 주제별 그룹핑 (개인 섹션에 포함)
-    - 회고는 `#### 회고` 하위에 Cut/Core/Logic 형식으로 작성 (하루 전체 통합)
-    - Logic에는 반드시 ID 포함: `Logic: {내용} \`L-MMDD-순번\``
+    - 회고는 `#### 회고` 하위에 Cut/Core/Logic 형식으로 작성 (하루 전체 통합, planner 리뷰 반영)
+    - Cut: 반복 패턴이 없으면 생략. Logic: 진짜 배운 게 있을 때만 기록, ID 포함 `L-MMDD-순번`
     - **inbox.md 비우기**: 처리 완료 후 헤더만 남기고 내용 삭제
 11. **Google Drive 업로드**: 당일 리뷰 내용(헤드라인 + 업무/개인 요약 + 회고)만 추출하여 `diary` 폴더에 월별 파일로 업로드
     - `gog drive ls --parent 1NiKzp9l9IHbQ2dOAN6cUd7qDDSyGyvDa`로 해당 월 파일 존재 여부 확인
@@ -325,45 +324,6 @@ ORDER BY last_visit_time DESC;
 4. `~/.claude/project-categories.json`의 patterns로 업무/개인 분류
 
 **제외**: 코드 변경사항(git diff), 상세 코드
-
-**출력**:
-
-```markdown
-# 오늘 작업 요약 - YYYY-MM-DD
-
-## 업무 (Confluence 업로드됨)
-
-- kop-web: 기능 A 구현
-
-## 개인
-
-- my-telegram-bot: 아키텍처 문서화
-```
-
----
-
-### Mode: conversation
-
-**데이터 소스**: 당일 대화 내용
-
-**Step 1**: 하루 요약
-
-```markdown
-## 오늘 하루 요약
-
-- **주요 작업**: {핵심 업무}
-- **완료사항**: {완료된 것}
-- **진행사항**: {진행 중}
-- **이슈/도전**: {문제점}
-```
-
-**Step 2**: Minimalist Feedback Loop (선택적)
-
-1. **Cut**: "오늘 에너지를 갉아먹은 불필요한 변수가 있었어? 내일 제거하거나 위임할 건?"
-2. **Core**: "오늘 결과 중 인과관계가 가장 명확한 핵심 사건은? 성공/실패 원인을 한 줄로 정리하면?"
-3. **Logic**: "그 원인을 바탕으로 내일부터 적용할 새 규칙이 있어?"
-
-> "빠르게 넘어갈게" → 회고 생략
 
 ---
 
@@ -429,23 +389,26 @@ ORDER BY last_visit_time DESC;
 
 ## 오늘의 헤드라인
 
-> **{하루를 한 줄로 요약하는 문장}**
+> **{신문 기사 헤드라인: 상황(갈등/도전) + 대응(어떻게 조율했는지)}**
 
 ## 오늘의 회고 (Cut - Core - Logic)
 
-### Cut (Noise Reduction)
+> planner agent 리뷰를 거쳐 작성. 기술 작업 로그가 아니라 상황-판단-결과의 맥락을 기록한다.
 
-- {에너지를 갉아먹은 불필요한 변수} → **내일 액션**: {제거 또는 위임}
+### Cut (반복되는 나의 패턴)
 
-### Core (Data Extraction)
+- {구체적 상황에서 드러난 행동/판단 패턴} → **다음 액션**: {패턴을 깨기 위한 행동}
+- 반복 패턴이 없으면 이 섹션 생략
 
-- {인과관계가 가장 명확한 핵심 사건}
-- **원인 한 줄 정의**: {성공/실패의 근본 원인}
+### Core (오늘의 진짜 성과)
 
-### Logic (System Upgrade)
+- {어떤 상황/갈등에서 어떤 판단을 내렸고, 결과가 어떠했는지}
+- 특별한 의사결정 없는 루틴 날은 간략히
 
-- **새 규칙**: {내일부터 적용할 시스템 규칙} `L-MMDD-순번`
-- **유형**: {Leverage(성공 복제) | Antifragile(실패 방어)}
+### Logic (삶에 남기는 규칙)
+
+- {진짜 배운 게 있을 때만 기록} `L-MMDD-순번`
+- 없는 날은 "오늘은 새로운 Logic 없음"
 
 ---
 
