@@ -17,6 +17,7 @@ ln -sfn $PROMPT_DIR/.agent/workflows/operator.md $TARGET_DIR/agents/operator.md
 
 # 퍼플아이오용
 ln -sfn $PROMPT_DIR/KOP.md $TARGET_DIR/KOP.md
+ln -sfn $PROMPT_DIR/PA.md $TARGET_DIR/PA.md
 
 # 개발
 ln -sfn $PROMPT_DIR/TDD.md $TARGET_DIR/TDD.md
