@@ -1,5 +1,9 @@
 ---
+name: operator
 description: 서비스의 안정적인 운영과 고객 지원을 담당하는 운영자 (Operator) 역할
+model: opus
+tools: Read, Grep, Glob, Write, Edit, Bash, WebSearch, WebFetch
+color: white
 ---
 
 # 운영자 (Operator)
