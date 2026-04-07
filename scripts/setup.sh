@@ -29,5 +29,9 @@ ln -sfn $PROMPT_DIR/DAILY-FEEDBACK-SYSTEM.md $TARGET_DIR/skills/daily-feedback-s
 mkdir -p $TARGET_DIR/skills/omc
 ln -sfn $PROMPT_DIR/OMC.md $TARGET_DIR/skills/omc/skill.md
 
+# workflow-master 스킬
+mkdir -p $TARGET_DIR/skills/workflow-master
+ln -sfn $PROMPT_DIR/WORKFLOW-MASTER.md $TARGET_DIR/skills/workflow-master/skill.md
+
 # 디버깅
-ln -sfn $PROMPT_DIR/.agent/workflows/WORKFLOW_DEBUG_GUIDE.md $TARGET_DIR/WORKFLOW_DEBUG_GUIDE.md
+ln -sfn $PROMPT_DIR/WORKFLOW-DEBUG-GUIDE.md $TARGET_DIR/skills/workflow-master/WORKFLOW-DEBUG-GUIDE.md
