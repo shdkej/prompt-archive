@@ -15,7 +15,19 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Check quiet hours (KST 22:00-08:00)
+        id: time_check
+        run: |
+          KST_HOUR=$(TZ=Asia/Seoul date +%H)
+          if [ "$KST_HOUR" -ge 8 ] && [ "$KST_HOUR" -lt 22 ]; then
+            echo "send=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "send=false" >> "$GITHUB_OUTPUT"
+            echo "Quiet hours (KST $KST_HOUR시). Skipping notification."
+          fi
+
       - name: Extract changes and notify
+        if: steps.time_check.outputs.send == 'true'
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
