@@ -39,6 +39,167 @@ description: Agent-First 의도 등록 스킬. 자유 형식으로 의도를 선
 - 원격 Heartbeat 트리거를 즉시 실행
 - 트리거 ID: `trig_01Fubp8g8UDKQtvuSkFofPuM`
 
+---
+
+# 설계 문서
+
+## 핵심 전환
+
+```
+[AS-IS] User-Driven (반응형)
+  사용자 → 트리거 → workflow-master → 에이전트 할당 → 실행 → 보고
+
+[TO-BE] Agent-First (자율형)
+  사용자 → 의도 선언 → 일상 복귀
+  에이전트 → Heartbeat 기상 → 의도 확인 → 자율 실행 → 결과 알림
+                                                ↑
+                                    (판단 필요시만 사용자 호출)
+```
+
+사용자는 **의도(Intent)와 판단(Gate)**만 담당한다.
+에이전트는 **실행, 진행, 보고**를 허용된 권한 안에서 자율적으로 수행한다.
+
+## 설계 원칙
+
+| 원칙 | 설명 | 출처 |
+|------|------|------|
+| Heartbeat Loop | 에이전트가 스케줄에 따라 깨어나서 일감 확인→실행→보고→수면 | Paperclip |
+| Plan-Based Autonomy | 검증된 계획 안에서 수시간 자율 작업 가능 | Superpowers |
+| Context Chaining | 각 단계의 산출물이 다음 단계의 입력으로 자동 전달 | gstack |
+| Verifiable Criteria | 모호한 목표 대신 측정 가능한 성공 기준 | Karpathy |
+| Permission Boundary | 자율성은 무제한이 아니라 등급별 경계 안에서 작동 | 공통 |
+| Reuse Before Create | 새 컴포넌트 생성 전 기존 리소스 활용 가능 여부를 먼저 확인 | Lesson Learn |
+
+## 아키텍처
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    USER LAYER                           │
+│                                                         │
+│  INTENTS.md          의도 선언 (목표, 우선순위, 제약)     │
+│  Telegram            승인/거부, 진행 상황 수신           │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│                    CONTROL LAYER                        │
+│                                                         │
+│  Heartbeat Agent     스케줄 기반으로 깨어남              │
+│    ├── Intent 읽기   INTENTS.md에서 활성 의도 확인       │
+│    ├── State 확인    현재 상태 점검 (git, files, etc.)   │
+│    ├── Dispatch      적절한 실행 에이전트에 작업 할당     │
+│    └── Gate Check    권한 레벨에 따라 자율 실행/승인 요청 │
+│                                                         │
+│  PERMISSIONS.md      권한 경계 정의                      │
+│  GATES.md            승인 대기 큐                        │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│                    EXECUTION LAYER                      │
+│                                                         │
+│  기존 workflow-master   복잡한 작업 시 4-role 오케스트레이션 │
+│  단일 에이전트 실행      간단한 작업 시 focused 실행       │
+│  OMC 스킬               autopilot, ralph 등 활용         │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│                    NOTIFICATION LAYER                   │
+│                                                         │
+│  GitHub Action       푸시 감지 → Telegram 알림 발송      │
+│  infinity/reports/   실행 결과 로그 (영구 저장)          │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+```
+
+## Intent 설계
+
+### 구조
+
+```markdown
+## [intent-id] 의도 이름
+- status: declared | active | in_progress | blocked | completed
+- priority: critical | high | medium | low
+- heartbeat: 30m | 1h | 4h | daily | weekly
+- permission: L0 | L1 | L2
+- project: 프로젝트 경로 또는 이름
+- deadline: YYYY-MM-DD (선택)
+- goal: 이 의도가 달성되면 어떤 상태인지 한 줄로
+- success_criteria:
+  - 측정 가능한 기준
+- context: 관련 파일, URL, 참고 정보
+- constraints: 하지 말아야 할 것, 제약 조건
+```
+
+### 생명주기
+
+```
+declared ──→ active ──→ in_progress ──→ completed ──→ archive/로 이관
+                │              │
+                │              └──→ blocked (승인 대기) ──→ in_progress
+                │
+                └──→ cancelled
+```
+
+## Heartbeat 동작 흐름
+
+```
+[Heartbeat 기상 (매 시간)]
+    │
+    ├── 1. Inbox 확인 → 자유 형식을 구조화하여 Active로 이동
+    │
+    ├── 2. Active에서 활성 Intent 필터링
+    │   └── critical > high > medium > low, deadline 임박 우선
+    │
+    ├── 3. 각 Intent별 상태 점검
+    │   ├── 이전 리포트 확인 (infinity/reports/)
+    │   └── 다음 액션 결정
+    │
+    ├── 4. 권한 레벨 확인
+    │   ├── L0/L1 → 자율 실행
+    │   └── L2 → GATES.md 등록 + Telegram 승인 요청
+    │
+    ├── 5. 실행 (한 번에 하나의 Intent만)
+    │   ├── 간단 → 단일 에이전트
+    │   └── 복잡 → workflow-master 호출
+    │
+    ├── 6. 결과 기록 → infinity/reports/{intent-id}/{timestamp}.md
+    │
+    ├── 7. completed → infinity/intents/archive/로 이관
+    │
+    └── 8. 커밋 & 푸시 → GitHub Action → Telegram 알림
+```
+
+## Gate 승인 흐름
+
+```
+에이전트: L2 필요 → GATES.md 대기 등록 + Telegram 승인 요청
+    │
+    └── Intent status → blocked
+
+사용자: Telegram 알림 수신 → /infinity 승인 (Claude Code에서)
+    │
+    ├── 승인 → 다음 Heartbeat에서 실행
+    ├── 거부 → 대안 탐색
+    └── 수정 → 방향 조정 후 재실행
+```
+
+## 기존 시스템 통합
+
+Heartbeat Agent는 workflow-master의 **상위 계층**.
+기존 워크플로우를 대체하지 않고, 언제 어떤 워크플로우를 실행할지 결정하는 지휘관.
+
+| 기존 스킬 | Agent-First에서의 역할 |
+|-----------|----------------------|
+| `/workflow-master` | 복잡한 Intent 실행 시 4-role 오케스트레이션 |
+| `/kop-workflow` | KOP Intent 실행 시 호출 |
+| `/brand-monitor` | 브랜드 모니터링 Intent 실행 시 호출 |
+| `/daily-feedback-system` | daily heartbeat에서 자동 호출 |
+
+## 측정 지표
+
+| 지표 | 설명 | 목표 |
+|------|------|------|
+| 자율 실행률 | L0+L1 실행 / 전체 실행 | 70% 이상 |
+| Gate 응답 시간 | L2 요청 → 사용자 응답 | 30분 이내 |
+| Intent 완료율 | 완료 / 선언된 전체 | 주간 추적 |
+| 사용자 개입 횟수 | Heartbeat당 사용자 개입 | 감소 추세 |
+
 ## 시스템 구조
 
 ```
