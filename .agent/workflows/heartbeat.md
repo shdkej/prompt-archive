@@ -7,15 +7,28 @@
 
 매 Heartbeat마다 아래 순서를 따른다.
 
-### 1. 의도 읽기
+### 1. Inbox 처리
 
-INTENTS.md를 읽고 실행 가능한 Intent를 필터링한다.
+INTENTS.md의 `## Inbox` 섹션을 먼저 확인한다. 자유 형식 텍스트가 있으면:
+
+1. 내용을 분석하여 구조화된 Intent로 변환
+2. 적절한 ID 부여 (카테고리-번호, 예: monitor-02, dev-01)
+3. priority, permission, goal, success_criteria를 추론하여 채움
+4. `## Active` 섹션에 `status: declared`로 추가
+5. Inbox에서 해당 항목 제거
+6. Telegram으로 "새 Intent 등록: [id] {이름}" 알림
+
+추론이 어려운 필드는 비워두지 말고 Telegram으로 사용자에게 질문한다.
+
+### 2. 의도 읽기
+
+INTENTS.md의 `## Active` 섹션에서 실행 가능한 Intent를 필터링한다.
 
 - `declared` → 첫 분석 대상
 - `active` → 계획 수립 또는 실행 대상
 - `in_progress` → 진행 중, 다음 마일스톤 실행
 - `blocked` → GATES.md 확인하여 승인 여부 체크
-- `completed`, `archived`, `cancelled` → 건너뜀
+- `completed` → 아카이브 처리 후 건너뜀
 
 ### 2. 우선순위 정렬
 
@@ -168,6 +181,21 @@ declared ──→ active ──→ in_progress ──→ completed ──→ ar
 - Heartbeat 실행 시간이 10분을 초과하면 중간 저장 후 다음 Heartbeat로 이월
 - 에러 발생 시 3회까지 재시도, 이후 blocked 처리 + 사용자 알림
 - 이전 Heartbeat가 아직 실행 중이면 새 Heartbeat 건너뜀 (중복 방지)
+
+## 아카이브 처리
+
+Intent가 `completed` 상태가 되면:
+
+1. `.agent/intents/archive/{intent-id}.md` 파일 생성
+   - Intent 전체 내용 + completed_at, result, lesson 필드 추가
+2. INTENTS.md의 `## Active` 섹션에서 해당 Intent 제거
+3. INTENTS.md는 항상 활성 Intent만 남아있도록 유지
+
+```
+INTENTS.md              ← 활성 Intent만 (가볍게)
+.agent/intents/archive/ ← 완료된 Intent (이력 보존)
+.agent/reports/         ← 실행 리포트 (상세 기록)
+```
 
 ## 자기 개선
 
