@@ -152,3 +152,4 @@ PA Flow 설계/구현 시:
 - **PA 식에서 coalesce + HTML 폴백 주의**: `coalesce(replace(...), '<html>폴백</html>')` 형태의 식에서 HTML 안의 특수문자가 파싱 에러를 유발할 수 있음. HTML 폴백이 필요하면 별도 Compose로 분리하거나 변수에 저장 후 참조
 - **`@식` vs `@{식}` 차이 (중요)**: `@{}`는 string interpolation이므로 결과가 항상 **문자열**이 됨. 정수 필드(`max_completion_tokens`)에는 `@int(...)`, null 허용 날짜 필드(`DueDate`)에는 `@if(empty(...), null, ...)` 처럼 `@{}` 없이 사용해야 타입이 보존됨. `@{if(..., null, ...)}`는 null을 빈 문자열 `""`로 변환하여 날짜 파싱 에러 발생
 - **replace() 치환값 null 방어 필수**: `replace(template, '{{key}}', value)` 에서 value가 null이면 런타임 에러 발생 (`expects its third parameter 'new string' to be a string`). 모든 치환값을 `coalesce(value, '')` 또는 `coalesce(value, '(없음)')` 으로 감싸야 함
+- **Flow Management API 연속 PATCH 시 반드시 최신 GET 먼저**: 한 Flow를 여러 번 PATCH할 때, 이전에 GET한 definition을 재사용하면 앞선 PATCH의 수정이 롤백됨. 매 PATCH 전에 최신 definition을 GET한 후 수정해야 함. 예: 1차 PATCH로 Teams 중복 수정 → 2차 PATCH에서 수정 전 원본 기반으로 Planner만 수정 → Teams 중복이 다시 복원되는 사고 발생
