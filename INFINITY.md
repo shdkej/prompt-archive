@@ -9,13 +9,16 @@ description: Agent-First 의도 등록 스킬. 자유 형식으로 의도를 선
 
 ## 스킬 동작
 
-### 1. Intent 추가 (`/infinity <자유 형식>`)
+**중요: 이 스킬은 Intent 등록과 상태 관리만 수행한다. Intent의 실제 작업 실행은 절대 하지 않는다. 실행은 원격 Heartbeat Agent가 담당한다.**
+
+### 1. Intent 추가 (`/infinity <자유 형식>`) — 기본 동작
 
 사용자가 자유 형식으로 의도를 말하면:
 
-1. `infinity/INTENTS.md`의 `## Inbox`에 추가
+1. `infinity/INTENTS.md`의 `## Inbox`에 `- {입력 내용}` 한 줄 추가
 2. 커밋 & 푸시
 3. "Intent 등록 완료. 다음 Heartbeat에서 처리됩니다." 응답
+4. **여기서 끝. 분석, 구조화, 실행 등 추가 작업을 하지 않는다.**
 
 예시:
 - `/infinity layer2 안 돼`
@@ -26,18 +29,16 @@ description: Agent-First 의도 등록 스킬. 자유 형식으로 의도를 선
 
 - `infinity/INTENTS.md`의 Active 섹션 표시
 - `infinity/GATES.md`의 대기 중 항목 표시
-- 최근 리포트 요약
 
 ### 3. 승인 (`/infinity 승인` 또는 `/infinity approve`)
 
-- `infinity/GATES.md`에 대기 중인 항목을 승인 처리
-- status: blocked → in_progress로 변경
+- `infinity/GATES.md` 대기 중 항목을 처리 완료로 이동
+- `infinity/INTENTS.md`에서 blocked → in_progress로 변경
 - 커밋 & 푸시
 
 ### 4. 즉시 실행 (`/infinity run`)
 
-- 원격 Heartbeat 트리거를 즉시 실행
-- 트리거 ID: `trig_01Fubp8g8UDKQtvuSkFofPuM`
+- RemoteTrigger로 `trig_01Fubp8g8UDKQtvuSkFofPuM` 즉시 실행
 
 ---
 
