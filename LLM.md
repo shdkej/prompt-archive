@@ -189,6 +189,7 @@ https://platform.claude.com/docs/ko/agents-and-tools/agent-skills/best-practices
 - 복잡한 업무를 할 경우 아래 omc 스킬을 참조할 것 @OMC.md
 - /Users/seongho-noh/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main 이 위치에 나의 노트가 저장되어 있으니 필요할 경우 참고할 것
 - 인프라 관리앱은 ~/workspace/space, 모니터링 설정 파일은 ~/workspace/monitoring_personal 을 참고할 것
+    - k8s에서 모니터링이 돌아가고 있고 해당 인프라는 space에, 모니터링 관련 설정만 monitoring_personal에 있음
 - 트러블슈팅 기록은 ~/.claude/logs/ 에 저장할 것 (형식: troubleshooting_YYYY-MM-DD_{주제}.log)
 
 
