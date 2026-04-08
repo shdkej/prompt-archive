@@ -5,7 +5,13 @@
 
 ## 대기 중
 
-<!-- Heartbeat Agent가 자동으로 추가/제���한다 -->
+<!-- Heartbeat Agent가 자동으로 추가/제거한다 -->
+
+### [doc-01] lessons-learned.md 변경사항 푸시
+- requested: 2026-04-08 13:00
+- action: `git push -u origin main` (커밋 3816adf)
+- reason: lessons-learned.md #Monitoring 섹션 추가 및 doc-01 아카이브를 원격 저장소에 반영
+- impact: prompt-archive 레포 main 브랜치 업데이트
 
 ## 처리 완료
 
