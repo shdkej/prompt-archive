@@ -4,8 +4,7 @@
 
 ## Inbox
 
-<!-- 자유롭게 적으면 Heartbeat가 구조화해서 Active로 옮김 -->
-<!-- 예: "layer2 안 돼", "보안교육 PA 이번달까지", "KOP 빌드 모니터링 해줘" -->
+- lessons-learned.md 정리 좀 해줘. monitor-01에서 배운 교훈도 추가하고
 
 ## Active
 
