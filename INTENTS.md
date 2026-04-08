@@ -4,7 +4,7 @@
 
 ## Inbox
 
-- lessons-learned.md 정리 좀 해줘. monitor-01에서 배운 교훈도 추가하고
+<!-- 비어있음 -->
 
 ## Active
 

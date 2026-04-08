@@ -138,6 +138,22 @@
 
 ---
 
+## #Monitoring
+
+### 대시보드 No Data 시 기존 파이프라인 동기화부터 확인
+
+- 출처: `.agent/intents/archive/monitor-01.md` (2026-04-08)
+- 교훈: Grafana 패널에 데이터가 없을 때 새 exporter나 mock을 만들기 전에 기존 수집 파이프라인의 설정 동기화 상태를 먼저 확인해야 함. monitor-01에서는 로컬 YACE config(yace/config.yml)에는 AWS/RUM job이 존재했지만 k8s ConfigMap(yace-config.yaml)에 누락된 것이 원인이었음. 새 컴포넌트 0개로 해결.
+- 적용: No Data 디버깅 순서 → ① 로컬 설정 vs k8s 설정 동기화 확인 → ② Prometheus targets 상태 확인(`/targets`) → ③ 대시보드 쿼리 메트릭명과 실제 수집 메트릭명 일치 확인 → ④ 모두 정상이면 새 exporter 고려
+
+### 로컬-k8s 설정 drift 함정
+
+- 출처: `.agent/intents/archive/monitor-01.md` (2026-04-08)
+- 교훈: 로컬 개발 설정(docker-compose.yml, yace/config.yml)과 k8s 배포 설정(ConfigMap, Deployment)은 독립적으로 관리되므로 drift가 발생하기 쉬움. 로컬에서 정상 동작하더라도 k8s 환경에서 No Data일 수 있음.
+- 적용: 모니터링 설정 변경 시 로컬 파일과 k8s 파일을 항상 함께 수정. 코드 리뷰 시 "k8s ConfigMap과 로컬 설정이 동기화되어 있는가?" 체크리스트 포함 권장.
+
+---
+
 ## #UX
 
 ### 인지 부하 줄이기 3원칙
@@ -148,5 +164,5 @@
 
 ---
 
-*마지막 업데이트: 2026-02-21*
-*추출 대상 로그: 8개 (2025-02-03 ~ 2026-02-19)*
+*마지막 업데이트: 2026-04-08*
+*추출 대상 로그: 8개 (2025-02-03 ~ 2026-02-19) + Heartbeat Agent 실행 결과 1건 (monitor-01)*
