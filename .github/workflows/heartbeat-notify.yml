@@ -1,0 +1,45 @@
+name: Heartbeat Telegram Notify
+
+on:
+  push:
+    paths:
+      - '.agent/reports/**'
+      - 'INTENTS.md'
+      - 'GATES.md'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Extract changes and notify
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- .agent/reports/ INTENTS.md GATES.md)
+
+          if [ -z "$CHANGED" ]; then
+            echo "No relevant changes"
+            exit 0
+          fi
+
+          REPORT=$(echo "$CHANGED" | grep '.agent/reports/' | head -1)
+
+          if [ -n "$REPORT" ] && [ -f "$REPORT" ]; then
+            CONTENT=$(head -30 "$REPORT")
+            MSG=$(printf '🤖 Heartbeat Report\n\n%s' "$CONTENT")
+          else
+            COMMIT_MSG=$(git log -1 --pretty=%B)
+            MSG=$(printf '🤖 Heartbeat Update\n\n%s' "$COMMIT_MSG")
+          fi
+
+          curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=${MSG}" \
+            > /dev/null 2>&1
+
+          echo "Notification sent"
