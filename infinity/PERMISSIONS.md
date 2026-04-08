@@ -22,10 +22,12 @@
 - lint, format 자동 수정
 - INTENTS.md status 업데이트
 - infinity/reports/ 결과 기록
+- infinity/ 내 변경사항 커밋 & 푸시 (리포트, 상태 업데이트, GATES.md 등)
+- prompt-archive 레포 내 파일 수정 후 커밋 & 푸시
 
 ## L2 - 승인 후 실행
 
-- git push (원격 저장소 반영)
+- 다른 레포에 git push (monitoring_personal, space 등)
 - PR/MR 생성
 - 외부 서비스 API 호출 (Slack, Teams, Graph API, SharePoint)
 - 배포 트리거 (ArgoCD, GitLab CI)
