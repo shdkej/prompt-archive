@@ -8,7 +8,7 @@
 - 파일 읽기, 코드 검색, 구조 분석
 - 웹 리서치, 문서 참조, 라이브러리 문서 조회
 - 상태 체크 (git status, 파이프라인 상태, 서비스 헬스체크)
-- 문서 드래프트 작성 (.agent/drafts/ 하위에만)
+- 문서 드래프트 작성 (infinity/drafts/ 하위에만)
 - 읽기 전용 테스트 실행 (기존 테스트 수트)
 - 로그 분석, 에러 패턴 탐지
 
@@ -21,7 +21,7 @@
 - 로컬 빌드
 - lint, format 자동 수정
 - INTENTS.md status 업데이트
-- .agent/reports/ 결과 기록
+- infinity/reports/ 결과 기록
 
 ## L2 - 승인 후 실행
 

@@ -61,7 +61,7 @@
 │                    NOTIFICATION LAYER                   │
 │                                                         │
 │  Telegram Bot        진행 알림, 완료 보고, 승인 요청     │
-│  .agent/reports/     실행 결과 로그 (영구 저장)          │
+│  infinity/reports/     실행 결과 로그 (영구 저장)          │
 │                                                         │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -158,7 +158,7 @@ declared ──→ active ──→ in_progress ──→ completed ──→ ar
 - 파일 읽기, 코드 검색, 구조 분석
 - 웹 리서치, 문서 참조
 - 상태 체크 (git status, 파이프라인, 모니터링)
-- 문서 드래프트 작성 (.agent/drafts/ 하위)
+- 문서 드래프트 작성 (infinity/drafts/ 하위)
 - 테스트 실행 (읽기 전용)
 
 ## L1 - 실행 후 알림
@@ -198,7 +198,7 @@ declared ──→ active ──→ in_progress ──→ completed ──→ ar
     │   └── deadline 임박 항목 우선
     │
     ├── 3. 각 Intent별 상태 점검
-    │   ├── 이전 실행 결과 확인 (.agent/reports/)
+    │   ├── 이전 실행 결과 확인 (infinity/reports/)
     │   ├── 현재 상태 확인 (git, files, external)
     │   └── 다음 액션 결정
     │
@@ -211,7 +211,7 @@ declared ──→ active ──→ in_progress ──→ completed ──→ ar
     │   └── 복잡한 작업 → workflow-master 호출
     │
     ├── 6. 결과 기록
-    │   └── .agent/reports/{intent-id}/{timestamp}.md
+    │   └── infinity/reports/{intent-id}/{timestamp}.md
     │
     └── 7. 알림 발송
         ├── L0: 요약 알림 (변화 있을 때만)
@@ -321,7 +321,7 @@ Heartbeat Agent는 workflow-master의 **상위 계층**이다.
    ├── 방안 A: Mock Exporter 복원 (데모 데이터)
    ├── 방안 B: 실제 서비스 연동 (RUM, 프론트엔드 에이전트)
    └── 판단: 현재 환경은 로컬 모니터링 → 방안 A (Mock Exporter 복원)
-4. .agent/reports/monitor-01/2026-04-08T10-00.md 기록
+4. infinity/reports/monitor-01/2026-04-08T10-00.md 기록
 5. status: declared → active
 6. Telegram 알림:
 
@@ -407,14 +407,14 @@ Heartbeat Agent는 workflow-master의 **상위 계층**이다.
 - [x] PERMISSIONS.md 생성
 - [x] GATES.md 생성
 - [ ] Telegram Bot 알림 연동 (기존 Bot 활용)
-- [ ] Heartbeat Agent 스킬 작성 (.agent/workflows/heartbeat.md)
+- [ ] Heartbeat Agent 스킬 작성 (infinity/workflows/heartbeat.md)
 - [ ] Heartbeat 1회 수동 실행 → monitor-01 분석 → Telegram 알림 수신 확인
 - [ ] Heartbeat 2회 수동 실행 → Mock Exporter 코드 작성 → L2 승인 요청 확인
 - [ ] 승인 후 Heartbeat 3회 → 배포 → 검증 → 완료 알림 확인
 
 ### Phase 1: 자동화 (Phase 0 증명 후)
 - [ ] `/schedule`로 Heartbeat cron 등록
-- [ ] .agent/reports/ 로깅 자동화
+- [ ] infinity/reports/ 로깅 자동화
 - [ ] 두 번째 Intent 추가 (다른 유형의 작업)
 
 ### Phase 2: Gate 시스템 (2-3일)

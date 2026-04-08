@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.agent/reports/**'
+      - 'infinity/reports/**'
       - 'INTENTS.md'
       - 'GATES.md'
 
@@ -38,7 +38,7 @@ jobs:
         run: |
           # 최근 24시간 Heartbeat 커밋 요약
           SINCE=$(TZ=Asia/Seoul date -d '24 hours ago' --iso-8601=seconds 2>/dev/null || date -v-24H '+%Y-%m-%dT%H:%M:%S')
-          COMMITS=$(git log --since="$SINCE" --oneline --author="Claude" -- .agent/reports/ INTENTS.md GATES.md)
+          COMMITS=$(git log --since="$SINCE" --oneline --author="Claude" -- infinity/reports/ INTENTS.md GATES.md)
           COMMIT_COUNT=$(echo "$COMMITS" | grep -c . || true)
 
           # 현재 INTENTS.md Active 상태
@@ -62,14 +62,14 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          CHANGED=$(git diff --name-only HEAD~1 HEAD -- .agent/reports/ INTENTS.md GATES.md)
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- infinity/reports/ INTENTS.md GATES.md)
 
           if [ -z "$CHANGED" ]; then
             echo "No relevant changes"
             exit 0
           fi
 
-          REPORT=$(echo "$CHANGED" | grep '.agent/reports/' | head -1)
+          REPORT=$(echo "$CHANGED" | grep 'infinity/reports/' | head -1)
 
           if [ -n "$REPORT" ] && [ -f "$REPORT" ]; then
             CONTENT=$(head -30 "$REPORT")

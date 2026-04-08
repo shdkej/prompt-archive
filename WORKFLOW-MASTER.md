@@ -125,11 +125,11 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
 
 | 역할   | 에이전트              | 설명                    |
 | ------ | --------------------- | ----------------------- |
-| 지휘자 | `@workflow-master.md` | 전체 오케스트레이션     |
-| 기획   | `@planner.md`         | 요구사항 분석, PRD 작성 |
-| 개발   | `@developer.md`       | 설계 및 구현            |
-| 마케팅 | `@marketer.md`        | 브랜드, 마케팅 전략     |
-| 운영   | `@operator.md`        | 배포, 모니터링, CS      |
+| 지휘자 | `@infinity/workflows/workflow-master.md` | 전체 오케스트레이션     |
+| 기획   | `@infinity/workflows/planner.md`         | 요구사항 분석, PRD 작성 |
+| 개발   | `@infinity/workflows/developer.md`       | 설계 및 구현            |
+| 마케팅 | `@infinity/workflows/marketer.md`        | 브랜드, 마케팅 전략     |
+| 운영   | `@infinity/workflows/operator.md`        | 배포, 모니터링, CS      |
 
 ## 워크플로우 로그 관리
 
