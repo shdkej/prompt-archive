@@ -4,4 +4,4 @@
 .playwright-mcp
 incubating
 gather
-.omc
+.omc.agent/config/telegram.env
