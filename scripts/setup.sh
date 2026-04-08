@@ -35,3 +35,7 @@ ln -sfn $PROMPT_DIR/WORKFLOW-MASTER.md $TARGET_DIR/skills/workflow-master/skill.
 
 # 디버깅
 ln -sfn $PROMPT_DIR/WORKFLOW-DEBUG-GUIDE.md $TARGET_DIR/skills/workflow-master/WORKFLOW-DEBUG-GUIDE.md
+
+# Infinity (Agent-First)
+mkdir -p $TARGET_DIR/skills/infinity
+ln -sfn $PROMPT_DIR/INFINITY.md $TARGET_DIR/skills/infinity/skill.md
