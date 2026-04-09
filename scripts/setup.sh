@@ -24,18 +24,19 @@ ln -sfn $PROMPT_DIR/TDD.md $TARGET_DIR/TDD.md
 
 # Skills
 mkdir -p $TARGET_DIR/skills/daily-feedback-system
-ln -sfn $PROMPT_DIR/DAILY-FEEDBACK-SYSTEM.md $TARGET_DIR/skills/daily-feedback-system/skill.md
+ln -sfn $PROMPT_DIR/DAILY-FEEDBACK-SYSTEM.md $TARGET_DIR/skills/daily-feedback-system/SKILL.md
 
 mkdir -p $TARGET_DIR/skills/omc
-ln -sfn $PROMPT_DIR/OMC.md $TARGET_DIR/skills/omc/skill.md
+ln -sfn $PROMPT_DIR/OMC.md $TARGET_DIR/skills/omc/SKILL.md
 
 # workflow-master 스킬
 mkdir -p $TARGET_DIR/skills/workflow-master
-ln -sfn $PROMPT_DIR/WORKFLOW-MASTER.md $TARGET_DIR/skills/workflow-master/skill.md
+ln -sfn $PROMPT_DIR/WORKFLOW-MASTER.md $TARGET_DIR/skills/workflow-master/SKILL.md
 
 # 디버깅
+# 디버깅 가이드 (supporting file)
 ln -sfn $PROMPT_DIR/WORKFLOW-DEBUG-GUIDE.md $TARGET_DIR/skills/workflow-master/WORKFLOW-DEBUG-GUIDE.md
 
 # Infinity (Agent-First)
 mkdir -p $TARGET_DIR/skills/infinity
-ln -sfn $PROMPT_DIR/INFINITY.md $TARGET_DIR/skills/infinity/skill.md
+ln -sfn $PROMPT_DIR/INFINITY.md $TARGET_DIR/skills/infinity/SKILL.md
