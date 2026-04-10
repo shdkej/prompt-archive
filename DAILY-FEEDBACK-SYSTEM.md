@@ -234,7 +234,7 @@ ORDER BY last_visit_time DESC;
 8. **Planner Agent 리뷰**: 회고 초안을 `planner` agent(`~/.claude/agents/planner.md`)에게 전달하여 품질 검증
    - Agent 호출: `Agent(subagent_type="planner", prompt=...)`
    - planner에게 전달하는 내용:
-     - `~/Obsidian/diary/review-patterns.md` (사용자 톤/취향 패턴 — 반드시 먼저 읽기)
+     - `~/workspace/prompt-archive/review-patterns.md` (사용자 톤/취향 패턴 — 반드시 먼저 읽기)
      - 회고 초안
      - 최근 7일 회고 (패턴 비교용)
    - planner는 패턴 파일의 Good/Bad 예시를 기준으로 초안을 검증하고, 개선된 초안을 반환
@@ -286,7 +286,7 @@ ORDER BY last_visit_time DESC;
 ## 회고 품질 기준
 
 > **핵심 원칙**: 기술 디테일이 아니라 **상황-판단-결과의 맥락**을 기록한다.
-> **Good/Bad 예시 및 톤 패턴**: `~/Obsidian/diary/review-patterns.md` 참조 (planner 리뷰 시 반드시 읽기)
+> **Good/Bad 예시 및 톤 패턴**: `~/workspace/prompt-archive/review-patterns.md` 참조 (planner 리뷰 시 반드시 읽기)
 
 - **헤드라인**: 상황(갈등/도전) + 대응. 작업 나열 X
 - **Cut**: 행동/판단의 반복 패턴. 기술 실수 나열 X. 없는 날 생략
