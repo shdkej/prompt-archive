@@ -40,3 +40,7 @@ ln -sfn $PROMPT_DIR/WORKFLOW-DEBUG-GUIDE.md $TARGET_DIR/skills/workflow-master/W
 # Infinity (Agent-First)
 mkdir -p $TARGET_DIR/skills/infinity
 ln -sfn $PROMPT_DIR/INFINITY.md $TARGET_DIR/skills/infinity/SKILL.md
+
+# Harness Compare (GitHub AI 시스템 비교 분석)
+mkdir -p $TARGET_DIR/skills/harness-compare
+ln -sfn $PROMPT_DIR/HARNESS-COMPARE.md $TARGET_DIR/skills/harness-compare/SKILL.md
