@@ -179,6 +179,7 @@
 
 스킬 생성 시 아래 가이드를 확인하여 가이드대로 구성되어있는지 확인합니다.
 예를 들어 측정,평가하기와 피드백 루프 구성하기는 스킬 제작에 큰 도움이 되므로 포함시키도록 합니다.
+스킬 검증 시 스킬 적용 전/후 비교 테스트(A/B)를 반드시 수행하여 실질적 개선을 확인합니다.
 
 https://platform.claude.com/docs/ko/agents-and-tools/agent-skills/best-practices
 
