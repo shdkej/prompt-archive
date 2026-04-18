@@ -3,7 +3,7 @@
 ## 동작
 
 - 30분마다 `daily-sessions.py` + Chrome 히스토리 수집
-- `claude -p`로 정제해 `agent-wiki-ko/diary/YYYY-MM-DD.md`에 merge
+- `claude -p`로 정제해 `agent-wiki/diary/YYYY-MM-DD.md`에 merge
 - `git add/commit/push` (변경 없으면 skip)
 - 7일 경과 파일은 자동 삭제 commit
 
@@ -13,7 +13,7 @@
 |------|------|
 | `~/workspace/prompt-archive/scripts/diary-sync.sh` | 본체 스크립트 |
 | `~/Library/LaunchAgents/com.shdkej.diary-sync.plist` | 30분 주기 실행 (macOS launchd) |
-| `~/workspace/agent-wiki-ko/diary/` | 출력 저장소 (`shdkej/agent-wiki-ko` GitHub) |
+| `~/workspace/agent-wiki/diary/` | 출력 저장소 (`shdkej/agent-wiki` GitHub) |
 | `~/.claude/logs/diary-sync.log` / `.err` | 실행 로그 |
 
 ## 새 컴퓨터 세팅
@@ -36,7 +36,7 @@ claude login
 
 ```bash
 mkdir -p ~/workspace
-git clone git@github.com:shdkej/agent-wiki-ko.git ~/workspace/agent-wiki-ko
+git clone git@github.com:shdkej/agent-wiki.git ~/workspace/agent-wiki
 git clone git@github.com:shdkej/prompt-archive.git ~/workspace/prompt-archive
 ```
 

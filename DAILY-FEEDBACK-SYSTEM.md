@@ -8,7 +8,8 @@ allowed-tools: ["Read", "Grep", "Glob", "Bash", "AskUserQuestion"]
 
 하루를 관리하고 자동 문서화하는 스킬.
 
-> **저장 정책**: 회고/주간/월간 산출물은 **Google Drive에만 저장**. Obsidian은 **읽기 전용**(전일 회고 참조, 리마인드 검색, inbox 캡처 읽기, 기타/인사이트 수집). Obsidian diary 파일에는 쓰지 않는다.
+> **저장 정책**: 회고/주간/월간 산출물은 **Google Drive에만 저장**. Obsidian diary 파일에는 쓰지 않는다.
+> **Obsidian 읽기 정책**: Obsidian은 단순 맥락 보완용이 아니라 **하루 업무 내역·고민·결정 맥락을 파악하는 핵심 입력**이다. 퇴근 회고 시 당일 다이어리·inbox·관련 노트를 **반드시** 읽고 반영한다 (전일 회고 참조, 리마인드 검색, inbox 캡처, 업무 내역, 고민/결정 포인트, 기타/인사이트 수집).
 
 ## 설정
 
@@ -17,11 +18,16 @@ allowed-tools: ["Read", "Grep", "Glob", "Bash", "AskUserQuestion"]
 - 업무: `~/dev/` / 개인: `~/workspace/`
 - 설정 파일: `~/.claude/project-categories.json`
 
-### Obsidian (읽기 전용)
+### Obsidian (읽기 전용, 적극 활용)
 
 - Vault: `~/Obsidian` (로컬), 다이어리: `~/Obsidian/diary/`
 - 파일: `YYYY-MM.md` (월별 단일), 항목: `## MM-DD` 헤더 + 스페이스 4칸 불릿
-- **쓰기 금지** — 참조 용도로만 마크다운 직접 읽기
+- **쓰기 금지** (inbox.md 비우기만 예외)
+- **읽기는 회고 품질의 핵심 입력** — 다음을 반드시 수집:
+  - 당일 `## MM-DD` 섹션: 업무 진행 내역, 작업 메모, 진행 중 고민
+  - inbox.md: 모바일에서 캡처한 결정/인사이트/TODO
+  - 연결된 노트 (필요 시): 오늘 수정되거나 당일 업무와 관련된 Obsidian 노트
+  - 전일/과거 회고: 리마인드·이어가야 할 맥락
 
 ### Google Drive (주 저장소)
 
@@ -158,7 +164,13 @@ ORDER BY last_visit_time DESC;
    - 어제/특정일: `python3 ~/workspace/prompt-archive/scripts/daily-sessions.py YYYY-MM-DD`
 3. **Session Log 기록**: 출력(프로젝트명/분류/사용자 메시지) 기반 핵심 작업 요약을 일일 템플릿 "오늘의 작업 목록" 테이블(업무/개인/기타)에 **반드시 포함**. Google Drive 업로드 대상에 포함.
 4. 필요 시 개별 JSONL 읽어 상세 보강
-5. **다이어리 '기타', '인사이트' 수집** (읽기 전용): 당일 Obsidian 다이어리가 있으면 읽어서 인사이트(업무 외 깨달음/아이디어)는 `#### 인사이트`로, 생활 메모는 `#### 리마인드`로 분류하여 Google Drive 산출물에 반영
+5. **Obsidian 다이어리 전체 읽기** (읽기 전용, 필수): 당일 `~/Obsidian/diary/YYYY-MM.md`의 `## MM-DD` 섹션 + `inbox.md` + 당일 수정된 관련 노트를 읽어서 다음을 모두 수집·반영:
+   - **업무 내역**: 세션 로그에 빠진 작업/메모를 "오늘의 작업 목록" 보강
+   - **고민/질문**: 진행 중이던 의사결정, 미결 고민 → `#### 논의사항` 또는 결정 로그 Context로 반영
+   - **결정 포인트**: 다이어리에 적힌 결정/선택 → 결정 로그에 병합 (6번 Decision Context와 병행)
+   - **인사이트**: 업무 외 깨달음/아이디어 → `#### 인사이트`
+   - **생활 메모/리마인드**: `#### 리마인드`
+   - Obsidian에 아무것도 없으면 "Obsidian 입력 없음"으로 기록하고 넘어감
 6. **결정 맥락 추출 (Decision Context Extraction)**
    - 패턴 탐지: "A vs B", "고민", "선택", "결정", "트레이드오프", "이유는", "왜냐면", "대신"
    - 각 결정마다 Context/Options/Decision/Reasoning/Trade-off 정리

@@ -7,6 +7,12 @@
 
 ## #PA (Power Automate)
 
+### Excel List rows의 Filter Query는 고급 매개변수에 숨겨져 있음 (치명적)
+
+- 출처: `workflow_2026-04-17_excel-mail-notifier.log`
+- 교훈: Excel Online "List rows present in a table" 액션의 **Filter Query 필드는 기본 UI에 노출되지 않고 "고급 매개 변수 0/6 표시 중" 섹션 안에 숨겨져 있음**. 필터 미입력 시 전체 행을 반환하여 조건 상관없이 모든 행이 처리됨
+- 적용: Filter Query가 필요한 Flow는 반드시 **"모두 보기" 클릭 → Filter Query 필드 확인**. 구축 가이드에 해당 단계를 명시적으로 기록. 배포 전 검증 시 고급 매개변수 표시 상태(`n/6 표시 중`의 n값)로 설정 여부 확인
+
 ### Monaco 에디터에 외부 텍스트 입력 불가
 
 - 출처: `workflow_2026-02-19_pa-flow-build.log`

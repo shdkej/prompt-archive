@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # diary-sync.sh — 30분마다 세션/시청 raw 데이터를 Claude로 정제해
-# agent-wiki-ko/diary/YYYY-MM-DD.md 에 merge하고 push. 7일 경과 파일 삭제.
+# agent-wiki/diary/YYYY-MM-DD.md 에 merge하고 push. 7일 경과 파일 삭제.
 set -euo pipefail
 
 export PATH="/Users/seongho-noh/.asdf/installs/nodejs/24.3.0/bin:/opt/homebrew/bin:/usr/bin:/bin:$PATH"
 export HOME="${HOME:-/Users/seongho-noh}"
 
-REPO="$HOME/workspace/agent-wiki-ko"
+REPO="$HOME/workspace/agent-wiki"
 DIARY_DIR="$REPO/diary"
 SESSIONS_SCRIPT="$HOME/workspace/prompt-archive/scripts/daily-sessions.py"
 TODAY=$(date +%F)
@@ -100,7 +100,18 @@ done
 git add -A
 if ! git diff --cached --quiet; then
   git commit -m "diary: auto-sync $(date +'%Y-%m-%d %H:%M')" >/dev/null
-  git push --quiet origin main && log "pushed"
+  if git push --quiet origin main 2>/dev/null; then
+    log "pushed"
+  else
+    log "warn: push rejected, attempting rebase+push"
+    if git pull --rebase --quiet origin main 2>/dev/null && git push --quiet origin main 2>/dev/null; then
+      log "pushed (after rebase)"
+    else
+      log "error: push failed, will retry next run"
+    fi
+  fi
 else
   log "no changes"
 fi
+
+exit 0
