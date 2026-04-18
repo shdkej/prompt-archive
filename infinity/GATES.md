@@ -5,15 +5,6 @@
 
 ## 대기 중
 
-### [wiki-02] shdkej/agent-wiki 레포에 Docsify 파일 추가 및 GitHub Pages 활성화
-- requested: 2026-04-18 09:00
-- action:
-  1. `shdkej/agent-wiki/docs/index.html` 생성 (Docsify HTML)
-  2. `shdkej/agent-wiki/docs/README.md` 홈페이지 생성
-  3. GitHub Settings에서 Pages 활성화 (main 브랜치 /docs 폴더) → 사용자 직접 수행
-- reason: wiki-01 설계안 기반 agent-wiki 공개 웹 뷰어 구현
-- impact: shdkej/agent-wiki 레포에 파일 2개 추가 (공개 사이트 생성됨)
-- files_ready: infinity/drafts/wiki-02-implementation.md
 
 ## 처리 완료
 
@@ -28,3 +19,9 @@
 - resolved: 2026-04-08 11:15
 - decision: approved
 - note: 사용자 승인
+
+### [wiki-02] shdkej/agent-wiki 레포에 Docsify 파일 추가 및 GitHub Pages 활성화
+- requested: 2026-04-18 09:00
+- resolved: 2026-04-18 13:13
+- decision: approved
+- note: Telegram에서 사용자 승인

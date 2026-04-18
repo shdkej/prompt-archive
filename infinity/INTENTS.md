@@ -12,7 +12,7 @@
 
 ### wiki-02: agent-wiki GitHub Pages 구현
 - id: wiki-02
-- status: blocked
+- status: in_progress
 - priority: medium
 - permission: L2
 - created: 2026-04-18T09:00
