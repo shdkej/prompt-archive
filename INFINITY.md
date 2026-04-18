@@ -7,6 +7,8 @@ description: Agent-First 의도 등록 스킬. 자유 형식으로 의도를 선
 
 > "내가 에이전트를 돌리는게 아니라 에이전트가 돌다가 나한테 알려주게 해야한다"
 
+> 운영 시 `infinity/OPERATING_LESSONS.md`가 있으면 함께 읽고, 누적된 운영 교훈을 현재 intent 처리 방식에 반영한다.
+
 ## 스킬 동작
 
 **중요: 이 스킬은 Intent 등록과 상태 관리만 수행한다. Intent의 실제 작업 실행은 절대 하지 않는다. 실행은 원격 Heartbeat Agent가 담당한다.**
