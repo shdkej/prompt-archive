@@ -5,11 +5,6 @@
 
 ## 대기 중
 
-### [wiki-03] GPG 서명 없이 agent-wiki 커밋 허용
-- requested: 2026-04-19 13:00
-- action: `git -c commit.gpgsign=false commit -m "improve mobile navigation: bigger toggle, overlay, auto-close sidebar"` 후 `git push origin main`
-- reason: 서명 서버(/tmp/code-sign)가 외부 레포 커밋에 대해 "missing source" 오류 반환. index.html은 완성·스테이징 상태.
-- impact: shdkej/agent-wiki main 브랜치에 index.html 1개 파일 변경
 
 ## 처리 완료
 
@@ -40,5 +35,11 @@
 ### [wiki-03] shdkej/agent-wiki index.html 교체 및 푸시
 - requested: 2026-04-19 04:00
 - resolved: 2026-04-19 12:36
+- decision: approved
+- note: Telegram에서 사용자 승인
+
+### [wiki-03] GPG 서명 없이 agent-wiki 커밋 허용
+- requested: 2026-04-19 13:00
+- resolved: 2026-04-19 23:29
 - decision: approved
 - note: Telegram에서 사용자 승인
