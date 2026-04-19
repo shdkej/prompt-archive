@@ -12,11 +12,12 @@
 
 ### wiki-02: agent-wiki GitHub Pages 구현
 - id: wiki-02
-- status: blocked
+- status: in_progress
 - priority: medium
 - permission: L2
 - created: 2026-04-18T09:00
-- blocked_reason: L2 승인 수신(13:13) 후 실행 시도했으나 환경 제약 — GitHub MCP가 prompt-archive 전용이며 로컬에 agent-wiki 클론 없음. 사용자 직접 수행 또는 agent-wiki MCP 권한 추가 필요
+- unblocked: 2026-04-19T02:40 — 사용자 `/infinity 승인`으로 재진행 지시. 다음 Heartbeat에서 재시도
+- prior_block: L2 승인 수신(13:13) 후 실행 시도했으나 환경 제약 — GitHub MCP가 prompt-archive 전용이며 로컬에 agent-wiki 클론 없음
 - goal: shdkej/agent-wiki 레포에 Docsify 설정 추가 후 GitHub Pages 활성화
 - success_criteria:
   - docs/index.html 생성 완료

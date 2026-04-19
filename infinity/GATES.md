@@ -8,6 +8,12 @@
 
 ## 처리 완료
 
+### [wiki-02] 재진행 승인 (환경 제약 blocked 해제)
+- requested: 2026-04-19 02:40
+- resolved: 2026-04-19 02:40
+- decision: approved
+- note: 사용자 `/infinity 승인` — wiki-02 blocked 해제, in_progress 전환. 다음 Heartbeat에서 실행 재시도
+
 ### [doc-01] lessons-learned.md 변경사항 푸시
 - requested: 2026-04-08 13:00
 - resolved: 2026-04-08 13:05
