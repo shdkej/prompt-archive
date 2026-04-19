@@ -12,7 +12,7 @@
 
 ### wiki-03: agent-wiki 모바일 네비게이션 개선
 
-- status: in_progress
+- status: blocked
 - priority: medium
 - permission: L1 (드래프트 준비) + L2 (agent-wiki push)
 - created: 2026-04-19T04:00
