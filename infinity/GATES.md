@@ -5,12 +5,6 @@
 
 ## 대기 중
 
-### [wiki-03] shdkej/agent-wiki index.html 교체 및 푸시
-- requested: 2026-04-19 04:00
-- action: `git clone https://github.com/shdkej/agent-wiki.git /tmp/agent-wiki-wiki03` → index.html 교체 → `git push origin main`
-- reason: 모바일 네비게이션 개선 (토글 버튼 강화, 오버레이, 링크 클릭 시 사이드바 자동 닫힘)
-- impact: shdkej/agent-wiki main 브랜치 1개 파일(index.html) 변경. _sidebar.md / .nojekyll 영향 없음
-- draft: infinity/drafts/wiki-03-mobile-nav.md
 
 ## 처리 완료
 
@@ -35,5 +29,11 @@
 ### [wiki-02] shdkej/agent-wiki 레포에 Docsify 파일 추가 및 GitHub Pages 활성화
 - requested: 2026-04-18 09:00
 - resolved: 2026-04-18 13:13
+- decision: approved
+- note: Telegram에서 사용자 승인
+
+### [wiki-03] shdkej/agent-wiki index.html 교체 및 푸시
+- requested: 2026-04-19 04:00
+- resolved: 2026-04-19 12:36
 - decision: approved
 - note: Telegram에서 사용자 승인
