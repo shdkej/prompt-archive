@@ -8,6 +8,12 @@
 
 ## 처리 완료
 
+### [wiki-03] 로컬 환경에서 agent-wiki push 수행
+- requested: 2026-04-20 11:00 (T11:00 에스컬레이션)
+- resolved: 2026-04-20 13:30
+- decision: approved
+- note: 사용자 `/infinity 승인 후 여기서 진행` — 로컬 SSH 인증으로 index.html push 완료 (commit d52641c). Intent completed → archive 이관
+
 ### [wiki-02] 재진행 승인 (환경 제약 blocked 해제)
 - requested: 2026-04-19 02:40
 - resolved: 2026-04-19 02:40
