@@ -16,16 +16,18 @@
 <!-- wiki-01 completed 2026-04-21T00:00 → infinity/intents/archive/wiki-01.md -->
 
 ### build-01: agent-wiki GitHub Pages 배포 구조 설계
-- status: in_progress
+- status: completed
 - priority: medium
 - permission: L0/L1
 - goal: agent-wiki 내용을 웹으로 보여주는 GitHub Pages 경로 설계 및 구현안 작성
 - success_criteria:
-  - 새 GitHub Pages 레포/브랜치 방안 검토
-  - 기존 shdkej.github.io에 agent-wiki 추가하는 대안 검토
-  - 가장 현실적인 배포 구조와 작업 순서 제안
+  - 새 GitHub Pages 레포/브랜치 방안 검토 ✓
+  - 기존 shdkej.github.io에 agent-wiki 추가하는 대안 검토 ✓
+  - 가장 현실적인 배포 구조와 작업 순서 제안 ✓
 - context:
   - shdkej/agent-wiki (GitHub 레포, diary 항목 저장)
   - shdkej/shdkej.github.io (기존 GitHub Pages)
   - infinity/drafts/build-01-agent-wiki-pages.md
 - created: 2026-04-21
+- completed: 2026-04-21
+- note: 설계안 완료. wiki-01/02/03에서 이미 Docsify 방식으로 구현됨 확인. 미해결 과제(sidebar 자동화, wikilink 플러그인)는 후속 Intent 권장

@@ -5,6 +5,12 @@
 
 ## 대기 중
 
+### [build-01] agent-wiki GitHub Pages 구현 (Jekyll 방식)
+- requested: 2026-04-21 00:00
+- action: shdkej/agent-wiki 레포에 `_config.yml`, `index.md`, `_layouts/default.html`, `.github/workflows/pages.yml` 생성 및 push
+- reason: build-01 설계안(Jekyll 기반) 구현을 위해 다른 레포에 push 필요
+- impact: shdkej/agent-wiki 레포 구조 변경, GitHub Pages 빌드 방식 변경 (현재 Docsify → Jekyll)
+- ⚠️ 주의: wiki-02에서 이미 Docsify 설정(`index.html`, `_sidebar.md`, `.nojekyll`)이 배포되어 `https://shdkej.github.io/agent-wiki/`가 작동 중. Jekyll 방식으로 전환 시 기존 Docsify 구성 교체됨. 승인 전 기존 설정 유지 여부 검토 권장.
 
 ## 처리 완료
 
