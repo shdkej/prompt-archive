@@ -5,9 +5,20 @@
 
 ## 대기 중
 
-<!-- Heartbeat Agent가 자동으로 추가/제거한다 -->
 
 ## 처리 완료
+
+### [wiki-03] 로컬 환경에서 agent-wiki push 수행
+- requested: 2026-04-20 11:00 (T11:00 에스컬레이션)
+- resolved: 2026-04-20 13:30
+- decision: approved
+- note: 사용자 `/infinity 승인 후 여기서 진행` — 로컬 SSH 인증으로 index.html push 완료 (commit d52641c). Intent completed → archive 이관
+
+### [wiki-02] 재진행 승인 (환경 제약 blocked 해제)
+- requested: 2026-04-19 02:40
+- resolved: 2026-04-19 02:40
+- decision: approved
+- note: 사용자 `/infinity 승인` — wiki-02 blocked 해제, in_progress 전환. 다음 Heartbeat에서 실행 재시도
 
 ### [doc-01] lessons-learned.md 변경사항 푸시
 - requested: 2026-04-08 13:00
@@ -20,3 +31,21 @@
 - resolved: 2026-04-08 11:15
 - decision: approved
 - note: 사용자 승인
+
+### [wiki-02] shdkej/agent-wiki 레포에 Docsify 파일 추가 및 GitHub Pages 활성화
+- requested: 2026-04-18 09:00
+- resolved: 2026-04-18 13:13
+- decision: approved
+- note: Telegram에서 사용자 승인
+
+### [wiki-03] shdkej/agent-wiki index.html 교체 및 푸시
+- requested: 2026-04-19 04:00
+- resolved: 2026-04-19 12:36
+- decision: approved
+- note: Telegram에서 사용자 승인
+
+### [wiki-03] GPG 서명 없이 agent-wiki 커밋 허용
+- requested: 2026-04-19 13:00
+- resolved: 2026-04-19 23:29
+- decision: approved
+- note: Telegram에서 사용자 승인
