@@ -4,11 +4,22 @@
 
 ## Inbox
 
-- [리서치] Google, OpenAI, Anthropic의 AI 모델 학습 데이터 조사. 공개 정보 기준으로 각 회사가 어떤 유형의 데이터(웹, 코드, 책, 라이선스 데이터, 사용자 상호작용, RLHF/피드백 등)를 써왔는지 정리. 학습 데이터 차이가 특정 주제 강점에 미치는 영향 분석. 코딩 영역 등 인터넷에서 어떤 주제에 더 강점을 보일지 추론. 불확실한 부분은 추정과 공개 근거를 구분해서 작성.
-- [구축] `agent-wiki` 내용을 웹으로 보여주는 GitHub Pages 경로 설계 및 구현안 만들기. 새 GitHub Pages 레포/브랜치가 가능하면 그 방향을 우선 검토하고, 이미 사용 중인 Pages 제약 때문에 어렵다면 기존 GitHub Pages 자산에 `agent-wiki`를 붙이는 대안까지 포함해 정리. 목표는 공개 웹 뷰어를 만들 수 있는 가장 현실적인 배포 구조와 작업 순서를 제안하는 것.
+<!-- 비어있음 -->
 
 ## Active
 
 <!-- Heartbeat가 관리하는 구조화된 Intent -->
 
-<!-- 활성 Intent 없음 -->
+<!-- research-05 completed 2026-04-23T10:00 → infinity/intents/archive/research-05.md -->
+
+### wiki-01: agent-wiki GitHub Pages 배포 구조 설계 및 구현
+- status: declared
+- priority: medium
+- permission: L0/L1/L2
+- goal: shdkej/agent-wiki 콘텐츠를 공개 웹으로 서빙하는 GitHub Pages 구현안 설계. 새 Pages 레포/브랜치를 우선 검토, 어렵다면 기존 Pages 자산에 통합하는 대안 포함.
+- success_criteria:
+  - 배포 구조 설계 문서 작성 (현실적인 경로 제시)
+  - 실제 구현 시도 (L2 승인 후 push)
+  - 공개 URL로 agent-wiki 접근 가능
+- deadline: -
+- context: shdkej/agent-wiki (github repo), prompt-archive/infinity/drafts/wiki-01/
