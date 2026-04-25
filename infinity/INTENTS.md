@@ -3,6 +3,7 @@
 > Heartbeat Agent가 주기적으로 읽고 실행하는 의도 목록.
 
 ## Inbox
+- 재검사. js 로 했으면 좋겠음
 
 ## Active
 
