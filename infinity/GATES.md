@@ -7,13 +7,14 @@
 
 ### [wiki-04] shdkej/agent-wiki에 자동 사이드바 파일 추가 및 푸시
 - requested: 2026-04-24 09:00
+- updated: 2026-04-25 09:00 (wiki-05: Python → JavaScript 변환)
 - action: |
     git clone https://github.com/shdkej/agent-wiki.git /tmp/agent-wiki-wiki04
-    # .github/workflows/auto-sidebar.yml 추가
-    # scripts/generate_sidebar.py 추가
-    git commit -m "feat: auto-generate _sidebar.md via GitHub Actions"
+    # .github/workflows/auto-sidebar.yml 추가 (node scripts/generate_sidebar.js 사용)
+    # scripts/generate_sidebar.js 추가 (Node.js 스크립트)
+    git commit -m "feat: auto-generate _sidebar.md via GitHub Actions (JS)"
     git push origin main
-- reason: GitHub Actions 워크플로 + 자동 생성 스크립트를 agent-wiki에 추가해야 전체 문서 자동 네비게이션 구현 가능
+- reason: GitHub Actions 워크플로 + 자동 생성 스크립트(JS)를 agent-wiki에 추가해야 전체 문서 자동 네비게이션 구현 가능
 - impact: shdkej/agent-wiki main 브랜치에 2개 파일 추가. GitHub Pages 재빌드 트리거. 기존 index.html 변경 없음.
 - draft: infinity/drafts/wiki-04-auto-navigation.md
 

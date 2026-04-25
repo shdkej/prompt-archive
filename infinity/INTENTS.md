@@ -3,11 +3,12 @@
 > Heartbeat Agent가 주기적으로 읽고 실행하는 의도 목록.
 
 ## Inbox
-- 재검사. js 로 했으면 좋겠음
 
 ## Active
 
 <!-- Heartbeat가 관리하는 구조화된 Intent -->
+
+<!-- wiki-05 completed 2026-04-25T09:00 → infinity/intents/archive/wiki-05.md -->
 
 ### wiki-04: agent-wiki 전체 문서 자동 네비게이션
 
