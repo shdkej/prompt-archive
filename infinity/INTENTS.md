@@ -13,7 +13,7 @@
 ### wiki-04: agent-wiki 전체 문서 자동 네비게이션
 
 - id: wiki-04
-- status: blocked
+- status: in_progress
 - priority: medium
 - permission: L1 (드래프트/코드 작성) + L2 (agent-wiki push)
 - created: 2026-04-24T09:00
