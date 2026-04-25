@@ -16,8 +16,21 @@ mkdir -p "$DIARY_DIR" "$LOG_DIR"
 
 log() { printf '[%s] %s\n' "$(date +'%F %T')" "$*"; }
 
+retry() {
+  local n=0 max=3 delay=5
+  until "$@"; do
+    n=$((n+1))
+    [[ $n -ge $max ]] && return 1
+    sleep $delay
+    delay=$((delay*2))
+  done
+}
+
 cd "$REPO"
-git pull --rebase --quiet origin main || log "warn: git pull skipped"
+if ! retry git pull --rebase --quiet origin main; then
+  log "error: git pull failed after retries, skipping run to avoid divergence"
+  exit 0
+fi
 
 RAW_SESSIONS=$(python3 "$SESSIONS_SCRIPT" 2>/dev/null || true)
 
@@ -100,15 +113,13 @@ done
 git add -A
 if ! git diff --cached --quiet; then
   git commit -m "diary: auto-sync $(date +'%Y-%m-%d %H:%M')" >/dev/null
-  if git push --quiet origin main 2>/dev/null; then
+  push_once() {
+    git pull --rebase --quiet origin main 2>/dev/null && git push --quiet origin main 2>/dev/null
+  }
+  if retry push_once; then
     log "pushed"
   else
-    log "warn: push rejected, attempting rebase+push"
-    if git pull --rebase --quiet origin main 2>/dev/null && git push --quiet origin main 2>/dev/null; then
-      log "pushed (after rebase)"
-    else
-      log "error: push failed, will retry next run"
-    fi
+    log "error: push failed after retries, will retry next run"
   fi
 else
   log "no changes"

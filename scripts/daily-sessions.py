@@ -113,6 +113,35 @@ def extract_user_messages(filepath, max_messages=10):
     return messages
 
 
+DIARY_SYNC_MARKER = "너는 일일 활동 로그 유지자"
+
+
+def is_diary_sync_session(filepath):
+    """diary-sync.sh가 claude -p로 만든 세션인지 판별"""
+    try:
+        with open(filepath) as f:
+            for line in f:
+                try:
+                    d = json.loads(line)
+                    if d.get("message", {}).get("role") != "user":
+                        continue
+                    content = d["message"].get("content", "")
+                    if isinstance(content, list):
+                        text = " ".join(
+                            c.get("text", "")
+                            for c in content
+                            if isinstance(c, dict) and c.get("type") == "text"
+                        )
+                    else:
+                        text = content if isinstance(content, str) else ""
+                    return DIARY_SYNC_MARKER in text
+                except (json.JSONDecodeError, KeyError):
+                    continue
+    except OSError:
+        pass
+    return False
+
+
 def find_sessions(target_date):
     """대상 날짜에 수정된 세션 파일 탐색"""
     sessions = []
@@ -130,6 +159,8 @@ def find_sessions(target_date):
                 continue
             mtime = datetime.fromtimestamp(f.stat().st_mtime)
             if start <= mtime < end:
+                if is_diary_sync_session(f):
+                    continue
                 sessions.append(
                     {
                         "file": f,
