@@ -5,13 +5,19 @@ Infinity의 intent 처리 품질을 독립적으로 평가하고, 다음 pickup/
 
 ## 반드시 읽을 문서
 - `/home/ubuntu/.openclaw/workspace/external-repos/prompt-archive/infinity/OPERATING_LESSONS.md`
-- `/home/ubuntu/.openclaw/workspace/external-repos/prompt-archive/infinity/EVALUATION_NOTES.md`
+- `/home/ubuntu/.openclaw/workspace/external-repos/prompt-archive/infinity/EVALUATION_INDEX.md`
 - `/home/ubuntu/.openclaw/workspace/external-repos/prompt-archive/infinity/INTENTS.md`
 
+## 토큰 절약 읽기 규칙
+- 정기 evaluator는 `EVALUATION_NOTES.md` 전체를 읽지 않는다.
+- 기본값은 `EVALUATION_NOTES.md` 최근 80줄만 확인한다. 필요해도 최대 120줄까지만 읽는다.
+- 전체 재독해는 사용자가 명시적으로 감사/audit를 요청하거나, `EVALUATION_INDEX.md`와 최근 노트가 충돌해 판단이 불가능할 때만 한다.
+- 새 평가가 기존 패턴을 바꾸는 수준이면 `EVALUATION_INDEX.md`도 짧게 갱신한다.
+
 ## 추가로 볼 수 있는 대상
-- 최근 heartbeat report
-- archive/inbox 변화
-- 최근 구조화/실행 흔적
+- 최근 heartbeat report 1~2개
+- archive/inbox 변화 중 현재 판단에 직접 필요한 파일
+- 최근 구조화/실행 흔적 1~2개
 
 ## 평가 기준
 - intent pickup 적합성

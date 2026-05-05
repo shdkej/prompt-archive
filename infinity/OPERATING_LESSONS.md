@@ -16,3 +16,4 @@ Infinity 운영 중 intent 처리 방식에 실제로 영향을 주는 규칙만
 - "웹 UI 필수"처럼 운영 수단을 제약하는 주장은 실제 시도 결과나 공식 문서 근거 없이 믿지 않는다. 설계 문서에 그렇게 적혀 있어도 실행 단계에서 재검증한다. (wiki-02: 설계안은 "Pages 활성화는 웹 UI 필수"였으나 `gh api POST /repos/.../pages`로 해결됨)
 - 같은 Intent가 연속 N회 이상 동일 사유로 blocked 리포트만 쌓이면, heartbeat는 자동 실행 재시도가 아니라 사용자에게 "대안 경로 요약 + 결정 요청"으로 에스컬레이션한다.
 - 배포가 "build success"라도 실제 콘텐츠 탐색이 되는지 사용자 관점에서 검증하기 전에 Intent를 complete로 닫지 않는다. URL 200 응답은 필요조건일 뿐 충분조건이 아니다. (wiki-02: 초기 배포는 200 OK였으나 `/docs` 외부 콘텐츠는 모두 접근 불가 → 사용자가 직접 발견해서야 수정)
+- Infinity evaluator는 `EVALUATION_NOTES.md` 전체를 매번 읽지 않는다. 정기 평가는 `EVALUATION_INDEX.md`와 최근 80줄만 읽고, 전체 재독해는 명시 감사나 요약 충돌 때만 허용한다.
