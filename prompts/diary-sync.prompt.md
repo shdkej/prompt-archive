@@ -2,6 +2,7 @@
 
 요구 구조:
 ---
+title: "{{TODAY}}"
 date: {{TODAY}}
 type: diary
 last_sync: {{NOW_ISO}}
