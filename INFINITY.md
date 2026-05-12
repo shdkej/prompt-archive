@@ -11,7 +11,7 @@ description: Agent-First 의도 등록 스킬. 자유 형식으로 의도를 선
 
 ## 스킬 동작
 
-**중요: 이 스킬은 Intent 등록과 상태 관리만 수행한다. Intent의 실제 작업 실행은 절대 하지 않는다. 실행은 원격 Heartbeat Agent가 담당한다.**
+**중요: 이 스킬은 Intent 등록과 상태 관리가 기본 역할이다. 실제 실행은 `Cloud prepares, Local executes` 원칙을 따른다. 클라우드는 조사·비교·요약·계획·초안·모니터링처럼 오래 걸리고 성가신 선행 작업을 맡고, 파일/브라우저/터미널/테스트/배포처럼 권한과 실제 상태가 필요한 작업은 로컬에서 Claude Code가 처리한다.**
 
 ### 1. Intent 추가 (`/infinity <자유 형식>`) — 기본 동작
 
@@ -72,6 +72,64 @@ description: Agent-First 의도 등록 스킬. 자유 형식으로 의도를 선
 | Verifiable Criteria | 모호한 목표 대신 측정 가능한 성공 기준 | Karpathy |
 | Permission Boundary | 자율성은 무제한이 아니라 등급별 경계 안에서 작동 | 공통 |
 | Reuse Before Create | 새 컴포넌트 생성 전 기존 리소스 활용 가능 여부를 먼저 확인 | Lesson Learn |
+| Cloud-Prep-First | 클라우드는 로컬 실행을 대체하지 않고 조사·정리·초안·순서화로 로컬 부담을 줄인다 | Infinity |
+
+## 실행 위치 라우팅
+
+Infinity에서 클라우드는 제한된 실행자가 아니라 **조사원 / 준비 담당 / 큐 관리자 / 반복 모니터링 담당**이다. 로컬은 권한과 실제 상태를 가진 **실행자**다.
+
+### Cloud가 맡는 일
+
+- 웹 조사, 문서/레포/이슈 읽기
+- 기술 선택지 비교, 라이브러리·도구 평가
+- 에러 메시지 기반 원인 후보 조사
+- 긴 문서 요약, 실행 계획 쪼개기
+- 코드 변경안/테스트 전략/커밋 메시지 초안
+- 반복 모니터링, 체크, 리마인드
+- 로컬에서 바로 실행할 수 있는 단계별 지시서 작성
+
+### Local Claude Code가 맡는 일
+
+- 파일 읽기/수정, 코드 실행, 테스트, 빌드
+- 브라우저/IDE/터미널 조작
+- 개인 로그인 세션, 로컬 DB/서비스, 로컬 네트워크 접근
+- 민감 데이터가 섞인 처리
+- 실제 커밋/푸시/배포 전 검증
+
+### 라우팅 타입
+
+```ts
+type InfinityTaskMode =
+  | "research"        // 클라우드 조사/비교/요약
+  | "prepare"         // 클라우드 초안/계획/명령어 후보 작성
+  | "monitor"         // 클라우드 반복 체크/상태 감시
+  | "draft"           // 클라우드 문서/패치/메시지 초안
+  | "execute_local"   // 로컬 Claude Code 실행
+  | "verify_local"    // 로컬 테스트/빌드/브라우저 검증
+  | "needs_review";   // 승인/판단 필요
+```
+
+기본 판단:
+
+```ts
+if (task.requiresLocalState || task.requiresPermission || task.mutatesFiles) {
+  mode = "execute_local";
+} else if (task.isResearch || task.isSummarization || task.isComparison) {
+  mode = "research";
+} else if (task.isTediousButPreparatory) {
+  mode = "prepare";
+} else {
+  mode = "monitor";
+}
+```
+
+복잡한 Intent의 기본 흐름:
+
+```text
+Cloud: 조사 → 정리 → 실행 계획/패치 초안 생성
+Local Claude Code: 적용 → 실행 → 검증 → 결과 기록
+Cloud: 결과 해석 → 다음 단계 제안/보고
+```
 
 ## 아키텍처
 

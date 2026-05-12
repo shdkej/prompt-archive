@@ -11,6 +11,8 @@
 - 문서 드래프트 작성 (infinity/drafts/ 하위에만)
 - 읽기 전용 테스트 실행 (기존 테스트 수트)
 - 로그 분석, 에러 패턴 탐지
+- Cloud research/prepare/monitor/draft 작업
+- 로컬 실행 필요 여부 판단 및 Claude Code 실행 프롬프트 작성
 
 ## L1 - 실행 후 결과 알림
 
@@ -24,6 +26,8 @@
 - infinity/reports/ 결과 기록
 - infinity/ 내 변경사항 커밋 & 푸시 (리포트, 상태 업데이트, GATES.md 등)
 - prompt-archive 레포 내 파일 수정 후 커밋 & 푸시
+- Local Claude Code에 L0/L1 범위 작업 위임
+- Claude Code 호출 시 기본 옵션: `claude --dangerously-skip-permissions` (Claude Code 내부 권한 프롬프트 생략용이며, L2/L3 승인 경계는 우회하지 않는다)
 
 ## L2 - 승인 후 실행
 
