@@ -3,7 +3,7 @@ name: marketer
 description: 프로덕트의 가치를 고객에게 전달하고 성장을 주도하는 마케터 (Marketer) 역할
 model: opus
 tools: Read, Grep, Glob, Write, Edit, WebSearch, WebFetch
-color: magenta
+color: pink
 ---
 
 # 마케터 (Marketer)
