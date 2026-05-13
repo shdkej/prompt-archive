@@ -1,0 +1,32 @@
+# [build-02] Infinity Kanban 시각화 대시보드 배포
+
+- id: build-02
+- status: in_progress
+- priority: medium
+- permission: L1/L2 (space repo push, ArgoCD 자동 sync, public URL 노출)
+- created: 2026-05-13
+- project: infinity-dashboard
+- goal: Infinity Intent/Gate 상태를 상태별 칸반으로 보여주는 경량 대시보드를 만들어 `https://infinity.oracle.shdkej.com` 으로 공개한다.
+- context:
+  - infinity/INTENTS.md
+  - infinity/GATES.md
+  - space repo: `argocd/apps/`, `helm_chart_base/`
+- approach:
+  - 별도 Docker 이미지 없이 `nginx:alpine` + ConfigMap(`index.html`) 구성
+  - GitHub raw URL에서 INTENTS.md / GATES.md를 런타임에 fetch 후 클라이언트에서 파싱·렌더
+  - cert-manager TLS 적용 Ingress (guestbook 예시 동일 패턴)
+  - ArgoCD Application으로 auto sync (prune, selfHeal)
+- success_criteria:
+  - space repo `apps/infinity-kanban/` 매니페스트 추가 (ConfigMap, Deployment, Service, Ingress)
+  - `argocd/apps/infinity-kanban.yaml` Application 추가
+  - Kanban 4단(Inbox / Active / Waiting Gates / Completed) 렌더
+  - 새로고침 버튼 + 주기적 auto-refresh
+  - 모바일 가독성 OK, 외부 빌드 단계 없음
+  - `https://infinity.oracle.shdkej.com` 응답 (DNS wildcard 기존 적용 + cert-manager 발급)
+- risks:
+  - INTENTS.md / GATES.md 포맷 변화 시 파서 깨질 수 있음 → defensive 파싱
+  - GitHub raw URL 캐시 지연 (수 분) → 새로고침 안내 문구로 보완
+- next_actions:
+  - prompt-archive: 본 Intent 등록 (Active 진입)
+  - space: 매니페스트/Application 작성·검증·푸시
+  - ArgoCD auto sync 후 인증서 발급 확인
