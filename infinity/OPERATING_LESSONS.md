@@ -19,3 +19,5 @@ Infinity 운영 중 intent 처리 방식에 실제로 영향을 주는 규칙만
 - 사용자가 Infinity 승인을 요청하면, 승인 처리 전에 먼저 `prompt-archive` 최신 변경을 `git pull`로 받아 현재 gate/intent 상태를 기준으로 승인한다.
 - Infinity evaluator는 `EVALUATION_NOTES.md` 전체를 매번 읽지 않는다. 정기 평가는 `EVALUATION_INDEX.md`와 최근 80줄만 읽고, 전체 재독해는 명시 감사나 요약 충돌 때만 허용한다.
 - Research/prepare Intent를 완료 처리할 때는 `INTENTS.md` 아카이브만 하지 말고, 산출물 경로와 다음 실행 선택지를 사용자에게 도달 가능한 채널로 보고한다. 완료됐지만 사용자가 산출물을 못 봤다면 운영 실패로 본다.
+- Intent 결과물이 `drafts/`, `reports/`, active intent 본문에 흩어지면 사용자가 같은 결론을 다시 찾기 위해 운영자처럼 디렉터리를 뒤져야 한다. 운영 규칙: 산출물은 `infinity/artifacts/{id}/`, 실행 로그는 `infinity/reports/{id}/`, **canonical 결과는 `infinity/intents/archive/{id}.md`에 링크 인덱스로** 모은다. 자세한 규칙은 `infinity/ARTIFACT_RULES.md`. `drafts/`는 legacy freeze.
+- Archive intent는 짧은 회고문서가 아니라 **canonical index**다. artifacts / reports / commits / urls / next_actions 링크가 모두 한 문서에 모여 있어야 다음 Heartbeat나 사용자가 한 번에 도달 가능하다.

@@ -255,17 +255,25 @@ declared ──→ active ──→ in_progress ──→ completed ──→ ar
 
 ## 아카이브 처리
 
+> 자세한 경로 규칙: `infinity/ARTIFACT_RULES.md`
+
 Intent가 `completed` 상태가 되면:
 
-1. `infinity/intents/archive/{intent-id}.md` 파일 생성
-   - Intent 전체 내용 + completed_at, result, lesson 필드 추가
-2. INTENTS.md의 `## Active` 섹션에서 해당 Intent 제거
-3. INTENTS.md는 항상 활성 Intent만 남아있도록 유지
+1. `infinity/intents/active/{id}.md` → `infinity/intents/archive/{id}.md`로 이동하고, archive 문서를 **canonical final index** 포맷으로 재작성한다.
+   - 최소 필드: `id`, `status: archived`, `completed_at`, `result_summary`, `artifacts`, `reports`, `commits`, `urls`, `next_actions`
+2. 결과로서 가치 있는 산출물은 `infinity/artifacts/{id}/...`에 보관하고 archive intent에서 참조한다. **active intent 본문에 결과를 누적하지 않는다.**
+3. 실행 로그는 `infinity/reports/{id}/{timestamp}.md`에 남기되, **로그이지 결론이 아니다.** 동일 결론을 reports에서 찾아 헤매게 하지 않는다.
+4. `INTENTS.md`의 `## Active`에서 블록을 제거하고 완료 코멘트(`<!-- {id} completed YYYY-MM-DDTHH:MM → infinity/intents/archive/{id}.md -->`)를 남긴다.
+5. 대시보드 등 외부 소비자가 `detail:` 경로를 참조한다면 archive 경로가 유효한지 확인한다.
 
 ```
-INTENTS.md              ← 활성 Intent만 (가볍게)
-infinity/intents/archive/ ← 완료된 Intent (이력 보존)
-infinity/reports/         ← 실행 리포트 (상세 기록)
+INTENTS.md                ← 활성 Intent만 (가볍게)
+infinity/intents/active/  ← 진행 중 상태/다음 액션만
+infinity/intents/archive/ ← 완료된 Intent의 canonical index
+infinity/artifacts/{id}/  ← 결과 산출물 (research/design/impl/data)
+infinity/reports/{id}/    ← 실행 로그 (heartbeat run 보고)
+infinity/reports/heartbeat/ ← 전역 heartbeat 요약
+infinity/drafts/          ← legacy (freeze, 신규 작성 금지)
 ```
 
 ## 자기 개선

@@ -8,13 +8,7 @@
 
 <!-- Heartbeat가 관리하는 구조화된 Intent -->
 
-### [build-02] Infinity Kanban 시각화 대시보드 배포
-- created: 2026-05-13
-- status: in_progress
-- permission: L1/L2
-- goal: Infinity Intent/Gate 상태를 칸반으로 보여주는 경량 대시보드를 `https://infinity.oracle.shdkej.com` 으로 공개
-- approach: space repo `apps/infinity-kanban/` (nginx + ConfigMap) + ArgoCD Application, GitHub raw URL에서 INTENTS.md/GATES.md 런타임 fetch
-- detail: infinity/intents/active/build-02-infinity-kanban-dashboard.md
+<!-- build-02 completed 2026-05-13 → infinity/intents/archive/build-02.md (https://infinity.oracle.shdkej.com 배포 완료) -->
 
 <!-- research-06 completed 2026-05-05T08:00 → infinity/intents/archive/research-06.md -->
 

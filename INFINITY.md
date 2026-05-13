@@ -265,15 +265,22 @@ Heartbeat Agent는 workflow-master의 **상위 계층**.
 
 ```
 infinity/
-├── INTENTS.md          # Inbox(자유 형식) + Active(구조화)
-├── PERMISSIONS.md      # L0~L3 권한 경계
-├── GATES.md            # 승인 대기 큐
+├── INTENTS.md            # Inbox(자유 형식) + Active(구조화)
+├── PERMISSIONS.md        # L0~L3 권한 경계
+├── GATES.md              # 승인 대기 큐
+├── ARTIFACT_RULES.md     # 산출물/리포트/아카이브 경로 규칙
 ├── workflows/
-│   └── heartbeat.md    # Heartbeat Agent 프로토콜
-├── reports/            # 실행 리포트
-├── intents/archive/    # 완료 Intent 보관
-└── scripts/notify.sh   # Telegram 알림 (로컬용)
+│   └── heartbeat.md      # Heartbeat Agent 프로토콜
+├── intents/active/       # 진행 중 상태/다음 액션
+├── intents/archive/      # 완료 Intent의 canonical index
+├── artifacts/{id}/       # 결과 산출물 (research/design/impl/data)
+├── reports/{id}/         # 실행 로그
+├── reports/heartbeat/    # 전역 heartbeat 요약
+├── drafts/               # legacy (freeze, 신규 작성 금지)
+└── scripts/notify.sh     # Telegram 알림 (로컬용)
 ```
+
+경로 규칙 상세는 `infinity/ARTIFACT_RULES.md` 참조. 완료된 Intent의 canonical 결과는 `intents/archive/{id}.md`에 모은다 — reports/drafts에 흩어 두지 않는다.
 
 ## 권한 레벨
 
