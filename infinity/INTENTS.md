@@ -8,19 +8,7 @@
 
 <!-- Heartbeat가 관리하는 구조화된 Intent -->
 
-### research-07 · 덕 쌓기 · 환생 앱 유사 시장조사
-
-- id: research-07
-- status: completed
-- priority: medium
-- permission: L0/L1
-- created: 2026-05-13
-- completed: 2026-05-13
-- detail: infinity/intents/active/research-07-virtue-rebirth-market.md
-- artifacts:
-  - path: infinity/artifacts/research-07/market-research.md
-    role: research
-    note: 유사 제품/시장/포지셔닝 조사 결과
+<!-- research-07 completed 2026-05-13T12:00 → infinity/intents/archive/research-07.md -->
 
 ### product-01 · 덕 쌓기 · 환생 모바일 웹앱 기획
 
