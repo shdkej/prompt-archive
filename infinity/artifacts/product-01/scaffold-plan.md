@@ -116,6 +116,7 @@ export function getProgress(total: number): number {
 ### `src/app/(tabs)/layout.tsx` (하단 탭)
 
 ```tsx
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Sparkles, Camera, BookOpen, Bird, UserRound } from "lucide-react";
 
 export default function TabsLayout({ children }: { children: React.ReactNode }) {
