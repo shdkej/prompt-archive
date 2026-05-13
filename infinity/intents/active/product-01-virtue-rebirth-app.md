@@ -26,16 +26,24 @@
 - `infinity/artifacts/product-01/design.md` — 제품/디자인 기획서 (한국어)
 - `infinity/artifacts/product-01/implementation.md` — 디벨롭 후 구현 메모
 - `infinity/artifacts/product-01/ai-scoring-prompt.md` — 채점 시스템 프롬프트 초안
+- `infinity/artifacts/product-01/score-api-implementation.md` — AI 채점 route.ts + prompt caching + 로컬 실행 프롬프트
+- `infinity/artifacts/product-01/ai-scoring-route-complete.md` — AI 채점 route.ts (extractJson 방어 버전)
+- `infinity/artifacts/product-01/persistence-decision.md` — Supabase 영속화 스펙 + 로컬 실행 프롬프트
+- `infinity/artifacts/product-01/shadcn-integration.md` — Drawer 단독 도입 분석 + 로컬 실행 프롬프트
+- `infinity/artifacts/product-01/deployment-guide.md` — oracle 서버 배포 가이드
+- `infinity/artifacts/product-01/photo-storage-guide.md` — Supabase Storage 사진 영속화 + 로컬 실행 프롬프트
 - `infinity/reports/product-01/2026-05-14T00-50.md` — 디벨롭 세션 리포트
 
-## Next Actions
+## Next Actions (로컬 실행 순서)
 
-1. **(다음 우선)** mock 채점을 진짜 Claude Sonnet 4.6 vision API로 교체 — `/app/api/score/route.ts` 서버사이드 + zod 스키마 + §5 톤 가이드.
-2. 영속화 결정: Supabase Postgres+Storage vs 로컬 SQLite + Tailscale. store 어댑터로 교체.
-3. shadcn/ui base-nova 도입 검토 — Drawer로 업로드 모달 통일.
-4. 사진 영속화 (현재 blob 미리보기만).
-5. 배포 결정 — `virtue.oracle.shdkej.com` 후보.
-6. 사용자 컨펌 시 app 레포 origin 설정 + 첫 push.
+1. **[선결]** `.env.local`에 `ANTHROPIC_API_KEY` 설정 (사용자 직접)
+2. **(우선)** AI 채점 API 연결: `score-api-implementation.md` §8 프롬프트 → Claude Code
+3. **[선결]** Supabase 프로젝트 생성 + URL/ANON_KEY 획득 (사용자 직접, L2)
+4. 영속화 어댑터 교체: `persistence-decision.md` 로컬 실행 프롬프트 → Claude Code
+5. 사진 영속화: `photo-storage-guide.md` §9 프롬프트 → Claude Code
+6. Drawer 도입: `shadcn-integration.md` 로컬 실행 프롬프트 → Claude Code
+7. 사용자 컨펌 시 GitHub origin + 첫 push (L2)
+8. oracle 서버 배포: `deployment-guide.md` 참조
 
 ## Open Questions
 
