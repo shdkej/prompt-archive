@@ -14,18 +14,21 @@
 ## Current State
 
 - 제품 컨셉 / IA / 메인 화면 / AI 채점 UX / 환생종 진행 / 데이터 모델 / MVP 범위를 `infinity/artifacts/product-01/design.md`에 정리.
-- 사용자 디자인 시스템 후보로 `dev/pt` (purplemux) 의 shadcn/ui base-nova + Tailwind 4 + Pretendard 토큰을 채택 권고. 단, purplemux는 데스크톱 멀티플렉서이므로 신규 모바일 웹앱은 별도 Next.js 프로젝트로 분리하고 토큰/컴포넌트만 차용.
+- **2026-05-13**: 사용자가 "신규 레포 분리" 옵션을 선택. 로컬 경로 `/home/ubuntu/dev/virtue-rebirth-app`에 Next.js 15 + App Router + Tailwind v4 + TS 스캐폴드 완료 (mock 데이터 기반 5탭 모바일 MVP). `dev/pt`의 OKLCH 토큰과 Pretendard 폰트를 차용. 로컬 git 초기 커밋만, push 없음.
+- 구현 산출물 메모: `infinity/artifacts/product-01/implementation.md`.
 
 ## Artifacts
 
 - `infinity/artifacts/product-01/design.md` — 제품/디자인 기획서 (한국어)
+- `infinity/artifacts/product-01/implementation.md` — 스캐폴드 구현 메모 (경로/파일/검증 결과)
 
 ## Next Actions
 
-1. 구현 레포 결정: 신규 `virtue-rebirth-app` 레포를 만들지, `dev/pt` 위 mobile route로 붙일지 사용자 확인.
-2. 결정 후 Next.js 15/16 + shadcn/ui base-nova 스캐폴드 + 메인 대시보드 wireframe.
-3. AI 채점 모델 선택 (Claude Sonnet 4.6 vision API vs 별도) 및 톤 가이드라인 확정.
-4. 환생종 테이블 (브론즈→다이아 식의 단계와 종 매핑) 초안 → 사용자 리뷰.
+1. mock 채점을 진짜 Claude Sonnet 4.6 vision API로 교체 (zod 스키마 강제, §5 톤 가이드 적용).
+2. 영속화 결정: Supabase vs 로컬 SQLite + Tailscale. 개인용이면 후자 가벼움.
+3. shadcn/ui base-nova `Drawer`/`Sheet`를 도입해 업로드 흐름을 모달 UX로 통일.
+4. 다크 모드 실제 적용 (현재는 토글 UI만).
+5. 배포 결정 — Vercel vs `virtue.oracle.shdkej.com`.
 
 ## Open Questions
 
