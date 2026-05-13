@@ -11,10 +11,11 @@
 ### research-07 · 덕 쌓기 · 환생 앱 유사 시장조사
 
 - id: research-07
-- status: declared
+- status: completed
 - priority: medium
 - permission: L0/L1
 - created: 2026-05-13
+- completed: 2026-05-13
 - detail: infinity/intents/active/research-07-virtue-rebirth-market.md
 - artifacts:
   - path: infinity/artifacts/research-07/market-research.md

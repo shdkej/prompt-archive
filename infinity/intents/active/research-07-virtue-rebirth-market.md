@@ -1,7 +1,7 @@
 # [research-07] 덕 쌓기 · 환생 앱 유사 시장조사
 
 - id: research-07
-- status: declared
+- status: completed
 - priority: medium
 - permission: L0/L1
 - project: virtue-rebirth-app
@@ -32,8 +32,15 @@
 
 - `infinity/artifacts/research-07/market-research.md` — 시장조사 결과
 
+## Current State
+
+- 2026-05-13: `infinity/artifacts/research-07/market-research.md` 작성 완료.
+- 15개 유사/인접 사례를 직접 경쟁·간접 경쟁·영감 사례로 분류했다.
+- 선행/봉사/친절 기록, 사진 인증 습관, AI 판독, 캐릭터 성장 라이프로그, 환생·진화·컬렉션 메타포를 비교했다.
+- MVP 권장 방향: 사진 1장 업로드, AI 덕력 판정 카드, 환생종 진행률, 덕 로그 타임라인에 집중. 친구 검증·공개 피드·실물 리워드·공식 봉사 인증은 후순위.
+
 ## Next Actions
 
-1. 웹/앱스토어/기사 기준 유사 사례 수집
-2. 후보를 직접/간접/영감 사례로 분류
-3. 차별화 전략과 MVP 반영점 정리
+1. `product-01` 디자인/AI scoring prompt에 시장조사 반영.
+2. 환생종 8~12개를 덕성 태그와 연결해 MVP 도감 구조 확정.
+3. 업로드 결과 화면을 `사진 → 덕력 카드 → 다음 생 진행률 → 로그 저장` 흐름으로 단순화.
