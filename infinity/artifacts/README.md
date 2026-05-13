@@ -30,4 +30,4 @@ infinity/artifacts/{intent-id}/{filename}
 
 ## Legacy 안내
 
-기존 `infinity/drafts/`는 legacy로 freeze. 기존 archive intent가 참조하므로 이동하지 않는다. 신규 산출물은 항상 `infinity/artifacts/{id}/`에 만든다.
+`infinity/drafts/`는 폐기되었다. 과거 drafts 산출물은 모두 본 `infinity/artifacts/{id}/`로 이관 완료. 모든 archive intent도 새 경로를 참조한다.

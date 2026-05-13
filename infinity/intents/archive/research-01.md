@@ -11,13 +11,13 @@
   - 10개 기업/프로젝트 각각 분석 완료 ✅
   - 기업별 5가지 항목(핵심 문제, 기존 방식 한계, 해결 방식, 결과, 배울 포인트) 작성 ✅
   - 공통 패턴 5개 정리 ✅
-  - infinity/drafts/apm-companies-research.md 파일로 저장 ✅
+  - infinity/artifacts/research-01/apm-companies-research.md 파일로 저장 ✅
 
 ## result
 
 모든 성공 기준 충족. 10개 기업/프로젝트를 각 5개 항목으로 분석하고, 공통 패턴 5개 도출.
 
-- 산출물: `infinity/drafts/apm-companies-research.md`
+- 산출물: `infinity/artifacts/research-01/apm-companies-research.md`
 - 분석 대상: Datadog, New Relic, AppDynamics, Dynatrace, Elastic APM, Grafana, Honeycomb, Sentry, Splunk Observability, OpenTelemetry
 - 공통 패턴:
   1. 사일로 → 통합 플랫폼

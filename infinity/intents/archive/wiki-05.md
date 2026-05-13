@@ -8,7 +8,7 @@
 - completed_at: 2026-04-25T09:00
 - project: agent-wiki
 - goal: wiki-04에서 계획된 사이드바 생성 스크립트를 Python에서 JavaScript(Node.js)로 변경하고 관련 드래프트/GATES.md 업데이트
-- context: infinity/drafts/wiki-04-auto-navigation.md, infinity/GATES.md
+- context: infinity/artifacts/wiki-04/auto-navigation.md, infinity/GATES.md
 - success_criteria:
   - generate_sidebar.js (Node.js) 스크립트로 드래프트 업데이트 ✅
   - GitHub Actions 워크플로가 node 명령 사용으로 변경 ✅

@@ -8,7 +8,7 @@
 - unblocked_at: 2026-04-19T02:40 (`/infinity 승인`)
 - completed_at: 2026-04-19T02:45 (initial) / 2026-04-19T03:07 (content navigation fix)
 - goal: shdkej/agent-wiki 레포에 Docsify 설정 추가 후 GitHub Pages 활성화
-- context: infinity/drafts/agent-wiki-pages-design.md, infinity/drafts/wiki-02-implementation.md, github:shdkej/agent-wiki
+- context: infinity/artifacts/wiki-01/agent-wiki-pages-design.md, infinity/artifacts/wiki-02/implementation.md, github:shdkej/agent-wiki
 
 ## Result (최종 구성)
 - shdkej/agent-wiki @ ba2f28a

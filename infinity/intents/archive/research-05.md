@@ -7,13 +7,13 @@
 - permission: L0
 - completed_at: 2026-04-18T06:13
 - goal: Google, OpenAI, Anthropic 각사의 AI 모델 학습 데이터 유형 비교 분석 문서 작성
-- context: infinity/drafts/ai-training-data-research.md
+- context: infinity/artifacts/research-05/ai-training-data-research.md
 
 ### Result
 - 각 회사별 학습 데이터 유형 정리 완료
 - 공개 근거와 추정 명확히 구분
 - 코딩 포함 도메인별 강점 추론 완료
-- 산출물: infinity/drafts/ai-training-data-research.md
+- 산출물: infinity/artifacts/research-05/ai-training-data-research.md
 
 ### Lesson
 - 세 회사 모두 학습 데이터 구성을 대부분 비공개로 유지하므로, 논문/모델 카드가 주요 공개 근거
@@ -34,11 +34,11 @@
   - 학습 데이터 차이가 특정 주제 강점에 미치는 영향 분석
   - 코딩 등 주제별 강점 추론 포함
   - 확인된 사실과 추정을 명확히 구분하여 작성
-- context: infinity/drafts/research-05-ai-training-data.md
+- context: infinity/artifacts/research-05/research-05-ai-training-data.md
 - project: research
 
 ### Result
-- infinity/drafts/research-05-ai-training-data.md 작성 완료
+- infinity/artifacts/research-05/research-05-ai-training-data.md 작성 완료
 - 3사 학습 데이터 유형 비교, 도메인별 강점 분석, 확인 사실/추정 구분 포함
 - 벤치마크 수치(HumanEval, MMLU, MGSM) 포함한 상세 비교
 
@@ -55,10 +55,10 @@
 - permission: L0
 - completed_at: 2026-04-23T10:00
 - note: local main이 origin/main보다 뒤처진 상태에서 Inbox 항목을 재처리. 새 웹 리서치로 2026년 최신 벤치마크 데이터 반영.
-- context: infinity/drafts/research-05/ai-training-data.md
+- context: infinity/artifacts/research-05/ai-training-data.md
 
 ### Result
-- infinity/drafts/research-05/ai-training-data.md 작성 완료 (2026년 기준 최신 벤치마크 반영)
+- infinity/artifacts/research-05/ai-training-data.md 작성 완료 (2026년 기준 최신 벤치마크 반영)
 - 회사별 학습 데이터 비교표, 코딩/멀티모달/안전성/장문처리 강점 분석, 투명성 비교 포함
 - 공개 근거 vs 추정 명확히 구분
 

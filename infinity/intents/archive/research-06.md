@@ -22,7 +22,7 @@
 - [x] 분석 문서 + 스킬 설계 초안 작성 (SKILL.md 초안 포함)
 
 ## 결과 요약
-- 분석 문서: `infinity/drafts/research-06-viral-keyword-skill.md`
+- 분석 문서: `infinity/artifacts/research-06/viral-keyword-skill.md`
 - 기존 도구 7종 비교 분석 (바이럴 적합도 별점 포함)
 - 바이럴 신호 10종 + 종합 점수 산식 설계
 - OpenClaw AgentSkill 완전한 SKILL.md 초안 (입/출력 스키마, 도구 흐름, 출력 포맷 포함)
@@ -46,4 +46,4 @@
 infinity/reports/research-06/2026-05-05T0800.md
 
 ## 산출물
-infinity/drafts/research-06-viral-keyword-skill.md
+infinity/artifacts/research-06/viral-keyword-skill.md

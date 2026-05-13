@@ -12,7 +12,7 @@
 - resolved: 2026-04-25 (사용자 `/infinity 승인`)
 - decision: approved
 - note: JS 버전으로 진행. 다음 Heartbeat에서 실행
-- draft: infinity/drafts/wiki-04-auto-navigation.md
+- draft: infinity/artifacts/wiki-04/auto-navigation.md
 
 ### [build-01] agent-wiki GitHub Pages 구현 (Jekyll 방식) — 취소
 - requested: 2026-04-21 00:00

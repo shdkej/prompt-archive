@@ -18,7 +18,7 @@
 
 - 산출물:
   - 설계 리포트: `infinity/reports/pages-01/2026-04-20T00-00.md`
-  - 구현안 초안: `infinity/drafts/agent-wiki-pages-plan.md`
+  - 구현안 초안: `infinity/artifacts/pages-01/agent-wiki-pages-plan.md`
 - 추천 방안: Option A — agent-wiki 레포에 MkDocs-Material + GitHub Actions 직접 활성화
 - 배포 후 URL: `https://shdkej.github.io/agent-wiki/`
 - 사용자 직접 수행 필요: GitHub Pages 활성화 (Settings → Pages → Source: GitHub Actions)

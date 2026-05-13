@@ -273,7 +273,6 @@ infinity/intents/archive/ ← 완료된 Intent의 canonical index
 infinity/artifacts/{id}/  ← 결과 산출물 (research/design/impl/data)
 infinity/reports/{id}/    ← 실행 로그 (heartbeat run 보고)
 infinity/reports/heartbeat/ ← 전역 heartbeat 요약
-infinity/drafts/          ← legacy (freeze, 신규 작성 금지)
 ```
 
 ## 자기 개선

@@ -7,13 +7,13 @@
 - permission: L1
 - completed_at: 2026-04-18T06:13
 - goal: shdkej/agent-wiki 내용을 GitHub Pages로 공개하는 현실적인 배포 구조 설계
-- context: infinity/drafts/agent-wiki-pages-design.md, github:shdkej/agent-wiki
+- context: infinity/artifacts/wiki-01/agent-wiki-pages-design.md, github:shdkej/agent-wiki
 
 ### Result
 - 3가지 배포 옵션 분석 완료 (직접 Pages / shdkej.github.io 통합 / Docsify)
 - 권장 구조: Docsify + agent-wiki 레포 직접 Pages 활성화
 - 구현 체크리스트 및 코드 예시 포함 설계안 작성
-- 산출물: infinity/drafts/agent-wiki-pages-design.md
+- 산출물: infinity/artifacts/wiki-01/agent-wiki-pages-design.md
 
 ### Lesson
 - Docsify는 빌드 없이 마크다운을 직접 렌더링해 GitHub Actions 없이도 배포 가능
@@ -37,11 +37,11 @@
   - 새 GitHub Pages 레포/브랜치 방향 검토 (우선)
   - 기존 Pages 자산 활용 대안 포함
   - 가장 현실적인 배포 구조와 작업 순서를 문서로 작성
-- context: infinity/drafts/wiki-01-github-pages-plan.md
+- context: infinity/artifacts/wiki-01/github-pages-plan.md
 - project: wiki
 
 ### Result
-- infinity/drafts/wiki-01-github-pages-plan.md 작성 완료
+- infinity/artifacts/wiki-01/github-pages-plan.md 작성 완료
 - prompt-archive 레포 현황 확인 (Pages 미설정, main 브랜치만)
 - 옵션 A(기존 prompt-archive 레포 활용)를 권장안으로 제시 (Reuse Before Create 원칙)
 - agent-wiki/ 디렉토리 없음 확인 → 신규 생성 필요

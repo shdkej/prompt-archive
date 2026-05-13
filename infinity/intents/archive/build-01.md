@@ -16,7 +16,7 @@
 - 자동화: diary-sync.sh 30분 주기 push → 즉시 반영
 - 구성 파일: `index.html`, `_sidebar.md`, `.nojekyll`
 
-설계 문서: `infinity/drafts/build-01-agent-wiki-pages.md` (3개 옵션 비교 포함)
+설계 문서: `infinity/artifacts/build-01/agent-wiki-pages.md` (3개 옵션 비교 포함)
 
 ## 미해결 과제 (후속 Intent 권장)
 
