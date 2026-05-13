@@ -33,6 +33,9 @@
   - path: infinity/artifacts/product-01/design.md
     role: design
     note: 제품/디자인 기획서 (한국어, IA·메인화면·AI 채점 UX·환생종·MVP)
+  - path: infinity/artifacts/product-01/development-notes.md
+    role: development-notes
+    note: 사용자 초안 승인 이후 디벨롭 방향과 우선순위
   - path: infinity/artifacts/product-01/implementation.md
     role: implementation
     note: 스캐폴드 구현 메모 (로컬 레포 /home/ubuntu/dev/virtue-rebirth-app, Next.js 15 + Tailwind v4, mock 데이터 5탭 MVP)

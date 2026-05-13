@@ -13,6 +13,8 @@
 
 ## Current State
 
+- 사용자 피드백: 2026-05-13 초안 방향 승인. “마음에 들어, 디벨롭 해보자.”
+
 - 제품 컨셉 / IA / 메인 화면 / AI 채점 UX / 환생종 진행 / 데이터 모델 / MVP 범위를 `infinity/artifacts/product-01/design.md`에 정리.
 - **2026-05-13**: 사용자가 "신규 레포 분리" 옵션을 선택. 로컬 경로 `/home/ubuntu/dev/virtue-rebirth-app`에 Next.js 15 + App Router + Tailwind v4 + TS 스캐폴드 완료 (mock 데이터 기반 5탭 모바일 MVP). `dev/pt`의 OKLCH 토큰과 Pretendard 폰트를 차용. 로컬 git 초기 커밋만, push 없음.
 - 구현 산출물 메모: `infinity/artifacts/product-01/implementation.md`.
