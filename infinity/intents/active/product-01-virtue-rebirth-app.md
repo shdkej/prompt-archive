@@ -32,18 +32,20 @@
 - `infinity/artifacts/product-01/shadcn-integration.md` — Drawer 단독 도입 분석 + 로컬 실행 프롬프트
 - `infinity/artifacts/product-01/deployment-guide.md` — oracle 서버 배포 가이드
 - `infinity/artifacts/product-01/photo-storage-guide.md` — Supabase Storage 사진 영속화 + 로컬 실행 프롬프트
+- `infinity/artifacts/product-01/ux-improvement-guide.md` — UX 개선 가이드 (보상감·도감·덕행록 일기화) — **신규 2026-05-14**
 - `infinity/reports/product-01/2026-05-14T00-50.md` — 디벨롭 세션 리포트
 
 ## Next Actions (로컬 실행 순서)
 
 1. **[선결]** `.env.local`에 `ANTHROPIC_API_KEY` 설정 (사용자 직접)
-2. **(우선)** AI 채점 API 연결: `score-api-implementation.md` §8 프롬프트 → Claude Code
-3. **[선결]** Supabase 프로젝트 생성 + URL/ANON_KEY 획득 (사용자 직접, L2)
-4. 영속화 어댑터 교체: `persistence-decision.md` 로컬 실행 프롬프트 → Claude Code
-5. 사진 영속화: `photo-storage-guide.md` §9 프롬프트 → Claude Code
-6. Drawer 도입: `shadcn-integration.md` 로컬 실행 프롬프트 → Claude Code
-7. 사용자 컨펌 시 GitHub origin + 첫 push (L2)
-8. oracle 서버 배포: `deployment-guide.md` 참조
+2. **(우선)** AI 채점 API 연결: `ai-scoring-route-final.md` §7 프롬프트 → Claude Code
+3. UX 개선 (선택): `ux-improvement-guide.md` §4 로컬 실행 프롬프트 → Claude Code (AI 연결과 병행 가능)
+4. **[선결]** Supabase 프로젝트 생성 + URL/ANON_KEY 획득 (사용자 직접, L2)
+5. 영속화 어댑터 교체: `persistence-decision.md` 로컬 실행 프롬프트 → Claude Code
+6. 사진 영속화: `photo-storage-guide.md` §9 프롬프트 → Claude Code
+7. Drawer 도입: `shadcn-integration.md` 로컬 실행 프롬프트 → Claude Code
+8. 사용자 컨펌 시 GitHub origin + 첫 push (L2)
+9. oracle 서버 배포: `deployment-guide.md` 참조
 
 ## Open Questions
 
