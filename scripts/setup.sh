@@ -44,3 +44,6 @@ ln -sfn $PROMPT_DIR/INFINITY.md $TARGET_DIR/skills/infinity/SKILL.md
 # Harness Compare (GitHub AI 시스템 비교 분석)
 mkdir -p $TARGET_DIR/skills/harness-compare
 ln -sfn $PROMPT_DIR/HARNESS-COMPARE.md $TARGET_DIR/skills/harness-compare/SKILL.md
+
+# Keyword & Title (디렉토리형 스킬 — SKILL.md + references/)
+ln -sfn $PROMPT_DIR/skills/keyword-title $TARGET_DIR/skills/keyword-title
