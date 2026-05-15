@@ -10,24 +10,7 @@
 
 <!-- research-07 completed 2026-05-13T12:00 → infinity/intents/archive/research-07.md -->
 
-### product-01 · 덕 쌓기 · 환생 모바일 웹앱 기획
-
-- id: product-01
-- status: in_progress
-- priority: medium
-- permission: L1
-- created: 2026-05-13
-- detail: infinity/intents/active/product-01-virtue-rebirth-app.md
-- artifacts:
-  - path: infinity/artifacts/product-01/design.md
-    role: design
-    note: 제품/디자인 기획서 (한국어, IA·메인화면·AI 채점 UX·환생종·MVP)
-  - path: infinity/artifacts/product-01/development-notes.md
-    role: development-notes
-    note: 사용자 초안 승인 이후 디벨롭 방향과 우선순위
-  - path: infinity/artifacts/product-01/implementation.md
-    role: implementation
-    note: 스캐폴드 구현 메모 (로컬 레포 /home/ubuntu/dev/virtue-rebirth-app, Next.js 15 + Tailwind v4, mock 데이터 5탭 MVP)
+<!-- product-01 completed 2026-05-15T11:44Z → infinity/intents/archive/product-01.md (Virtue 최신 상태, 후속 개선은 별도 Intent로 분리) -->
 
 <!-- build-02 completed 2026-05-13 → infinity/intents/archive/build-02.md (https://infinity.oracle.shdkej.com 배포 완료) -->
 
