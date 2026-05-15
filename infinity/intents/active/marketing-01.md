@@ -1,7 +1,7 @@
 # marketing-01 · Virtue 활성화 감사
 
 - id: marketing-01
-- status: in_progress
+- status: waiting
 - priority: high
 - permission: L0/L1 (research · prepare · fix plan 문서)
 - project: virtue-rebirth-app
