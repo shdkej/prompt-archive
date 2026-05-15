@@ -4,8 +4,6 @@
 
 ## Inbox
 
-<!-- marketing-01 created 2026-05-15T13:32Z → infinity/intents/inbox/marketing-01.md (Virtue activation/demo-state audit) -->
-
 ## Active
 
 ### marketing-01 · Virtue 활성화 감사
