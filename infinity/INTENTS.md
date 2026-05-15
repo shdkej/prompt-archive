@@ -8,7 +8,14 @@
 
 ## Active
 
-<!-- Heartbeat가 관리하는 구조화된 Intent -->
+### marketing-01 · Virtue 활성화 감사
+- id: marketing-01
+- status: in_progress
+- priority: high
+- permission: L0/L1
+- project: virtue-rebirth-app
+- goal: demo-state 원인 파악·수정 계획 + PostHog 텔레메트리 개선 코드 초안 + 로컬 실행 위임 프롬프트 완성
+- detail: infinity/intents/active/marketing-01.md
 
 ## Waiting
 
