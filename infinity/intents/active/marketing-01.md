@@ -26,9 +26,11 @@ PostHog 신호 기반으로 demo-state 원인, add-flow 마찰, 텔레메트리 
 
 ## Local Execution Status
 
-- [ ] **대기 중**: 사용자가 `local-execution-prompt.md`를 로컬 Claude Code에 실행
+- [x] PostHog 텔레메트리 코드 적용 + push
+  - commit: `a10ff0e` (`Improve PostHog activation telemetry`)
+  - report: `infinity/reports/marketing-01/2026-05-15T19-07-local-claude.md`
+- [ ] **대기 중**: 프로덕션 배포/재시작은 사용자 승인 또는 별도 실행 필요
   - Oracle 서버 배포 (git pull + pnpm build + pm2 restart)
-  - PostHog 텔레메트리 코드 적용 + push
   - 배포 검증 (ETag 확인 + 신규 방문자 시뮬레이션)
 
 ## Context

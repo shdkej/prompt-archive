@@ -17,7 +17,7 @@
 - permission: L0/L1
 - project: virtue-rebirth-app
 - goal: demo-state 원인 파악·수정 계획 + PostHog 텔레메트리 개선 코드 초안 + 로컬 실행 위임 프롬프트 완성
-- waiting_for: 사용자 로컬 Claude Code 실행 (infinity/artifacts/marketing-01/local-execution-prompt.md)
+- waiting_for: 프로덕션 배포/재시작 승인 또는 별도 실행
 - detail: infinity/intents/active/marketing-01.md
 
 ## Archive
