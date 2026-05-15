@@ -8,6 +8,12 @@
 
 <!-- Heartbeat가 관리하는 구조화된 Intent -->
 
+## Waiting
+
+<!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
+
+## Archive
+
 <!-- research-07 completed 2026-05-13T12:00 → infinity/intents/archive/research-07.md -->
 
 <!-- product-01 completed 2026-05-15T11:44Z → infinity/intents/archive/product-01.md (Virtue 최신 상태, 후속 개선은 별도 Intent로 분리) -->

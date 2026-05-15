@@ -183,7 +183,7 @@ Cloud: 결과 해석 → 다음 단계 제안/보고
 
 ```markdown
 ## [intent-id] 의도 이름
-- status: declared | active | in_progress | blocked | completed
+- status: inbox | active | in_progress | waiting | archived
 - priority: critical | high | medium | low
 - heartbeat: 30m | 1h | 4h | daily | weekly
 - permission: L0 | L1 | L2
@@ -199,11 +199,11 @@ Cloud: 결과 해석 → 다음 단계 제안/보고
 ### 생명주기
 
 ```
-declared ──→ active ──→ in_progress ──→ completed ──→ archive/로 이관
-                │              │
-                │              └──→ blocked (승인 대기) ──→ in_progress
-                │
-                └──→ cancelled
+Inbox ──→ Active ──→ in_progress ──→ archived
+             │             │
+             │             └──→ waiting (사용자 결정/외부 조건 대기) ──→ Active
+             │
+             └──→ archived/cancelled
 ```
 
 ## Heartbeat 동작 흐름
@@ -211,7 +211,7 @@ declared ──→ active ──→ in_progress ──→ completed ──→ ar
 ```
 [Heartbeat 기상 (매 시간)]
     │
-    ├── 1. Inbox 확인 → 자유 형식을 구조화하여 Active로 이동
+    ├── 1. Inbox 확인 → 자유 형식을 구조화하되 Active는 최대 3개만 유지
     │
     ├── 2. Active에서 활성 Intent 필터링
     │   └── critical > high > medium > low, deadline 임박 우선
@@ -230,7 +230,7 @@ declared ──→ active ──→ in_progress ──→ completed ──→ ar
     │
     ├── 6. 결과 기록 → infinity/reports/{intent-id}/{timestamp}.md
     │
-    ├── 7. completed → infinity/intents/archive/로 이관
+    ├── 7. 완료된 Intent는 Archive 섹션 + infinity/intents/archive/로 이관
     │
     └── 8. 커밋 & 푸시 → GitHub Action → Telegram 알림
 ```
@@ -274,7 +274,7 @@ Heartbeat Agent는 workflow-master의 **상위 계층**.
 
 ```
 infinity/
-├── INTENTS.md            # Inbox(자유 형식) + Active(구조화)
+├── INTENTS.md            # Inbox + Active(최대 3) + Waiting + Archive
 ├── PERMISSIONS.md        # L0~L3 권한 경계
 ├── GATES.md              # 승인 대기 큐
 ├── ARTIFACT_RULES.md     # 산출물/리포트/아카이브 경로 규칙
