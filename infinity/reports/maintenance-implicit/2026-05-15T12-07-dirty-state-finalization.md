@@ -57,7 +57,13 @@
 - `git branch -vv`: `main e5e403b [origin/main]` — origin과 동기화 완료, force push 미발생.
 - 리포트 커밋·push 후 ahead/behind = 0/0 (아래 next 갱신).
 
+## final push
+
+- 본 리포트 단독 커밋 `7f5bc25 chore(infinity): record maintenance-implicit dirty-state finalization report` → `origin/main` push 완료 (`e5e403b..7f5bc25`).
+- `git status`: clean, `branch -vv`: `[origin/main]`.
+
 ## next
 
 - 후속 product-01 개선 (Gemini 채점 전환, 영속화, UX wave 추가)은 별도 Intent로 등록 필요.
 - L2 자체 승인 규칙은 PERMISSIONS.md / INFINITY.md / heartbeat.md에 일관되게 반영되었으므로 다음 heartbeat부터 적용.
+- 향후 dirty-state finalization은 병렬 heartbeat와 중복 실행될 수 있으므로, finalize 진입 직전 `git status`/`branch -vv` 재확인을 강제하는 게 유효함 (이번 경우 다른 에이전트가 동일 작업을 선행 완료).
