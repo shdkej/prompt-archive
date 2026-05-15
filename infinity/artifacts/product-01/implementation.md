@@ -2,8 +2,8 @@
 
 > intent: `product-01`
 > created: 2026-05-13
-> last update: 2026-05-14 (MVP develop wave)
-> status: MVP UI 완성 (mock/local only · 모든 페이지 store 연결 · 빌드 통과)
+> last update: 2026-05-13 (Vision API wave)
+> status: MVP UI + AI 채점 API 경로 존재 (현재 운영은 mock · 2026-05-15 사용자 결정: 활성화 후보는 Gemini 기준으로 전환 · 모든 페이지 store 연결 · 빌드 통과)
 
 ## 결정 사항
 
@@ -48,6 +48,36 @@ virtue-rebirth-app/
         └── me/page.tsx          # 5. 나 — useTone/useDailyCapEnabled/useTheme + JSON export + clearDeeds
 ```
 
+## Vision API wave (2026-05-13)
+
+| 영역 | 변경 |
+|------|------|
+| 의존성 | `zod@4.4.3` + `@anthropic-ai/sdk@0.96.0` 추가. |
+| 서버 라우트 | `src/app/api/score/route.ts` (Node runtime, dynamic). 현재 구현은 `ANTHROPIC_API_KEY` 없으면 503 + `scoring_disabled`. 단, 다음 활성화 방향은 사용자 결정에 따라 Gemini Vision 계열로 전환. SDK 호출 → 텍스트 응답에서 JSON 추출 → `ScoreResultSchema.safeParse` 구조는 재사용 가능. |
+| 스키마 | `src/lib/score-schema.ts` — `ScoreRequestSchema` (image base64 ≤ 7.5MB, mime jpeg/png/gif/webp, memo ≤ 500자, toneMode soft/casual) + `ScoreResultSchema` (score 0-10, comment ≤ 120자, tags ≤ 2). |
+| 시스템 프롬프트 | `src/lib/score-prompt.ts` — `ai-scoring-prompt.md` 원문 그대로, `{{toneMode}}` 치환. |
+| 클라이언트 | `src/lib/score-client.ts` — `judgeWithFallback({file, memo, tone})`. 사진 없거나 mime 미허용 → mock. fetch 실패/비-200 → mock. 성공 → `source: "ai"` + model 표기. |
+| Add 페이지 | `mockJudge` 직접 호출 제거. `File` state 추가. 결과 카드 배지가 `source` 따라 "AI"(positive 색) / "mock"(muted) 동적 표시. 하단 안내 한 줄 업데이트. |
+| 환경 변수 | 현재 `.env.example`: `ANTHROPIC_API_KEY`, `SCORING_MODEL` (기본 `claude-sonnet-4-6`). Gemini 전환 시 `GEMINI_API_KEY`/모델명 기준으로 갱신 필요. |
+| 문서 | `README.md` — `/api/score` 요청/응답 스펙, 상태 코드, 환경 변수 표 추가. |
+| 검증 | `pnpm typecheck` ✅ · `pnpm lint` ✅ (warning 0) · `pnpm build` ✅ (8 routes, `/api/score`는 dynamic). |
+| 톤 보존 | 도덕적 칭찬/설교 금지 룰은 시스템 프롬프트에 그대로. mock 폴백 코멘트는 기존 `judge.ts` 풀 그대로. |
+
+알려진 한계 (다음 단계):
+- 사진은 여전히 blob URL preview만, 영속화 미구현.
+- 일일 30덕 캡은 클라이언트 가드만 — 서버 검증 없음.
+- 동일 사진 중복 업로드 감지/차감 미구현.
+- ~~AI 실패 → mock 폴백 시 사용자에게 별도 안내 없음 (배지로만 구분).~~ ✅ 해소 (2026-05-13 Fallback UX wave).
+
+## Fallback UX wave (2026-05-13)
+
+| 영역 | 변경 |
+|------|------|
+| 클라이언트 | `IJudgeOutcome`에 `fallbackReason?: "api_error" \| "network_error"` 추가. `res.ok === false` → `api_error`, `catch` → `network_error`. 사진 없음/미허용 mime는 의도된 mock이라 `fallbackReason` 미설정. |
+| Add 페이지 | `runJudge` 결과에 `fallbackReason`이 있으면 토스트 1회: `AI가 잠깐 졸고 있어요. 임시 판정으로 보여드릴게요.` 배지(AI/mock)는 그대로. |
+| 카피 | `docs/copy-spec.md`의 Operator 마이크로카피 표에 "AI 응답 실패 → mock 폴백" 행 추가, 기존 재시도 유도 카피와 분리. |
+| 검증 | `pnpm typecheck` ✅ · `pnpm lint` ✅ · `pnpm build` ✅. |
+
 ## 디벨롭 핵심 (이번 wave)
 
 | 영역 | 변경 |
@@ -79,9 +109,11 @@ virtue-rebirth-app/
 
 ## Next Actions
 
-1. mock judge → Claude Sonnet 4.6 vision API 연결. `/app/api/score/route.ts` 서버사이드 + zod 스키마. 시스템 프롬프트는 `infinity/artifacts/product-01/ai-scoring-prompt.md` 그대로.
-2. 영속화 결정 — Supabase Postgres + Storage 또는 SQLite + Tailscale. store 어댑터 패턴으로 교체.
-3. shadcn/ui base-nova 도입 검토 — Drawer/Sheet으로 업로드 흐름 통합.
-4. 사진 영속화: 현재 blob URL preview만. 저장 시 server-side로 업로드.
-5. 다국어/공유/도전 과제 — MVP 후 단계.
-6. 배포 도메인 결정 (`virtue.oracle.shdkej.com`).
+1. ~~mock judge → Claude Sonnet 4.6 vision API 연결~~ ✅ 완료 (2026-05-13).
+2. 실제 API 키로 end-to-end 검증 (현재는 build/typecheck/lint만 통과, 실호출 미검증). 키 없는 상태에서 503 응답이 오면 fallback 토스트가 한 번만 뜨는지도 같이 확인.
+3. 서버 측 일일 30덕 캡 검증 (DB 또는 stateless 카운트).
+4. 영속화 결정 — Supabase Postgres + Storage 또는 SQLite + Tailscale. store 어댑터 패턴으로 교체.
+5. shadcn/ui base-nova 도입 검토 — Drawer/Sheet으로 업로드 흐름 통합.
+6. 사진 영속화: 현재 blob URL preview만. 저장 시 server-side로 업로드.
+7. 다국어/공유/도전 과제 — MVP 후 단계.
+8. 배포 도메인 결정 (`virtue.oracle.shdkej.com`).

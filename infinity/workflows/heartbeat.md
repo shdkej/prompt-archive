@@ -73,7 +73,7 @@ PERMISSIONS.md의 권한 레벨에 따라:
 |------|------|
 | L0 (자율) | Cloud research/prepare/monitor는 즉시 수행. Local 검증이 필요하면 Claude Code로 위임 가능. 변화 있을 때만 Telegram 요약 알림 |
 | L1 (알림) | 허용된 로컬 파일 수정/테스트/빌드는 Claude Code로 위임 후 결과를 Telegram으로 알림 |
-| L2 (승인) | 실행하지 않음. GATES.md에 등록 + Telegram 승인 요청 |
+| L2 (에이전트 검토 후 자체 승인 가능) | `PERMISSIONS.md`의 L2 자체 승인 조건을 모두 만족하면 `agent-approved L2`로 리포트에 기록하고 실행. 조건을 만족하지 못하면 GATES.md에 등록 + Telegram 승인 요청 |
 | L3 (금지) | 실행하지 않음. 사용자에게 직접 수행 안내 |
 
 ### 7. 병렬 스케줄링
@@ -133,11 +133,16 @@ Verification: {tests/build/lint/screenshot/direct inspection}
 Report back to: infinity/reports/{intent-id}/{timestamp}.md
 ```
 
-실행 중 L2 이상 액션이 필요해지면:
+실행 중 L2 액션이 필요해지면:
 1. 현재까지의 L0/L1 작업은 완료
-2. L2 액션을 GATES.md에 등록
-3. Intent status를 `blocked`로 변경
-4. 다음 Heartbeat에서 승인 여부 확인 후 이어서 실행
+2. `PERMISSIONS.md`의 L2 자체 승인 조건을 확인
+3. 조건을 모두 만족하면 `agent-approved L2`로 리포트에 판단 근거·영향 범위·검증 결과를 남기고 진행
+4. 조건을 만족하지 못하면 GATES.md에 등록하고 Intent status를 `blocked`로 변경
+
+실행 중 L3 액션이 필요해지면:
+1. 실행하지 않음
+2. 현재까지의 안전한 작업만 기록
+3. 사용자에게 직접 수행 또는 명시 승인 필요 사항을 안내
 
 ### 9. 결과 기록
 
