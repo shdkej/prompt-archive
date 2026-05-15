@@ -264,7 +264,7 @@ Inbox ──→ Active ──→ in_progress ──→ archived
 
 > 자세한 경로 규칙: `infinity/ARTIFACT_RULES.md`
 
-Intent가 `completed` 상태가 되면:
+Intent가 완료 기준을 충족하거나 사용자가 완료 처리하면:
 
 1. `infinity/intents/active/{id}.md` → `infinity/intents/archive/{id}.md`로 이동하고, archive 문서를 **canonical final index** 포맷으로 재작성한다.
    - 최소 필드: `id`, `status: archived`, `completed_at`, `result_summary`, `artifacts`, `reports`, `commits`, `urls`, `next_actions`
