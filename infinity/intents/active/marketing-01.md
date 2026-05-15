@@ -18,11 +18,18 @@ PostHog 신호 기반으로 demo-state 원인, add-flow 마찰, 텔레메트리 
 
 ## Success Criteria
 
-- [ ] 프로덕션 HTML demo-state(641덕·MOCK_DEEDS) 원인 특정 + 수정 방법 확인
-- [ ] 모바일 add-flow(landing → add → judge → save) 마찰점 목록 작성
-- [ ] PostHog `$exception` 텔레메트리 개선 코드 초안 작성
-- [ ] 위 세 가지를 반영한 로컬 실행 위임 프롬프트 완성
-- [ ] 수정 후 7일간 `deed_saved / deed_judged` 비율 개선 기대치 설정
+- [x] 프로덕션 HTML demo-state(641덕·MOCK_DEEDS) 원인 특정 + 수정 방법 확인 → artifacts/marketing-01/demo-state-fix.md
+- [x] 모바일 add-flow(landing → add → judge → save) 마찰점 목록 작성 → telemetry-fix.md §3-3 참조 (live 페이지 접근 불가로 부분 완료)
+- [x] PostHog `$exception` 텔레메트리 개선 코드 초안 작성 → artifacts/marketing-01/telemetry-fix.md
+- [x] 위 세 가지를 반영한 로컬 실행 위임 프롬프트 완성 → artifacts/marketing-01/local-execution-prompt.md
+- [x] 수정 후 7일간 `deed_saved / deed_judged` 비율 개선 기대치 설정 → artifacts/marketing-01/improvement-expectation.md
+
+## Local Execution Status
+
+- [ ] **대기 중**: 사용자가 `local-execution-prompt.md`를 로컬 Claude Code에 실행
+  - Oracle 서버 배포 (git pull + pnpm build + pm2 restart)
+  - PostHog 텔레메트리 코드 적용 + push
+  - 배포 검증 (ETag 확인 + 신규 방문자 시뮬레이션)
 
 ## Context
 
@@ -39,7 +46,7 @@ PostHog 신호 기반으로 demo-state 원인, add-flow 마찰, 텔레메트리 
 
 ## Next Actions
 
-1. (L0) demo-state 루트 콜즈 확인 + 수정 계획 초안 → `infinity/artifacts/marketing-01/demo-state-fix.md`
-2. (L0) PostHog 텔레메트리 개선 코드 초안 → `infinity/artifacts/marketing-01/telemetry-fix.md`
-3. (L0/L1) 로컬 실행 위임 프롬프트 작성 → `infinity/artifacts/marketing-01/local-execution-prompt.md`
-4. (L2 agent-approved) Oracle 서버 배포 트리거 — dfaaf4e 반영 (자체 승인 조건 재확인 필요)
+1. **[사용자 액션 필요]** `infinity/artifacts/marketing-01/local-execution-prompt.md` 내용을 로컬 Claude Code에 실행
+   - Oracle 서버 배포 + PostHog 텔레메트리 적용
+2. (L0) 로컬 실행 완료 후 결과 리포트 수신 → status 재평가
+3. 7일 후 PostHog 지표 점검 (improvement-expectation.md 기준)
