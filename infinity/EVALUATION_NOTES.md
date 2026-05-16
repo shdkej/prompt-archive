@@ -476,7 +476,7 @@ Infinity intent 처리 품질을 평가해 다음 pickup/구조화/실행에서 
 - 근거: 최신 리포트 `2026-05-15T04-07-heartbeat.md`는 직전 검증과 로컬/배포 상태가 동일하고 새 결정사항이 없다고 판단했지만, INTENTS.md와 active intent는 여전히 단순 `in_progress`로 남아 있어 사용자 결정 대기 상태가 구조화 필드로 드러나지 않는다.
 - 다음에 바꿀 것: L2를 실행하지 않기로 한 이유가 사용자 선택 대기라면 리포트 문장뿐 아니라 registry 상태 필드와 next_check 조건에 반영해, 이후 heartbeat는 상태 변화나 사용자 응답이 있을 때만 깊은 검증으로 들어가게 한다.
 
-- 대상 intent: 2026-05-16 기준 marketing-01의 외부 실행/배포 기록과 canonical registry 불일치
-- 평가: 작업이 로컬 실행·배포·아카이브까지 진행됐다는 세션 메모가 있어도 prompt-archive 원격 HEAD의 INTENTS.md가 여전히 waiting이면 다음 heartbeat는 완료로 추정하지 말고, canonical repo에 실행 리포트·Archive 링크·registry 전이를 먼저 복구해야 한다.
-- 근거: workspace memory에는 marketing-01 배포·검증·archive commit `fad3ebf`가 기록돼 있지만, prompt-archive `origin/main`은 `cb30ab5`에서 marketing-01을 Waiting으로 유지하고 archive/report도 배포 완료 상태를 담고 있지 않다.
-- 다음에 바꿀 것: 외부 실행 결과를 memory나 채팅에 남긴 즉시 같은 턴에 prompt-archive canonical 상태를 갱신하고 push했는지 확인하며, commit hash가 원격 HEAD에 없으면 완료 알림보다 registry 복구를 우선한다.
+- 대상 intent: 2026-05-16 기준 marketing-01 평가 전 stale checkout 오판
+- 평가: evaluator가 registry 상태를 판정하기 전 `git fetch/pull`을 하지 않으면 이미 원격에 반영된 완료·Archive 전이를 stale local 상태로 오판해 잘못된 복구 평가를 남길 수 있다.
+- 근거: local checkout은 `cb30ab5`에서 marketing-01을 Waiting으로 보였지만, fetch 후 원격에는 이미 `fad3ebf` 완료 전이가 존재했고 INTENTS.md Archive도 정상 반영돼 있었다.
+- 다음에 바꿀 것: 정기 evaluator 시작 시 prompt-archive 최신화 여부를 먼저 확인하고, local HEAD와 origin/main이 다르면 평가보다 fast-forward/pull 또는 stale 판단 보류를 우선한다.
