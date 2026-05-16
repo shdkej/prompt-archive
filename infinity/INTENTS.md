@@ -4,8 +4,6 @@
 
 ## Inbox
 
-<!-- marketing-02 candidate 2026-05-16T13:30Z -> infinity/intents/inbox/marketing-02.md (Virtue /add 진입 후 저장 이벤트 부재 점검) -->
-
 ## Active
 
 ## Waiting
@@ -13,6 +11,8 @@
 <!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
 
 ## Archive
+
+<!-- marketing-02 completed 2026-05-16T14:00Z → infinity/intents/archive/marketing-02.md (마찰점 4개 특정, 개선 후보 3개 초안, 로컬 실행 프롬프트 작성) -->
 
 <!-- marketing-01 completed 2026-05-16T06:14Z → infinity/intents/archive/marketing-01.md (Virtue 배포/검증 완료, 641/MOCK 미노출 확인) -->
 
