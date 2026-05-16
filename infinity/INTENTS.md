@@ -4,6 +4,8 @@
 
 ## Inbox
 
+<!-- marketing-02 candidate 2026-05-16T13:30Z -> infinity/intents/inbox/marketing-02.md (Virtue /add 진입 후 저장 이벤트 부재 점검) -->
+
 ## Active
 
 ## Waiting
