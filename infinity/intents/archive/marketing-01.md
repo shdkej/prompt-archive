@@ -1,7 +1,7 @@
 # marketing-01 · Virtue 활성화 감사
 
 - id: marketing-01
-- status: waiting
+- status: completed
 - priority: high
 - permission: L0/L1 (research · prepare · fix plan 문서)
 - project: virtue-rebirth-app
@@ -29,9 +29,12 @@ PostHog 신호 기반으로 demo-state 원인, add-flow 마찰, 텔레메트리 
 - [x] PostHog 텔레메트리 코드 적용 + push
   - commit: `a10ff0e` (`Improve PostHog activation telemetry`)
   - report: `infinity/reports/marketing-01/2026-05-15T19-07-local-claude.md`
-- [ ] **대기 중**: 프로덕션 배포/재시작은 사용자 승인 또는 별도 실행 필요
-  - Oracle 서버 배포 (git pull + pnpm build + pm2 restart)
-  - 배포 검증 (ETag 확인 + 신규 방문자 시뮬레이션)
+- [x] 사용자 Telegram 승인 수신 후 로컬 Claude Code 실행
+  - approved_at: 2026-05-16T06:02Z
+  - commit: `148b1cc` (`deed_judged 이벤트를 채점 완료 시점으로 통일`)
+  - deployment: Kubernetes rollout completed, `virtue-rebirth-6bff5598d-5w6d4` ready
+  - verification: `https://virtue.oracle.shdkej.com` ETag `"w3v1o6fzvocvu"`, `641`/`MOCK` marker 미노출
+  - report: `infinity/reports/marketing-01/2026-05-16T06-14-local-execution.md`
 
 ## Context
 
@@ -46,9 +49,7 @@ PostHog 신호 기반으로 demo-state 원인, add-flow 마찰, 텔레메트리 
   - infinity/artifacts/product-01/deployment-guide.md
   - infinity/reports/product-01/2026-05-15T11-07-post-push-verify.md
 
-## Next Actions
+## Final Result
 
-1. **[사용자 액션 필요]** `infinity/artifacts/marketing-01/local-execution-prompt.md` 내용을 로컬 Claude Code에 실행
-   - Oracle 서버 배포 + PostHog 텔레메트리 적용
-2. (L0) 로컬 실행 완료 후 결과 리포트 수신 → status 재평가
-3. 7일 후 PostHog 지표 점검 (improvement-expectation.md 기준)
+- 완료: demo-state guard 배포, PostHog 이벤트 정리, 신규 배포 검증.
+- 후속: 7일 후 PostHog 지표를 `improvement-expectation.md` 기준으로 점검.
