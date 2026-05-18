@@ -6,27 +6,6 @@
 
 ## Active
 
-### marketing-03 · Virtue 첫 7일 덕행 루프 정의서 작성
-
-- id: marketing-03
-- status: in_progress
-- priority: medium
-- permission: L1
-- project: virtue-rebirth-app
-- created: 2026-05-18T22:00Z
-- promoted_to_active: 2026-05-18T22:00Z
-- goal: Duolingo/BJ Fogg/Calm 사례를 Virtue prelaunch에 맞게 번역하여 첫 7일 리텐션 기준 및 제품 내 카피·계측 후보 정의
-- success_criteria:
-  - [x] streak 행동을 deed_saved 중심으로 정의
-  - [x] 첫 1/3/7일 마일스톤 카피 후보 3개 이상
-  - [x] 유연성/실패 처리 원칙 2개 이상
-  - [x] PostHog 후보 이벤트와 first verification gate 포함
-  - [ ] 로컬 실행: virtue-rebirth-app 이벤트 추가 및 카피 구현
-- context:
-  - artifact: infinity/artifacts/marketing-03/first-7-day-virtue-loop.md
-  - source: marketing-02, product-01 아티팩트
-- next_action: 사용자 검토 후 로컬 Claude Code 위임 (§5 실행 프롬프트)
-
 ## Waiting
 
 <!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
