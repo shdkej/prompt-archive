@@ -4,6 +4,17 @@
 
 ## Inbox
 
+<!-- marketing-03 created 2026-05-18T22:00Z
+제목: Virtue 첫 7일 덕행 루프 정의서 작성
+Source note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-19-habit-streak-flexibility.md
+Rationale: Duolingo streak, BJ Fogg B=MAP, Calm reminder 사례를 Virtue의 prelaunch 단계에 맞게 번역하면, 지금은 기능 구현보다 "무엇을 반복 행동으로 볼지"와 "부담 없는 유연성 규칙"을 먼저 정의하는 것이 안전하다.
+Expected impact: 출시 후 첫 7일 리텐션을 해석할 기준을 만들고, 설교/압박 없이 재방문 이유를 주는 제품 내 카피·계측 후보를 준비한다.
+Permission level: L1 내부 문서/기획. 공개 발송, 푸시/이메일, 유료 집행, 프로덕션 트래킹 변경은 Waiting/approval-needed.
+Owner route: Infinity router -> Claude Code 또는 문서 작업자. Required workflow: Use workflow-master first.
+Success criteria: (1) streak로 셀 행동을 deed_saved 중심으로 정의, (2) 첫 1/3/7일 마일스톤 카피 후보 3개 이상, (3) 유연성/실패 처리 원칙 2개 이상, (4) 확인할 PostHog 후보 이벤트와 첫 verification gate 포함.
+First verification gate: virtue-rebirth-app README/copy-spec/posthog setup을 읽고 기존 이벤트명·카피 톤과 충돌하지 않는지 확인한다.
+-->
+
 ## Active
 
 ## Waiting
