@@ -58,8 +58,9 @@
   sha: ca2e007
   note: docs/empty-state-first-action-audit.md 추가, origin/master push 완료
 - repo: prompt-archive
-  content sha: eeda81a
-  note: infinity/reports/marketing-05/2026-05-19T2207Z.md + infinity/intents/archive/marketing-05.md + INTENTS.md 갱신. Bookkeeping commit으로 본 ledger의 SHA 부기 후 origin/main push.
+  content sha: 7acc6f1
+  bookkeeping sha: 8639cfa
+  note: infinity/reports/marketing-05/2026-05-19T2207Z.md + infinity/intents/archive/marketing-05.md + INTENTS.md 갱신. 원격 heartbeat(`bb0b6a9`) 위로 rebase 후 origin/main push 완료. 본 ledger annotation은 별도 후처리 커밋에서 반영 예정.
 
 ## URLs
 
