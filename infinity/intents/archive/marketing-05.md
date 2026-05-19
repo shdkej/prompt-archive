@@ -55,11 +55,11 @@
 ## Commits
 
 - repo: virtue-rebirth-app
-  sha: (commit 단계에서 본 ledger를 update commit으로 부기)
-  note: docs/empty-state-first-action-audit.md 추가
+  sha: ca2e007
+  note: docs/empty-state-first-action-audit.md 추가, origin/master push 완료
 - repo: prompt-archive
-  sha: (commit 단계에서 본 ledger를 update commit으로 부기)
-  note: infinity/reports/marketing-05/2026-05-19T2207Z.md + infinity/intents/archive/marketing-05.md + INTENTS.md 갱신
+  content sha: eeda81a
+  note: infinity/reports/marketing-05/2026-05-19T2207Z.md + infinity/intents/archive/marketing-05.md + INTENTS.md 갱신. Bookkeeping commit으로 본 ledger의 SHA 부기 후 origin/main push.
 
 ## URLs
 
