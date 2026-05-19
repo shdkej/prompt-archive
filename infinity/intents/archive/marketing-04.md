@@ -59,8 +59,8 @@
   sha: 1145a9dd465be3b2fd62a89ba8ec6a910a62b297
   note: docs/first-impression-positioning-snapshot.md 추가
 - repo: prompt-archive
-  sha: a7bf50c
-  note: infinity/artifacts/marketing-04/ + report + archive ledger + INTENTS 업데이트
+  sha: c417242
+  note: infinity/artifacts/marketing-04/ + report + archive ledger + INTENTS 업데이트. 후속 bookkeeping: d5cafd8, 44e863c.
 
 ## URLs
 
