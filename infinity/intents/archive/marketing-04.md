@@ -56,10 +56,10 @@
 ## Commits
 
 - repo: virtue-rebirth-app
-  sha: (see report)
+  sha: 1145a9dd465be3b2fd62a89ba8ec6a910a62b297
   note: docs/first-impression-positioning-snapshot.md 추가
 - repo: prompt-archive
-  sha: (see report)
+  sha: a7bf50c
   note: infinity/artifacts/marketing-04/ + report + archive ledger + INTENTS 업데이트
 
 ## URLs
