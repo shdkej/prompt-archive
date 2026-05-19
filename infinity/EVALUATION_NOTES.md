@@ -480,3 +480,7 @@ Infinity intent 처리 품질을 평가해 다음 pickup/구조화/실행에서 
 - 평가: evaluator가 registry 상태를 판정하기 전 `git fetch/pull`을 하지 않으면 이미 원격에 반영된 완료·Archive 전이를 stale local 상태로 오판해 잘못된 복구 평가를 남길 수 있다.
 - 근거: local checkout은 `cb30ab5`에서 marketing-01을 Waiting으로 보였지만, fetch 후 원격에는 이미 `fad3ebf` 완료 전이가 존재했고 INTENTS.md Archive도 정상 반영돼 있었다.
 - 다음에 바꿀 것: 정기 evaluator 시작 시 prompt-archive 최신화 여부를 먼저 확인하고, local HEAD와 origin/main이 다르면 평가보다 fast-forward/pull 또는 stale 판단 보류를 우선한다.
+
+- 대상 intent: 2026-05-19 기준 같은 시각의 heartbeat report 2건
+- 평가: Inbox/Active가 비어 있는 정상 idle 상태라도 같은 기준 시각의 heartbeat가 `2026-05-19T00:00.md`와 `2026-05-19T00-00.md` 두 파일·두 커밋으로 남으면, liveness 신호가 중복 노이즈로 변한다.
+- 다음에 바꿀 것: heartbeat report는 timestamp key를 하나로 정규화하고, 동일 시각 재실행은 새 report/commit 생성보다 기존 상태 확인 또는 idempotent skip으로 처리한다.
