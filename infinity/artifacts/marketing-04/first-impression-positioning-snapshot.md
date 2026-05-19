@@ -4,7 +4,11 @@ Intent: marketing-04
 Mode: 내부 기획 L1
 Status: draft
 Owner: Marketer (Planner/Operator/Developer 관점 포함)
+Canonical source: /home/ubuntu/dev/virtue-rebirth-app/docs/first-impression-positioning-snapshot.md
 ---
+
+> 본 파일은 Infinity Artifact 레이어의 보존본이다. 정식 변경은 Virtue 앱 레포의 canonical 경로에서 먼저 일어나고, 그 결과를 이 파일에 동기화한다.
+> 두 파일이 충돌하면 canonical(Virtue 앱 레포)이 우선이다.
 
 # Virtue 첫인상 포지셔닝 스냅샷
 
