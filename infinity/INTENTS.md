@@ -6,30 +6,13 @@
 
 ## Active
 
-### marketing-07 — Virtue 최소 생존 오디언스 기준표 작성
-
-- id: marketing-07
-- status: in_progress
-- priority: high
-- permission: L1 (내부 기획 문서. 외부 초대/DM/메일/공개 포스트/설문 발송은 Waiting/approval-needed)
-- mode: draft (cloud) → execute_local
-- goal: docs/minimum-viable-audience-brief.md에 JTBD 4잡별 첫 10명 후보 조건, 첫 문장, 첫 세션 가치 순간, 관찰 질문, 승인 필요 외부 액션 경계를 표로 정리
-- success_criteria:
-  - copy-spec.md 및 first-session-jtbd-matrix.md와 충돌 없음 확인
-  - git diff에서 docs 1파일(minimum-viable-audience-brief.md) 외 변경 없음 확인
-- context:
-  - source_note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-20-minimum-viable-audience.md
-  - canonical_target: /home/ubuntu/dev/virtue-rebirth-app/docs/minimum-viable-audience-brief.md
-  - cloud_draft: infinity/artifacts/marketing-07/minimum-viable-audience-brief.md
-  - ref: marketing-06 (J1-J4 정의), copy-spec.md, first-session-jtbd-matrix.md
-- cloud_progress: draft 완료 (2026-05-20T23:00Z) — 로컬 실행 대기
-- next_action: 로컬 Claude Code에서 source note 읽기 → 드래프트 보완 → virtue-rebirth-app/docs/ 저장 → copy-spec 충돌 검증 → 커밋/푸시
-
 ## Waiting
 
 <!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
 
 ## Archive
+
+<!-- marketing-07 completed 2026-05-20T22:07Z → infinity/intents/archive/marketing-07.md (Virtue 최소 생존 오디언스 기준표: J1~J4 잡을 그대로 계승해 첫 10명 후보 조건·첫 문장/약속·첫 세션 가치 순간·관찰 질문·승인 필요 외부 액션 경계 6칸으로 매핑, 컬럼별 Planner/Marketer/Developer/Operator 렌즈. Seth Godin 밀도>규모 + Paul Graham do-things-that-dont-scale 학습 루프, "문안까지 L1·발송부터 Waiting" 경계 명시. 활성화 이벤트 계승(J1/J2/J4=deed_saved, J3=deed_judged) 신규 0. copy-spec/first-session-jtbd-matrix 충돌 0건; docs/minimum-viable-audience-brief.md 추가) -->
 
 <!-- marketing-06 completed 2026-05-20T10:07Z → infinity/intents/archive/marketing-06.md (Virtue 첫 세션 JTBD 매트릭스: J1 기록형/J2 누적형/J3 AI 호기심형/J4 회고형 4잡을 첫 화면 약속·첫 행동·성공 지표·마찰 위험·근거 문서 5칸으로 매핑, J3=deed_judged·나머지=deed_saved 활성화, good/bad 마찰 구분, 기존 6 이벤트 재사용·신규 0, 선행 3문서+copy-spec 충돌 0건; docs/first-session-jtbd-matrix.md sha 38af1be) -->
 
