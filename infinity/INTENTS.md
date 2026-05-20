@@ -4,18 +4,26 @@
 
 ## Inbox
 
-<!-- marketing-07 inbox 2026-05-20T22:00Z
-제목: Virtue 최소 생존 오디언스 기준표 작성
-Source note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-20-minimum-viable-audience.md
-Rationale: prelaunch 상태에서 대중 홍보보다 먼저, JTBD 4잡 기준으로 "처음 보여줄 10명"의 조건과 첫 세션 학습 루프를 좁혀야 함.
-Expected impact: 공개 런칭 전 오디언스/문장/관찰 질문을 맞춰, 작은 실사용 신호가 생겼을 때 포지셔닝과 활성화 해석을 더 선명하게 만든다.
-Permission level: L1 내부 기획 문서. 외부 초대/DM/메일/공개 포스트/설문 발송은 Waiting/approval-needed.
-Owner route: Infinity router → Claude Code(local) with workflow-master first; virtue-rebirth-app docs 범위에서 새 내부 문서 작성, 제품 코드/트래킹/배포 변경 없음.
-Success criteria: docs/minimum-viable-audience-brief.md에 JTBD 4잡별 첫 10명 후보 조건, 첫 문장, 첫 세션 가치 순간, 관찰 질문, 승인 필요 외부 액션 경계를 표로 정리.
-First verification gate: copy-spec.md 및 first-session-jtbd-matrix.md와 충돌 없음 확인, git diff에서 docs 1파일 외 변경 없음 확인.
--->
-
 ## Active
+
+### marketing-07 — Virtue 최소 생존 오디언스 기준표 작성
+
+- id: marketing-07
+- status: in_progress
+- priority: high
+- permission: L1 (내부 기획 문서. 외부 초대/DM/메일/공개 포스트/설문 발송은 Waiting/approval-needed)
+- mode: draft (cloud) → execute_local
+- goal: docs/minimum-viable-audience-brief.md에 JTBD 4잡별 첫 10명 후보 조건, 첫 문장, 첫 세션 가치 순간, 관찰 질문, 승인 필요 외부 액션 경계를 표로 정리
+- success_criteria:
+  - copy-spec.md 및 first-session-jtbd-matrix.md와 충돌 없음 확인
+  - git diff에서 docs 1파일(minimum-viable-audience-brief.md) 외 변경 없음 확인
+- context:
+  - source_note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-20-minimum-viable-audience.md
+  - canonical_target: /home/ubuntu/dev/virtue-rebirth-app/docs/minimum-viable-audience-brief.md
+  - cloud_draft: infinity/artifacts/marketing-07/minimum-viable-audience-brief.md
+  - ref: marketing-06 (J1-J4 정의), copy-spec.md, first-session-jtbd-matrix.md
+- cloud_progress: draft 완료 (2026-05-20T23:00Z) — 로컬 실행 대기
+- next_action: 로컬 Claude Code에서 source note 읽기 → 드래프트 보완 → virtue-rebirth-app/docs/ 저장 → copy-spec 충돌 검증 → 커밋/푸시
 
 ## Waiting
 
