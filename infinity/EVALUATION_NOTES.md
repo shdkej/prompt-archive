@@ -484,3 +484,6 @@ Infinity intent 처리 품질을 평가해 다음 pickup/구조화/실행에서 
 - 대상 intent: 2026-05-19 기준 같은 시각의 heartbeat report 2건
 - 평가: Inbox/Active가 비어 있는 정상 idle 상태라도 같은 기준 시각의 heartbeat가 `2026-05-19T00:00.md`와 `2026-05-19T00-00.md` 두 파일·두 커밋으로 남으면, liveness 신호가 중복 노이즈로 변한다.
 - 다음에 바꿀 것: heartbeat report는 timestamp key를 하나로 정규화하고, 동일 시각 재실행은 새 report/commit 생성보다 기존 상태 확인 또는 idempotent skip으로 처리한다.
+
+- 대상 intent: 2026-05-20 기준 marketing-01 히스토리 병합 후 잔존 파일
+- 평가: `INTENTS.md`와 archive는 marketing-01 완료를 가리키는데 `intents/active/marketing-01.md`와 `intents/inbox/marketing-01.md`가 함께 남아 있으면, registry 우선 원칙만으로는 디렉터리 기반 대시보드·자동화가 stale 상태를 다시 pickup할 수 있다. 병합/복구 heartbeat는 `INTENTS.md`뿐 아니라 lane 디렉터리의 동일 id 중복을 검사해 완료 intent의 active/inbox 잔존 파일을 정리하거나 명시적으로 무시해야 한다.
