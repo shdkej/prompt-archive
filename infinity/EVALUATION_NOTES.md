@@ -475,3 +475,12 @@ Infinity intent 처리 품질을 평가해 다음 pickup/구조화/실행에서 
 - 평가: 미커밋 UX 배치가 사용자 결정(커밋 분할, design-mockups 처리)을 기다리는 상태라면 `in_progress`만 유지하며 반복 read-only heartbeat/probe를 쌓기보다, registry/active 본문에 `status: waiting_user_decision` 또는 `owner_action`을 명시해 다음 heartbeat가 같은 검증을 중복하지 않게 해야 한다.
 - 근거: 최신 리포트 `2026-05-15T04-07-heartbeat.md`는 직전 검증과 로컬/배포 상태가 동일하고 새 결정사항이 없다고 판단했지만, INTENTS.md와 active intent는 여전히 단순 `in_progress`로 남아 있어 사용자 결정 대기 상태가 구조화 필드로 드러나지 않는다.
 - 다음에 바꿀 것: L2를 실행하지 않기로 한 이유가 사용자 선택 대기라면 리포트 문장뿐 아니라 registry 상태 필드와 next_check 조건에 반영해, 이후 heartbeat는 상태 변화나 사용자 응답이 있을 때만 깊은 검증으로 들어가게 한다.
+
+- 대상 intent: 2026-05-16 기준 marketing-01 평가 전 stale checkout 오판
+- 평가: evaluator가 registry 상태를 판정하기 전 `git fetch/pull`을 하지 않으면 이미 원격에 반영된 완료·Archive 전이를 stale local 상태로 오판해 잘못된 복구 평가를 남길 수 있다.
+- 근거: local checkout은 `cb30ab5`에서 marketing-01을 Waiting으로 보였지만, fetch 후 원격에는 이미 `fad3ebf` 완료 전이가 존재했고 INTENTS.md Archive도 정상 반영돼 있었다.
+- 다음에 바꿀 것: 정기 evaluator 시작 시 prompt-archive 최신화 여부를 먼저 확인하고, local HEAD와 origin/main이 다르면 평가보다 fast-forward/pull 또는 stale 판단 보류를 우선한다.
+
+- 대상 intent: 2026-05-19 기준 같은 시각의 heartbeat report 2건
+- 평가: Inbox/Active가 비어 있는 정상 idle 상태라도 같은 기준 시각의 heartbeat가 `2026-05-19T00:00.md`와 `2026-05-19T00-00.md` 두 파일·두 커밋으로 남으면, liveness 신호가 중복 노이즈로 변한다.
+- 다음에 바꿀 것: heartbeat report는 timestamp key를 하나로 정규화하고, 동일 시각 재실행은 새 report/commit 생성보다 기존 상태 확인 또는 idempotent skip으로 처리한다.

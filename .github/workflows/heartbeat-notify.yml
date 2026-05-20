@@ -5,8 +5,8 @@ on:
   push:
     paths:
       - 'infinity/reports/**'
-      - 'INTENTS.md'
-      - 'GATES.md'
+      - 'infinity/INTENTS.md'
+      - 'infinity/GATES.md'
 
 jobs:
   notify:
@@ -42,10 +42,10 @@ jobs:
           COMMIT_COUNT=$(echo "$COMMITS" | grep -c . || true)
 
           # 현재 INTENTS.md Active 상태
-          ACTIVE=$(grep -A1 "^## Active" INTENTS.md | tail -1)
+          ACTIVE=$(grep -A1 "^## Active" infinity/INTENTS.md | tail -1)
 
           # 현재 GATES.md 대기 중
-          PENDING=$(sed -n '/^## 대기 중/,/^## /p' GATES.md | grep -c "^###" || true)
+          PENDING=$(sed -n '/^## 대기 중/,/^## /p' infinity/GATES.md | grep -c "^###" || true)
 
           MSG=$(printf "☀️ 아침 리캡 (최근 24시간)\n\nHeartbeat 활동: %s건\n승인 대기: %s건\n\n--- 커밋 이력 ---\n%s" "$COMMIT_COUNT" "$PENDING" "$COMMITS")
 
@@ -62,20 +62,32 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          CHANGED=$(git diff --name-only HEAD~1 HEAD -- infinity/reports/ INTENTS.md GATES.md)
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- infinity/reports/ infinity/INTENTS.md infinity/GATES.md)
 
           if [ -z "$CHANGED" ]; then
             echo "No relevant changes"
             exit 0
           fi
 
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+
+          # 조용한 종료 신호 — 커밋 메시지에 무의미 키워드가 있으면 알림 스킵
+          if echo "$COMMIT_MSG" | grep -qE "활성 Intent 없음|처리할 Intent 없음|변화 없음|no activity|nothing to do"; then
+            echo "Skip: no-op heartbeat commit"
+            exit 0
+          fi
+
           REPORT=$(echo "$CHANGED" | grep 'infinity/reports/' | head -1)
 
           if [ -n "$REPORT" ] && [ -f "$REPORT" ]; then
+            # 리포트에 actions_taken 항목이 비어있으면 스킵
+            if grep -qE "actions_taken:\s*\[\]|actions_taken:\s*$|수행 액션:\s*0건|actions_taken:\s*없음" "$REPORT"; then
+              echo "Skip: report has no actions"
+              exit 0
+            fi
             CONTENT=$(head -30 "$REPORT")
             MSG=$(printf '🤖 Heartbeat Report\n\n%s' "$CONTENT")
           else
-            COMMIT_MSG=$(git log -1 --pretty=%B)
             MSG=$(printf '🤖 Heartbeat Update\n\n%s' "$COMMIT_MSG")
           fi
 

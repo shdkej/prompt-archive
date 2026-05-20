@@ -291,6 +291,14 @@ infinity/
 
 경로 규칙 상세는 `infinity/ARTIFACT_RULES.md` 참조. 완료된 Intent의 canonical 결과는 `intents/archive/{id}.md`에 모은다 — reports/drafts에 흩어 두지 않는다.
 
+문서 역할은 `Intent 원장 / Artifact / Report`로 통일한다.
+
+- `Intent 원장`: `infinity/intents/archive/{id}.md`의 최종 상태와 링크 인덱스
+- `Artifact`: `infinity/artifacts/{id}/...`의 재사용 가능한 산출물 원문
+- `Report`: `infinity/reports/{id}/{timestamp}.md`의 실행 로그
+
+완료된 Intent에 대해 `Archive Intent`와 `Detail`을 별도 문서처럼 중복 생성하지 않는다. 같은 path를 가리키는 경우에는 하나의 `Intent 원장`으로 취급한다.
+
 ## 권한 레벨
 
 | 레벨 | 이름 | 에이전트 행동 |

@@ -163,6 +163,16 @@ Report back to: infinity/reports/{intent-id}/{timestamp}.md
 - findings: Mock Exporter 누락이 원인
 ```
 
+Report는 실행 로그다. 사용자가 나중에 한눈에 볼 최종 문서는 `infinity/intents/archive/{intent-id}.md`의 `Intent 원장`이다.
+
+완료 처리 시 문서 역할은 반드시 아래처럼 통일한다.
+
+1. `Intent 원장`: `infinity/intents/archive/{id}.md` 하나만 canonical final index로 만든다.
+2. `Artifact`: 재사용할 원문/초안/분석/프롬프트/데이터는 `infinity/artifacts/{id}/...`에 둔다.
+3. `Report`: 실행 과정 로그만 `infinity/reports/{id}/{timestamp}.md`에 둔다.
+4. `Detail`이라는 별도 최종 문서는 만들지 않는다. archive path와 detail path가 같아지는 중복 구조를 생성하지 않는다.
+5. `INTENTS.md` 완료 코멘트에는 archive path와 한 줄 결과를 함께 남겨 대시보드가 `Intent 원장` 카드로 요약할 수 있게 한다.
+
 ### 10. Telegram 알림
 
 `infinity/scripts/notify.sh`를 사용하여 알림 발송.
@@ -270,8 +280,9 @@ Intent가 완료 기준을 충족하거나 사용자가 완료 처리하면:
    - 최소 필드: `id`, `status: archived`, `completed_at`, `result_summary`, `artifacts`, `reports`, `commits`, `urls`, `next_actions`
 2. 결과로서 가치 있는 산출물은 `infinity/artifacts/{id}/...`에 보관하고 archive intent에서 참조한다. **active intent 본문에 결과를 누적하지 않는다.**
 3. 실행 로그는 `infinity/reports/{id}/{timestamp}.md`에 남기되, **로그이지 결론이 아니다.** 동일 결론을 reports에서 찾아 헤매게 하지 않는다.
-4. `INTENTS.md`의 `## Active` 또는 `## Waiting`에서 블록을 제거하고 `## Archive`에 완료 코멘트(`<!-- {id} completed YYYY-MM-DDTHH:MM → infinity/intents/archive/{id}.md -->`)를 남긴다.
+4. `INTENTS.md`의 `## Active` 또는 `## Waiting`에서 블록을 제거하고 `## Archive`에 완료 코멘트(`<!-- {id} completed YYYY-MM-DDTHH:MM → infinity/intents/archive/{id}.md (한 줄 결과) -->`)를 남긴다.
 5. 대시보드 등 외부 소비자가 `detail:` 경로를 참조한다면 archive 경로가 유효한지 확인한다.
+6. 완료 직후 같은 내용을 `Detail` 문서로 다시 만들지 않는다. 최종 문서는 `Intent 원장`, 원문 산출물은 `Artifact`, 실행 로그는 `Report`로 분리한다.
 
 ```
 INTENTS.md                ← 활성 Intent만 (가볍게)

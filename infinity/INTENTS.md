@@ -10,17 +10,17 @@
 
 <!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
 
-### marketing-01 · Virtue 활성화 감사
-- id: marketing-01
-- status: waiting
-- priority: high
-- permission: L0/L1
-- project: virtue-rebirth-app
-- goal: demo-state 원인 파악·수정 계획 + PostHog 텔레메트리 개선 코드 초안 + 로컬 실행 위임 프롬프트 완성
-- waiting_for: 사용자 로컬 Claude Code 실행 (infinity/artifacts/marketing-01/local-execution-prompt.md)
-- detail: infinity/intents/active/marketing-01.md
-
 ## Archive
+
+<!-- marketing-05 completed 2026-05-19T22:07Z → infinity/intents/archive/marketing-05.md (Virtue 빈 상태/첫 행동 감사표: ES-1~ES-6 다섯 칸 표, 대시보드 최근 덕행 카드 내부 CTA 후보 A/B + 라벨 3종, 톤 위험 T1–T5, 계측 후보 3종 정의, copy-spec 금지선 충돌 0건) -->
+
+<!-- marketing-04 completed 2026-05-19T10:07Z → infinity/intents/archive/marketing-04.md (Virtue 첫인상 포지셔닝 스냅샷: 3가설 A/B/C, 첫인상 리스크 R1–R4, PMF 질문 4개, 헤드라인 후보 3개, copy-spec 금지선 충돌 0건) -->
+
+<!-- marketing-03 completed 2026-05-18T22:20Z → infinity/intents/archive/marketing-03.md (Virtue 첫 7일 deed_saved 루프 정의서 작성, D1/D3/D7 카피·유연성 원칙·PostHog 후보 정리) -->
+
+<!-- marketing-02 completed 2026-05-16T14:00Z → infinity/intents/archive/marketing-02.md (마찰점 4개 특정, 개선 후보 3개 초안, 로컬 실행 프롬프트 작성) -->
+
+<!-- marketing-01 completed 2026-05-16T06:14Z → infinity/intents/archive/marketing-01.md (Virtue 배포/검증 완료, 641/MOCK 미노출 확인) -->
 
 <!-- research-07 completed 2026-05-13T12:00 → infinity/intents/archive/research-07.md -->
 
