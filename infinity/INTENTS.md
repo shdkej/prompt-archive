@@ -4,6 +4,17 @@
 
 ## Inbox
 
+<!-- marketing-06 created 2026-05-20T10:00Z
+제목: Virtue 첫 세션 JTBD 매트릭스 작성
+Source note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-20-jtbd-onboarding-segmentation.md
+Rationale: ProductLed/Ramli John의 온보딩 관점상 활성화 지표는 사용자의 Jobs to Be Done에 묶여야 한다. Virtue는 prelaunch라 실제 세그먼트를 확정할 수 없지만, 현재 첫 화면·빈 상태·첫 7일 루프 문서가 어떤 job을 약속하는지 한 장으로 연결하면 이후 카피/인터뷰/측정 후보의 기준점이 생긴다.
+Expected impact: 첫 세션 메시징과 활성화 기준을 사용자 동기별로 분리해, 작은 지표를 과해석하지 않고도 출시 전 의사결정 품질을 높인다.
+Permission level: L1 internal docs only. 코드, 배포, PostHog 설정, 외부 설문/게시/발송 금지.
+Owner route: Infinity router → local Claude Code, Required workflow: Use workflow-master first.
+Success criteria: (1) job 후보 3-4개를 표로 정의, (2) 각 job별 첫 화면 약속/첫 행동/성공 지표/마찰 위험/현재 근거 문서를 매핑, (3) 기존 docs/first-impression-positioning-snapshot.md, docs/empty-state-first-action-audit.md, docs/seven-day-deed-loop.md와 충돌 0건, (4) 외부 발송·트래킹 변경·코드 변경 0건 명시.
+First verification gate: virtue-rebirth-app에서 관련 docs와 src/app/page.tsx, src/app/add/page.tsx를 읽고, 산출물 작성 후 rg로 job 후보명·deed_saved·deed_judged·Out of scope 존재를 확인한다.
+--> 
+
 ## Active
 
 ## Waiting
