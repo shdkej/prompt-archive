@@ -4,6 +4,15 @@
 
 ## Inbox
 
+- [ ] marketing-09: Virtue 활성화 마일스톤 사다리 문서화
+  - source note: `/home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-21-activation-milestone-ladder.md`
+  - rationale: prelaunch 지표를 성급히 판정하지 않기 위해 J1-J4별 setup/aha/habit moment를 기존 이벤트(`add_flow_started`, `deed_judged`, `deed_saved`, `level_up_viewed`)와 한 표로 연결한다.
+  - expected impact: 첫 10명 관찰과 이후 PostHog 대시보드가 같은 활성화 기준을 쓰게 되어, "이탈"과 "가치 충족 후 자연 종료"를 구분할 수 있다.
+  - permission level: L1 내부 문서 작성만 허용. 코드, 트래킹/프라이버시 설정, 공개 발송, 비용 지출 없음.
+  - owner route: Infinity가 Claude Code에 `/home/ubuntu/dev/virtue-rebirth-app/docs/activation-milestone-ladder.md` 작성 위임.
+  - success criteria: J1-J4 각각에 setup/aha/habit moment, 기존 이벤트, 해석 주의점, prelaunch 판정 금지선을 포함하고 기존 `first-session-jtbd-matrix.md`, `seven-day-deed-loop.md`, `pmf-response-analysis-rubric.md`와 충돌이 없다.
+  - first verification gate: 문서 추가 후 `rg -n "deed_judged|deed_saved|add_flow_started|level_up_viewed" docs/activation-milestone-ladder.md docs/first-session-jtbd-matrix.md docs/seven-day-deed-loop.md`로 이벤트 명칭 일관성을 확인한다.
+
 ## Active
 
 ## Waiting
