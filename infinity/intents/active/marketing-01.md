@@ -26,10 +26,13 @@ PostHog 신호 기반으로 demo-state 원인, add-flow 마찰, 텔레메트리 
 
 ## Local Execution Status
 
-- [ ] **대기 중**: 사용자가 `local-execution-prompt.md`를 로컬 Claude Code에 실행
-  - Oracle 서버 배포 (git pull + pnpm build + pm2 restart)
-  - PostHog 텔레메트리 코드 적용 + push
-  - 배포 검증 (ETag 확인 + 신규 방문자 시뮬레이션)
+- [x] 로컬 Claude Code 실행 완료 → `infinity/reports/marketing-01/2026-05-21T0807Z-local-execution.md`
+  - demo-state 가드와 라이브 HTML 검증 완료: 641/MOCK 미노출, 빈 상태 렌더 확인
+  - PostHog 텔레메트리 중 남은 공백(`add_flow_started` / `add_flow_abandoned`)만 로컬 브랜치 `marketing-01-add-flow-telemetry`에 적용
+  - `pnpm typecheck`, `pnpm lint`, `pnpm build` 통과
+- [ ] **승인 대기**: `GATES.md`의 `[marketing-01] Virtue add-flow telemetry 머지/푸시 및 배포 승인`
+  - 로컬 브랜치 `marketing-01-add-flow-telemetry`(`b28d01f`) → master 머지/push
+  - 필요 시 Oracle 서버 배포 (git pull + pnpm build + pm2 restart)
 
 ## Context
 
@@ -46,7 +49,6 @@ PostHog 신호 기반으로 demo-state 원인, add-flow 마찰, 텔레메트리 
 
 ## Next Actions
 
-1. **[사용자 액션 필요]** `infinity/artifacts/marketing-01/local-execution-prompt.md` 내용을 로컬 Claude Code에 실행
-   - Oracle 서버 배포 + PostHog 텔레메트리 적용
-2. (L0) 로컬 실행 완료 후 결과 리포트 수신 → status 재평가
-3. 7일 후 PostHog 지표 점검 (improvement-expectation.md 기준)
+1. **[사용자 승인 필요]** `GATES.md`의 `[marketing-01]` 머지/푸시 및 배포 승인 여부 결정
+2. 승인 시 로컬 브랜치 `marketing-01-add-flow-telemetry`를 master에 머지/push하고, 배포 범위까지 승인되면 Oracle 서버 배포
+3. 배포 후 7일간 PostHog 지표 점검 (improvement-expectation.md 기준)
