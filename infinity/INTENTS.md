@@ -4,15 +4,6 @@
 
 ## Inbox
 
-- [ ] marketing-09: Virtue 활성화 마일스톤 사다리 문서화
-  - source note: `/home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-21-activation-milestone-ladder.md`
-  - rationale: prelaunch 지표를 성급히 판정하지 않기 위해 J1-J4별 setup/aha/habit moment를 기존 이벤트(`add_flow_started`, `deed_judged`, `deed_saved`, `level_up_viewed`)와 한 표로 연결한다.
-  - expected impact: 첫 10명 관찰과 이후 PostHog 대시보드가 같은 활성화 기준을 쓰게 되어, "이탈"과 "가치 충족 후 자연 종료"를 구분할 수 있다.
-  - permission level: L1 내부 문서 작성만 허용. 코드, 트래킹/프라이버시 설정, 공개 발송, 비용 지출 없음.
-  - owner route: Infinity가 Claude Code에 `/home/ubuntu/dev/virtue-rebirth-app/docs/activation-milestone-ladder.md` 작성 위임.
-  - success criteria: J1-J4 각각에 setup/aha/habit moment, 기존 이벤트, 해석 주의점, prelaunch 판정 금지선을 포함하고 기존 `first-session-jtbd-matrix.md`, `seven-day-deed-loop.md`, `pmf-response-analysis-rubric.md`와 충돌이 없다.
-  - first verification gate: 문서 추가 후 `rg -n "deed_judged|deed_saved|add_flow_started|level_up_viewed" docs/activation-milestone-ladder.md docs/first-session-jtbd-matrix.md docs/seven-day-deed-loop.md`로 이벤트 명칭 일관성을 확인한다.
-
 ## Active
 
 ## Waiting
@@ -20,6 +11,8 @@
 <!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
 
 ## Archive
+
+<!-- marketing-09 completed 2026-05-21T22:07Z → infinity/intents/archive/marketing-09.md (Virtue 활성화 마일스톤 사다리: 활성화를 setup→aha→habit 사다리로 재정의, J1~J4를 setup/aha/habit moment·기존 이벤트·해석 주의·prelaunch 판정 보류 6칸으로 매핑. setup=add_flow_started(진입=의도), aha=deed_saved(J1/J2/J4)·deed_judged(J3 저장 전·독립), habit=반복 deed_saved(distinct-day 계산형)+level_up_viewed. deed_save_capped early-return 코드 사실 반영. prelaunch 단계 도달률은 성패 아닌 관찰 기준(전환율 판정·judged−saved 갭 이탈 단정·40% 임계값 금지). 선행 4문서(jtbd-matrix/seven-day-loop/pmf-rubric/mva-brief) 매핑 계승, 신규 이벤트·속성·카피·코드·대시보드·외부발송 0. workflow-master 4역할 병렬 후 통합. grep 게이트 55매치 PASS, copy-spec 금지어 충돌 0건; docs/activation-milestone-ladder.md 추가) -->
 
 <!-- marketing-01 completed 2026-05-21T10:17Z → infinity/intents/archive/marketing-01.md (Virtue add-flow telemetry 승인 처리: `marketing-01-add-flow-telemetry` b28d01f를 master에 fast-forward 머지/push, Kubernetes `deployment/virtue-rebirth` rollout restart 완료. GitHub master와 배포 pod HEAD 모두 b28d01f, 라이브 HTTP 200, `641`/`MOCK` 미노출, 빈 상태 카피 렌더 확인. 후속은 7일 PostHog `add_flow_started` 대비 `add_flow_abandoned`/`deed_saved` 점검) -->
 
