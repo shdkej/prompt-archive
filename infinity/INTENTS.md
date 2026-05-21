@@ -4,6 +4,18 @@
 
 ## Inbox
 
+<!-- marketing-08 candidate 2026-05-21T10:01Z
+제목: Virtue PMF 응답 분석 루브릭 작성
+소스 노트: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-21-pmf-response-engine.md
+근거: Superhuman/Sean Ellis 방식은 40% 숫자보다 "매우 아쉽다" 응답자의 persona·benefit·대체재 언어를 분리해 high-expectation customer를 찾는 데 핵심이 있다. Virtue에는 이미 PMF 질문 초안과 MVA 기준표가 있으나, 응답을 J1~J4·benefit·대체재·다음 카피 가설로 태깅하는 분석 루브릭은 없다.
+예상 임팩트: 첫 10명 prelaunch 학습이 평균 만족도 판단으로 흐르지 않고, 강한 반응자의 언어를 다음 포지셔닝/온보딩 문서로 연결할 수 있다.
+권한 수준: L1 내부 문서 작성. 외부 설문 발송, DM/메일, 공개 모집, PostHog 설정 변경은 Waiting/approval-needed.
+Owner route: Marketer 주도, Planner 검수, Developer/Operator는 기존 이벤트(deed_saved, deed_judged) 참조만 확인. 코드/트래킹 변경 없음.
+성공 기준: docs/pmf-response-analysis-rubric.md 1개 추가; PMF-1~4 응답 태깅 표, J1~J4 매핑 규칙, "매우 아쉽다" 그룹 우선 분석 규칙, 작은 표본 과대해석 금지선, 외부 발송 approval-needed 경계 포함.
+첫 검증 게이트: docs/first-impression-positioning-snapshot.md의 PMF 질문과 docs/minimum-viable-audience-brief.md의 J1~J4/MVA 기준을 변경 없이 계승했는지 확인하고, copy-spec 금지어를 사용자 노출 카피로 새로 쓰지 않았는지 grep으로 점검.
+Routing: Inbox
+-->
+
 ## Active
 
 ## Waiting
