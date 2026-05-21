@@ -37,6 +37,8 @@ Routing: Inbox
 
 ## Archive
 
+<!-- marketing-01 completed 2026-05-21T10:17Z → infinity/intents/archive/marketing-01.md (Virtue add-flow telemetry 승인 처리: `marketing-01-add-flow-telemetry` b28d01f를 master에 fast-forward 머지/push, Kubernetes `deployment/virtue-rebirth` rollout restart 완료. GitHub master와 배포 pod HEAD 모두 b28d01f, 라이브 HTTP 200, `641`/`MOCK` 미노출, 빈 상태 카피 렌더 확인. 후속은 7일 PostHog `add_flow_started` 대비 `add_flow_abandoned`/`deed_saved` 점검) -->
+
 <!-- marketing-07 completed 2026-05-20T22:07Z → infinity/intents/archive/marketing-07.md (Virtue 최소 생존 오디언스 기준표: J1~J4 잡을 그대로 계승해 첫 10명 후보 조건·첫 문장/약속·첫 세션 가치 순간·관찰 질문·승인 필요 외부 액션 경계 6칸으로 매핑, 컬럼별 Planner/Marketer/Developer/Operator 렌즈. Seth Godin 밀도>규모 + Paul Graham do-things-that-dont-scale 학습 루프, "문안까지 L1·발송부터 Waiting" 경계 명시. 활성화 이벤트 계승(J1/J2/J4=deed_saved, J3=deed_judged) 신규 0. copy-spec/first-session-jtbd-matrix 충돌 0건; docs/minimum-viable-audience-brief.md 추가) -->
 
 <!-- marketing-06 completed 2026-05-20T10:07Z → infinity/intents/archive/marketing-06.md (Virtue 첫 세션 JTBD 매트릭스: J1 기록형/J2 누적형/J3 AI 호기심형/J4 회고형 4잡을 첫 화면 약속·첫 행동·성공 지표·마찰 위험·근거 문서 5칸으로 매핑, J3=deed_judged·나머지=deed_saved 활성화, good/bad 마찰 구분, 기존 6 이벤트 재사용·신규 0, 선행 3문서+copy-spec 충돌 0건; docs/first-session-jtbd-matrix.md sha 38af1be) -->
@@ -48,8 +50,6 @@ Routing: Inbox
 <!-- marketing-03 completed 2026-05-18T22:20Z → infinity/intents/archive/marketing-03.md (Virtue 첫 7일 deed_saved 루프 정의서 작성, D1/D3/D7 카피·유연성 원칙·PostHog 후보 정리) -->
 
 <!-- marketing-02 completed 2026-05-16T14:00Z → infinity/intents/archive/marketing-02.md (마찰점 4개 특정, 개선 후보 3개 초안, 로컬 실행 프롬프트 작성) -->
-
-<!-- marketing-01 completed 2026-05-16T06:14Z → infinity/intents/archive/marketing-01.md (Virtue 배포/검증 완료, 641/MOCK 미노출 확인) -->
 
 <!-- research-07 completed 2026-05-13T12:00 → infinity/intents/archive/research-07.md -->
 

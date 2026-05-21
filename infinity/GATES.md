@@ -5,14 +5,16 @@
 
 ## 대기 중
 
+## 처리 완료
+
 ### [marketing-01] Virtue add-flow telemetry 머지/푸시 및 배포 승인
 - requested: 2026-05-21 08:07 UTC
-- action: `/home/ubuntu/dev/virtue-rebirth-app`의 로컬 브랜치 `marketing-01-add-flow-telemetry`(`b28d01f`)를 `master`에 머지 후 push하고, 승인 범위에 포함되면 Oracle 서버에서 `git pull + pnpm build + pm2 restart` 배포까지 진행
-- reason: `add_flow_started` / `add_flow_abandoned` 텔레메트리를 배포해야 landing → add → judge → save 드롭오프 측정이 시작됨
-- impact: GitHub 원격 repo 및 프로덕션 Virtue 배포에 영향 가능. Push의 자동 배포 여부와 Oracle 서버 배포는 로컬에서 안전하게 단정할 수 없어 명시 승인 필요
+- resolved: 2026-05-21 10:17 UTC
+- decision: approved
+- action: `/home/ubuntu/dev/virtue-rebirth-app`의 로컬 브랜치 `marketing-01-add-flow-telemetry`(`b28d01f`)를 `master`에 fast-forward 머지 후 push하고, Kubernetes `deployment/virtue-rebirth` rollout restart로 프로덕션 반영
+- result: GitHub `master`와 배포 pod `/app` HEAD 모두 `b28d01f719db344f4e76c5c7d32934617a2d0f28`; `https://virtue.oracle.shdkej.com` HTTP 200, `641`/`MOCK` 미노출, 빈 상태 카피 렌더 확인
 - prepared_report: infinity/reports/marketing-01/2026-05-21T0807Z-local-execution.md
-
-## 처리 완료
+- completion_report: infinity/reports/marketing-01/2026-05-21T0950Z-approved-deploy.md
 
 ### [wiki-04] shdkej/agent-wiki에 자동 사이드바 파일 추가 및 푸시 (JS)
 - requested: 2026-04-24 09:00

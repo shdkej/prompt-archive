@@ -35,12 +35,18 @@ PostHog 신호 기반으로 demo-state 원인, add-flow 마찰, 텔레메트리 
   - deployment: Kubernetes rollout completed, `virtue-rebirth-6bff5598d-5w6d4` ready
   - verification: `https://virtue.oracle.shdkej.com` ETag `"w3v1o6fzvocvu"`, `641`/`MOCK` marker 미노출
   - report: `infinity/reports/marketing-01/2026-05-16T06-14-local-execution.md`
+- [x] 사용자 Telegram 승인 수신 후 add-flow telemetry 머지/푸시/배포
+  - approved_at: 2026-05-21T09:49Z
+  - commit: `b28d01f` (`add-flow 퍼널 텔레메트리 추가 (marketing-01)`)
+  - deployment: Kubernetes rollout completed, `virtue-rebirth-6b6656cd8b-6w6gn` ready
+  - verification: GitHub `master`와 배포 pod `/app` HEAD 모두 `b28d01f719db344f4e76c5c7d32934617a2d0f28`; `https://virtue.oracle.shdkej.com` HTTP 200, ETag `"60azsylmbqcvu"`, `641`/`MOCK` marker 미노출
+  - report: `infinity/reports/marketing-01/2026-05-21T0950Z-approved-deploy.md`
 
 ## Context
 
 - PostHog project 424014 — 7일 31 pageviews / 3 users / 1 deed_judged / 0 deed_saved
-- 배포 URL: https://virtue.oracle.shdkej.com (PM2 + Nginx, oracle 서버)
-- 앱 repo: shdkej/virtue-rebirth-app (master, 최신 푸시 dfaaf4e)
+- 배포 URL: https://virtue.oracle.shdkej.com (Kubernetes deployment `virtue-rebirth`)
+- 앱 repo: shdkej/virtue-rebirth-app (master, 최신 푸시 b28d01f)
 - 운영 모드: NEXT_PUBLIC_SCORING_MODE=mock / ANTHROPIC_API_KEY 미설정
 - store: localStorage 기반 / 첫 로드 시 MOCK_DEEDS 14건 시드 (guard는 dfaaf4e에 추가됨)
 - 핵심 참조 파일:
@@ -51,5 +57,5 @@ PostHog 신호 기반으로 demo-state 원인, add-flow 마찰, 텔레메트리 
 
 ## Final Result
 
-- 완료: demo-state guard 배포, PostHog 이벤트 정리, 신규 배포 검증.
+- 완료: demo-state guard 배포, PostHog 이벤트 정리, add-flow started/abandoned 텔레메트리 배포, 신규 배포 검증.
 - 후속: 7일 후 PostHog 지표를 `improvement-expectation.md` 기준으로 점검.
