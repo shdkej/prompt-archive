@@ -18,6 +18,19 @@ Routing: Inbox
 
 ## Active
 
+### marketing-08 · Virtue PMF 응답 분석 루브릭 작성
+
+- id: marketing-08
+- status: in_progress
+- priority: high
+- permission: L1
+- created: 2026-05-21T10:10Z
+- detail: infinity/intents/active/marketing-08.md
+
+**Goal**: PMF-1~4 응답을 J1~J4·benefit·대체재·다음 카피 가설로 태깅하는 분석 루브릭 작성
+**Cloud draft**: 완료 → infinity/artifacts/marketing-08/pmf-response-analysis-rubric.md
+**Next**: 로컬 Claude Code에서 source note 보완 후 docs/pmf-response-analysis-rubric.md 저장
+
 ## Waiting
 
 <!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
