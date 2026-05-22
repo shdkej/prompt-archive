@@ -6,15 +6,21 @@
 
 ## Active
 
+## Waiting
+
+<!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
+
 ### marketing-10 Virtue Time-to-Value 관찰 기준표 작성
 
 - id: marketing-10
 - title: Virtue Time-to-Value 관찰 기준표 작성
-- status: in_progress
+- status: waiting
 - priority: medium
 - permission: L1 (내부 문서 작성. 외부발송/대시보드/프로덕션 tracking 변경은 Waiting)
-- mode: draft (cloud) → execute_local
+- mode: execute_local (클라우드 단계 완료)
 - created_at: 2026-05-22T10:00Z
+- waiting_since: 2026-05-22T10:30Z
+- wait_reason: 로컬 환경 필요 — virtue-rebirth-app/docs/에 파일 생성 후 커밋/푸시. 클라우드 환경에서는 push 불가(SSH/token 미설정). 로컬에서 아래 execute_local 프롬프트 실행 필요.
 - goal: J1-J4별 first value · second value · time gap 계산 방식 · 정성 확인 질문 · prelaunch 해석 금지선을 표로 정리한 내부 기획 문서 작성
 - success_criteria: docs/time-to-value-observation-brief.md에 J1-J4별 first/second value 이벤트·time gap 계산·정성 질문·해석 금지선 표 포함. 신규 이벤트/코드/외부발송/비용 0. activation-milestone-ladder 및 first-session-jtbd-matrix 충돌 0.
 - context:
@@ -22,11 +28,17 @@
   - prior: activation-milestone-ladder.md, first-session-jtbd-matrix.md
   - events: add_flow_started, deed_judged, deed_saved, level_up_viewed
 - cloud_draft: infinity/artifacts/marketing-10/time-to-value-observation-brief.md
-- note: 클라우드 초안 완료(2026-05-22T10:00Z). 로컬 실행 대기 — virtue-rebirth-app/docs/에 초안 기반으로 파일 생성 후 검증 및 커밋/푸시.
-
-## Waiting
-
-<!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
+- execute_local_prompt: |
+    Infinity Intent: marketing-10 Virtue Time-to-Value 관찰 기준표 작성
+    Mode: execute_local
+    Goal: virtue-rebirth-app/docs/time-to-value-observation-brief.md 생성 후 커밋/푸시
+    Cloud draft: prompt-archive/infinity/artifacts/marketing-10/time-to-value-observation-brief.md
+    Allowed: L0/L1 only (docs 파일 추가, 커밋, 푸시)
+    Forbidden: 신규 이벤트/코드/대시보드/외부발송/비용
+    Verification:
+      rg -n "deed_judged|deed_saved|add_flow_started|level_up_viewed" docs/time-to-value-observation-brief.md
+      grep -v "time-to-value-observation-brief" docs/ — 기존 파일 수정 없음 확인
+    Report back to: prompt-archive/infinity/reports/marketing-10/{timestamp}.md
 
 ## Archive
 
