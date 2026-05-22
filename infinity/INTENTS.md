@@ -4,9 +4,25 @@
 
 ## Inbox
 
-<!-- marketing-10 candidate 2026-05-22T10:00Z | 제목: Virtue time-to-value 관찰 기준표 작성 | Source note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-22-time-to-value-second-value.md | Rationale: activation ladder 다음 병목은 첫 가치와 두 번째 가치 사이의 시간을 J1-J4별로 정의하는 것. prelaunch라 성패 판정은 금지하고 기존 이벤트 기반 관찰 기준만 만든다. | Expected impact: 첫 10명 관찰과 launch 후 PostHog 해석이 "가입/클릭"이 아니라 가치 도달 속도 중심으로 정렬됨. | Permission: L1 내부 문서 작성만 허용, public posting/외부 인터뷰/프로덕션 tracking 변경/대시보드 생성은 Waiting approval-needed. | Owner route: Infinity → Claude Code docs 작업 후보. | Success criteria: `docs/time-to-value-observation-brief.md`에 J1-J4별 first value, second value, 기존 이벤트(`add_flow_started`, `deed_judged`, `deed_saved`, `level_up_viewed`), time gap 계산 방식, 정성 확인 질문, prelaunch 해석 금지선이 표로 정리됨. | First verification gate: 신규 이벤트/코드/외부 발송/비용 작업이 0인지 확인하고, 기존 `activation-milestone-ladder` 및 `first-session-jtbd-matrix`와 충돌하지 않는지 grep으로 확인. -->
-
 ## Active
+
+### marketing-10 Virtue Time-to-Value 관찰 기준표 작성
+
+- id: marketing-10
+- title: Virtue Time-to-Value 관찰 기준표 작성
+- status: in_progress
+- priority: medium
+- permission: L1 (내부 문서 작성. 외부발송/대시보드/프로덕션 tracking 변경은 Waiting)
+- mode: draft (cloud) → execute_local
+- created_at: 2026-05-22T10:00Z
+- goal: J1-J4별 first value · second value · time gap 계산 방식 · 정성 확인 질문 · prelaunch 해석 금지선을 표로 정리한 내부 기획 문서 작성
+- success_criteria: docs/time-to-value-observation-brief.md에 J1-J4별 first/second value 이벤트·time gap 계산·정성 질문·해석 금지선 표 포함. 신규 이벤트/코드/외부발송/비용 0. activation-milestone-ladder 및 first-session-jtbd-matrix 충돌 0.
+- context:
+  - source: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-22-time-to-value-second-value.md
+  - prior: activation-milestone-ladder.md, first-session-jtbd-matrix.md
+  - events: add_flow_started, deed_judged, deed_saved, level_up_viewed
+- cloud_draft: infinity/artifacts/marketing-10/time-to-value-observation-brief.md
+- note: 클라우드 초안 완료(2026-05-22T10:00Z). 로컬 실행 대기 — virtue-rebirth-app/docs/에 초안 기반으로 파일 생성 후 검증 및 커밋/푸시.
 
 ## Waiting
 
