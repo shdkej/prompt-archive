@@ -4,8 +4,6 @@
 
 ## Inbox
 
-<!-- marketing-11 candidate 2026-05-22T22:00Z | 제목: Virtue 첫 실제 사용자 기준선 템플릿 작성 | Source note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-22-own-baseline-onboarding-metrics.md | Rationale: prelaunch 단계에서는 외부 activation/TTV 평균보다 첫 10~20명 실제 사용자 기준선을 먼저 만들어야 이후 개선 판단이 흔들리지 않는다. | Expected impact: launch 후 작은 표본을 성급히 성공/실패로 해석하지 않고, J1-J4별 첫 가치·두 번째 가치·정성 관찰을 같은 포맷으로 축적할 수 있음. | Permission: L1 내부 문서 작성만 허용. public posting/외부 모집/이메일·DM/유료 광고/프로덕션 tracking 변경/PostHog 대시보드 생성은 Waiting approval-needed. | Owner route: Infinity → Claude Code docs 작업 후보. | Success criteria: `docs/first-real-user-baseline-template.md`에 첫 10~20명 기준선 표, J1-J4 분류, 유입 문장, 기존 이벤트(`add_flow_started`, `deed_judged`, `deed_saved`, `level_up_viewed`), first/second value 기록칸, synthetic/test traffic 제외 기준, prelaunch 해석 금지선이 정리됨. | First verification gate: 신규 이벤트·코드·외부 발송·비용 작업이 0인지 확인하고, 기존 `docs/time-to-value-observation-brief.md` 및 `docs/activation-milestone-ladder.md`와 충돌하지 않는지 grep으로 확인. -->
-
 ## Active
 
 ## Waiting
@@ -43,6 +41,8 @@
     Report back to: prompt-archive/infinity/reports/marketing-10/{timestamp}.md
 
 ## Archive
+
+<!-- marketing-11 completed 2026-05-22T22:17Z → infinity/intents/archive/marketing-11.md (Virtue 첫 실사용자 기준선 템플릿: 첫 10~20명 한 명당 한 행 기록 양식, J1~J4 분류, 유입 문장, first/second value, synthetic/test 제외 기준, prelaunch 해석 금지선, 주간 리뷰 리듬, 기존 이벤트 근거 정리. 핵심 이벤트는 add_flow_started/deed_judged/deed_saved/level_up_viewed만 사용. 신규 이벤트·코드·대시보드·외부발송·비용 0. ladder/TTV 충돌 0; docs/first-real-user-baseline-template.md 추가, virtue-rebirth-app ebd5781 push 완료) -->
 
 <!-- marketing-09 completed 2026-05-21T22:07Z → infinity/intents/archive/marketing-09.md (Virtue 활성화 마일스톤 사다리: 활성화를 setup→aha→habit 사다리로 재정의, J1~J4를 setup/aha/habit moment·기존 이벤트·해석 주의·prelaunch 판정 보류 6칸으로 매핑. setup=add_flow_started(진입=의도), aha=deed_saved(J1/J2/J4)·deed_judged(J3 저장 전·독립), habit=반복 deed_saved(distinct-day 계산형)+level_up_viewed. deed_save_capped early-return 코드 사실 반영. prelaunch 단계 도달률은 성패 아닌 관찰 기준(전환율 판정·judged−saved 갭 이탈 단정·40% 임계값 금지). 선행 4문서(jtbd-matrix/seven-day-loop/pmf-rubric/mva-brief) 매핑 계승, 신규 이벤트·속성·카피·코드·대시보드·외부발송 0. workflow-master 4역할 병렬 후 통합. grep 게이트 55매치 PASS, copy-spec 금지어 충돌 0건; docs/activation-milestone-ladder.md 추가) -->
 
