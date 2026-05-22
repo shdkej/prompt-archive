@@ -4,6 +4,8 @@
 
 ## Inbox
 
+<!-- marketing-11 candidate 2026-05-22T22:00Z | 제목: Virtue 첫 실제 사용자 기준선 템플릿 작성 | Source note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-22-own-baseline-onboarding-metrics.md | Rationale: prelaunch 단계에서는 외부 activation/TTV 평균보다 첫 10~20명 실제 사용자 기준선을 먼저 만들어야 이후 개선 판단이 흔들리지 않는다. | Expected impact: launch 후 작은 표본을 성급히 성공/실패로 해석하지 않고, J1-J4별 첫 가치·두 번째 가치·정성 관찰을 같은 포맷으로 축적할 수 있음. | Permission: L1 내부 문서 작성만 허용. public posting/외부 모집/이메일·DM/유료 광고/프로덕션 tracking 변경/PostHog 대시보드 생성은 Waiting approval-needed. | Owner route: Infinity → Claude Code docs 작업 후보. | Success criteria: `docs/first-real-user-baseline-template.md`에 첫 10~20명 기준선 표, J1-J4 분류, 유입 문장, 기존 이벤트(`add_flow_started`, `deed_judged`, `deed_saved`, `level_up_viewed`), first/second value 기록칸, synthetic/test traffic 제외 기준, prelaunch 해석 금지선이 정리됨. | First verification gate: 신규 이벤트·코드·외부 발송·비용 작업이 0인지 확인하고, 기존 `docs/time-to-value-observation-brief.md` 및 `docs/activation-milestone-ladder.md`와 충돌하지 않는지 grep으로 확인. -->
+
 ## Active
 
 ## Waiting
