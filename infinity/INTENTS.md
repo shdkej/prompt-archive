@@ -4,6 +4,8 @@
 
 ## Inbox
 
+- research-08: `llms.txt` 등 GEO/LLMO(SEO의 AI 검색/답변엔진 대응 버전)에서 실제로 설정해야 할 항목을 조사하고, Virtue/Knowledge Lab/Infinity에 적용 가능한 우선순위 체크리스트로 정리한다. 포함 범위: `llms.txt`, `robots.txt`/AI crawler 정책, sitemap/schema.org, canonical/metadata, LLM answer visibility, 콘텐츠 구조, 출처·저자 신뢰 신호, 주요 AI 검색/답변엔진별 차이. 산출물은 내부 조사 문서와 실행 후보 목록이며, 공개 사이트 변경·배포·외부 발송은 별도 승인 없이는 하지 않는다.
+
 ## Active
 
 ## Waiting
