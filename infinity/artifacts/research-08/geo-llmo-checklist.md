@@ -1,201 +1,343 @@
-# GEO/LLMO Implementation Checklist
+# GEO/LLMO 설정 조사 및 우선순위 체크리스트
 
-- intent: research-08
-- date: 2026-05-23
-- scope: Virtue, Knowledge Lab, Infinity
-- constraint: research and implementation candidates only; no public site changes, deployments, or external sends
+> research-08 | 작성: 2026-05-23T10:00Z  
+> 대상 프로젝트: Virtue, Knowledge Lab, Infinity
 
-## Executive Takeaway
+---
 
-GEO/LLMO work should start with crawlability and source clarity, not with speculative "AI SEO" hacks. The high-confidence foundation is:
+## 1. 개요
 
-1. Make public pages fetchable without client-only rendering.
-2. Publish clear `robots.txt` and `sitemap.xml`.
-3. Add structured metadata/schema for entity, author, and canonical identity.
-4. Add a conservative `/llms.txt` as a curated map, while treating it as voluntary and not guaranteed.
-5. Validate from bot-like fetches and server logs before interpreting AI-answer visibility.
+**GEO (Generative Engine Optimization)** / **LLMO (Large Language Model Optimization)**는 SEO의 AI 검색·답변엔진 버전이다. Google AI Overviews, ChatGPT Search, Perplexity, Bing Copilot 등 LLM 기반 검색엔진이 콘텐츠를 발견·인용·요약하는 방식을 최적화하는 것이 목표다.
 
-`llms.txt` is useful as a controlled reading map, especially for Knowledge Lab and Infinity docs, but it is not a replacement for normal SEO, robots policy, sitemaps, structured data, or human-visible source quality.
+기존 SEO와 차이:
+- 클릭 유도가 아닌 **인용·출처로서의 신뢰성** 확보
+- 키워드 밀도보다 **구조화된 답변 형식**
+- PageRank보다 **출처 권위성 (E-E-A-T)**
+- 메타 태그보다 **기계 가독형 마크업 (schema.org, llms.txt)**
 
-## Source Baseline
+---
 
-- `llms.txt` was proposed by Jeremy Howard on 2024-09-03 as a Markdown file at `/llms.txt` to help LLMs use websites at inference time. The proposal defines a required H1, optional blockquote summary, explanatory content, H2 sections, and Markdown link lists. Source: https://llmstxt.org/
-- The neutral reference audited in 2026-05 positions `llms.txt` as voluntary, client-side, inference-oriented curation; it does not replace `robots.txt` or `sitemap.xml`. Source: https://llmtxt.info/
-- OpenAI separates search and training crawlers: allow `OAI-SearchBot` for ChatGPT search visibility; disallowing `GPTBot` indicates content should not be used for foundation-model training. `ChatGPT-User` is user-triggered and robots rules may not apply. Source: https://developers.openai.com/api/docs/bots
-- Google `Google-Extended` is a robots token, not a separate HTTP user agent. It controls use for Gemini model training and Gemini/Vertex grounding, and does not affect Google Search inclusion or ranking. Source: https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers
-- Google robots handling still matters: `robots.txt` must be top-level plain text; `Sitemap:` entries are supported; disallowed pages can still be indexed as URLs without snippets, so use indexing controls separately when needed. Source: https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec
-- Anthropic documents `ClaudeBot` robots controls, supports non-standard `Crawl-delay`, and recommends robots rules over IP blocking for opt-out. Source: https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
-- Google structured data should follow Google Search Central behavior for Search eligibility, even when using schema.org vocabulary. Required/recommended fields should be accurate and tested with Rich Results Test. Source: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
+## 2. llms.txt
 
-## Priority Checklist
+### 개념
+- Jeremy Howard (fast.ai)가 2024년 제안한 표준
+- `robots.txt`처럼 도메인 루트에 위치 (`yourdomain.com/llms.txt`)
+- LLM이 사이트 전체를 크롤하지 않고도 핵심 내용을 파악할 수 있도록 Markdown 요약 제공
 
-### P0 - Crawl and Render Access
+### 형식
+```markdown
+# [사이트 이름]
 
-- Verify public pages return meaningful HTML to a simple HTTP fetch, not only a JavaScript shell.
-- Confirm `robots.txt` is reachable at the production root for each public host.
-- Confirm CDN/security settings do not silently block desired AI/search bots despite permissive `robots.txt`.
-- Keep login-only, private, staging, admin, and internal routes disallowed or unavailable.
-- For sites intended to appear in AI answers, allow search/answer crawlers separately from training crawlers where providers support that distinction.
+> [한 줄 설명 — LLM이 이 사이트를 어떻게 소개해야 하는지]
 
-Recommended robots stance for public marketing/docs pages:
+## 주요 섹션
 
-```txt
-User-agent: OAI-SearchBot
+- [페이지 제목](URL): 한 줄 설명
+- [페이지 제목](URL): 한 줄 설명
+
+## 관련 정보
+
+- [외부 링크](URL): 맥락
+```
+
+### 보완 파일
+- `llms-full.txt`: 전체 문서 텍스트 (AI가 RAG 등으로 직접 읽을 때)
+- 마크다운 버전 페이지: 각 URL에 `.md` 접미사로 Markdown 원문 제공
+
+### 프로젝트별 적용 우선순위
+| 프로젝트 | 적용 필요성 | 이유 |
+|---------|-----------|------|
+| Virtue | 중 | 공개 서비스이나 콘텐츠 사이트 아님 |
+| Knowledge Lab | 높음 | 지식/문서 콘텐츠 → AI 인용 대상 |
+| Infinity | 중 | 내부 시스템 → 공개 필요성 낮음 |
+
+---
+
+## 3. robots.txt / AI 크롤러 정책
+
+### 주요 AI 크롤러 User-Agent 목록
+
+| 크롤러 | User-Agent | 소속 | 목적 |
+|-------|-----------|------|------|
+| GPTBot | `GPTBot` | OpenAI | ChatGPT 학습 데이터 수집 |
+| OAI-SearchBot | `OAI-SearchBot` | OpenAI | ChatGPT Search 실시간 인덱싱 |
+| ClaudeBot | `ClaudeBot` | Anthropic | Claude 학습 데이터 수집 |
+| anthropic-ai | `anthropic-ai` | Anthropic | Claude 웹 검색 |
+| Google-Extended | `Google-Extended` | Google | Bard/Gemini 학습용 |
+| PerplexityBot | `PerplexityBot` | Perplexity | Perplexity 검색 인덱싱 |
+| CCBot | `CCBot` | Common Crawl | 오픈 크롤 (다수 AI 학습에 사용) |
+| Amazonbot | `Amazonbot` | Amazon | Alexa/AWS AI 학습 |
+
+### 정책 결정 기준
+```
+공개 콘텐츠 서비스 → 기본적으로 허용 (인용 기회 확보)
+개인정보/민감정보 포함 → 명시적 차단
+학습용만 차단, 검색은 허용 → GPTBot/ClaudeBot 차단, OAI-SearchBot/PerplexityBot 허용
+```
+
+### 권장 robots.txt 템플릿 (공개 콘텐츠 프로젝트)
+```
+User-agent: *
 Allow: /
 
+# AI 크롤러 — 검색/답변엔진용 허용
 User-agent: GPTBot
-Disallow: /
-
-User-agent: Google-Extended
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
-Crawl-delay: 1
 
-User-agent: *
+User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://example.com/sitemap.xml
+User-agent: PerplexityBot
+Allow: /
+
+# 민감 경로 차단
+Disallow: /admin/
+Disallow: /api/private/
+Disallow: /user/
 ```
 
-Adjust `GPTBot`, `Google-Extended`, and `ClaudeBot` based on content-licensing preference. Search visibility and training permission are not the same policy decision.
+---
 
-### P1 - Sitemap, Canonical, and Metadata
+## 4. Sitemap / Schema.org
 
-- Publish a sitemap containing only canonical public URLs.
-- Add canonical URLs on every public page.
-- Add stable title/description metadata that names the product/site and the page purpose.
-- Add Open Graph/Twitter metadata for share previews.
-- Avoid duplicate URLs for the same page state; redirect or canonicalize variants.
-- Include `lastmod` in sitemaps for docs/wiki pages where freshness matters.
+### Sitemap
+- XML 사이트맵은 AI 크롤러도 참조
+- `<lastmod>` 태그로 최신 콘텐츠를 우선 인덱싱 유도
+- 이미지·비디오 사이트맵 별도 제공 시 멀티모달 인덱싱에 유리
 
-### P1 - Structured Data and Trust Signals
+### 핵심 Schema.org 마크업 (JSON-LD)
 
-- Add `WebSite`/`Organization` or `Person` schema where there is a stable public entity.
-- For docs/wiki content, use `Article`, `TechArticle`, or `WebPage` only where the visible page actually supports those claims.
-- Include visible author/source/date/update information for public editorial or research pages.
-- Link to source documents, GitHub repos, changelogs, and contact/about pages from crawlable pages.
-- Do not add fake ratings, fake author credentials, or schema that is not visible or supported on the page.
-
-### P1 - `/llms.txt`
-
-- Publish `/llms.txt` as a concise map of the highest-value public pages.
-- Keep it short enough to be useful in a context window; link to canonical pages or Markdown versions.
-- Use absolute HTTPS URLs.
-- Include sections such as `Docs`, `Product`, `Research`, `Changelog`, and `Optional`.
-- Put secondary or large context in `## Optional`.
-- Validate the format with a parser or validator before deployment.
-- Treat `/llms-full.txt` or expanded context files as optional and only for stable docs, not frequently changing app state.
-
-Starter template:
-
-```md
-# Site Name
-
-> One-sentence source-of-truth description: what this site is, who it serves, and what its public pages can be cited for.
-
-## Core
-
-- [Overview](https://example.com/): Product/site overview and primary canonical entry point.
-- [Docs](https://example.com/docs/): Public documentation index.
-
-## Trust
-
-- [About](https://example.com/about/): Ownership, contact, and source context.
-- [Changelog](https://example.com/changelog/): Public update history.
-
-## Optional
-
-- [Archive](https://example.com/archive/): Lower-priority historical material.
+**기본 (모든 사이트)**
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "사이트 이름",
+  "url": "https://yourdomain.com",
+  "description": "사이트 설명",
+  "author": {
+    "@type": "Person",
+    "name": "작성자 이름"
+  }
+}
 ```
 
-### P2 - LLM Answer Visibility
+**문서/블로그 페이지**
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "제목",
+  "datePublished": "2026-05-23",
+  "dateModified": "2026-05-23",
+  "author": {"@type": "Person", "name": "저자"},
+  "publisher": {"@type": "Organization", "name": "조직명"}
+}
+```
 
-- Create pages that answer entity-level questions directly: what it is, who it is for, how it works, constraints, pricing/status if public, and source links.
-- Prefer stable, linkable explanatory pages over only app screens.
-- Use clear headings and short answer-like paragraphs on public docs.
-- Make important claims citeable: link to evidence, changelogs, docs, or source code.
-- Track whether answers cite the canonical page, an outdated third-party page, or no source.
-- Do not infer product-market or conversion success from AI visibility alone.
+**FAQ 페이지** (AI 인용 확률 높음)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "질문",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "답변"
+    }
+  }]
+}
+```
 
-## Engine-Specific Notes
+**SpeakableSpecification** (음성 AI 대응)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["h1", ".summary", "#key-findings"]
+  }
+}
+```
 
-| Surface | What to configure | Main caution |
-| --- | --- | --- |
-| ChatGPT Search | `OAI-SearchBot` allow, fetchable HTML, canonical URLs, sitemap | `GPTBot` training permission is separate from `OAI-SearchBot`; user-triggered `ChatGPT-User` may not follow robots in the same way. |
-| OpenAI training | `GPTBot` allow/disallow | Allow only if training use is acceptable for that content. |
-| Google Search/AI surfaces | normal Googlebot crawlability, sitemap, structured data, canonical; `Google-Extended` policy | `Google-Extended` does not control normal Google Search ranking/inclusion. |
-| Gemini/Vertex grounding/training | `Google-Extended` allow/disallow | It is a robots token; logs may show normal Google crawlers rather than a separate Google-Extended UA. |
-| Claude | `ClaudeBot` robots rule and optional `Crawl-delay` | IP blocking can interfere with opt-out detection. |
-| Perplexity and other answer engines | public crawlability, sitemap, structured pages, citations | Bot behavior is less uniformly documented; verify with logs and do not rely only on robots declarations. |
+---
 
-## Project Application
+## 5. Canonical / Metadata
 
-### Virtue
+### Canonical
+```html
+<link rel="canonical" href="https://yourdomain.com/definitive-url" />
+```
+- AI 모델이 중복 콘텐츠를 하나의 URL로 집약하도록 유도
+- www vs non-www, trailing slash, 쿼리 파라미터 처리 일관성 필수
 
-Current local signal: `src/app/layout.tsx` has basic title/description metadata, but no `robots.txt` or `sitemap` file was found in the shallow app scan.
+### 핵심 메타 태그
+```html
+<!-- 기본 -->
+<meta name="description" content="150자 이내 핵심 요약 — AI 스니펫 소스">
+<meta name="author" content="저자명">
 
-Recommended sequence:
+<!-- Open Graph (ChatGPT, Perplexity 미리보기에 활용) -->
+<meta property="og:title" content="페이지 제목">
+<meta property="og:description" content="설명">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://...">
 
-1. Add production `robots.txt` with explicit policy for OAI-SearchBot, GPTBot, Google-Extended, ClaudeBot, and sitemap location.
-2. Add sitemap generation for public routes: `/`, `/add`, `/deeds`, `/dex`, `/me` only if these are intended to be public and meaningful without user state. If app routes are user-state screens, create separate public explanation pages instead.
-3. Improve metadata with canonical site URL, Open Graph, and a product-level description in Korean and/or English.
-4. Add an about/source page explaining Virtue's premise, status, and boundaries. This is more useful to answer engines than private app screens.
-5. Add `/llms.txt` only after public canonical pages exist; otherwise it will just point bots at thin app routes.
+<!-- 날짜 (최신성 신호) -->
+<meta name="article:published_time" content="2026-05-23T10:00:00Z">
+<meta name="article:modified_time" content="2026-05-23T10:00:00Z">
+```
 
-### Knowledge Lab
+---
 
-Current local signal: `agent-wiki` appears to be a docs/wiki Next/Fumadocs site with static output, but no shallow `robots.txt` or `sitemap` file was found.
+## 6. LLM Answer Visibility (AI 답변 노출 최적화)
 
-Recommended sequence:
+### 콘텐츠 작성 원칙
 
-1. Add `robots.txt` and sitemap for public wiki/docs pages.
-2. Generate `/llms.txt` from the docs index, with `## Docs`, `## Research`, `## Logs`, and `## Optional`.
-3. Prefer Markdown or clean static HTML versions for each important doc.
-4. Add author/source/update metadata to research pages.
-5. Add `TechArticle` or `Article` schema only for pages with visible title, author/source, and dates.
+**Answer-First 구조**
+- 문서 상단에 핵심 답변을 1-3문장으로 요약
+- H1 → 짧은 정의/요약 → 상세 설명 순서
+- 결론 먼저, 근거 나중 (AI가 답변 생성 시 앞부분을 우선 활용)
 
-Knowledge Lab is the best first target for `llms.txt` because the content is naturally documentation-like and source-citation oriented.
+**AI가 자주 인용하는 형식**
+- 번호 목록 / 불릿 목록 (단계별 절차, 비교)
+- 표 (비교 분석, 속성 나열)
+- FAQ 섹션 (질문-답변 쌍)
+- 짧은 단락 (3-5문장 이내)
+- 코드 블록 (기술 문서)
+- 정의: `**용어**: 설명` 형식
 
-### Infinity
+**피해야 할 패턴**
+- 긴 서론 (결론 전 배경 설명 3단락 이상)
+- JavaScript 렌더링 의존 콘텐츠 (크롤러가 실행 못함)
+- 이미지에만 존재하는 핵심 정보
+- 로그인 필수 콘텐츠
 
-Current local signal: Infinity is currently represented inside `prompt-archive`; no public web surface was found in the shallow scan.
+---
 
-Recommended sequence:
+## 7. 출처·저자 신뢰 신호 (E-E-A-T)
 
-1. Do not publish operational/private intent files directly.
-2. If a public Infinity page exists later, publish only a curated public explainer and selected public archive pages.
-3. Use `/llms.txt` to point to public concepts, architecture, and changelog, not live intent queues or reports that may include sensitive local context.
-4. Keep `robots.txt` restrictive by default until there is an explicit public information architecture.
+### E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness)
 
-## Verification Gates Before Any Public Change
+Google AI Overviews와 Perplexity 모두 출처 신뢰성을 반영.
 
-- `curl -I https://domain/robots.txt` returns 200 and `text/plain`.
-- `curl https://domain/robots.txt` shows intended AI/search rules and `Sitemap:`.
-- `curl https://domain/sitemap.xml` returns canonical production URLs.
-- `curl https://domain/llms.txt` returns valid Markdown, absolute URLs, and no private/internal links.
-- Fetch key pages with JavaScript disabled or a simple HTTP client and confirm meaningful title, heading, and body text are present.
-- Run Google Rich Results Test for structured pages.
-- Check server/CDN logs for 403/challenge responses to desired crawlers after rollout.
-- Ask target answer engines neutral questions and record whether they cite the canonical page; repeat weekly, not immediately after deploy only.
+| 신호 | 구현 방법 |
+|------|---------|
+| **경험 (Experience)** | 사용 후기, 실제 사례, 구체적 수치 포함 |
+| **전문성 (Expertise)** | 저자 소개 페이지, 자격증/이력, byline |
+| **권위성 (Authoritativeness)** | 외부 사이트의 인용/링크, 전문 기관 언급 |
+| **신뢰성 (Trustworthiness)** | About 페이지, 연락처, 편집 정책, 마지막 수정일 |
 
-## Candidate Work Items
+### 구체적 구현
+```
+/about — 저자/조직 소개, 전문 분야
+/author/[name] — 개인 저자 프로필
+콘텐츠 내 참고문헌/출처 링크
+주장에 날짜·수치·출처 병기
+```
 
-| Priority | Project | Candidate | Permission | Local needed |
-| --- | --- | --- | --- | --- |
-| P0 | Knowledge Lab | Add `robots.txt`, sitemap, and `/llms.txt` generated from docs index | L1/L2 if push | yes |
-| P0 | Virtue | Decide public vs app-state pages; add public explainer if needed | L1/L2 if push | yes |
-| P1 | Virtue | Add robots/sitemap/canonical/OG metadata for production host | L1/L2 if push | yes |
-| P1 | Knowledge Lab | Add visible source/update metadata to major docs pages | L1/L2 if push | yes |
-| P2 | Infinity | Draft public-safe Infinity explainer and publication boundary | L0/L1 draft | maybe |
-| P2 | All | Create monthly AI-answer visibility observation sheet | L1 docs only | yes |
+---
 
-## Non-Goals and Red Lines
+## 8. 주요 AI 검색·답변 엔진별 차이
 
-- No public deployments from this research intent.
-- No external outreach or submissions.
-- No automated AI-answer scraping that violates provider terms.
-- No training-crawler allow policy without content-owner decision.
-- No publication of private Infinity intent/report content.
-- No claims that `/llms.txt` guarantees answer-engine citation or ranking.
+| 엔진 | 인덱싱 방식 | 크롤러 | 최적화 포인트 |
+|-----|-----------|-------|------------|
+| **Google AI Overviews** | Google 기존 인덱스 활용 | Googlebot + Google-Extended | schema.org, E-E-A-T, 기존 SEO 연속 |
+| **ChatGPT Search** | Bing 인덱스 + OAI-SearchBot | OAI-SearchBot | Bing SEO 최적화, robots.txt OAI 허용 |
+| **Perplexity** | 자체 크롤 + 실시간 검색 | PerplexityBot | 출처 표기 명확성, 인용 가능한 문장 구조 |
+| **Bing Copilot** | Bing 인덱스 | Bingbot | 기존 Bing SEO, schema.org |
+| **Claude (web search)** | 실시간 검색 | anthropic-ai | 구조화된 콘텐츠, llms.txt |
+| **Gemini** | Google 인덱스 | Google-Extended | Google SEO와 동일 |
+
+### 공통 최적화 전략
+Bing 인덱싱이 여전히 중요 (ChatGPT Search, Copilot 동시 커버).
+Bing Webmaster Tools 등록 + sitemap 제출 권장.
+
+---
+
+## 9. 프로젝트별 우선순위 체크리스트
+
+### 공통 (모든 프로젝트)
+
+**P0 — 즉시 (공수 1-2시간)**
+- [ ] robots.txt에 주요 AI 크롤러 명시적 허용/차단 정책 추가
+- [ ] `<meta name="description">` 콘텐츠 최신화 (150자 이내 핵심 요약)
+- [ ] Canonical 태그 일관성 점검
+
+**P1 — 단기 (공수 반나절)**
+- [ ] llms.txt 초안 작성 및 배포 (공개 서비스만)
+- [ ] 주요 페이지에 `WebSite`, `WebPage` schema.org JSON-LD 추가
+- [ ] sitemap.xml 최신화 + `<lastmod>` 태그 추가
+
+**P2 — 중기 (공수 1-2일)**
+- [ ] About 페이지 / 저자 페이지 정비 (E-E-A-T 강화)
+- [ ] FAQ 섹션 추가 + FAQPage schema 마크업
+- [ ] 핵심 문서 Answer-First 구조로 재작성
+- [ ] llms-full.txt 또는 페이지별 .md 버전 제공
+
+### Virtue (virtue.oracle.shdkej.com)
+
+현재 상태: 실사용자 온보딩 단계. AI 검색 인용보다 사용자 직접 유입 위주.
+
+| 항목 | 우선순위 | 비고 |
+|------|--------|------|
+| robots.txt AI 크롤러 허용 | P1 | 현재 정책 확인 필요 |
+| llms.txt (앱 소개) | P2 | 공개 페이지 대상 |
+| WebSite schema | P1 | 랜딩 페이지에 추가 |
+| FAQ (서비스 소개) | P2 | 주요 Q&A 구성 후 |
+
+### Knowledge Lab (knowledge-lab)
+
+현재 상태: 지식 문서 저장소. AI 인용 가능성 가장 높음.
+
+| 항목 | 우선순위 | 비고 |
+|------|--------|------|
+| llms.txt | P0 | 핵심 문서 목록 + 설명 |
+| llms-full.txt or .md variants | P1 | 문서 AI 직접 접근 |
+| Article schema | P1 | 각 문서 페이지 |
+| Answer-First 구조 | P1 | 기존 문서 점진적 개선 |
+| 저자 정보 강화 | P2 | About 섹션 |
+
+### Infinity (infinity.oracle.shdkej.com)
+
+현재 상태: 내부 에이전트 시스템 대시보드. 외부 AI 인용 필요성 낮음.
+
+| 항목 | 우선순위 | 비고 |
+|------|--------|------|
+| robots.txt AI 크롤러 차단 | P1 | 내부 시스템 → 학습 데이터 제외 권장 |
+| llms.txt | 불필요 | 공개 인용 대상 아님 |
+
+---
+
+## 10. 실행 후보 목록 (승인 필요 항목)
+
+> 아래 항목들은 실제 사이트 변경이 필요하므로 별도 승인 후 실행.
+
+### 즉시 실행 가능 (L1 — 파일/코드 수정)
+1. `knowledge-lab` robots.txt AI 크롤러 정책 추가
+2. `knowledge-lab` llms.txt 생성 (문서 목록 Markdown)
+3. `virtue-rebirth-app` 랜딩페이지 schema.org JSON-LD 추가
+
+### 검토 후 실행 (L2 — 배포 필요)
+4. 각 프로젝트 sitemap.xml `<lastmod>` 태그 업데이트 후 배포
+5. Bing Webmaster Tools에 sitemap 제출
+
+### 사용자 직접 판단 필요
+6. Knowledge Lab 공개 여부 결정 (llms.txt 범위 결정에 영향)
+7. Virtue 마케팅 방향 — AI 검색 유입 vs 직접 유입 우선순위
+
+---
+
+## 참고
+
+- [llms.txt 제안 원문](https://llmstxt.org)
+- [Google E-E-A-T 가이드라인](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
+- [Schema.org](https://schema.org)
+- [GPTBot 정책](https://platform.openai.com/docs/gptbot)
+- [Google-Extended 안내](https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers)
