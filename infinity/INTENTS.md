@@ -4,17 +4,26 @@
 
 ## Inbox
 
+## Active
+
 ### marketing-13 — Virtue 경쟁 대안 기반 포지셔닝 브리프
 
-- Source note path: `/home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-23-competitive-alternatives-positioning.md`
-- Rationale: Virtue는 prelaunch라 작은 지표를 성패로 볼 수 없고, 현재 첫 화면은 `덕력`·`환생종` 신호가 강하지만 사용자가 어떤 기존 행동을 대체하는지까지는 명확히 정리되어 있지 않다.
-- Expected impact: 첫 10~20명 관찰 전에 J1-J4별 경쟁 대안, 이기는 가치, 첫 화면 신호, 검증 질문을 고정해 positioning/copy 논의를 덜 임의적으로 만든다.
-- Permission level: L1 내부 문서 작성만 허용. 공개 포스팅, 외부 발송, 프로덕션 코드/카피/트래킹 변경, 비용 발생 작업은 금지.
-- Owner route: Infinity router → Claude Code delegated candidate for `/home/ubuntu/dev/virtue-rebirth-app/docs/competitive-alternatives-positioning-brief.md`.
-- Success criteria: J1 기록형/J2 누적형/J3 AI 호기심형/J4 회고형 각각에 대해 경쟁 대안, Virtue 차별 속성, 고객 가치, 현재 첫 화면 신호, 첫 10명 검증 질문이 한 표에 정리된다. 기존 `copy-spec`, `first-session-jtbd-matrix`, `pmf-response-analysis-rubric`, `minimum-viable-audience-brief`와 충돌이 없어야 한다.
-- First verification gate: 문서 작성 후 `rg '<<<<<<<|=======|>>>>>>>' /home/ubuntu/dev/virtue-rebirth-app/docs/competitive-alternatives-positioning-brief.md || true` 및 copy-spec 금지어 사용자 노출 카피 충돌 점검 결과를 보고한다.
-
-## Active
+- id: marketing-13
+- title: Virtue 경쟁 대안 기반 포지셔닝 브리프 작성
+- status: in_progress
+- priority: high
+- permission: L1 (내부 문서 작성만. 공개/외부/프로덕션/비용 0)
+- mode: prepare/draft (cloud 완료) → execute_local (Claude Code 위임 대기)
+- project: /home/ubuntu/dev/virtue-rebirth-app
+- goal: J1-J4 각각에 대해 경쟁 대안, Virtue 차별 속성, 고객 가치, 현재 첫 화면 신호, 첫 10명 검증 질문이 한 표에 정리된 포지셔닝 브리프를 docs/competitive-alternatives-positioning-brief.md로 추가한다.
+- success_criteria: J1~J4 각 잡에 5항목 완비. copy-spec·first-session-jtbd-matrix·pmf-response-analysis-rubric·minimum-viable-audience-brief 충돌 0.
+- context:
+  - source_note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-23-competitive-alternatives-positioning.md
+  - target: /home/ubuntu/dev/virtue-rebirth-app/docs/competitive-alternatives-positioning-brief.md
+  - cloud_draft: infinity/artifacts/marketing-13/competitive-alternatives-positioning-brief.md
+  - references: docs/copy-spec.md, docs/first-session-jtbd-matrix.md, docs/pmf-response-analysis-rubric.md, docs/minimum-viable-audience-brief.md
+- next_action: local Claude Code로 위임 — source note 확인 후 cloud draft 기반으로 docs/competitive-alternatives-positioning-brief.md 작성·커밋·push
+- verification_gate: `rg '<<<<<<<|=======|>>>>>>>' docs/competitive-alternatives-positioning-brief.md || true` + copy-spec 금지어 충돌 점검
 
 
 ## Waiting
