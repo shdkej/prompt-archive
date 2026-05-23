@@ -11,37 +11,6 @@
 
 <!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
 
-### marketing-12 Virtue 활성화 경로 마찰 감사표 작성
-
-- id: marketing-12
-- title: Virtue 활성화 경로 마찰 감사표 작성
-- status: waiting
-- priority: medium
-- permission: L1 (내부 문서 작성. 코드/카피/트래킹/대시보드/외부발송/비용 변경 없음)
-- mode: execute_local (클라우드 draft 완료)
-- created_at: 2026-05-23T1010Z
-- waiting_since: 2026-05-23T1010Z
-- wait_reason: 로컬 환경 필요 — virtue-rebirth-app/docs/에 파일 생성 후 커밋/푸시. 클라우드 환경에서는 push 불가(SSH/token 미설정). 로컬에서 아래 execute_local 프롬프트 실행 필요.
-- goal: `/` → `/add` → 채점 → 저장/누적 피드백 경로를 J1-J4별로 나눈 마찰 감사표 내부 기획 문서 작성
-- success_criteria: docs/activation-path-friction-audit.md에 경로 단계 A-E × J1-J4 좋은/나쁜/보류 마찰 표 포함. 기존 문서(activation-milestone-ladder, first-session-jtbd-matrix, first-real-user-baseline-template) 충돌 0. 신규 이벤트/속성/코드/카피/대시보드/외부발송 0.
-- context:
-  - source: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-23-outcome-based-onboarding.md
-  - prior: activation-milestone-ladder.md, first-session-jtbd-matrix.md, first-real-user-baseline-template.md, time-to-value-observation-brief.md
-  - events: add_flow_started, deed_judged, deed_saved, level_up_viewed
-- cloud_draft: infinity/artifacts/marketing-12/activation-path-friction-audit.md
-- execute_local_prompt: |
-    Infinity Intent: marketing-12 Virtue 활성화 경로 마찰 감사표 작성
-    Mode: execute_local
-    Goal: virtue-rebirth-app/docs/activation-path-friction-audit.md 생성 후 커밋/푸시
-    Cloud draft: prompt-archive/infinity/artifacts/marketing-12/activation-path-friction-audit.md
-    Allowed: L0/L1 only (docs 파일 추가, 커밋, 푸시)
-    Forbidden: 신규 이벤트/속성/코드/카피/대시보드/외부발송/비용
-    Verification:
-      rg -n "deed_judged|deed_saved|add_flow_started|J1|J2|J3|J4" docs/activation-path-friction-audit.md
-      rg -n "신규 이벤트|외부 발송|대시보드" docs/activation-path-friction-audit.md  # "Out of scope"에만 있어야 함
-      git diff --stat HEAD  # docs/ 1파일만 변경 확인
-    Report back to: prompt-archive/infinity/reports/marketing-12/{timestamp}.md
-
 ### marketing-10 Virtue Time-to-Value 관찰 기준표 작성
 
 - id: marketing-10
@@ -73,6 +42,8 @@
     Report back to: prompt-archive/infinity/reports/marketing-10/{timestamp}.md
 
 ## Archive
+
+<!-- marketing-12 completed 2026-05-23T10:18Z → infinity/intents/archive/marketing-12.md (Virtue 활성화 경로 마찰 감사표: `/`→`/add`→채점(deed_judged)→저장/누적(deed_saved·level_up_viewed) 4스텝(S1~S4)을 J1~J4 잡별로 좋은/나쁜/보류/마찰 거의 없음으로 분류. 핵심: 같은 마찰이 잡별로 부호가 뒤집힘(AI 채점 대기=J3 좋은 마찰·J1·J4 나쁜 마찰), prelaunch용 "보류" 제3분류, 마찰=분류 렌즈이지 처분 결정문 아님. 기존 이벤트 4개(+보조 deed_rerolled/deed_save_capped)만 인용·드리프트 0, 신규 이벤트·속성·코드·카피·대시보드·외부발송·비용 0. 선행 6문서+copy-spec 충돌 0. 처리 경위: cloud draft(dc63065)가 artifacts/marketing-12/에 초안 작성 후 Waiting 이동 → local 실행이 실제 docs/activation-path-friction-audit.md를 작성·커밋(virtue-rebirth-app fc08cf4)·push 완료 → 본 실행은 검증 게이트 3종 PASS 확인 후 Waiting→Archive 정리. reports/marketing-12/2026-05-23T1007Z.md(final), 2026-05-23T1010Z.md(cloud draft 단계)) -->
 
 <!-- research-08 completed 2026-05-23T10:30Z → infinity/intents/archive/research-08.md (GEO/LLMO 체크리스트 조사 완료: llms.txt는 추론용 큐레이션 제안이며 robots/sitemap/schema/canonical/source quality 대체 아님. OpenAI OAI-SearchBot/GPTBot 분리, Google-Extended 범위, ClaudeBot robots 처리, sitemap/schema/metadata/answer visibility 정리. Knowledge Lab은 llms.txt 1순위, Virtue는 public explainer/canonical 선행, Infinity는 private-default 권고. 공개 사이트 변경 0) -->
 
