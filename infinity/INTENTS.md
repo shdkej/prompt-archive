@@ -4,8 +4,6 @@
 
 ## Inbox
 
-- research-08: `llms.txt` 등 GEO/LLMO(SEO의 AI 검색/답변엔진 대응 버전)에서 실제로 설정해야 할 항목을 조사하고, Virtue/Knowledge Lab/Infinity에 적용 가능한 우선순위 체크리스트로 정리한다. 포함 범위: `llms.txt`, `robots.txt`/AI crawler 정책, sitemap/schema.org, canonical/metadata, LLM answer visibility, 콘텐츠 구조, 출처·저자 신뢰 신호, 주요 AI 검색/답변엔진별 차이. 산출물은 내부 조사 문서와 실행 후보 목록이며, 공개 사이트 변경·배포·외부 발송은 별도 승인 없이는 하지 않는다.
-
 ## Active
 
 ## Waiting
@@ -43,6 +41,8 @@
     Report back to: prompt-archive/infinity/reports/marketing-10/{timestamp}.md
 
 ## Archive
+
+<!-- research-08 completed 2026-05-23T00:07Z → infinity/intents/archive/research-08.md (GEO/LLMO 체크리스트 조사 완료: llms.txt는 추론용 큐레이션 제안이며 robots/sitemap/schema/canonical/source quality 대체 아님. OpenAI OAI-SearchBot/GPTBot 분리, Google-Extended 범위, ClaudeBot robots 처리, sitemap/schema/metadata/answer visibility 검증 게이트 정리. Knowledge Lab은 llms.txt 1순위, Virtue는 public explainer/canonical 선행, Infinity는 private-default 권고. 내부 산출물 infinity/artifacts/research-08/geo-llmo-checklist.md; 공개 사이트 변경·배포·외부 발송 0) -->
 
 <!-- marketing-11 completed 2026-05-22T22:17Z → infinity/intents/archive/marketing-11.md (Virtue 첫 실사용자 기준선 템플릿: 첫 10~20명 한 명당 한 행 기록 양식, J1~J4 분류, 유입 문장, first/second value, synthetic/test 제외 기준, prelaunch 해석 금지선, 주간 리뷰 리듬, 기존 이벤트 근거 정리. 핵심 이벤트는 add_flow_started/deed_judged/deed_saved/level_up_viewed만 사용. 신규 이벤트·코드·대시보드·외부발송·비용 0. ladder/TTV 충돌 0; docs/first-real-user-baseline-template.md 추가, virtue-rebirth-app ebd5781 push 완료) -->
 
