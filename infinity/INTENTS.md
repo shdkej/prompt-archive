@@ -6,31 +6,14 @@
 
 ## Active
 
-### marketing-13 — Virtue 경쟁 대안 기반 포지셔닝 브리프
-
-- id: marketing-13
-- title: Virtue 경쟁 대안 기반 포지셔닝 브리프 작성
-- status: in_progress
-- priority: high
-- permission: L1 (내부 문서 작성만. 공개/외부/프로덕션/비용 0)
-- mode: prepare/draft (cloud 완료) → execute_local (Claude Code 위임 대기)
-- project: /home/ubuntu/dev/virtue-rebirth-app
-- goal: J1-J4 각각에 대해 경쟁 대안, Virtue 차별 속성, 고객 가치, 현재 첫 화면 신호, 첫 10명 검증 질문이 한 표에 정리된 포지셔닝 브리프를 docs/competitive-alternatives-positioning-brief.md로 추가한다.
-- success_criteria: J1~J4 각 잡에 5항목 완비. copy-spec·first-session-jtbd-matrix·pmf-response-analysis-rubric·minimum-viable-audience-brief 충돌 0.
-- context:
-  - source_note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-23-competitive-alternatives-positioning.md
-  - target: /home/ubuntu/dev/virtue-rebirth-app/docs/competitive-alternatives-positioning-brief.md
-  - cloud_draft: infinity/artifacts/marketing-13/competitive-alternatives-positioning-brief.md
-  - references: docs/copy-spec.md, docs/first-session-jtbd-matrix.md, docs/pmf-response-analysis-rubric.md, docs/minimum-viable-audience-brief.md
-- next_action: local Claude Code로 위임 — source note 확인 후 cloud draft 기반으로 docs/competitive-alternatives-positioning-brief.md 작성·커밋·push
-- verification_gate: `rg '<<<<<<<|=======|>>>>>>>' docs/competitive-alternatives-positioning-brief.md || true` + copy-spec 금지어 충돌 점검
-
 
 ## Waiting
 
 <!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
 
 ## Archive
+
+<!-- marketing-13 completed 2026-05-23T22:07Z → infinity/intents/archive/marketing-13.md (Virtue 경쟁 대안 기반 포지셔닝 브리프: J1 기록형/J2 누적형/J3 AI 호기심형/J4 회고형 × 5축(경쟁 대안·Virtue 차별 속성·고객 가치·현재 첫 화면 신호·첫 10명 검증 질문)을 한 표로 정리. April Dunford(경쟁 대안에서 출발)+Seth Godin(smallest viable audience) 렌즈. 핵심: J1·J4 최강 대안은 "아무것도 안 하기", 첫 화면 신호는 J2 최강·J3는 /add 이전 사실상 부재(코드 file:line 근거), 후보 positioning 문구 4종은 internal draft·앱 미반영·copy-spec 금지어 0. 기존 6개 이벤트(add_flow_started/deed_judged/deed_saved/level_up_viewed/deed_rerolled/deed_save_capped) 인용만, 신규 이벤트·속성·코드·카피·대시보드·외부발송·비용·시크릿·권한 변경 0. 7개 선행 문서 충돌 0. 처리 경위: cloud draft(e7e4d35)가 Inbox→Active 구조화 + artifacts/marketing-13/에 초안 작성 → 직전 local Claude Code 실행이 실제 apps/web/docs/competitive-alternatives-positioning-brief.md 작성·커밋(virtue-rebirth-app dc0ce55)·push 후 무응답 종료 → 본 실행이 workflow-master 4역할 병렬 재합성으로 교차검증하고 검증 게이트 4종(충돌마커 empty/금지어 메타맥락만/스코프 doc-only/git clean·HEAD==origin) PASS 확인 후 Active→Archive 마감. 레지스트리 docs/는 약칭, 정본은 apps/web/docs/. reports/marketing-13/2026-05-23T2207Z.md(final), 2026-05-23T2206Z.md(cloud draft 단계)) -->
 
 <!-- marketing-10 completed 2026-05-23T16:07Z → infinity/intents/archive/marketing-10.md (Virtue Time-to-Value 관찰 기준표: J1~J4별 first value·second value·time gap 계산·정성 확인 질문·prelaunch 해석 금지선을 내부 문서 docs/time-to-value-observation-brief.md로 추가. 기존 이벤트 add_flow_started/deed_judged/deed_saved/level_up_viewed만 사용, 신규 이벤트·속성·코드·대시보드·외부발송·비용·시크릿·권한 변경 0. Claude Code가 초안 작성 후 무응답으로 종료되어 Heartbeat가 보조 이벤트 언급 제거·검증·커밋/push 완료. virtue-rebirth-app c32033f, reports/marketing-10/2026-05-23T1607Z.md) -->
 
