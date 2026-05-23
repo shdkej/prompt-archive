@@ -4,26 +4,43 @@
 
 ## Inbox
 
-### marketing-12 Virtue 활성화 경로 마찰 감사표 작성
-
-- id: marketing-12
-- title: Virtue 활성화 경로 마찰 감사표 작성
-- status: inbox
-- priority: medium
-- permission: L1 (내부 문서 작성. 코드/카피/트래킹/대시보드/외부발송/비용 변경 없음)
-- source_note: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-23-outcome-based-onboarding.md
-- rationale: Reforge/Appcues의 결과 기반 온보딩 관점상 신규 사용자는 기능 설명이 아니라 첫 가치 결과에 빨리 닿아야 한다. Virtue는 activation ladder와 first-user baseline은 있으나 `/` → `/add` → `deed_judged`/`deed_saved`까지의 잡별 마찰 inventory가 별도 문서로 고정되어 있지 않다.
-- expected_impact: prelaunch에서 작은 지표를 성패로 오독하지 않고, 첫 실사용자 관찰 전에 J1-J4별 좋은 마찰/나쁜 마찰/보류 지점을 같은 기준으로 기록할 수 있다.
-- owner_route: Infinity → Claude Code 또는 내부 문서 작업자
-- success_criteria: `virtue-rebirth-app/docs/activation-path-friction-audit.md`에 `/` → `/add` → 채점 → 저장/누적 피드백 경로를 J1-J4별로 나눈 감사표 포함. 기존 문서(`activation-milestone-ladder`, `first-session-jtbd-matrix`, `first-real-user-baseline-template`)와 충돌 0. 신규 이벤트/속성/코드/카피/대시보드/외부발송 0.
-- first_verification_gate: `rg -n "deed_judged|deed_saved|add_flow_started|J1|J2|J3|J4" docs/activation-path-friction-audit.md` 및 `rg -n "신규 이벤트|외부 발송|대시보드" docs/activation-path-friction-audit.md`로 경계 명시 확인.
-
 ## Active
 
 
 ## Waiting
 
 <!-- 사용자 결정, 외부 조건, 안전 확인 대기. 같은 질문을 반복하지 않고 상태만 보존한다. -->
+
+### marketing-12 Virtue 활성화 경로 마찰 감사표 작성
+
+- id: marketing-12
+- title: Virtue 활성화 경로 마찰 감사표 작성
+- status: waiting
+- priority: medium
+- permission: L1 (내부 문서 작성. 코드/카피/트래킹/대시보드/외부발송/비용 변경 없음)
+- mode: execute_local (클라우드 draft 완료)
+- created_at: 2026-05-23T1010Z
+- waiting_since: 2026-05-23T1010Z
+- wait_reason: 로컬 환경 필요 — virtue-rebirth-app/docs/에 파일 생성 후 커밋/푸시. 클라우드 환경에서는 push 불가(SSH/token 미설정). 로컬에서 아래 execute_local 프롬프트 실행 필요.
+- goal: `/` → `/add` → 채점 → 저장/누적 피드백 경로를 J1-J4별로 나눈 마찰 감사표 내부 기획 문서 작성
+- success_criteria: docs/activation-path-friction-audit.md에 경로 단계 A-E × J1-J4 좋은/나쁜/보류 마찰 표 포함. 기존 문서(activation-milestone-ladder, first-session-jtbd-matrix, first-real-user-baseline-template) 충돌 0. 신규 이벤트/속성/코드/카피/대시보드/외부발송 0.
+- context:
+  - source: /home/ubuntu/dev/knowledge-lab/source/external-links/marketing/2026-05-23-outcome-based-onboarding.md
+  - prior: activation-milestone-ladder.md, first-session-jtbd-matrix.md, first-real-user-baseline-template.md, time-to-value-observation-brief.md
+  - events: add_flow_started, deed_judged, deed_saved, level_up_viewed
+- cloud_draft: infinity/artifacts/marketing-12/activation-path-friction-audit.md
+- execute_local_prompt: |
+    Infinity Intent: marketing-12 Virtue 활성화 경로 마찰 감사표 작성
+    Mode: execute_local
+    Goal: virtue-rebirth-app/docs/activation-path-friction-audit.md 생성 후 커밋/푸시
+    Cloud draft: prompt-archive/infinity/artifacts/marketing-12/activation-path-friction-audit.md
+    Allowed: L0/L1 only (docs 파일 추가, 커밋, 푸시)
+    Forbidden: 신규 이벤트/속성/코드/카피/대시보드/외부발송/비용
+    Verification:
+      rg -n "deed_judged|deed_saved|add_flow_started|J1|J2|J3|J4" docs/activation-path-friction-audit.md
+      rg -n "신규 이벤트|외부 발송|대시보드" docs/activation-path-friction-audit.md  # "Out of scope"에만 있어야 함
+      git diff --stat HEAD  # docs/ 1파일만 변경 확인
+    Report back to: prompt-archive/infinity/reports/marketing-12/{timestamp}.md
 
 ### marketing-10 Virtue Time-to-Value 관찰 기준표 작성
 
