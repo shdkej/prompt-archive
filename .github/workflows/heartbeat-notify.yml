@@ -72,7 +72,8 @@ jobs:
           COMMIT_MSG=$(git log -1 --pretty=%B)
 
           # 조용한 종료 신호 — 커밋 메시지에 무의미 키워드가 있으면 알림 스킵
-          if echo "$COMMIT_MSG" | grep -qE "활성 Intent 없음|처리할 Intent 없음|변화 없음|no activity|nothing to do"; then
+          # 대소문자 무시(-i): Active/active 등 표기 흔들림 흡수
+          if printf '%s' "$COMMIT_MSG" | grep -iqE "조용한 종료|무변화|no-?op|비어[ ]?있음|Intent 없음|active 없음|처리할 Intent 없음|변화 없음|no activity|nothing to do"; then
             echo "Skip: no-op heartbeat commit"
             exit 0
           fi
