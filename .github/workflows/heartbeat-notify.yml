@@ -2,6 +2,10 @@ name: Heartbeat Telegram Notify
 
 on:
   workflow_dispatch:
+  # 아침 8시 리캡 보장 — no-op Heartbeat는 더 이상 커밋하지 않으므로
+  # push에 의존하지 않고 독립 스케줄로 깨운다. KST 08:00 = UTC 23:00.
+  schedule:
+    - cron: '0 23 * * *'
   push:
     paths:
       - 'infinity/reports/**'
@@ -14,7 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          # recap(schedule)은 24시간 git log가 필요하고, normal은 HEAD~1 diff가 필요하다.
+          fetch-depth: 0
 
       - name: Check time and mode (KST)
         id: time_check
@@ -38,7 +43,7 @@ jobs:
         run: |
           # 최근 24시간 Heartbeat 커밋 요약
           SINCE=$(TZ=Asia/Seoul date -d '24 hours ago' --iso-8601=seconds 2>/dev/null || date -v-24H '+%Y-%m-%dT%H:%M:%S')
-          COMMITS=$(git log --since="$SINCE" --oneline --author="Claude" -- infinity/reports/ INTENTS.md GATES.md)
+          COMMITS=$(git log --since="$SINCE" --oneline --author="Claude" -- infinity/reports/ infinity/INTENTS.md infinity/GATES.md)
           COMMIT_COUNT=$(echo "$COMMITS" | grep -c . || true)
 
           # 현재 INTENTS.md Active 상태
