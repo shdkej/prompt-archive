@@ -4,7 +4,5 @@
 .playwright-mcp
 incubating
 gather
-.omcinfinity/config/telegram.env
 .omc/
 .vibe-ready/
-infinity/config/telegram.env
