@@ -3,7 +3,9 @@
 # agent-wiki/content/docs/diary/YYYY-MM-DD.mdx 에 merge하고 push. 7일 경과 파일 삭제.
 set -euo pipefail
 
-export PATH="/Users/seongho-noh/.asdf/installs/nodejs/24.3.0/bin:/opt/homebrew/bin:/usr/bin:/bin:$PATH"
+# asdf shims를 쓴다(특정 버전 경로 하드코딩 금지 — 버전 올라가면 깨짐).
+# claude가 띄우는 SessionEnd 훅도 이 PATH를 상속받아 node를 찾는다.
+export PATH="/Users/seongho-noh/.asdf/shims:/opt/homebrew/bin:/usr/bin:/bin:$PATH"
 export HOME="${HOME:-/Users/seongho-noh}"
 
 REPO="$HOME/workspace/agent-wiki"
