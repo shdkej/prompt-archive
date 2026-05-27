@@ -43,7 +43,16 @@ if cp "$HOME/Library/Application Support/Google/Chrome/Profile 1/History" "$TMP_
 fi
 
 EXISTING="(빈 파일)"
-[[ -f "$TARGET" ]] && EXISTING=$(cat "$TARGET")
+if [[ -f "$TARGET" ]]; then
+  EXISTING=$(python3 - "$TARGET" <<'PYEOF'
+import sys, re
+t = open(sys.argv[1], encoding='utf-8').read()
+m = re.match(r'^---\n.*?\n---\n', t, re.DOTALL)  # frontmatter 제거, 본문만 LLM에 전달
+body = (t[m.end():] if m else t).strip()
+sys.stdout.write(body or "(빈 파일)")
+PYEOF
+)
+fi
 
 NOW_ISO=$(date -Iseconds)
 PROMPT_FILE="/tmp/diary-prompt-$$.txt"
@@ -73,7 +82,26 @@ PYEOF
 OUT=$(claude -p --dangerously-skip-permissions < "$PROMPT_FILE" 2>>"$LOG_DIR/diary-sync.err" || true)
 rm -f "$PROMPT_FILE"
 if [[ -n "$OUT" ]]; then
-  printf '%s\n' "$OUT" > "$TARGET"
+  # frontmatter는 LLM에 맡기지 않고 셸이 결정적으로 생성·주입한다.
+  # (fumadocs pageSchema가 title 필수라 LLM이 누락하면 빌드가 깨짐)
+  # heredoc이 stdin을 점유하므로 LLM 출력은 파이프가 아닌 임시파일로 전달한다.
+  RAW_OUT="/tmp/diary-out-$$.md"
+  printf '%s' "$OUT" > "$RAW_OUT"
+  TODAY="$TODAY" NOW_ISO="$NOW_ISO" python3 - "$RAW_OUT" "$TARGET" <<'PYEOF'
+import sys, os, re
+body = open(sys.argv[1], encoding='utf-8').read()
+body = re.sub(r'^\s*```[a-zA-Z]*\n', '', body)          # 선행 코드펜스 제거
+body = re.sub(r'\n```\s*$', '', body)                   # 후행 코드펜스 제거
+body = re.sub(r'^\s*---\n.*?\n---\n', '', body, count=1, flags=re.DOTALL)  # LLM이 낸 frontmatter 제거
+body = body.strip()
+today = os.environ['TODAY']
+if not body.startswith('#'):
+    body = f"# {today}\n\n{body}"
+fm = (f'---\ntitle: "{today}"\ndate: {today}\n'
+      f'type: diary\nlast_sync: {os.environ["NOW_ISO"]}\n---\n\n')
+open(sys.argv[2], 'w', encoding='utf-8').write(fm + body + "\n")
+PYEOF
+  rm -f "$RAW_OUT"
   log "merged $TARGET ($(wc -l <"$TARGET") lines)"
 else
   log "warn: claude output empty, keeping existing $TARGET"
