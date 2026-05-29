@@ -114,7 +114,7 @@
 
 - 작업 디렉토리: `~/dev/ai/kolon/`
 - 핵심 도구: Power Automate, Microsoft Graph API, SharePoint
-- PA 작업 가이드: @PA.md
+- PA 작업 가이드: 이 디렉토리에서 작업할 때만 `~/.claude/PA.md`를 읽어서 따른다 (평소엔 로드하지 않음)
 - 주요 프로젝트:
   - `legal-advice-dispatch` — 법무 배분 자동화
   - `legal-cases` — 사건검색 자동화
@@ -124,8 +124,7 @@
 
 ## KOP 작업
 
-현재 디렉토리가 kop-web, kop-api, kop-cms, hybris 인 경우 아래 가이드를 참고해 작업합니다.
-@KOP.md
+현재 디렉토리가 kop-web, kop-api, kop-cms, hybris 인 경우에만 `~/.claude/KOP.md`를 읽어서 따른다 (평소엔 로드하지 않음).
 
 ## Daily Feedback 트리거
 
@@ -186,8 +185,8 @@ https://platform.claude.com/docs/ko/agents-and-tools/agent-skills/best-practices
 
 # 참고
 
-- 내 설계 취향은 @TECH_SPEC.md 에 있으므로 설계 시 참고할 것
-- 복잡한 업무를 할 경우 아래 omc 스킬을 참조할 것 @OMC.md
+- 내 설계 취향은 `~/.claude/TECH_SPEC.md` 에 있으므로 **설계/아키텍처 작업 시에만** 읽어서 참고할 것 (평소엔 로드하지 않음)
+- 복잡한 업무를 할 경우에만 `~/.claude/OMC.md`(omc 오케스트레이션 가이드)를 읽어서 참조할 것 (평소엔 로드하지 않음)
 - /Users/seongho-noh/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main 이 위치에 나의 노트가 저장되어 있으니 필요할 경우 참고할 것
 - 인프라 관리앱은 ~/workspace/space, 모니터링 설정 파일은 ~/workspace/monitoring_personal 을 참고할 것
     - k8s에서 모니터링이 돌아가고 있고 해당 인프라는 space에, 모니터링 관련 설정만 monitoring_personal에 있음
@@ -196,10 +195,7 @@ https://platform.claude.com/docs/ko/agents-and-tools/agent-skills/best-practices
 
 ## MCP Documentation
 
-@MCP_Context7.md
-@MCP_Magic.md
-@MCP_Playwright.md
-@MCP_Sequential.md
-@MCP_Stitch.md
+해당 MCP를 실제로 사용할 때만 `~/.claude/MCP_{name}.md`를 읽어서 참고한다 (Context7, Magic, Playwright, Sequential, Stitch). 평소엔 로드하지 않는다.
+(참고: 위 MCP 문서 파일들은 현재 존재하지 않으므로, 필요 시 생성하거나 해당 줄을 정리할 것)
 
 ---
