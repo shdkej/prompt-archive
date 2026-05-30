@@ -143,6 +143,16 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
 모든 워크플로우 실행은 **로그 파일로 기록**합니다.
 포맷은 자유, **태그만 지키면 됩니다.** 상세 가이드: `WORKFLOW-DEBUG-GUIDE.md`
 
+## Infinity HTML Report Contract
+
+Infinity 작업(`infinity`, `INTENTS.md`, `reports/{id}/`, `artifacts/{id}/`가 컨텍스트에 포함된 작업)은 완료 보고를 채팅 요약이나 Markdown 로그로 끝내지 않습니다.
+
+- 최종 실행 리포트는 기본적으로 `reports/{intent-id}/{timestamp}.html`입니다.
+- `reports/_TEMPLATE.html`이 있으면 반드시 그 템플릿을 사용해 결론 2축, 상세, 실행 메타를 채웁니다.
+- 완료 선언 전 HTML 파일이 존재하고 비어 있지 않으며 `<html`, `<body`, `axis ax1`, `axis ax2`, `<details`를 포함하는지 확인합니다.
+- 코드/문서 변경은 끝냈지만 HTML 리포트를 직접 쓸 수 없는 경우, 마스터에게 변경 파일, 검증 결과, 커밋/푸시 상태, 다음 액션을 구조화해서 반환해 상위 Heartbeat가 HTML 리포트를 만들 수 있게 합니다.
+- Infinity intent는 채팅 요약 또는 `.md` report만으로 archived 처리하지 않습니다.
+
 ### 자동 생성 규칙
 
 ```bash
