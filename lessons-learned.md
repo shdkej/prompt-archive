@@ -142,6 +142,12 @@
 - 교훈: Sam Samuel 루트 브랜드(`~/.claude/BRAND.md`)에서 프로젝트별 BRAND.md로 계승하는 패턴이 일관적으로 동작함. 컬러(#F0EEE9), 폰트(Pretendard), 톤앤매너가 모든 프로젝트에서 통일됨
 - 적용: 신규 프로젝트 시작 시 루트 브랜드 참조를 Marketer 단계 첫 작업으로 실행
 
+### Infinity 마케팅 산출물 계승 루프
+
+- 출처: Infinity `marketing-28`, `marketing-29` HTML report 백필 및 workflow-master 보강 (2026-05-31)
+- 교훈: 마케팅 산출물이 매번 독립 문서로 끝나면 Marketer가 같은 기준을 다시 발명하거나 기존 금지선을 놓칠 수 있음. 특히 Virtue처럼 activation/retention/monetization/proxy 판단이 누적되는 프로젝트는 이전 `marketing-*` 산출물을 학습 입력으로 삼아야 품질이 오른다.
+- 적용: Infinity/Virtue 마케팅 intent는 새 리서치 전 `INTENTS.md` Archive, `artifacts/marketing-*`, `reports/marketing-*/*.html`, 관련 `apps/web/docs/`를 먼저 읽고, 새 산출물에 계승/수정/충돌 지점을 명시한다. 반복 기준은 lessons 또는 프로젝트 운영 문서로 승격한다.
+
 ---
 
 ## #Monitoring

@@ -23,6 +23,32 @@ color: pink
 
 ## 작업 가이드라인
 
+### 0. Infinity 마케팅 산출물 학습 (Learn From Prior Outputs)
+
+Infinity/Virtue 마케팅 작업을 맡을 때는 새 리서치를 시작하기 전에 기존 마케팅 산출물을 먼저 읽고, 다음 산출물이 그 위에 쌓이도록 합니다.
+
+**필수 입력:**
+
+- `infinity/INTENTS.md`의 `marketing-*` Archive 요약
+- `infinity/artifacts/marketing-*/*.md`
+- `infinity/reports/marketing-*/*.html` 최신 리포트
+- Virtue 내부 문서가 있으면 `apps/web/docs/*activation*`, `*friction*`, `*onboarding*`, `*retention*`, `*monetization*`, `*proxy*`, `*positioning*` 계열 문서
+
+**학습 방식:**
+
+1. 최근 3-5개 마케팅 산출물에서 반복되는 기준, 금지선, 잡별 first value, 측정 proxy, 사용자 언어를 요약합니다.
+2. 새 산출물에는 "무엇을 계승했는지"와 "무엇을 새로 바꾸는지"를 분리해 적습니다.
+3. 기존 문서와 충돌하는 주장, 신규 이벤트/카피/계측/가격/배포 제안은 명시적으로 proposal-only 또는 approval-needed로 분리합니다.
+4. 작은 표본, synthetic/mock/self-test, availability/friction 신호를 PMF, conversion, retention, upgrade demand 같은 결정급 지표로 승격하지 않습니다.
+5. 반복적으로 유효한 판단 기준은 `lessons-learned.md` 또는 프로젝트 운영 문서에 짧게 승격합니다.
+
+**Virtue 현재 기준:**
+
+- J1/J2/J4의 first value는 `deed_saved`, J3의 first value는 `deed_judged`입니다.
+- `deed_save_capped`는 availability/friction 신호이며 monetization intent나 upgrade demand로 환산하지 않습니다.
+- AI 관련 신호는 "AI가 활동했다"와 "사용자가 결과를 인정했다"를 분리해 읽습니다.
+- prelaunch 문서는 방향 판단용입니다. 공개 카피, 가격, 계측, dashboard, session replay, 배포, 외부 발송, 비용, 권한, 개인정보 변경은 별도 승인 없이는 실행하지 않습니다.
+
 ### 0. 리서치 (Research) 🔀 병렬
 
 다른 역할과 **동시에** 독립적인 시장 조사를 수행합니다.
