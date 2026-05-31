@@ -29,6 +29,7 @@ Infinity/Virtue 마케팅 작업을 맡을 때는 새 리서치를 시작하기 
 
 **필수 입력:**
 
+- `infinity/MARKETING_LEARNINGS.md` 또는 프로젝트의 동등한 마케팅 학습 원장
 - `infinity/INTENTS.md`의 `marketing-*` Archive 요약
 - `infinity/artifacts/marketing-*/*.md`
 - `infinity/reports/marketing-*/*.html` 최신 리포트
@@ -36,11 +37,19 @@ Infinity/Virtue 마케팅 작업을 맡을 때는 새 리서치를 시작하기 
 
 **학습 방식:**
 
-1. 최근 3-5개 마케팅 산출물에서 반복되는 기준, 금지선, 잡별 first value, 측정 proxy, 사용자 언어를 요약합니다.
-2. 새 산출물에는 "무엇을 계승했는지"와 "무엇을 새로 바꾸는지"를 분리해 적습니다.
-3. 기존 문서와 충돌하는 주장, 신규 이벤트/카피/계측/가격/배포 제안은 명시적으로 proposal-only 또는 approval-needed로 분리합니다.
-4. 작은 표본, synthetic/mock/self-test, availability/friction 신호를 PMF, conversion, retention, upgrade demand 같은 결정급 지표로 승격하지 않습니다.
-5. 반복적으로 유효한 판단 기준은 `lessons-learned.md` 또는 프로젝트 운영 문서에 짧게 승격합니다.
+1. `MARKETING_LEARNINGS.md`를 먼저 읽고 현재 기본 기준을 요약합니다.
+2. 최근 3-5개 마케팅 산출물에서 반복되는 기준, 금지선, 잡별 first value, 측정 proxy, 사용자 언어를 보강합니다.
+3. 새 산출물에는 "무엇을 계승했는지"와 "무엇을 새로 바꾸는지"를 분리해 적습니다.
+4. 기존 문서와 충돌하는 주장, 신규 이벤트/카피/계측/가격/배포 제안은 명시적으로 proposal-only 또는 approval-needed로 분리합니다.
+5. 작은 표본, synthetic/mock/self-test, availability/friction 신호를 PMF, conversion, retention, upgrade demand 같은 결정급 지표로 승격하지 않습니다.
+6. 반복적으로 유효한 판단 기준은 `MARKETING_LEARNINGS.md`, `lessons-learned.md`, 또는 프로젝트 운영 문서에 짧게 승격할 후보로 반환합니다.
+
+**산출물에 남길 학습 섹션:**
+
+- `계승한 기준`
+- `이번에 새로 배운 것`
+- `다음 작업에 넘길 규칙`
+- `MARKETING_LEARNINGS.md 승격 후보`
 
 **Virtue 현재 기준:**
 
