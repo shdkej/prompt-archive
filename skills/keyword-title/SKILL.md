@@ -87,7 +87,9 @@ optional:
     ├── 만다라트 축 매핑
     ├── PersonalDepth 산정
     ├── 시드 키워드 5~15개 생성 (tone.md 통과 필터)
+    │   └── [선택] scripts/searchad_keyword.py → related_top으로 검색량 큰 연관어 발굴해 보강
     ├── [선택] scripts/datalab_trend.py 호출 → Velocity·Direction 실측 (키 없으면 LLM 추론 fallback)
+    ├── [선택] scripts/searchad_keyword.py → exact[].volume_signal로 Searchability·LongTail 절대값 보강
     ├── signals-content.md 점수 → 70/50/<50 컷오프
     ├── matrix.md 사분면 매핑
     └── 제목 후보 생성 (결론형·이야기형·선택의 순간형 / 회고형·발견형)
@@ -252,7 +254,7 @@ slug는 시드에서 핵심 명사 2~3개 추출 → kebab-case.
 ## 제약
 
 - **외부 API는 선택적** (키 없으면 LLM 추론 fallback, 키 없이도 완전 동작):
-  - 콘텐츠 모드 → 네이버 데이터랩(`scripts/datalab_trend.py`)으로 Velocity·Direction 실측.
+  - 콘텐츠 모드 → 네이버 데이터랩(`scripts/datalab_trend.py`)으로 Velocity·Direction 실측 + 네이버 검색광고(`scripts/searchad_keyword.py`)로 절대 검색량·연관 키워드 발굴.
   - 유튜브 모드 → YouTube Data API(`scripts/youtube_keyword.py`)로 Searchability 실측. **데이터랩으로 대체 금지** (네이버 검색량과 유튜브 조회수는 자주 역전됨 — signals-youtube §6).
 - 콘텐츠 모드: 시드에 1인칭 경험 신호 없으면 (PersonalDepth ≤ 0.2) 출력 거부 + 시드 보강 요청.
 - 유튜브 모드: PersonalDepth 제약 없음 (시청자가 주어). 단 검색 키워드(Searchability ≤ 0.2)가 없으면 노출 경로 0으로 보고 폐기. Searchability는 `youtube_keyword.py`로 실측(키 있을 때), vidIQ/TubeBuddy로 정밀 보완은 사용자 선택.

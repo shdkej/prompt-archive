@@ -125,4 +125,23 @@ python3 scripts/datalab_trend.py --keywords "키워드1,키워드2" --months 6 -
 - `ok=false`(키 없음/HTTP 오류)면 **기존 LLM 추정값으로 그대로 진행**. 외부 API는 정확도 보강일 뿐, 없어도 스킬은 동작한다.
 - 키는 `NAVER_CLIENT_ID`/`NAVER_CLIENT_SECRET` 환경변수 또는 `skills/keyword-title/.env` (gitignore됨).
 
-> 데이터랩은 **상대값(0~100)**만 준다. 절대 검색량이 필요하면 네이버 검색광고 키워드도구 API를 추가로 붙인다(서명 로직 필요, 별도 스크립트).
+> 데이터랩은 **상대값(0~100)**만 준다. 절대 검색량·연관어는 아래 검색광고 API로 보강.
+
+---
+
+## 6. 외부 API 연동 — 네이버 검색광고 키워드도구 (구현됨)
+
+`scripts/searchad_keyword.py`가 **절대 월 검색량 + 경쟁도 + 연관 키워드**를 준다. 데이터랩(추세)과 역할이 다르다.
+
+```
+python3 scripts/searchad_keyword.py --keywords "신혼여행,세계여행" --related 10
+```
+
+- **두 가지 용도**:
+  1. **Searchability·LongTail 절대값 보강** — `exact[].volume_signal`(월 검색량 기반 0~1)로 "실제로 검색되는 말인지" 확정. compIdx(경쟁도)도 참고.
+  2. **시드 키워드 발굴** — `related_top[]`은 시드 연관어를 검색량 순으로 준다. `[2]` 키워드 5~15개 생성 단계를 LLM 상상 대신 **실제 검색량 큰 연관어**로 채운다.
+- **매핑** (`volume_signal`): 월 검색량 ≥100k →1.0 / ≥30k →0.8 / ≥10k →0.6 / ≥1k →0.4 / <1k →0.2
+- **인증**: HMAC-SHA256 서명. 키 3종 — `NAVER_SEARCH_ACCESS_LICENSE`, `NAVER_SEARCH_SECRET_KEY`, `NAVER_SEARCH_CUSTOMER_ID`(라이선스 발급 **계정의** 고객 ID여야 함 — 다른 계정 ID면 403).
+- **Fallback**: `ok=false`면 LLM 추론으로 진행.
+
+> 실측 교훈(2026-06-03): 시드 절대 검색량은 작아도(신혼여행 8.4k/월) 연관어가 5~7배 클 수 있다(크루즈여행 56k·모리셔스 21k). **제목·주제를 검색량 큰 연관어로 확장**하는 게 이 API의 핵심 가치.
