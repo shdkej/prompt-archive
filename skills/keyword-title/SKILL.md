@@ -90,7 +90,8 @@ optional:
 [2] 모드별 분기
 
   [inflow 모드 — 주력] → references/inflow.md 따름
-    ├── 파생 키워드 5 발굴 (searchad related_top + youtube median, LLM 보강 → 상위 5)
+    ├── 네이버(searchad+datalab)+LLM로 후보 발굴 → 검색량·연관성으로 최종 5 선별
+    ├── YouTube는 최종 5개에만 호출 (쿼터 절약 ≈500 units/회, 네이버 타겟이면 생략)
     └── 유입 제목 5 생성 (Searchability+CuriosityGap, 플랫폼 태그 🔍/▶️) → 사용자 픽
 
   [콘텐츠 모드 — blog · threads]
