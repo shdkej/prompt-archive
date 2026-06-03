@@ -2,10 +2,10 @@
 name: keyword-title
 description: >
   시드(주제·경험 조각·초안·제품 컨셉)를 받아 모드별로 후보를 뽑는다.
-  지원 모드: blog (블로그 제목), threads (Threads 첫 줄), youtube (유튜브 제목·썸네일 카피), app-name (앱·서비스 이름), product-name (제품·기능 이름).
+  지원 모드: inflow (시드 한 문장→파생 키워드 5→유입 제목 5→픽, 주력), blog (블로그 제목), threads (Threads 첫 줄), youtube (유튜브 제목·썸네일 카피), app-name (앱·서비스 이름), product-name (제품·기능 이름).
   공통 흐름: 시드 깊이 추출 → Divergent 생성 → Convergent 선별 → 자가 체크.
   Sam Samuel 톤 강제(유튜브는 후크 허용 예외). research-06 점수 산식 + Content_Strategy 매트릭스(콘텐츠 모드) / youtube 신호(유튜브 모드) / naming 신호·카테고리(이름 모드).
-  트리거: "키워드 뽑아줘", "제목 후보", "유튜브 제목", "앱 이름 후보", "/keyword-title", "블로그 제목", "Threads 첫 줄"
+  트리거: "키워드 뽑아줘", "키워드 뽑아서 제목", "유입 문장", "제목 후보", "유튜브 제목", "앱 이름 후보", "/keyword-title", "블로그 제목", "Threads 첫 줄"
 ---
 
 # Keyword & Title
@@ -18,6 +18,10 @@ description: >
 
 **공통**
 - `references/tone.md` — 톤 절대 규칙 + 자가 체크 6항목
+
+**inflow 모드 (주력 — 한 문장으로 키워드+제목 한 번에)**
+- `references/inflow.md` — 2단계 흐름(키워드 5 발굴 → 유입 제목 5) + 출력 포맷
+- 키워드 발굴은 `scripts/searchad_keyword.py`·`youtube_keyword.py` 실측 우선
 
 **콘텐츠 모드 (blog · threads)**
 - `references/signals-content.md` — 바이럴 신호 7종 + Personal Depth 0.30 산식
@@ -39,6 +43,8 @@ description: >
 
 | 트리거 신호 | 모드 |
 |---|---|
+| "키워드 뽑아서 제목", "유입 문장", "한 문장 주면 키워드+제목" | `inflow` |
+| 시드가 한 문장 + 모드 불명확 | `inflow` (자동 추론, 주력) |
 | "블로그 제목", "글 제목" | `blog` |
 | "Threads 첫 줄", "스레드 시드" | `threads` |
 | "유튜브 제목", "영상 제목", "썸네일 카피" | `youtube` |
@@ -82,6 +88,10 @@ optional:
     └── 사용 순간: 언제·어디서 호출되는가
 
 [2] 모드별 분기
+
+  [inflow 모드 — 주력] → references/inflow.md 따름
+    ├── 파생 키워드 5 발굴 (searchad related_top + youtube median, LLM 보강 → 상위 5)
+    └── 유입 제목 5 생성 (Searchability+CuriosityGap, 플랫폼 태그 🔍/▶️) → 사용자 픽
 
   [콘텐츠 모드 — blog · threads]
     ├── 만다라트 축 매핑
