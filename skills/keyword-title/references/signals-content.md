@@ -105,11 +105,24 @@ Viral Score (0~100) =
 
 ---
 
-## 5. 외부 API 부착 시 변경점 (v1.0+)
+## 5. 외부 API 연동 — 네이버 데이터랩 (구현됨)
 
-Google Trends API alpha를 붙이게 되면 다음만 교체한다:
-- Velocity: LLM 추정 → Trends API 30일 변화율
-- Direction: LLM 추정 → Trends API 시계열 패턴 매칭
-- 나머지 5개 신호는 그대로 LLM 추론 유지
+`scripts/datalab_trend.py`가 네이버 데이터랩 검색어트렌드를 호출해 **Velocity·Direction을 실측으로 교체**한다. (youtube 모드와 공유)
 
-캐시 TTL은 research-06 §6 그대로 (24h/6h/3h).
+```
+python3 scripts/datalab_trend.py --keywords "키워드1,키워드2" --months 6 --unit week
+```
+
+- **교체되는 신호**: `Velocity`, `Direction` (나머지 5개는 LLM 추론 유지)
+- **반환**: 키워드별 `velocity_signal`·`direction_signal` (이미 0.0~1.0, 산식에 바로 투입)
+- **매핑 규칙** (스크립트 `to_signals`):
+  - change = (최근 절반 평균 ratio − 이전 절반 평균) / 이전 절반
+  - Velocity: change ≥ +0.15 → 1.0 / −0.05~+0.15 → 0.5 / < −0.05 → 0.2
+  - Direction: change ≥ +0.30 → 1.0 / +0.10 → 0.6 / 정체 → 0.3 / 하락 → 0.1
+- **신뢰도 주의**: `low_volume_warning=true`(평균 ratio<5)거나 `points<4`면 검색량이 적어 노이즈가 크다 → LLM 추론을 병행.
+
+### Fallback
+- `ok=false`(키 없음/HTTP 오류)면 **기존 LLM 추정값으로 그대로 진행**. 외부 API는 정확도 보강일 뿐, 없어도 스킬은 동작한다.
+- 키는 `NAVER_CLIENT_ID`/`NAVER_CLIENT_SECRET` 환경변수 또는 `skills/keyword-title/.env` (gitignore됨).
+
+> 데이터랩은 **상대값(0~100)**만 준다. 절대 검색량이 필요하면 네이버 검색광고 키워드도구 API를 추가로 붙인다(서명 로직 필요, 별도 스크립트).

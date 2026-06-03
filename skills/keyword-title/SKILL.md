@@ -2,10 +2,10 @@
 name: keyword-title
 description: >
   시드(주제·경험 조각·초안·제품 컨셉)를 받아 모드별로 후보를 뽑는다.
-  지원 모드: blog (블로그 제목), threads (Threads 첫 줄), app-name (앱·서비스 이름), product-name (제품·기능 이름).
+  지원 모드: blog (블로그 제목), threads (Threads 첫 줄), youtube (유튜브 제목·썸네일 카피), app-name (앱·서비스 이름), product-name (제품·기능 이름).
   공통 흐름: 시드 깊이 추출 → Divergent 생성 → Convergent 선별 → 자가 체크.
-  Sam Samuel 톤 강제. research-06 점수 산식 + Content_Strategy 매트릭스(콘텐츠 모드) / naming 신호·카테고리(이름 모드).
-  트리거: "키워드 뽑아줘", "제목 후보", "앱 이름 후보", "/keyword-title", "블로그 제목", "Threads 첫 줄"
+  Sam Samuel 톤 강제(유튜브는 후크 허용 예외). research-06 점수 산식 + Content_Strategy 매트릭스(콘텐츠 모드) / youtube 신호(유튜브 모드) / naming 신호·카테고리(이름 모드).
+  트리거: "키워드 뽑아줘", "제목 후보", "유튜브 제목", "앱 이름 후보", "/keyword-title", "블로그 제목", "Threads 첫 줄"
 ---
 
 # Keyword & Title
@@ -23,6 +23,10 @@ description: >
 - `references/signals-content.md` — 바이럴 신호 7종 + Personal Depth 0.30 산식
 - `references/matrix.md` — 깊이×희소성 4사분면 + 만다라트 8축
 
+**유튜브 모드 (youtube)**
+- `references/signals-youtube.md` — 유튜브 신호 6종 + CuriosityGap 0.25 산식
+- `references/tone.md` §3 "YouTube 제목" 분기 — 후크 허용·거짓 낚시 금지
+
 **이름 모드 (app-name · product-name)**
 - `references/signals-naming.md` — 네이밍 신호 6종 + 점수 산식
 - `references/naming-categories.md` — 10개 카테고리 + Divergent-Convergent 흐름
@@ -37,6 +41,7 @@ description: >
 |---|---|
 | "블로그 제목", "글 제목" | `blog` |
 | "Threads 첫 줄", "스레드 시드" | `threads` |
+| "유튜브 제목", "영상 제목", "썸네일 카피" | `youtube` |
 | "앱 이름", "서비스 이름", "프로덕트 이름" | `app-name` |
 | "기능 이름", "메뉴 이름" | `product-name` |
 | 시드가 디렉토리·README·앱 컨셉이면 | `app-name` (자동 추론) |
@@ -54,8 +59,8 @@ required:
     파일 경로면 자동으로 읽어 컨텍스트 추출.
 
 optional:
-  mode: blog | threads | app-name | product-name (기본값: 자동 추론)
-  count: 3~10 (기본값: 모드별 디폴트 — blog 3·threads 3·app-name 5·product-name 5)
+  mode: blog | threads | youtube | app-name | product-name (기본값: 자동 추론)
+  count: 3~10 (기본값: 모드별 디폴트 — blog 3·threads 3·youtube 5·app-name 5·product-name 5)
   platform: blog | threads | both (콘텐츠 모드 전용)
   include_low: boolean (기본값: false, 컷오프 미달도 표시)
 ```
@@ -82,9 +87,19 @@ optional:
     ├── 만다라트 축 매핑
     ├── PersonalDepth 산정
     ├── 시드 키워드 5~15개 생성 (tone.md 통과 필터)
+    ├── [선택] scripts/datalab_trend.py 호출 → Velocity·Direction 실측 (키 없으면 LLM 추론 fallback)
     ├── signals-content.md 점수 → 70/50/<50 컷오프
     ├── matrix.md 사분면 매핑
     └── 제목 후보 생성 (결론형·이야기형·선택의 순간형 / 회고형·발견형)
+
+  [유튜브 모드 — youtube]
+    ├── tone.md §3 "YouTube 제목" 분기 적용 (후크 허용·거짓 낚시 금지)
+    ├── 검색 키워드(Searchability) 후보 추출 — 사람들이 실제 치는 명사구
+    ├── [선택] scripts/youtube_keyword.py 호출 → median_view 기반 Searchability 실측 (키 없으면 fallback)
+    │   ※ 유튜브 Searchability는 데이터랩 아닌 YouTube API로 — 플랫폼 역전 주의 (signals-youtube §6)
+    ├── 제목 후보 생성 (호기심 갭형·숫자대비형·변화형)
+    ├── signals-youtube.md 점수 → 70/55/<55 컷오프
+    └── 자동 폐기 조건 적용 (signals-youtube.md §5) — 거짓 낚시·공포 마케팅 제거
 
   [이름 모드 — app-name · product-name] ★ 강화
     ├── [Divergent] naming-categories.md 10개 카테고리로 20~30개 후보 생성
@@ -98,8 +113,9 @@ optional:
     └── 카테고리 다양성 룰 적용 (categories §3) — 최소 4개 카테고리에서 출력
 
 [3] 자가 체크
-    ├── tone.md 6항목 통과
+    ├── tone.md 6항목 통과 (유튜브는 §5 "YouTube 모드 자가체크" 6항목 적용)
     ├── 콘텐츠 모드: 기존 글 중복 80%+ 여부
+    ├── 유튜브 모드: 거짓 낚시·공포 마케팅 없음 / 검색 키워드 1개+ 포함
     ├── 이름 모드: 카테고리 분산 ≥ 4개 / 자동 폐기 조건 통과
     └── 통과 못한 후보는 재생성 1회 후 폐기
 
@@ -133,6 +149,40 @@ optional:
 - (결론형/이야기형/선택의순간형 또는 회고형/발견형)
 
 ## 자가 체크 / 다음 액션
+```
+
+### 유튜브 모드 (youtube)
+
+```markdown
+# YouTube Title — {시드 요약 15자}
+
+## 시드
+{원문}
+
+## 깊이 분석
+- 검색 키워드(Searchability): {사람들이 실제 치는 명사구}
+- 변화/판돈: {시드에서 끌어낼 수 있는 전환점}
+- 호기심 갭 소재: {결과로 숨길 수 있는 것}
+
+## 제목 후보 ({N}개)
+| 순위 | 제목 | 유형 | YT Score | 핵심 신호 |
+|---|---|---|---|---|
+| 1 | ... | 호기심갭형 | 78 | CuriosityGap·Searchability |
+| 2 | ... | 숫자대비형 | 71 | NumberContrast |
+| ... |
+
+> 유형: 호기심갭형 / 숫자대비형 / 변화형
+
+## 썸네일 카피 분업 (선택)
+- 제목이 검색·맥락을 잡고, 썸네일 한 단어가 후크를 마무리하는 조합 제안
+
+## 자가 체크
+- [ ] 거짓 낚시 없음 / 공포 마케팅 없음
+- [ ] 검색 키워드 1개+ 포함
+- [ ] 호기심 갭 존재 (결과 다 말하지 않음)
+
+## 다음 액션
+- vidIQ·네이버 데이터랩으로 검색량 실측 → 메인 후보 확정
 ```
 
 ### 이름 모드 (app-name · product-name)
@@ -201,8 +251,11 @@ slug는 시드에서 핵심 명사 2~3개 추출 → kebab-case.
 
 ## 제약
 
-- **외부 API 호출 안 함** (MVP). LLM 추론만으로 평가.
+- **외부 API는 선택적** (키 없으면 LLM 추론 fallback, 키 없이도 완전 동작):
+  - 콘텐츠 모드 → 네이버 데이터랩(`scripts/datalab_trend.py`)으로 Velocity·Direction 실측.
+  - 유튜브 모드 → YouTube Data API(`scripts/youtube_keyword.py`)로 Searchability 실측. **데이터랩으로 대체 금지** (네이버 검색량과 유튜브 조회수는 자주 역전됨 — signals-youtube §6).
 - 콘텐츠 모드: 시드에 1인칭 경험 신호 없으면 (PersonalDepth ≤ 0.2) 출력 거부 + 시드 보강 요청.
+- 유튜브 모드: PersonalDepth 제약 없음 (시청자가 주어). 단 검색 키워드(Searchability ≤ 0.2)가 없으면 노출 경로 0으로 보고 폐기. Searchability는 `youtube_keyword.py`로 실측(키 있을 때), vidIQ/TubeBuddy로 정밀 보완은 사용자 선택.
 - 이름 모드: 카테고리 분산이 3개 이하면 재추림 1회. 그래도 안 되면 출력하되 "다양성 부족" 경고.
 - 톤 자가 체크 4/6 이하면 출력 거부 + 시드 재요청.
 - 이름 모드는 LLM 자가 판단으로 끝. 도메인·상표·SNS 핸들 실측은 **사용자 책임** (출력에 체크리스트만 제공).
@@ -242,6 +295,7 @@ slug는 시드에서 핵심 명사 2~3개 추출 → kebab-case.
 
 - 톤 규칙이 바뀌면 → `references/tone.md` 수정 + THREADS_STYLE_HISTORY에 누적
 - 콘텐츠 신호 가중치가 바뀌면 → `references/signals-content.md` 수정
+- 유튜브 신호 가중치가 바뀌면 → `references/signals-youtube.md` 수정
 - 네이밍 신호 가중치가 바뀌면 → `references/signals-naming.md` 수정
 - 카테고리 추가/삭제는 → `references/naming-categories.md` 수정
 - 사분면 정의가 바뀌면 → `references/matrix.md` 수정 (Content_Strategy.md와 동기화)

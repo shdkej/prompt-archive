@@ -6,3 +6,5 @@ incubating
 gather
 .omc/
 .vibe-ready/
+.env
+**/.env
