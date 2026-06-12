@@ -7,6 +7,7 @@ TARGET_DIR=~/.claude
 ln -sfn $PROMPT_DIR/LLM.md $TARGET_DIR/CLAUDE.md
 ln -sfn $PROMPT_DIR/BRAND.md $TARGET_DIR/BRAND.md
 ln -sfn $PROMPT_DIR/TECH_SPEC.md $TARGET_DIR/TECH_SPEC.md
+ln -sfn $PROMPT_DIR/TASTE.md $TARGET_DIR/TASTE.md
 ln -sfn $PROMPT_DIR/.agent/workflows/workflow-master.md $TARGET_DIR/agents/workflow-master.md
 ln -sfn $PROMPT_DIR/.agent/workflows/planner.md $TARGET_DIR/agents/planner.md
 ln -sfn $PROMPT_DIR/.agent/workflows/developer.md $TARGET_DIR/agents/developer.md
@@ -50,3 +51,8 @@ ln -sfn $PROMPT_DIR/skills/daily-news $TARGET_DIR/skills/daily-news
 
 # Keyword & Title (디렉토리형 스킬 — SKILL.md + references/)
 ln -sfn $PROMPT_DIR/skills/keyword-title $TARGET_DIR/skills/keyword-title
+
+# 자가검증
+[ -e $TARGET_DIR/TASTE.md ] \
+  && echo "TASTE OK ($(wc -l < $TARGET_DIR/TASTE.md) lines)" \
+  || echo "WARN: TASTE.md 심링크 깨짐"

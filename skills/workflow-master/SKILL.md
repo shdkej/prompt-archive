@@ -20,6 +20,17 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
 >
 > 복잡도(간단/중간/복잡)는 **인원 수를 정하는 기준이 아니다** — 인원은 항상 0 아니면 4다. 복잡도는 아래 「목표 설정」에서 **목표 합의·마일스톤·체크포인트의 관리 강도**를 정하는 데만 쓴다.
 
+## 단순성 원칙 (Simplicity First)
+
+**에이전트가 4개 돌아도, 가장 좋은 해결방법은 가장 간결한 해결방법이다.**
+
+4개 병렬 검토는 **관점의 누락을 막기 위한 것**이지, 산출물을 키우기 위한 것이 아니다. 에이전트 수 × 제안 수가 산출물 크기가 되어서는 안 된다.
+
+- 마스터는 4개의 제안을 **합산하지 않고 수렴시킨다** — 목표를 달성하는 최소한만 남기고 쳐낸다
+- 두 해법이 같은 목표를 **동등하게** 달성하면 **무조건 더 단순한 쪽**을 채택한다 (적은 코드, 적은 종속성, 적은 단계)
+- 각 에이전트의 제안이 "있으면 좋은 것"이면 버린다. "없으면 목표가 깨지는 것"만 채택한다. 단, '목표'에는 각 역할이 책임지는 품질 기준(운영 안전·로깅·사용자 명확성·지속성)이 포함된다 — 기능만이 목표가 아니다
+- 검토는 4개 전부, 채택은 최소한 — **검토의 폭과 산출물의 부피는 별개다**
+
 ## 의도 확인 프로토콜
 
 요청이 애매한 경우, 작업 시작 전에 핵심 의도를 확인하는 질문을 먼저 한다.
@@ -75,7 +86,7 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
 
 1. 마스터는 에이전트의 작업 결과와 워크플로우 로그를 분석하여 실패 패턴을 파악합니다
 2. 마스터가 해당 에이전트의 `.md` 파일에 교훈/규칙/체크리스트를 **직접 추가**합니다
-3. 수정 내용을 `lessons-learned.md`에도 기록하여 세션 간 맥락을 유지합니다
+3. 수정 내용을 `~/.claude/TASTE.md`에도 기록하여 세션 간 맥락을 유지합니다
 4. 다음 작업부터는 개선된 파일을 기반으로 동작하여 같은 실수를 반복하지 않습니다
 
 이를 통해 에이전트들은 작업을 거듭할수록 **실무에 더 익숙해지고**, 마스터의 개입이 점차 줄어듭니다.
@@ -149,13 +160,13 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
 
 아래 에이전트 문서들을 참조하여 워크플로우를 진행합니다:
 
-| 역할   | 에이전트              | 설명                    |
-| ------ | --------------------- | ----------------------- |
-| 지휘자 | `@workflow-master.md` | 전체 오케스트레이션     |
-| 기획   | `@planner.md`         | 요구사항 분석, PRD 작성 |
-| 개발   | `@developer.md`       | 설계 및 구현            |
-| 마케팅 | `@marketer.md`        | 브랜드, 마케팅 전략     |
-| 운영   | `@operator.md`        | 배포, 모니터링, CS      |
+| 역할   | 에이전트                              | 설명                    |
+| ------ | ------------------------------------- | ----------------------- |
+| 지휘자 | `@.agent/workflows/workflow-master.md` | 전체 오케스트레이션     |
+| 기획   | `@.agent/workflows/planner.md`         | 요구사항 분석, PRD 작성 |
+| 개발   | `@.agent/workflows/developer.md`       | 설계 및 구현            |
+| 마케팅 | `@.agent/workflows/marketer.md`        | 브랜드, 마케팅 전략     |
+| 운영   | `@.agent/workflows/operator.md`        | 배포, 모니터링, CS      |
 
 ## 워크플로우 로그 관리
 
@@ -179,7 +190,7 @@ Infinity/Virtue 마케팅 intent(`marketing-*`, activation, onboarding, retentio
 - Marketer prompt에 반드시 기존 `INTENTS.md` Archive 요약, `artifacts/marketing-*`, `reports/marketing-*/*.html`, 관련 Virtue `apps/web/docs/` 문서를 읽게 합니다.
 - Infinity에 `MARKETING_LEARNINGS.md`가 있으면 Marketer가 이 파일을 1순위로 읽게 합니다. 이 파일은 report 원문보다 높은 우선순위의 현재 마케팅 판단 원장입니다.
 - 새 산출물은 선행 산출물의 기준을 "계승"하거나 "수정"하는 방식으로 작성하게 하고, 충돌/변경 지점은 따로 표시하게 합니다.
-- Marketer가 반복 기준을 발견하면 `MARKETING_LEARNINGS.md`, `lessons-learned.md`, 또는 프로젝트 운영 문서에 승격할 후보를 반환하게 합니다.
+- Marketer가 반복 기준을 발견하면 `MARKETING_LEARNINGS.md`, `~/.claude/TASTE.md`, 또는 프로젝트 운영 문서에 승격할 후보를 반환하게 합니다.
 - 마케팅 report에는 `계승한 기준`, `이번에 새로 배운 것`, `다음 작업에 넘길 규칙`, `MARKETING_LEARNINGS.md 승격 후보` 섹션을 포함하게 합니다.
 - 특히 Virtue에서는 first value 매핑(J1/J2/J4=`deed_saved`, J3=`deed_judged`), `deed_save_capped`의 availability/friction 해석, synthetic/mock/self-test 제외, 작은 표본의 decision-grade 승격 금지를 기본 전제로 둡니다.
 - Marketer는 공개 카피, 가격, 계측, dashboard, session replay, 배포, 외부 발송, 비용, 권한, 개인정보 변경을 직접 실행하지 않고 proposal-only 또는 approval-needed로 분리합니다.
@@ -194,7 +205,7 @@ touch ~/.claude/logs/workflow_{날짜}_{프로젝트명}.log
 ### 세션 시작 시
 
 1. `~/.claude/logs/`에서 `INCOMPLETE` 상태 워크플로우 스캔 -> 있으면 이어서 할지 물음
-2. `~/workspace/prompt-archive/lessons-learned.md`에서 현재 작업 관련 교훈 확인
+2. 상시 로드된 `~/.claude/TASTE.md`(판단 원칙·글 톤·기술 함정)를 현재 작업에 대조해 관련 교훈 확인
 3. **산출물 운명 판정 (지연 측정)**: 직전 로그에서 `status=PENDING`인 `[WORKFLOW:OUTPUT]` 항목을 스캔 -> 있으면 사용자에게 **1줄로** 물어 운명을 확정한다 (예: "지난번 3건 중 그대로 쓴 거 / 고친 거 / 버린 거?"). 응답을 `[WORKFLOW:FATE]`로 직전 로그에 append하고 **채택/수정/폐기 비율**을 산출한다. 폐기율이 높으면 그 원인을 `[WORKFLOW:LEARNING]`으로 적재한다 (← 이 비율이 다음 행동을 바꾸는 지점)
 
 ### 로그 태그
@@ -205,7 +216,7 @@ touch ~/.claude/logs/workflow_{날짜}_{프로젝트명}.log
 | --------------------- | ---------------------------------------- | ----------------------------------------------- |
 | `[WORKFLOW:CONTEXT]`  | 환경/제약/이전 워크플로우 관계가 있을 때 | `CONTINUES_FROM:` 으로 이전 로그 연결 가능      |
 | `[WORKFLOW:DECISION]` | 방향전환(Pivot) 시                       | 상황, 선택지, 결정, 근거를 기록                 |
-| `[WORKFLOW:LEARNING]` | 재사용 가능한 교훈 발생 시               | `lessons-learned.md`에 적재. `#{카테고리}` 태깅 |
+| `[WORKFLOW:LEARNING]` | 재사용 가능한 교훈 발생 시               | `~/.claude/TASTE.md`에 적재. `#{카테고리}` 태깅 |
 | `[WORKFLOW:METRICS]`  | 종료 시 정량 요약                        | 허영 지표(산출물 수·리뷰 건수) 지양. **채택/수정/폐기 비율** 등 다음 결정을 바꾸는 지표 우선 |
 | `[WORKFLOW:OUTPUT]`   | 종료 시 산출물마다                       | `id={id} status=PENDING "{설명}"`. 운명은 다음 세션에 확정 (지연 측정) |
 | `[WORKFLOW:FATE]`     | 다음 세션 시작 시 운명 확정              | `id={id} {ADOPTED\|MODIFIED\|DISCARDED}` + 채택/수정/폐기 비율 |
@@ -223,7 +234,7 @@ touch ~/.claude/logs/workflow_{날짜}_{프로젝트명}.log
 
 ### 교훈 적재
 
-`[WORKFLOW:LEARNING]` 태그가 있으면 워크플로우 종료 시 `~/workspace/prompt-archive/lessons-learned.md`에 추가합니다.
+`[WORKFLOW:LEARNING]` 태그가 있으면 워크플로우 종료 시 `~/.claude/TASTE.md`에 §0 적재 규칙(분류 게이트 → 단일 템플릿 → 섹션 끝 append)대로 추가합니다. 적재 직후 줄 수를 확인해 **600줄을 넘으면 같은 세션에서 압축을 제안**합니다.
 
 **상세 가이드:** `WORKFLOW-DEBUG-GUIDE.md` 참조
 

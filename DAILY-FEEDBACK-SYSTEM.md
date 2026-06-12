@@ -178,8 +178,8 @@ ORDER BY last_visit_time DESC;
    - 없으면 "새로운 결정 없음"
 7. **회고 추출 (Life Feedback Loop)** — 헤드라인/Cut/Core/Logic 초안. 품질 기준은 [§ 회고 품질 기준](#회고-품질-기준) 참조
 8. **Planner Agent 리뷰**: `Agent(subagent_type="planner", prompt=...)`
-   - 전달: `~/workspace/prompt-archive/review-patterns.md` (톤/취향 패턴 — **먼저 읽기**), 회고 초안, 최근 7일 회고
-   - planner가 Good/Bad 기준으로 검증·개선. "충분히 좋다"면 통과
+   - 전달: `~/.claude/TASTE.md`의 「2. 글 톤 & 회고 패턴」 (톤/취향 패턴 — **먼저 읽기**), 회고 초안, 최근 7일 회고
+   - planner는 §2의 톤·패턴 기준으로 검증·개선만 한다 (TASTE 적재는 9단계 사용자 평가 시에만). "충분히 좋다"면 통과
 9. **사용자 확인 (AskUserQuestion 선택창)**: 결정 로그 + planner 개선 회고 + 오늘 본 영상을 먼저 보여준 뒤, `AskUserQuestion` 도구로 맥락 질문 2~4개를 한 번에 제시
 
    **질문 생성 가이드**:
@@ -202,8 +202,9 @@ ORDER BY last_visit_time DESC;
 
    **처리**:
    - 맥락 질문 답변 → 결정 로그/회고/인사이트에 반영
-   - "이대로 저장" → planner 초안을 Good 패턴으로 `review-patterns.md`에 추가
-   - "회고 수정 후 저장" → 수정 내용 입력받고 원본=Bad, 수정본=Good, 거부 이유를 `review-patterns.md`에 기록
+   - "이대로 저장" → 저장만 한다. **TASTE에 적재하지 않는다** — 클릭만으로 넘긴 무확인 통과일 수 있어 선호 신호가 아니다
+   - "회고 수정 후 저장" → 수정 내용 입력받고 원본=Bad, 수정본=Good, 거부 이유를 `~/.claude/TASTE.md` §2에 기록 (섹션당 Good 3·Bad 3 상한 — 초과 시 §0 규칙대로 졸업). 사용자가 직접 고친 것만이 확실한 선호 신호다
+   - 사용자가 특정 문장을 콕 집어 좋다/별로라고 평가한 경우에만 해당 문장을 Good/Bad로 적재한다
 10. **Workflow Log Lesson-Learned**: `~/.claude/logs/`에서 당일 로그 수집
     - 패턴: `workflow_YYYY-MM-DD_*.log`, `troubleshooting_YYYY-MM-DD_*.log`
     - workflow → `[WORKFLOW:LEARNING]` 섹션, troubleshooting → 문제/원인/해결
@@ -229,7 +230,7 @@ ORDER BY last_visit_time DESC;
 ## 회고 품질 기준
 
 > **핵심 원칙**: 기술 디테일이 아니라 **상황-판단-결과의 맥락**을 기록.
-> **Good/Bad 예시·톤 패턴**: `~/workspace/prompt-archive/review-patterns.md` (planner 리뷰 시 필독)
+> **Good/Bad 예시·톤 패턴**: `~/.claude/TASTE.md` 「2. 글 톤 & 회고 패턴」 (planner 리뷰 시 필독)
 
 - **헤드라인**: 상황(갈등/도전) + 대응. 작업 나열 X
 - **Cut**: 행동/판단의 반복 패턴. 기술 실수 나열 X. 없는 날 생략

@@ -42,7 +42,7 @@ Infinity/Virtue 마케팅 작업을 맡을 때는 새 리서치를 시작하기 
 3. 새 산출물에는 "무엇을 계승했는지"와 "무엇을 새로 바꾸는지"를 분리해 적습니다.
 4. 기존 문서와 충돌하는 주장, 신규 이벤트/카피/계측/가격/배포 제안은 명시적으로 proposal-only 또는 approval-needed로 분리합니다.
 5. 작은 표본, synthetic/mock/self-test, availability/friction 신호를 PMF, conversion, retention, upgrade demand 같은 결정급 지표로 승격하지 않습니다.
-6. 반복적으로 유효한 판단 기준은 `MARKETING_LEARNINGS.md`, `lessons-learned.md`, 또는 프로젝트 운영 문서에 짧게 승격할 후보로 반환합니다.
+6. 반복적으로 유효한 판단 기준은 `MARKETING_LEARNINGS.md`, `~/.claude/TASTE.md`, 또는 프로젝트 운영 문서에 짧게 승격할 후보로 반환합니다.
 
 **산출물에 남길 학습 섹션:**
 

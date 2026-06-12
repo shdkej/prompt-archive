@@ -346,7 +346,7 @@
 |------|------|
 | `[WORKFLOW:CONTEXT]` | 환경/제약/이전 워크플로�� 관계가 있을 때. `CONTINUES_FROM:`으로 이전 로그 연결 |
 | `[WORKFLOW:DECISION]` | 방향전환(Pivot) 시 상황, 선택지, 결정, 근거 기록 |
-| `[WORKFLOW:LEARNING]` | 재사용 가능한 교훈 발생 시. `#{카테고리}` 태깅. `lessons-learned.md`에 적재 |
+| `[WORKFLOW:LEARNING]` | 재사용 가능한 교훈 발생 시. `#{카테고리}` 태깅. `~/.claude/TASTE.md`에 적재 |
 | `[WORKFLOW:METRICS]` | 종료 시 정량 요약. 허영 지표(산출물 수·리뷰 건수) 지양, **채택/수정/폐기 비율** 등 다음 결정을 바꾸는 지표 우선 |
 | `[WORKFLOW:OUTPUT]` | 종료 시 산출물마다 `id={id} status=PENDING "{설명}"` 등록. 운명은 다음 세션에 확정 (지연 측정) |
 | `[WORKFLOW:FATE]` | 다음 세션 시작 시 `id={id} {ADOPTED\|MODIFIED\|DISCARDED}` + 채택/수정/폐기 비율 |

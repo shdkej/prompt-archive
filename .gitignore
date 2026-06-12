@@ -7,7 +7,4 @@ gather
 .omc/
 .vibe-ready/
 .env
-<<<<<<< HEAD
 **/.env
-=======
->>>>>>> 47da08c (daily-news 스킬 추가 + README 색인/설치 안내)
