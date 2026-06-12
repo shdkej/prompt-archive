@@ -15,3 +15,4 @@
 
 - 2026-05-14 · Slack 배포봇 70% 단축 → [outputs/2026-05-14-slack-deploy-bot.md](outputs/2026-05-14-slack-deploy-bot.md) (★ 82점, A/B 검증용 시드)
 - 2026-05-14 · virtue 앱 이름 (v2) → [outputs/2026-05-14-virtue-app-name-v2.md](outputs/2026-05-14-virtue-app-name-v2.md) (app-name 모드 개선 후 재실행, A/B 비교 포함)
+- 2026-05-14 · AI 시대 카피 가드 → [outputs/2026-05-14-copy-before-code.md](outputs/2026-05-14-copy-before-code.md) (threads 모드, ◆ 사분면, 74점)
