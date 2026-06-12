@@ -215,6 +215,7 @@ ORDER BY last_visit_time DESC;
 12. **Google Drive 업로드** — 당일 리뷰(Session Log + 결정 + 회고 + Lesson-Learned) 전체를 [§ Google Drive](#google-drive-주-저장소) 절차로 월별 파일에 반영
 13. 전체 요약 터미널 출력 (lesson-learned 포함)
 14. 업무 외 항목(영상 경향/인사이트, 일상 리듬/생활 회고)도 가능하면 회고에 반영
+15. **meta-orchestrator 마스터 세션 정리**: cmux에 meta-orchestrator 루프/마스터 세션이 활성이면 그 세션의 「세션 수명」 퇴근 절차(루프 중단 확인·advice.log pending 정리·EOD 기록)를 실행시킨다. 현재 세션이 곧 마스터 세션이면 자기 절차를 직접 실행한다(자기 자신에게 중계 금지). session-manager의 "퇴근 시 자동 해제"와는 별개 경로다(둘 다 해당하면 각자 수행). 마스터 세션이 없으면 생략.
 
 **스크립트 없을 때 수동**:
 
