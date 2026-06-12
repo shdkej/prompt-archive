@@ -45,5 +45,8 @@ ln -sfn $PROMPT_DIR/INFINITY.md $TARGET_DIR/skills/infinity/SKILL.md
 mkdir -p $TARGET_DIR/skills/harness-compare
 ln -sfn $PROMPT_DIR/HARNESS-COMPARE.md $TARGET_DIR/skills/harness-compare/SKILL.md
 
+# daily-news (디렉토리형 스킬 — 디렉토리째 링크)
+ln -sfn $PROMPT_DIR/skills/daily-news $TARGET_DIR/skills/daily-news
+
 # Keyword & Title (디렉토리형 스킬 — SKILL.md + references/)
 ln -sfn $PROMPT_DIR/skills/keyword-title $TARGET_DIR/skills/keyword-title
