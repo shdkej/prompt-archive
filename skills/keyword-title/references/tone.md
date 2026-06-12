@@ -1,6 +1,6 @@
 # Tone Reference
 
-> 출처: `BRAND.md` "톤앤매너" + `THREADS_STYLE_HISTORY.md` 누적 컨펌
+> 출처: `BRAND.md` "톤앤매너" + `TASTE.md` §2 누적 컨펌 (THREADS_STYLE_HISTORY는 TASTE로 병합됨)
 > 키워드/제목 후보 생성 시 항상 이 톤 안에 있어야 한다.
 
 ---
@@ -61,7 +61,7 @@
 
 ---
 
-## 4. THREADS_STYLE_HISTORY 누적 합의 (2026-03-13 기준)
+## 4. Threads 문체 누적 합의 (2026-03-13 기준, 정본: TASTE.md §2)
 
 - "좀 더 라이트" — 무겁지 않게
 - "약간 느끼해" — 미사여구 줄이기

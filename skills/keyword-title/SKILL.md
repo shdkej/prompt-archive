@@ -306,7 +306,7 @@ slug는 시드에서 핵심 명사 2~3개 추출 → kebab-case.
 
 ## 변경 정책
 
-- 톤 규칙이 바뀌면 → `references/tone.md` 수정 + THREADS_STYLE_HISTORY에 누적
+- 톤 규칙이 바뀌면 → `references/tone.md` 수정 + `TASTE.md` §2에 누적
 - 콘텐츠 신호 가중치가 바뀌면 → `references/signals-content.md` 수정
 - 유튜브 신호 가중치가 바뀌면 → `references/signals-youtube.md` 수정
 - 네이밍 신호 가중치가 바뀌면 → `references/signals-naming.md` 수정
