@@ -172,6 +172,18 @@ Infinity 작업(`infinity`, `INTENTS.md`, `reports/{id}/`, `artifacts/{id}/`가 
 - 코드/문서 변경은 끝냈지만 HTML 리포트를 직접 쓸 수 없는 경우, 마스터에게 변경 파일, 검증 결과, 커밋/푸시 상태, 다음 액션을 구조화해서 반환해 상위 Heartbeat가 HTML 리포트를 만들 수 있게 합니다.
 - Infinity intent는 채팅 요약 또는 `.md` report만으로 archived 처리하지 않습니다.
 
+## Infinity Marketer Learning Loop
+
+Infinity/Virtue 마케팅 intent(`marketing-*`, activation, onboarding, retention, monetization, positioning, AI value/proxy 등)를 처리할 때 workflow-master는 Marketer가 기존 마케팅 산출물을 먼저 학습하도록 지시합니다.
+
+- Marketer prompt에 반드시 기존 `INTENTS.md` Archive 요약, `artifacts/marketing-*`, `reports/marketing-*/*.html`, 관련 Virtue `apps/web/docs/` 문서를 읽게 합니다.
+- Infinity에 `MARKETING_LEARNINGS.md`가 있으면 Marketer가 이 파일을 1순위로 읽게 합니다. 이 파일은 report 원문보다 높은 우선순위의 현재 마케팅 판단 원장입니다.
+- 새 산출물은 선행 산출물의 기준을 "계승"하거나 "수정"하는 방식으로 작성하게 하고, 충돌/변경 지점은 따로 표시하게 합니다.
+- Marketer가 반복 기준을 발견하면 `MARKETING_LEARNINGS.md`, `lessons-learned.md`, 또는 프로젝트 운영 문서에 승격할 후보를 반환하게 합니다.
+- 마케팅 report에는 `계승한 기준`, `이번에 새로 배운 것`, `다음 작업에 넘길 규칙`, `MARKETING_LEARNINGS.md 승격 후보` 섹션을 포함하게 합니다.
+- 특히 Virtue에서는 first value 매핑(J1/J2/J4=`deed_saved`, J3=`deed_judged`), `deed_save_capped`의 availability/friction 해석, synthetic/mock/self-test 제외, 작은 표본의 decision-grade 승격 금지를 기본 전제로 둡니다.
+- Marketer는 공개 카피, 가격, 계측, dashboard, session replay, 배포, 외부 발송, 비용, 권한, 개인정보 변경을 직접 실행하지 않고 proposal-only 또는 approval-needed로 분리합니다.
+
 ### 자동 생성 규칙
 
 ```bash
