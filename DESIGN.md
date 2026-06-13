@@ -1,363 +1,363 @@
-# Sam Samuel Design
+# Sam Samuel 디자인
 
-> This is the product design judgment layer.
-> `BRAND.md` defines why Sam Samuel exists.
-> `DESIGN_SYSTEM.md` defines how the interface is implemented.
-> This document defines whether a product feels right before implementation details.
+> 이 문서는 제품 디자인의 판단 계층입니다.
+> `BRAND.md`는 Sam Samuel이 왜 존재하는지를 정의합니다.
+> `DESIGN_SYSTEM.md`는 인터페이스를 어떻게 구현하는지를 정의합니다.
+> 이 문서는 구현 디테일에 앞서, 제품이 "맞게 느껴지는가"를 정의합니다.
 
-## Role
+## 역할
 
-Sam Samuel design exists to make people start.
+Sam Samuel 디자인은 사람들이 시작하게 만들기 위해 존재합니다.
 
-The product should not impress users with complexity. It should reduce the vague distance between "I want to make something" and "I can begin now." Good design here is not decorative minimalism. It is edited clarity: understanding a broad possibility space, then leaving only the parts that help the user move.
+제품은 복잡함으로 사용자에게 깊은 인상을 주려 해서는 안 됩니다. "무언가 만들고 싶다"와 "지금 시작할 수 있다" 사이의 막연한 거리를 줄여야 합니다. 여기서 좋은 디자인은 장식적인 미니멀리즘이 아닙니다. 넓은 가능성의 공간을 이해한 뒤, 사용자가 움직이도록 돕는 부분만 남기는 — 편집된 명료함입니다.
 
-Use this document when judging:
+다음을 판단할 때 이 문서를 사용하세요.
 
-- New app concepts
-- Product flows and first screens
-- Landing pages and onboarding
-- Copy, empty states, and error messages
-- App-making content for Threads or Instagram
-- Whether a product still feels like Sam Samuel after features are added
+- 새로운 앱 콘셉트
+- 제품 흐름과 첫 화면
+- 랜딩 페이지와 온보딩
+- 카피, 빈 상태(empty state), 에러 메시지
+- Threads나 Instagram용 앱 제작 콘텐츠
+- 기능이 추가된 뒤에도 제품이 여전히 Sam Samuel답게 느껴지는지
 
-## Source Documents
+## 참조 문서
 
-- `BRAND.md`: brand promise, tone, emotional promise, anti-positioning
-- `DESIGN_SYSTEM.md`: tokens, components, accessibility, implementation rules
-- `LLM.md`: maker identity, working philosophy, communication preference
-- `WORLD_TRAVEL_PROJECT.md`: travel insight to app-making content loop
+- `BRAND.md`: 브랜드 약속, 톤, 감정적 약속, 안티 포지셔닝
+- `DESIGN_SYSTEM.md`: 토큰, 컴포넌트, 접근성, 구현 규칙
+- `LLM.md`: 메이커 정체성, 작업 철학, 소통 선호
+- `WORLD_TRAVEL_PROJECT.md`: 여행 인사이트에서 앱 제작 콘텐츠로 이어지는 루프
 
-## Core Promise
+## 핵심 약속
 
-Make producers.
+생산자를 만든다.
 
-That means the design should help a person:
+이는 디자인이 사람을 다음과 같이 돕는다는 의미입니다.
 
-1. See what matters.
-2. Understand the next action.
-3. Try without feeling judged.
-4. Keep enough ownership to feel like the product is helping, not taking over.
-5. Want to come back tomorrow.
+1. 무엇이 중요한지 본다.
+2. 다음 행동을 이해한다.
+3. 평가받는 느낌 없이 시도한다.
+4. 제품이 대신 해주는 게 아니라 도와준다고 느낄 만큼의 주도권을 유지한다.
+5. 내일 다시 오고 싶어진다.
 
-The user already has the will to make something. Sam Samuel design adds a usable path.
+사용자에게는 이미 무언가 만들고 싶은 의지가 있습니다. Sam Samuel 디자인은 거기에 실제로 쓸 수 있는 길을 더합니다.
 
-## Design North Star
+## 디자인 북극성(North Star)
 
-Warm clarity.
+따뜻한 명료함(Warm clarity).
 
-The product should feel like a slightly more experienced person sitting nearby. It can suggest, organize, and reduce noise, but it should not lecture. It should feel calm, capable, and human.
+제품은 곁에 앉은, 조금 더 경험 많은 사람처럼 느껴져야 합니다. 제안하고, 정리하고, 소음을 줄여줄 수는 있지만, 가르치려 들어서는 안 됩니다. 차분하고, 유능하며, 인간적으로 느껴져야 합니다.
 
-If a screen feels efficient but cold, it is drifting.
-If a screen feels warm but unclear, it is unfinished.
-If a screen feels simple because nothing is there, it is empty, not edited.
+화면이 효율적이지만 차갑게 느껴진다면, 방향이 어긋나고 있는 것입니다.
+화면이 따뜻하지만 명료하지 않다면, 아직 완성되지 않은 것입니다.
+화면이 단순해 보이는 이유가 아무것도 없어서라면, 그것은 편집된 게 아니라 비어 있는 것입니다.
 
-## Product Feeling
+## 제품의 느낌
 
-Sam Samuel products should feel like:
+Sam Samuel 제품은 다음처럼 느껴져야 합니다.
 
-- A tool that waits with the user
-- A workspace where making feels possible
-- A quiet guide that knows the next step
-- A place that is easy to reopen
-- A product that helps the user produce their own output, not admire the tool
+- 사용자와 함께 기다려주는 도구
+- 만드는 일이 가능하게 느껴지는 작업 공간
+- 다음 단계를 알고 있는 조용한 안내자
+- 다시 열기 쉬운 장소
+- 도구를 감상하게 하는 게 아니라, 사용자가 스스로의 결과물을 만들도록 돕는 제품
 
-They should not feel like:
+다음처럼 느껴져서는 안 됩니다.
 
-- A cold enterprise dashboard
-- A feature catalog
-- A trend-driven AI toy
-- A teacher grading the user
-- A blank minimalist page with no real help
-- A generic SaaS page wearing warm colors
+- 차가운 엔터프라이즈 대시보드
+- 기능 카탈로그
+- 트렌드에 휘둘리는 AI 장난감
+- 사용자를 채점하는 선생님
+- 실질적 도움 없는 텅 빈 미니멀리즘 페이지
+- 따뜻한 색만 입힌 평범한 SaaS 페이지
 
-## Design Principles
+## 디자인 원칙
 
-### 1. Make The First Action Obvious
+### 1. 첫 행동을 명확하게 만든다
 
-The first screen should answer one question quickly:
+첫 화면은 한 가지 질문에 빠르게 답해야 합니다.
 
-What can I do here right now?
+지금 여기서 내가 무엇을 할 수 있는가?
 
-The answer does not need to be loud, but it must be visible. If the user needs to read a paragraph before acting, the screen is carrying too much explanation.
+답이 요란할 필요는 없지만, 반드시 보여야 합니다. 사용자가 행동하기 전에 한 문단을 읽어야 한다면, 그 화면은 설명을 너무 많이 짊어지고 있는 것입니다.
 
-Good:
+좋음:
 
-- One clear primary action
-- A short reason for that action
-- A visible example, placeholder, or starting point
+- 하나의 명확한 주요 행동
+- 그 행동에 대한 짧은 이유
+- 눈에 보이는 예시, 플레이스홀더, 또는 출발점
 
-Avoid:
+피하기:
 
-- Multiple equal CTAs
-- Abstract welcome copy
-- Empty states that only say nothing exists yet
+- 동등한 비중의 여러 CTA
+- 추상적인 환영 문구
+- 아직 아무것도 없다고만 말하는 빈 상태
 
-### 2. Leave The User As The Main Character
+### 2. 사용자를 주인공으로 남긴다
 
-The interface should make the user's content, intent, or decision the center.
+인터페이스는 사용자의 콘텐츠, 의도, 또는 결정을 중심에 두어야 합니다.
 
-AI, automation, and templates are support structures. They should not become the product's main performance. The user should feel, "This helped me make my thing," not "The tool made something instead of me."
+AI, 자동화, 템플릿은 보조 구조입니다. 제품의 주된 무대가 되어서는 안 됩니다. 사용자는 "이게 내 것을 만드는 걸 도와줬다"고 느껴야지, "도구가 나 대신 뭔가를 만들었다"고 느껴서는 안 됩니다.
 
-Good:
+좋음:
 
-- Show the user's material prominently
-- Make edits reversible and understandable
-- Explain suggestions through the user's goal
+- 사용자의 재료를 눈에 띄게 보여준다
+- 수정은 되돌릴 수 있고 이해할 수 있게 한다
+- 제안을 사용자의 목표를 통해 설명한다
 
-Avoid:
+피하기:
 
-- Overly magical generation flows
-- Hiding the reason behind suggestions
-- Replacing the user's judgment with opaque automation
+- 지나치게 마법 같은 생성 흐름
+- 제안 뒤의 이유를 숨기는 것
+- 불투명한 자동화로 사용자의 판단을 대체하는 것
 
-### 3. Edit From 100 To 10
+### 3. 100에서 10으로 편집한다
 
-Sam Samuel simplicity is not a lack of ideas. It is the result of filtering.
+Sam Samuel의 단순함은 아이디어가 부족해서가 아닙니다. 걸러낸 결과입니다.
 
-Before removing something, understand what it was trying to solve. Before adding something, ask whether it reduces confusion or merely increases capability.
+무언가를 빼기 전에, 그것이 무엇을 해결하려 했는지 이해하세요. 무언가를 더하기 전에, 그것이 혼란을 줄이는지 아니면 단지 기능을 늘릴 뿐인지 물으세요.
 
-The right 10% should feel strong enough to carry the product.
+남겨진 10%는 제품을 끌고 갈 만큼 충분히 강하게 느껴져야 합니다.
 
-Good:
+좋음:
 
-- Fewer controls with stronger defaults
-- Progressive detail after the first action
-- Feature depth hidden behind clear moments
+- 더 강력한 기본값을 가진, 더 적은 컨트롤
+- 첫 행동 이후에 점진적으로 드러나는 디테일
+- 명확한 순간 뒤에 숨겨진 기능의 깊이
 
-Avoid:
+피하기:
 
-- A thin MVP that has no guidance
-- Settings exposed before the user has context
-- Treating fewer UI elements as automatically better
+- 안내가 전혀 없는 얄팍한 MVP
+- 사용자가 맥락을 갖기도 전에 노출된 설정
+- UI 요소가 적은 것을 무조건 더 낫다고 여기는 태도
 
-### 4. Use Structure Before Explanation
+### 4. 설명보다 구조를 먼저 쓴다
 
-Users should understand the screen from layout, hierarchy, and labels before long text explains it.
+사용자는 긴 텍스트가 설명하기 전에, 레이아웃·위계·라벨만으로 화면을 이해할 수 있어야 합니다.
 
-Copy can help, but copy should not rescue a confused structure.
+카피가 도울 수는 있지만, 카피가 혼란스러운 구조를 구해내서는 안 됩니다.
 
-Good:
+좋음:
 
-- Group related things by proximity
-- Give one element clear visual priority
-- Use examples instead of instructions when possible
+- 관련된 것끼리 가까이 묶는다
+- 하나의 요소에 명확한 시각적 우선순위를 준다
+- 가능하면 지시문 대신 예시를 쓴다
 
-Avoid:
+피하기:
 
-- Long instructional blocks
-- Equal-weight cards everywhere
-- Tooltips that carry core understanding
+- 긴 설명 블록
+- 어디서나 같은 비중의 카드들
+- 핵심 이해를 떠안고 있는 툴팁
 
-### 5. Make Warmth Functional
+### 5. 따뜻함을 기능으로 만든다
 
-Warmth is not decoration. It should reduce tension.
+따뜻함은 장식이 아닙니다. 긴장을 줄여야 합니다.
 
-Warm surfaces, rounded forms, soft motion, and friendly copy matter because they make the first try feel less risky. The user should feel invited, not processed.
+따뜻한 표면, 둥근 형태, 부드러운 모션, 친근한 카피가 중요한 이유는, 첫 시도를 덜 위험하게 느끼게 하기 때문입니다. 사용자는 처리당하는 게 아니라 초대받는다고 느껴야 합니다.
 
-Good:
+좋음:
 
-- Soft but readable contrast
-- Tactile buttons and inputs
-- Empty states that offer a starting handle
-- Error messages with a recovery path
+- 부드럽지만 읽기 쉬운 대비
+- 촉각적인 버튼과 입력 요소
+- 출발 손잡이를 건네는 빈 상태
+- 복구 경로가 있는 에러 메시지
 
-Avoid:
+피하기:
 
-- Pure white emptiness
-- Pure black shadows
-- Default cold-blue focus rings
-- Formal system messages
+- 순백의 공허함
+- 순흑의 그림자
+- 차가운 기본 파란색 포커스 링
+- 딱딱한 시스템 메시지
 
-### 6. Design For Return
+### 6. 다시 돌아오도록 디자인한다
 
-The emotional promise is "계속 쓰고 싶다."
+감정적 약속은 "계속 쓰고 싶다."입니다.
 
-A good Sam Samuel product does not need to shock the user on first use. It should become comfortable enough to revisit. That means stable navigation, predictable rhythm, and a sense that yesterday's work still has a place.
+좋은 Sam Samuel 제품은 첫 사용에서 사용자를 놀라게 할 필요가 없습니다. 다시 찾을 만큼 편안해져야 합니다. 그러려면 안정적인 내비게이션, 예측 가능한 리듬, 그리고 어제의 작업이 여전히 자리를 갖고 있다는 감각이 필요합니다.
 
-Good:
+좋음:
 
-- Clear continuity from previous work
-- Calm visual rhythm
-- Fast paths to repeated actions
-- Small moments of progress
+- 이전 작업과의 명확한 연속성
+- 차분한 시각적 리듬
+- 반복 행동으로 가는 빠른 경로
+- 작은 진전의 순간들
 
-Avoid:
+피하기:
 
-- One-time wow effects
-- Constant layout novelty
-- Hidden history
-- Making repeat use feel like starting over
+- 일회성 와우 효과
+- 끊임없이 새로워지는 레이아웃
+- 숨겨진 히스토리
+- 다시 쓸 때 처음부터 시작하는 듯한 느낌
 
-## Screen Judgment Tests
+## 화면 판단 테스트
 
-Use these tests before discussing colors or component details.
+색이나 컴포넌트 디테일을 논하기 전에 이 테스트들을 사용하세요.
 
-### 1. Five-Second Test
+### 1. 5초 테스트
 
-After five seconds, can the user answer:
+5초 뒤, 사용자가 다음에 답할 수 있는가:
 
-- What is this screen for?
-- What matters most here?
-- What should I do next?
+- 이 화면은 무엇을 위한 것인가?
+- 여기서 가장 중요한 것은 무엇인가?
+- 다음에 무엇을 해야 하는가?
 
-If not, fix hierarchy before styling.
+아니라면, 스타일링 전에 위계를 고치세요.
 
-### 2. Warmth Test
+### 2. 따뜻함 테스트
 
-Does the screen feel like a person made it for another person?
+이 화면이 사람이 사람을 위해 만든 것처럼 느껴지는가?
 
-Check:
+확인:
 
-- Copy tone
-- Empty states
-- Error states
-- Waiting/loading states
-- First-use experience
+- 카피 톤
+- 빈 상태
+- 에러 상태
+- 대기/로딩 상태
+- 첫 사용 경험
 
-### 3. Editing Test
+### 3. 편집 테스트
 
-Is this the right 10 from 100?
+이것이 100 중에서 골라낸 올바른 10인가?
 
-If the screen is sparse, ask whether it is refined or just under-designed. If it is dense, ask whether every part earns its place.
+화면이 비어 보인다면, 그것이 다듬어진 것인지 아니면 그냥 덜 만들어진 것인지 물으세요. 빽빽하다면, 모든 부분이 제자리를 얻을 자격이 있는지 물으세요.
 
-### 4. Ownership Test
+### 4. 주도권 테스트
 
-Does the user remain the maker?
+사용자가 여전히 메이커로 남아 있는가?
 
-The product can guide, automate, and suggest, but it should leave a visible place for user judgment.
+제품은 안내하고, 자동화하고, 제안할 수 있지만, 사용자의 판단을 위한 자리를 눈에 보이게 남겨야 합니다.
 
-### 5. Return Test
+### 5. 재방문 테스트
 
-Would the user want to reopen this tomorrow?
+사용자가 내일 이걸 다시 열고 싶어할까?
 
-Look for comfort, continuity, and low friction. A product that is impressive once but tiring later fails this test.
+편안함, 연속성, 낮은 마찰을 살피세요. 한 번은 인상적이지만 나중에 피곤해지는 제품은 이 테스트를 통과하지 못합니다.
 
-## Screen Rules
+## 화면 규칙
 
-- One primary action per screen.
-- Put the strongest value above the fold.
-- Show "why" before "how."
-- Let the user's content become the visual center.
-- Reveal advanced controls after intent is clear.
-- Prefer examples, previews, and defaults over abstract instructions.
-- Use empty states as starting points, not dead ends.
-- Keep repeated actions reachable.
-- Do not make all cards, buttons, or sections equal weight.
-- If visual hierarchy fails, other polish does not matter yet.
+- 화면당 주요 행동은 하나.
+- 가장 강한 가치를 첫 화면(above the fold)에 둔다.
+- "어떻게"보다 "왜"를 먼저 보여준다.
+- 사용자의 콘텐츠가 시각적 중심이 되게 한다.
+- 의도가 분명해진 뒤에 고급 컨트롤을 드러낸다.
+- 추상적 지시문보다 예시·미리보기·기본값을 선호한다.
+- 빈 상태를 막다른 길이 아니라 출발점으로 쓴다.
+- 반복 행동은 늘 닿을 수 있게 둔다.
+- 모든 카드·버튼·섹션을 같은 비중으로 만들지 않는다.
+- 시각적 위계가 무너지면, 다른 마감은 아직 의미가 없다.
 
-## Visual Direction
+## 비주얼 방향
 
-The visual signature is Warm Tool.
+비주얼 시그니처는 따뜻한 도구(Warm Tool)입니다.
 
-It should feel minimal, tactile, and calm. It can borrow from Braun's tool clarity, Kyobo's warm space, and Tsutaya's curated flow, but it should not become retro, bookstore-themed, or decorative.
+미니멀하고, 촉각적이며, 차분하게 느껴져야 합니다. Braun의 도구적 명료함, 교보의 따뜻한 공간, 츠타야의 큐레이션된 흐름에서 빌려올 수는 있지만, 복고풍·서점 테마·장식적인 느낌이 되어서는 안 됩니다.
 
-### Fixed Direction
+### 고정된 방향
 
-- Light mode is the default first impression.
-- Pretendard is the default typeface.
-- Shapes are soft, but not childish.
-- Surfaces have depth, but not heavy shadows.
-- Backgrounds are warm and slightly textured by tone, not pure white.
-- Motion should feel like waiting with the user, not showing off.
-- Accessibility is part of the brand promise.
+- 라이트 모드가 기본 첫인상이다.
+- Pretendard가 기본 서체다.
+- 형태는 부드럽되, 유치하지 않다.
+- 표면에는 깊이가 있되, 무거운 그림자는 없다.
+- 배경은 따뜻하고 톤으로 살짝 질감이 있되, 순백은 아니다.
+- 모션은 과시가 아니라 사용자와 함께 기다리는 느낌이어야 한다.
+- 접근성은 브랜드 약속의 일부다.
 
-### Avoid
+### 피하기
 
-- Pure `#FFFFFF` as the dominant feeling
-- Pure `#000000` shadows or dark mode
-- Cold default blue as the main interaction color
-- Purple-blue AI SaaS gradients as a default identity
-- Excessive glassmorphism
-- Decorative orbs and vague atmospheric backgrounds
-- Over-rounded components that feel toy-like
-- Dense enterprise table-first layouts unless the product truly needs them
+- 지배적 인상으로서의 순수 `#FFFFFF`
+- 순수 `#000000` 그림자 또는 다크 모드
+- 주요 상호작용 색으로서의 차가운 기본 파랑
+- 기본 정체성으로서의 보라-파랑 AI SaaS 그라데이션
+- 과도한 글래스모피즘
+- 장식적인 구체(orb)와 모호한 분위기성 배경
+- 장난감처럼 느껴지는 과한 라운딩 컴포넌트
+- 제품이 정말로 필요로 하지 않는 한, 빽빽한 엔터프라이즈 테이블 우선 레이아웃
 
-## Copy And Tone
+## 카피와 톤
 
-Sam Samuel copy uses soft Korean honorifics.
+Sam Samuel 카피는 부드러운 한국어 존댓말을 씁니다.
 
-It should sound like a capable person nearby:
+곁에 있는 유능한 사람처럼 들려야 합니다.
 
 - "이렇게 해보세요."
 - "여기부터 시작하면 돼요."
 - "이 부분만 먼저 정리해볼까요?"
 - "문제가 생겼어요. 다시 시도할 수 있게 정리해둘게요."
 
-Avoid:
+피하기:
 
 - "하십시오"
 - "수행하세요"
 - "오류가 발생했습니다"
 - "사용자는 다음 절차를 따라야 합니다"
-- Over-explaining obvious UI
-- Teaching tone that makes the user feel behind
+- 뻔한 UI를 과하게 설명하는 것
+- 사용자를 뒤처진 사람처럼 느끼게 하는 가르치는 톤
 
-### Copy Rules
+### 카피 규칙
 
-- Use short sentences.
-- Lead with the reason before the action.
-- Give one next handle at a time.
-- Explain errors with cause and recovery.
-- Prefer concrete words over abstract brand language.
-- Remove filler before adding polish.
+- 짧은 문장을 쓴다.
+- 행동에 앞서 이유를 먼저 꺼낸다.
+- 한 번에 하나의 다음 손잡이만 건넨다.
+- 에러는 원인과 복구로 설명한다.
+- 추상적인 브랜드 언어보다 구체적인 단어를 선호한다.
+- 마감을 더하기 전에 군더더기를 먼저 덜어낸다.
 
-## App-Making Content Rule
+## 앱 제작 콘텐츠 규칙
 
-For travel-era app building, design should also create shareable evidence.
+여행 시대의 앱 제작에서, 디자인은 공유 가능한 증거도 만들어야 합니다.
 
-The content loop is:
+콘텐츠 루프는 이렇습니다.
 
-1. Travel observation or friction
-2. Product insight
-3. App change
-4. Screen before/after or short demo
-5. Next user reaction to check
+1. 여행에서의 관찰 또는 마찰
+2. 제품 인사이트
+3. 앱 변경
+4. 화면 before/after 또는 짧은 데모
+5. 확인해볼 다음 사용자 반응
 
-This should not look like a developer diary. It should show a product growing from lived friction.
+이것은 개발자 일기처럼 보여서는 안 됩니다. 실제 겪은 마찰에서 자라나는 제품을 보여줘야 합니다.
 
-Good Threads/Instagram material:
+좋은 Threads/Instagram 소재:
 
-- A photo of the real situation
-- A short screen recording of the changed app
-- One plain sentence: "이 장면 때문에 기능 하나를 고쳤습니다."
-- A small before/after comparison
+- 실제 상황을 담은 사진
+- 바뀐 앱의 짧은 화면 녹화
+- 담백한 한 문장: "이 장면 때문에 기능 하나를 고쳤습니다."
+- 작은 before/after 비교
 
-Avoid:
+피하기:
 
-- Long technical changelogs
-- Generic "building in public" posts
-- Showing code when the user-facing judgment is the real story
-- Travel photos disconnected from the product decision
+- 긴 기술적 변경 로그
+- 평범한 "공개적으로 만들기(building in public)" 게시물
+- 사용자 관점의 판단이 진짜 이야기인데 코드를 보여주는 것
+- 제품 결정과 동떨어진 여행 사진
 
-## Product Review Checklist
+## 제품 리뷰 체크리스트
 
-Before shipping or sharing a Sam Samuel product surface, check:
+Sam Samuel 제품 화면을 출시하거나 공유하기 전에 확인하세요.
 
-- Is the first action visible within five seconds?
-- Does the screen have one clear main character?
-- Did we leave the right 10, not just remove things?
-- Does the user's content or intent stay central?
-- Can the user recover from an error without feeling blamed?
-- Does the copy sound like a nearby senior, not a manual?
-- Is warmth helping clarity instead of decorating confusion?
-- Does the interface explain itself through structure?
-- Would the user want to come back tomorrow?
-- Does this still support "생산자를 만든다"?
+- 첫 행동이 5초 안에 보이는가?
+- 화면에 명확한 주인공이 하나 있는가?
+- 그냥 빼낸 게 아니라, 올바른 10을 남겼는가?
+- 사용자의 콘텐츠나 의도가 중심에 남아 있는가?
+- 사용자가 비난받는 느낌 없이 에러에서 복구할 수 있는가?
+- 카피가 매뉴얼이 아니라 곁에 있는 선배처럼 들리는가?
+- 따뜻함이 혼란을 장식하는 대신 명료함을 돕고 있는가?
+- 인터페이스가 구조를 통해 스스로를 설명하는가?
+- 사용자가 내일 다시 오고 싶어할까?
+- 이것이 여전히 "생산자를 만든다"를 뒷받침하는가?
 
-## Relationship To Other Documents
+## 다른 문서와의 관계
 
-Use the documents in this order:
+문서는 다음 순서로 사용하세요.
 
-1. `BRAND.md`: Why should this exist?
-2. `DESIGN.md`: What should this feel like?
-3. `DESIGN_SYSTEM.md`: How should it be built?
+1. `BRAND.md`: 이것이 왜 존재해야 하는가?
+2. `DESIGN.md`: 이것이 어떤 느낌이어야 하는가?
+3. `DESIGN_SYSTEM.md`: 이것을 어떻게 만들어야 하는가?
 
-If `DESIGN_SYSTEM.md` gives a token rule but the product still feels cold, revisit `DESIGN.md`.
-If `DESIGN.md` feels vague, revisit `BRAND.md`.
-If both are clear, implement through `DESIGN_SYSTEM.md`.
+`DESIGN_SYSTEM.md`가 토큰 규칙을 주는데도 제품이 여전히 차갑게 느껴진다면, `DESIGN.md`로 돌아가세요.
+`DESIGN.md`가 모호하게 느껴진다면, `BRAND.md`로 돌아가세요.
+둘 다 명확하다면, `DESIGN_SYSTEM.md`를 통해 구현하세요.
 
-## Final Standard
+## 최종 기준
 
-A Sam Samuel product should make the user think:
+Sam Samuel 제품은 사용자가 이렇게 생각하게 만들어야 합니다.
 
-I can start now, and I want to come back tomorrow.
+지금 시작할 수 있겠다. 그리고 내일 또 오고 싶다.
