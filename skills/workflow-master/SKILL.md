@@ -100,6 +100,21 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
 - 비전과 현재 상태가 일치하는지 확인합니다.
 - 각 역할(Role Updates)의 진행 상황을 검토하고, 충돌이나 지연이 없는지 파악합니다.
 
+### 1.5. 장기 맥락 선참조 (Agent Wiki / Knowledge Lab First)
+
+중요한 기획, 추천, 방향 제안, 장기 프로젝트 작업에서는 구현/산출 전에 관련 장기 맥락을 먼저 읽습니다.
+
+- 기본 원칙: 로컬 워크스페이스만 보고 바로 만들지 말고, 관련 `agent-wiki` / Knowledge Lab 문맥이 있으면 먼저 확인합니다.
+- 특히 아래 축은 **필요시 참조**가 아니라 **기본 참조**입니다.
+  - world-travel
+  - 콘텐츠 기획/제목/포맷/시리즈 방향
+  - 제품 아이디어/제품 방향/포지셔닝
+- 우선 확인 경로:
+  - `/home/ubuntu/workspace/knowledge-lab/agent-wiki/content/docs/diary/YYYY-MM-DD.mdx`
+  - `/home/ubuntu/workspace/knowledge-lab/agent-wiki/log.md`
+  - `/home/ubuntu/workspace/knowledge-lab/source/`
+- 마스터가 Claude Code나 다른 실행자에게 위임할 때도 이 규칙을 프롬프트에 명시합니다. 즉, **마스터만 아는 규칙이 아니라 위임받는 실행자도 따라야 하는 시작 조건**으로 전달합니다.
+
 ### 2. 업무에 필요한 에이전트 설정
 
 각 에이전트가 무엇을 잘하는지 이해하고, 해당 목표에 맞는 에이전트의 역량을 최대한 끌어냅니다.
