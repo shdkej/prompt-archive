@@ -102,7 +102,6 @@
 5. operator.md 를 참고하여 운영합니다
 
 
-
 ## 환경 설정
 
 - 프로젝트별로 환경을 세팅합니다
@@ -114,25 +113,6 @@
 
 - 테스트는 별도의 안내가 없다면 반드시 실행합니다
 - 테스트는 PRD가 있다면 PRD별로 가장 간단한 성공 케이스를 반드시 만듭니다
-
-## 지주사 AX(Automation Experience) 작업
-
-코오롱 지주사의 업무 자동화 프로젝트입니다.
-현재 디렉토리가 `~/dev/ai/kolon` 하위인 경우 이 가이드를 따릅니다.
-
-- 작업 디렉토리: `~/dev/ai/kolon/`
-- 핵심 도구: Power Automate, Microsoft Graph API, SharePoint
-- PA 작업 가이드: 이 디렉토리에서 작업할 때만 `~/.claude/PA.md`를 읽어서 따른다 (평소엔 로드하지 않음)
-- 주요 프로젝트:
-  - `legal-advice-dispatch` — 법무 배분 자동화
-  - `legal-cases` — 사건검색 자동화
-  - `coolron-monitor` — 브랜드 사칭 모니터링
-  - `health-check` — 시스템 접속 테스트
-  - `ms-graph-test` — Graph API 테스트
-
-## KOP 작업
-
-현재 디렉토리가 kop-web, kop-api, kop-cms, hybris 인 경우에만 `~/.claude/KOP.md`를 읽어서 따른다 (평소엔 로드하지 않음).
 
 ## Daily Feedback 트리거
 
