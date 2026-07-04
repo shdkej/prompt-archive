@@ -18,6 +18,10 @@ def main() -> int:
         return 2
 
     path = Path(sys.argv[1])
+    if not path.exists():
+        print(f"FAIL: file not found: {path}", file=sys.stderr)
+        return 1
+
     text = path.read_text(encoding="utf-8")
     lines = text.splitlines()
 
@@ -36,6 +40,14 @@ def main() -> int:
             f"expected at least {expected_min} standalone '---' separators "
             f"between {item_count} items, found {len(separator_lines)}"
         )
+
+    for left, right in zip(item_lines, item_lines[1:]):
+        has_between_separator = any(left < idx < right for idx in separator_lines)
+        if not has_between_separator:
+            errors.append(
+                f"missing standalone '---' separator between item lines "
+                f"{left + 1} and {right + 1}"
+            )
 
     for idx in separator_lines:
         prev_blank = idx == 0 or lines[idx - 1].strip() == ""
