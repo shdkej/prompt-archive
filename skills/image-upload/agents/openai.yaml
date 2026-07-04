@@ -1,0 +1,4 @@
+interface:
+  display_name: "Image Upload"
+  short_description: "사진과 이미지 파일을 Cloudflare 업로드 URL로 보존하고 검증합니다."
+  default_prompt: "사진이나 이미지 파일을 업로드하고 공개 링크를 받아 필요한 문서나 카드뉴스 작업에 연결해줘."
