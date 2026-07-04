@@ -95,7 +95,7 @@
 예를 들어 마케팅 포인트를 먼저 잡고 기획하여 성과 확인 후 구현을 할 수 있습니다.
 이를 workflow-master 가 지휘하도록 합니다.
 
-1. workflow_master.md 는 지휘자입니다. 전체적인 작업 계획을 세웁니다
+1. workflow-master.md 는 지휘자입니다. 전체적인 작업 계획을 세웁니다
 2. planner.md 를 참고하여 구체적인 작업을 세웁니다
 3. developer.md 를 참고하여 구현합니다
 4. marketer.md 를 참고하여 마케팅을 합니다
@@ -160,7 +160,7 @@
 
 ## 피드백 루프
 
-.agnet/logs를 보고 진행했던 내용 중 개선할 부분이 있는지 점검하고 문서에 업데이트합니다.
+.agent/logs를 보고 진행했던 내용 중 개선할 부분이 있는지 점검하고 문서에 업데이트합니다.
 
 ## 스킬 생성 가이드
 
@@ -174,16 +174,8 @@ https://platform.claude.com/docs/ko/agents-and-tools/agent-skills/best-practices
 # 참고
 
 - 내 설계 취향은 `~/.claude/TECH_SPEC.md` 에 있으므로 **설계/아키텍처 작업 시에만** 읽어서 참고할 것 (평소엔 로드하지 않음)
-- 복잡한 업무를 할 경우에만 `~/.claude/OMC.md`(omc 오케스트레이션 가이드)를 읽어서 참조할 것 (평소엔 로드하지 않음)
+- 복잡한 업무를 할 경우에만 `~/.claude/skills/omc/SKILL.md`(omc 오케스트레이션 가이드, prompt-archive `OMC.md` 링크)를 읽어서 참조할 것 (평소엔 로드하지 않음)
 - /Users/seongho-noh/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main 이 위치에 나의 노트가 저장되어 있으니 필요할 경우 참고할 것
 - 인프라 관리앱은 ~/workspace/space, 모니터링 설정 파일은 ~/workspace/monitoring_personal 을 참고할 것
     - k8s에서 모니터링이 돌아가고 있고 해당 인프라는 space에, 모니터링 관련 설정만 monitoring_personal에 있음
 - 트러블슈팅 기록은 ~/.claude/logs/ 에 저장할 것 (형식: troubleshooting_YYYY-MM-DD_{주제}.log)
-
-
-## MCP Documentation
-
-해당 MCP를 실제로 사용할 때만 `~/.claude/MCP_{name}.md`를 읽어서 참고한다 (Context7, Magic, Playwright, Sequential, Stitch). 평소엔 로드하지 않는다.
-(참고: 위 MCP 문서 파일들은 현재 존재하지 않으므로, 필요 시 생성하거나 해당 줄을 정리할 것)
-
----

@@ -1,6 +1,4 @@
-#### 코드레벨 아키텍처 마스터피스
-
-# Clean Architecture 설계 가이드
+# Clean Architecture 설계 가이드 — 코드레벨 아키텍처
 
 다음 아키텍처 패턴을 사용하여 코드를 설계해주세요.
 
