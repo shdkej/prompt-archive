@@ -11,21 +11,21 @@ Canonical image: `reference/saem-canonical-modern-calm-interior-2026-07-04.png`
 - `reference/saem-canonical-modern-calm-interior-2026-07-04.png`
   - 현재 대표 정본 이미지.
   - 조약돌 몸체, 회베이지 질감, 이끼 패치, 작은 새싹, 담담한 점눈이 가장 또렷하다.
-- `reference/variants/variant-saem-cozy-home-2026-07-04.png`
+- `https://img.shdkej.com/derived/2026/07/05/102f3e38-4937-4ef9-81ed-a5ad278069db.webp`
   - 따뜻한 집/작업 공간 적용 변형.
-- `reference/variants/variant-saem-cozy-home-line-2026-07-04.png`
+- `https://img.shdkej.com/derived/2026/07/05/8dbc5789-7856-4db8-b04e-188763cb00b3.webp`
   - 선화/일러스트 적용 변형.
 
 ## Uses
 
-- `uses/geeknews-solopreneur-ai-2026-07-04/card-02.png`
-- `uses/geeknews-solopreneur-ai-2026-07-04/card-03.png`
-- `uses/geeknews-solopreneur-ai-2026-07-04/card-04.png`
-- `uses/geeknews-solopreneur-ai-2026-07-04/card-05.png`
+- Card 02: `https://img.shdkej.com/derived/2026/07/05/ddbf081a-507d-47cf-8dcd-ed5aa7c18110.webp`
+- Card 03: `https://img.shdkej.com/derived/2026/07/05/6774da47-346b-45a0-be09-07d341eea010.webp`
+- Card 04: `https://img.shdkej.com/derived/2026/07/05/1f4a2586-9d1b-49b7-9499-0c48a10f781c.webp`
+- Card 05: `https://img.shdkej.com/derived/2026/07/05/3355fca6-b148-4b67-a64f-7b54c9dd091c.webp`
 
 위 4개는 카드뉴스 `혼자 만든 회사가 더 빨리 큽니다`에서 실제 사용한 샘 캐릭터 장면이다. 정본 자체라기보다 카드별 행동/구도 적용 사례로 본다.
 
-`uses/` 아래 파일은 사용 이력이며, 새 캐릭터 생성 기준으로 쓰지 않는다. 새 이미지를 만들 때는 반드시 canonical image를 먼저 보고, 변형과 사용 이력은 적용 범위와 구도 참고로만 본다.
+사용 이력 링크는 새 캐릭터 생성 기준으로 쓰지 않는다. 새 이미지를 만들 때는 반드시 canonical image를 먼저 보고, 변형과 사용 이력은 적용 범위와 구도 참고로만 본다.
 
 ## Identity Rules
 
