@@ -453,3 +453,11 @@ PRD.md, DESIGN_SYSTEM.md, MARKETING.md
 | OPERATIONS.md    | ARCHITECTURE.md (모니터링), PRD.md (FAQ) |
 
 예시: PRD.md 상단에 `참조: PERSONA.md, BRAND.md` 명시
+
+## 결정 기록 (지연 게이트 E3)
+
+산출물 결론(채택/폐기/보류)을 확정하면 아래 원장에 결정 줄 1개를 append한다. 판정(verdict) 줄은 밤 점검만 쓴다 — 여기서는 결정 줄만.
+
+- 원장: `/home/ubuntu/.openclaw/workspace/system/data/quality-gates/decisions.jsonl`
+- 형식: `{"date":"YYYY-MM-DD","id":"슬러그","decision":"채택안 한 줄","project":"프로젝트","source":"결론이 기록된 파일 경로"}`
+- 정본: `/home/ubuntu/.openclaw/workspace/system/docs/LIFE_SYSTEM_WORKFLOW_ARTIFACT.md` 지연 게이트 소절
