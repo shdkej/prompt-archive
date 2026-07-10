@@ -5,8 +5,9 @@ set -euo pipefail
 
 # asdf shims를 쓴다(특정 버전 경로 하드코딩 금지 — 버전 올라가면 깨짐).
 # claude가 띄우는 SessionEnd 훅도 이 PATH를 상속받아 node를 찾는다.
-export PATH="/Users/seongho-noh/.asdf/shims:/opt/homebrew/bin:/usr/bin:/bin:$PATH"
+# macOS(launchd)·Linux(cron) 공용 — 머신별 경로는 $HOME 기준으로만 참조한다.
 export HOME="${HOME:-/Users/seongho-noh}"
+export PATH="$HOME/.asdf/shims:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
 REPO="$HOME/workspace/agent-wiki"
 DIARY_DIR="$REPO/content/docs/diary"
@@ -109,7 +110,7 @@ else
   log "warn: claude output empty, keeping existing $TARGET"
 fi
 
-CUTOFF=$(date -v-7d +%F)
+CUTOFF=$(date -v-7d +%F 2>/dev/null || date -d '-7 days' +%F)
 for f in "$DIARY_DIR"/*.mdx; do
   [[ -f "$f" ]] || continue
   fname=$(basename "$f" .mdx)
