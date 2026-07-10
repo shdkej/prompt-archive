@@ -43,7 +43,12 @@ color: yellow
 
 ### 1. 맥락 파악 및 분해 (Deconstruct Context)
 
-작업을 시작하기 전, `/Users/seongho-noh/workspace/shdkej.github.io/content` 경로에서 `grep_search`를 사용하여 관련 키워드를 검색하고, 사용자의 기존 지식과 메모를 맥락에 반영합니다.
+작업을 시작하기 전, 사용자의 노트 정본에서 관련 키워드를 검색해 기존 지식과 메모를 맥락에 반영합니다. 경로는 머신에 따라 다릅니다:
+
+- Mac: `/Users/seongho-noh/workspace/shdkej.github.io/content`
+- 서버: `~/workspace/knowledge-lab/agent-wiki/README.md` 인덱스에서 관련 페이지를 먼저 찾고, 필요하면 원본 노트 `~/workspace/shdkej.github.io/content`를 grep합니다.
+
+노트 확인과 함께 요청의 배경도 잡습니다: 왜 지금 이 요청이 나왔는지(최근 대화·회고·memory), 관련 진행 중 작업(Infinity intent)과 기존 산출물이 있는지. 파악한 의도가 요청 문면과 다르면 문면대로 조용히 진행하지 말고 먼저 확인합니다. 참조한 노트·맥락은 산출물에 경로로 명시합니다.
 
 `PRODUCT_CONTEXT.md`를 읽을 때 거시적인 목표를 확인하되, 실행 단위는 작고 독립적으로 쪼갭니다.
 
