@@ -97,6 +97,7 @@ optional:
   [콘텐츠 모드 — blog · threads]
     ├── 만다라트 축 매핑
     ├── PersonalDepth 산정
+    ├── threads 모드면 계정 테마 게이트 적용 — 미니멀·실용성·소비취향 공유 중 하나를 첫 줄 후보의 선택/대비에 반영
     ├── 시드 키워드 5~15개 생성 (tone.md 통과 필터)
     │   └── [선택] scripts/searchad_keyword.py → related_top으로 검색량 큰 연관어 발굴해 보강
     ├── [선택] scripts/datalab_trend.py 호출 → Velocity·Direction 실측 (키 없으면 LLM 추론 fallback)
@@ -128,6 +129,7 @@ optional:
 [3] 자가 체크
     ├── tone.md 6항목 통과 (유튜브는 §5 "YouTube 모드 자가체크" 6항목 적용)
     ├── 콘텐츠 모드: 기존 글 중복 80%+ 여부
+    ├── Threads 모드: 기존 Threads 글 흐름(여행 선언→최근 여행 후기)과 톤은 이어가되, 첫 줄·썸네일 후보가 미니멀/실용성/소비취향 공유 테마와 맞는지
     ├── 유튜브 모드: 거짓 낚시·공포 마케팅 없음 / 검색 키워드 1개+ 포함
     ├── 이름 모드: 카테고리 분산 ≥ 4개 / 자동 폐기 조건 통과
     └── 통과 못한 후보는 재생성 1회 후 폐기
