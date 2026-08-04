@@ -1,37 +1,42 @@
 ---
 name: image-upload
-description: 사진/이미지 파일을 Cloudflare 업로드 저장소에 올리고 공개 URL을 받아 검증·기록한다. 사용 시기 - (1) 사용자가 사진, 스크린샷, 생성 이미지, 카드뉴스/썸네일 산출물 업로드나 링크화를 요청할 때, (2) 문서·노트·카드뉴스·리포트에 이미지 URL을 삽입해야 할 때, (3) 단독 사진을 일일 트래킹 입력으로 보존해야 할 때, (4) upload.shdkej.com, img.shdkej.com, CLOUDFLARE_IMAGE_UPLOAD_TOKEN 언급 시.
+description: 사진/이미지 파일과 짧은 mp4 여행 기록 클립을 Cloudflare 업로드 저장소에 올리고 공개 URL을 받아 검증·기록한다. 사용 시기 - (1) 사용자가 사진, 스크린샷, 생성 이미지, 카드뉴스/썸네일 산출물 업로드나 링크화를 요청할 때, (2) 문서·노트·카드뉴스·리포트에 이미지 URL을 삽입해야 할 때, (3) 단독 사진이나 짧은 여행 영상을 일일 트래킹 입력으로 보존해야 할 때, (4) upload.shdkej.com, img.shdkej.com, CLOUDFLARE_IMAGE_UPLOAD_TOKEN 언급 시.
 ---
 
 # Image Upload
 
-사진과 이미지 산출물을 Cloudflare 기반 이미지 저장소에 업로드하고, 반환 URL을 검증해 필요한 문서나 워크플로우에 연결하는 스킬입니다.
+사진, 이미지 산출물, 짧은 mp4 여행 기록 클립을 Cloudflare 기반 미디어 저장소에 업로드하고, 반환 URL을 검증해 필요한 문서나 워크플로우에 연결하는 스킬입니다.
 
 ## 기본 원칙
 
 - 업로드 엔드포인트는 `https://upload.shdkej.com`입니다.
 - 사용자가 준 원본 사진은 `https://upload.shdkej.com?kind=original`로 업로드합니다.
 - 카드뉴스, 썸네일, 재렌더, 생성 이미지, 편집 이미지 같은 가공 산출물은 `https://upload.shdkej.com?kind=derived`로 업로드합니다.
-- 요청은 이미지 파일의 MIME 타입에 맞는 `Content-Type`과 `Authorization: Bearer $CLOUDFLARE_IMAGE_UPLOAD_TOKEN`을 함께 보냅니다.
+- 요청은 파일의 MIME 타입에 맞는 `Content-Type`과 `Authorization: Bearer $CLOUDFLARE_IMAGE_UPLOAD_TOKEN`을 함께 보냅니다.
+- `video/mp4`는 짧은 여행 기록 클립만 허용합니다. 업로드 전 `ffprobe`로 길이를 확인하고, 기본 기준은 5초 내외입니다. 긴 영상·편집 원본·대용량 영상은 이 업로드 저장소에 올리지 않습니다.
+- mp4는 `Content-Length`가 잡히는 raw body로만 업로드합니다. multipart 업로드는 이미지 전용입니다.
 - 토큰은 로컬 env에서만 로드하고, 채팅·문서·로그·커밋에 절대 출력하지 않습니다.
 - 런타임에서 토큰을 읽지 못할 때만 사용자에게 새 토큰 제공을 요청합니다.
 - 업로드 후에는 반환 URL을 HTTP 요청으로 확인하고, 접근 가능할 때만 장기 보존 문서나 라이브러리에 삽입합니다.
 
 ## 작업 흐름
 
-1. 이미지의 성격을 판정합니다.
+1. 미디어의 성격을 판정합니다.
    - 사용자가 직접 보낸 사진/스크린샷: `original`
+   - 사용자가 직접 보낸 짧은 여행 기록 mp4: `original`
    - AI 생성, 카드뉴스 렌더, 썸네일, 리사이즈/편집 결과: `derived`
    - 사용자가 목적지를 지정하면 그 목적지를 우선합니다.
 
 2. 파일 위치와 MIME 타입을 확인합니다.
    - 로컬 파일이면 `file --mime-type` 등으로 타입을 확인합니다.
+   - mp4면 `ffprobe -v error -show_entries format=duration -of csv=p=0 "$file"`로 길이를 확인합니다.
    - Telegram/OpenClaw 첨부 파일이면 먼저 접근 가능한 로컬 경로나 미디어 파일로 받은 뒤 업로드합니다.
 
 3. 업로드합니다.
    - 토큰은 환경변수 `CLOUDFLARE_IMAGE_UPLOAD_TOKEN`에서 읽습니다.
    - `.env`를 로드해야 한다면 값 자체를 출력하지 않는 방식으로만 사용합니다.
    - 카드뉴스/썸네일/재렌더 산출물은 기본적으로 `?kind=derived`입니다.
+   - 짧은 mp4 여행 기록은 `Content-Type: video/mp4`와 `?kind=original`로 업로드합니다. 저장 URL의 날짜 경로는 UTC 기준일 수 있으므로 KST 일일 기록 날짜와 달라도 정상입니다.
 
 4. 반환 URL을 검증합니다.
    - HTTP 200 또는 이미지로 접근 가능한 성공 응답을 확인합니다.
