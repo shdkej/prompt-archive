@@ -45,7 +45,7 @@ description: 사진/이미지 파일과 짧은 mp4 여행 기록 클립을 Cloud
 5. 결과를 연결합니다.
    - 문서 요청이면 반환 URL을 대상 문서에 삽입합니다.
    - 카드뉴스면 라이브러리 `items/index`나 템플릿 데이터에 최종 카드 URL을 반영합니다.
-   - 단독 사진이면 `system/data/daily-tracking/YYYY-MM-DD.md`에 타임스탬프, 최소 맥락, URL을 남깁니다.
+   - 단독 사진이면 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/daily-tracking/YYYY-MM-DD.md`에 타임스탬프, 최소 맥락, URL을 남깁니다.
 
 ## 단독 사진 기본 처리
 
@@ -53,7 +53,7 @@ description: 사진/이미지 파일과 짧은 mp4 여행 기록 클립을 Cloud
 
 - `?kind=original`로 업로드합니다.
 - 반환 URL을 검증합니다.
-- `system/data/daily-tracking/YYYY-MM-DD.md`에 같은 타임스탬프 아래 기록합니다.
+- `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/daily-tracking/YYYY-MM-DD.md`에 같은 타임스탬프 아래 기록합니다.
 - 요청받지 않은 OCR, 감상, 분류, 분석은 하지 않습니다.
 
 여러 장이 함께 도착하면 모든 이미지를 같은 흐름으로 처리하고, 같은 타임스탬프 묶음 아래에 기록합니다.

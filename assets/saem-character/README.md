@@ -42,9 +42,9 @@ Canonical image: `reference/saem-canonical-modern-calm-interior-2026-07-04.png`
 ## Source History
 
 - 원본 생성/실험 위치:
-  - `/home/ubuntu/.openclaw/workspace/system/reports/card-news/saem-previews/`
-  - `/home/ubuntu/.openclaw/workspace/system/reports/card-news/saem-variants/`
-  - `/home/ubuntu/.openclaw/workspace/system/data/card-news/generated-assets/geeknews-solopreneur-ai-2026-07-04-saem/`
+  - `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/card-news/saem-previews/`
+  - `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/card-news/saem-variants/`
+  - `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/card-news/generated-assets/geeknews-solopreneur-ai-2026-07-04-saem/`
 - 관련 OpenClaw 커밋:
   - `6f7766d Add Saem card asset rule`
   - `13ce5b6 Make Saem card actions content-driven`
