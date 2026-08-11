@@ -77,6 +77,7 @@ Task(subagent_type=planner,   prompt="PRD.md 작성. ...")
 | 코드 구현 (다파일) | `developer` | 가장 흔한 위임 |
 | 코드 구현 (단일/단순) | `oh-my-claudecode:executor` | 빠른 처리 |
 | 설계 문서 | `planner` 또는 `developer` | ARCHITECTURE/PRD/RUNBOOK |
+| UI/디자인 시스템/화면 구조 | `designer` | DESIGN_SYSTEM/디자인 리뷰 |
 | 마케팅 콘텐츠 | `marketer` | BRAND/STP/MARKETING |
 | 운영 가이드 | `operator` | OPERATIONS/RUNBOOK |
 | 코드 탐색 | `Explore` | 파일 위치 파악 |
@@ -378,8 +379,8 @@ PRD.md, DESIGN_SYSTEM.md, MARKETING.md
 |               | PRD.md            | 요구사항, 기능 명세, UX 플로우 |
 |               | STORYBOARD.md     | UI/UX 화면 흐름                |
 |               | HYPOTHESES.md     | 가설 및 검증 계획              |
+| **Designer**  | DESIGN_SYSTEM.md  | 컬러, 타이포, 컴포넌트 규칙    |
 | **Developer** | ARCHITECTURE.md   | 기술 스택, 구조 설계           |
-|               | DESIGN_SYSTEM.md  | 컬러, 타이포, 컴포넌트 규칙    |
 |               | ERD.md            | 데이터 모델, 관계              |
 |               | API.md            | API 엔드포인트 명세            |
 | **Marketer**  | BRAND.md          | 브랜드 아이덴티티, 톤앤매너    |
@@ -408,8 +409,9 @@ PRD.md, DESIGN_SYSTEM.md, MARKETING.md
 ├── Planner: PERSONA.md, PRD.md, STORYBOARD.md
 └── Marketer: STP.md (리서치 결과 + BRAND 기반)
     ↓
-[Developer + Marketer] ──── 🔀 부분 병렬
-├── Developer: ARCHITECTURE.md, DESIGN_SYSTEM.md, ERD.md, API.md
+[Designer + Developer + Marketer] ──── 🔀 부분 병렬
+├── Designer: DESIGN_SYSTEM.md
+├── Developer: ARCHITECTURE.md, ERD.md, API.md
 └── Marketer: MARKETING.md, LAUNCH.md
     ↓
 [Operator 단계]
@@ -437,6 +439,7 @@ PRD.md, DESIGN_SYSTEM.md, MARKETING.md
 | BRAND.md                 | ⛔ 먼저   | 모든 문서의 톤앤매너 기준 |
 | PERSONA + STP            | 🔀 병렬   | 서로 독립적               |
 | PRD + ARCHITECTURE       | ⛔ 순차   | PRD 완성 후 설계          |
+| DESIGN_SYSTEM + UI 구현  | ⛔ 순차   | 디자이너 기준 확정 후 구현 |
 | ARCHITECTURE + MARKETING | 🔀 병렬   | PRD 기반으로 독립 작업    |
 | OPERATIONS               | ⛔ 마지막 | 전체 문서 참조 필요       |
 
@@ -448,7 +451,7 @@ PRD.md, DESIGN_SYSTEM.md, MARKETING.md
 | ---------------- | ---------------------------------------- |
 | PRD.md           | PERSONA.md (타겟), BRAND.md (톤앤매너)   |
 | ARCHITECTURE.md  | PRD.md (기능), ERD.md (데이터)           |
-| DESIGN_SYSTEM.md | BRAND.md (컬러, 톤)                      |
+| DESIGN_SYSTEM.md | BRAND.md (컬러, 톤), `.agent/agents/designer.md` |
 | MARKETING.md     | BRAND.md, STP.md, PRD.md                 |
 | OPERATIONS.md    | ARCHITECTURE.md (모니터링), PRD.md (FAQ) |
 

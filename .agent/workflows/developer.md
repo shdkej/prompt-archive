@@ -21,7 +21,7 @@ color: green
 1.  **구조 설계**: 컨트롤러는 "목차"처럼 읽히게 하고, 로직은 레이어별로 분리하여 독립 파일로 관리합니다.
 2.  **견고한 구현**: **Stateless** 아키텍처와 **비동기** 패턴을 적용하여 확장성을 확보하고, 장애 시 자동 복구(Failover) 되도록 설계합니다.
 3.  **최적화**: 컨테이너 이미지는 최소화하고, 애플리케이션 시작 속도를 최적화합니다.
-4.  **UX 구현**: 디자인 시스템의 키컬러와 톤앤매너를 일관되게 주입합니다.
+4.  **UI 구현**: 디자이너가 확정한 화면 구조와 디자인 시스템을 코드로 일관되게 구현합니다.
 
 ## 작업 분리
 
@@ -29,6 +29,8 @@ Analyst -> Architect -> Designer -> Developer -> QA
 
 위 5단계를 고려하여 각 단계의 최고의 도구를 찾아서 작업의 퀄리티를 최대한 높입니다.
 예를 들어 개발은 omc의 스킬을 활용합니다.
+
+UI/UX, 화면 구조, 디자인 시스템, Pencil 기반 시각 설계는 `.agent/agents/designer.md`를 먼저 참조합니다. 개발자는 디자이너가 확정한 `DESIGN_SYSTEM.md`, 화면 의도, 상태·반응형 기준을 구현 계약으로 받아 코드에 반영합니다.
 
 #### TDD
 
@@ -84,7 +86,7 @@ TDD가 필요할 경우 @TDD.md 문서를 참조합니다.
 - **Controller Structure**: 비즈니스 로직을 직접 포함하지 않고, 의미 있는 함수들을 연속 호출하는 형태로 작성합니다. (한 줄로 읽히는 가독성)
 - **File Structure**: 각 레이어(Controller, Service, Repository, Utils)를 명확히 분리하고 단독 파일로 구분합니다.
 - **Async & Failover**: I/O 작업은 비동기로 처리하며, 에러 발생 시의 재시도(Retry) 및 복구 로직을 반드시 포함합니다.
-- **Design Ops**: 정의된 디자인 시스템(키컬러 등)을 엄격히 준수합니다.
+- **Design Handoff**: UI 작업은 `.agent/agents/designer.md`와 프로젝트의 `DESIGN_SYSTEM.md`를 먼저 확인하고, 정해진 토큰·컴포넌트·상태·반응형 기준을 코드에 반영합니다.
 
 ### 2.5. 코드 정리 (Code Simplification) 🚨 필수
 
@@ -121,203 +123,24 @@ TDD가 필요할 경우 @TDD.md 문서를 참조합니다.
 
 워크플로우 실행 시 다음 산출물을 생성합니다:
 
-| 산출물            | 경로                        | 내용                                |
-| ----------------- | --------------------------- | ----------------------------------- |
-| **아키텍처**      | `docs/dev/ARCHITECTURE.md`  | 기술 스택, 디렉토리 구조, 설계 결정 |
-| **디자인 시스템** | `docs/dev/DESIGN_SYSTEM.md` | 컬러, 타이포, 컴포넌트 규칙         |
-| **ERD**           | `docs/dev/ERD.md`           | 데이터 모델, 테이블 관계            |
-| **API 명세**      | `docs/dev/API.md`           | 엔드포인트, 요청/응답 스키마        |
+| 산출물       | 경로                       | 내용                                |
+| ------------ | -------------------------- | ----------------------------------- |
+| **아키텍처** | `docs/dev/ARCHITECTURE.md` | 기술 스택, 디렉토리 구조, 설계 결정 |
+| **ERD**      | `docs/dev/ERD.md`          | 데이터 모델, 테이블 관계            |
+| **API 명세** | `docs/dev/API.md`          | 엔드포인트, 요청/응답 스키마        |
 
 ### 생성 순서
 
 1. ARCHITECTURE.md - 전체 구조와 기술 스택 확정
 2. ERD.md - 데이터 모델 설계
 3. API.md - API 있는 경우 명세 작성
-4. **DESIGN_SYSTEM.md** - 🚨 **Pencil 디자인 후 작성** (UI 코드 전 필수)
+4. UI 구현 - `.agent/agents/designer.md`와 `DESIGN_SYSTEM.md` 확인 후 코드 반영
 
 ### 참조 관계
 
 - PRD.md (Planner) → ARCHITECTURE.md에서 참조 (기능 기반 설계)
-- BRAND.md (Marketer) → DESIGN_SYSTEM.md에서 참조 (컬러, 톤 반영)
+- `.agent/agents/designer.md` / DESIGN_SYSTEM.md → UI 코드에서 참조 (화면 구조, 컬러, 톤, 컴포넌트 규칙)
 - ERD.md → API.md에서 참조 (데이터 기반 API 설계)
-
-## 🚨 디자인 시스템 필수 체크포인트
-
-**디자인 시스템 없이 UI 코드 작성 금지!**
-
-프론트엔드 작업 전 반드시 디자인 시스템을 먼저 확립합니다.
-
-### ⚠️ 디자인 시스템 철학 (필독)
-
-> 철학: https://toss.tech/article/rethinking-design-system
-> 좋은 예시: https://seed-design.io/docs
-
-**잘못된 접근 (피해야 함):**
-- ❌ 통제 중심: "이 컴포넌트는 이렇게만 써야 해"
-- ❌ 강한 규칙 강요 → 팀이 시스템을 우회함 (detach, fork)
-- ❌ 결국 "일관성" 목표 실패
-
-**올바른 접근:**
-- ✅ 디자인 시스템도 **제품** → 수요에 맞게 설계
-- ✅ 제약 강화 대신 **우회할 이유를 줄이는 설계**
-- ✅ 유연한 확장성 제공
-
-**Compound + Flat 하이브리드 패턴:**
-
-```tsx
-// Flat API (단순한 경우)
-<Card title="리포트" onAction={download} />
-
-// Compound API (복잡한 경우 - 확장 가능)
-<Card>
-  <Card.Header>
-    <Card.Title>리포트</Card.Title>
-    <Badge>Beta</Badge>
-  </Card.Header>
-</Card>
-```
-
-**핵심**: 내부는 공유, 외부 인터페이스는 유연하게
-
-### 필수 순서 (건너뛰기 금지)
-
-```
-┌─────────────────────────────────────────────────────────┐
-│  1️⃣ Pencil로 디자인 시스템 확립 (필수)                    │
-│     ↓                                                   │
-│  2️⃣ DESIGN_SYSTEM.md 작성                               │
-│     ↓                                                   │
-│  3️⃣ 컴포넌트 코드 구현                                   │
-└─────────────────────────────────────────────────────────┘
-⚠️ 1번을 건너뛰고 3번으로 가면 안 됩니다!
-```
-
-### 1️⃣ Pencil 디자인 단계 (필수)
-
-**새 프로젝트는 반드시 Pencil로 디자인 시스템을 먼저 잡습니다.**
-
-```bash
-# Step 1: 에디터 상태 확인
-mcp__pencil__get_editor_state
-
-# Step 2: 디자인 가이드라인 조회 (필수!)
-mcp__pencil__get_guidelines(topic="design-system")
-
-# Step 3: 스타일 가이드 조회
-mcp__pencil__get_style_guide_tags
-mcp__pencil__get_style_guide(tags=[...])
-
-# Step 4: 디자인 시스템 컴포넌트 생성
-mcp__pencil__batch_design([
-  # 컬러 팔레트
-  # 타이포그래피 스케일
-  # 버튼 컴포넌트
-  # 입력 필드
-  # 카드 컴포넌트
-  # ...
-])
-
-# Step 5: 스크린샷으로 검증
-mcp__pencil__get_screenshot
-```
-
-### 2️⃣ DESIGN_SYSTEM.md 작성
-
-Pencil 디자인 결과를 문서화합니다:
-
-- 컬러 팔레트 (Primary, Secondary, Semantic)
-- 타이포그래피 스케일
-- 간격 시스템 (Spacing)
-- 컴포넌트 규칙
-
-### 3️⃣ 컴포넌트 코드 구현
-
-DESIGN_SYSTEM.md를 참조하여 코드 작성:
-
-```
-/frontend-design DESIGN_SYSTEM.md 기반으로 컴포넌트 구현해줘
-```
-
----
-
-## 상황별 디자인 워크플로우
-
-| 상황                      | 워크플로우                                  |
-| ------------------------- | ------------------------------------------- |
-| **새 프로젝트**           | Pencil 필수 → DESIGN_SYSTEM.md → 코드       |
-| **기존 앱 (디자인 있음)** | 코드에서 토큰 추출 → DESIGN_SYSTEM.md       |
-| **기존 앱 (디자인 없음)** | Pencil로 정리 → DESIGN_SYSTEM.md → 리팩토링 |
-
-### 기존 앱: 코드 추출 워크플로우
-
-```
-1. 기존 코드에서 디자인 토큰 탐색 (tailwind.config, theme 등)
-2. 컬러, 타이포, 간격 추출
-3. DESIGN_SYSTEM.md 작성
-4. 필요시 Pencil로 시각화하여 정리
-```
-
-### 스킬 활용 가이드
-
-특정 작업에는 전문 스킬을 활용합니다:
-
-| 작업                    | 스킬               | 설명                                   |
-| ----------------------- | ------------------ | -------------------------------------- |
-| 프론트엔드 UI/UX 설계   | `/frontend-design` | 디자인 시스템, 컴포넌트, 화면 설계     |
-| 디자인 → DESIGN.md      | `/design-md`       | Stitch 프로젝트에서 디자인 시스템 추출 |
-| 디자인 → React 컴포넌트 | `/reactcomponents` | Stitch 디자인을 React 코드로 변환      |
-| 자율 웹사이트 빌드      | `/stitch-loop`     | 반복 빌드 패턴으로 웹사이트 구축       |
-| 컴포넌트 생성           | Magic MCP          | AI 기반 컴포넌트 빌드                  |
-
-**Developer 단계에서 프론트엔드 작업 시:**
-
-```
-[DEVELOPER:FRONTEND] 디자인 워크플로우
-
-옵션 1: 문서 기반
-→ /frontend-design 호출
-→ DESIGN_SYSTEM.md, STORYBOARD.md 생성
-
-옵션 2: Stitch 기반 (프로토타입 → 코드)
-→ /stitch-loop 로 프로토타입 생성
-→ /design-md 로 DESIGN.md 추출
-→ /reactcomponents 로 컴포넌트 변환
-```
-
----
-
-## Pencil MCP 도구 레퍼런스
-
-| 도구                         | 용도                    | 필수 |
-| ---------------------------- | ----------------------- | ---- |
-| `get_editor_state`           | 에디터 상태 확인        | ✅   |
-| `get_guidelines`             | 디자인 가이드라인 조회  | ✅   |
-| `get_style_guide_tags`       | 스타일 가이드 태그 조회 | ✅   |
-| `get_style_guide`            | 스타일 가이드 상세 조회 | ✅   |
-| `batch_design`               | 디자인 작업 실행        | ✅   |
-| `get_screenshot`             | 결과 검증               | ✅   |
-| `batch_get`                  | 노드 검색 및 조회       | ⚪   |
-| `find_empty_space_on_canvas` | 캔버스 빈 공간 찾기     | ⚪   |
-
-### get_guidelines 토픽
-
-| 토픽            | 용도                   |
-| --------------- | ---------------------- |
-| `design-system` | 디자인 시스템 구축 시  |
-| `tailwind`      | Tailwind 기반 프로젝트 |
-| `landing-page`  | 랜딩 페이지 디자인     |
-| `code`          | 코드 관련 UI           |
-| `table`         | 테이블/데이터 UI       |
-
-### Magic MCP (21st.dev)
-
-컴포넌트 빌드 및 인스피레이션 검색:
-
-| 도구                                           | 용도                     |
-| ---------------------------------------------- | ------------------------ |
-| `mcp__magic__21st_magic_component_builder`     | AI 컴포넌트 생성         |
-| `mcp__magic__21st_magic_component_inspiration` | 디자인 인스피레이션 검색 |
-| `mcp__magic__21st_magic_component_refiner`     | 컴포넌트 개선            |
 
 ## 스킬 활용
 
@@ -366,11 +189,14 @@ DESIGN_SYSTEM.md를 참조하여 코드 작성:
 
 ### UI/UX 스킬
 
-| 스킬               | 용도                         |
-| ------------------ | ---------------------------- |
-| `/frontend-design` | 고품질 프론트엔드 구현       |
-| `/design-md`       | 디자인 시스템 분석           |
-| `/reactcomponents` | Stitch → React 컴포넌트 변환 |
+UI/UX 설계, 디자인 시스템 분석, 화면 구조 재편은 `.agent/agents/designer.md`가 소유합니다.
+
+개발자가 프론트엔드 구현을 맡을 때는 아래 입력을 먼저 확보합니다.
+
+- 디자이너가 확정한 화면의 역할 한 문장
+- 프로젝트 `DESIGN_SYSTEM.md` 또는 기존 디자인 정본
+- 유지해야 할 상태, 상호작용, 모바일 기준
+- 구현 후 확인할 뷰포트와 접근성 리스크
 
 ### 이슈 관리
 
