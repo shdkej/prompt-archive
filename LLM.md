@@ -11,6 +11,60 @@
 
 단순한 기술 구현자가 아니라 **조직 전체의 워크플로우를 자동화하고 최적화하는 오케스트레이터**를 지향한다. 개인 프로젝트로 솔로프리너 플랫폼(MIMO), 미니멀 인프라 서비스, AI 헬스케어 앱(AFZMA)을 추진 중이다.
 
+## 내 서비스·프로젝트 레지스트리
+
+작업을 시작할 때 요청 대상이 아래 어느 서비스에 해당하는지 먼저 확인한다. 각 서비스의 운영 정본과 실제 저장소를 우선하며, 이름이 비슷한 산출물은 임의로 합치지 않는다.
+
+이 목록은 현재 작업 대상의 기준 목록이다. `Space` 아래에 배포된 정적 페이지는 아래의 별도 목록과 `/home/ubuntu/workspace/space/infra-aws-static-sites/sites/registry.json`을 함께 기준으로 삼는다.
+
+### 핵심 서비스·프로젝트
+
+- **Infinity** — 작업 Intent·실행 큐·Archive·리포트 관리. 운영 저장소: `~/workspace/knowledge-lab/infinity/`. 공개 대시보드: `https://infinity.aws.shdkej.com`
+- **Space** — Kubernetes·클라우드 인프라·배포 구성. 저장소: `~/workspace/space/`
+- **Monitoring Personal** — 개인 서비스 모니터링·로그·메트릭 구성. 저장소: `~/workspace/monitoring_personal/`
+- **Prompt Archive** — 개인 프롬프트·스킬·워크플로우·설계 가이드 아카이브. 저장소: `~/workspace/prompt-archive/`
+- **Knowledge Lab** — 원본 지식·외부 링크·OpenClaw 운영 문서·평가·위키 입력을 관리하는 지식 시스템. 저장소: `~/workspace/knowledge-lab/`
+- **Agent Wiki** — Knowledge Lab을 publish하는 에이전트 위키. 저장소: `~/workspace/agent-wiki/`
+- **아프지마(AFZMA)** — AI 증상 분석·진료 과목·병원 안내 서비스. 저장소: `~/workspace/afzma/`
+- **System Dashboard** — OpenClaw 에이전트 시스템 상태 수집기와 Control Center CMS System 탭. 저장소: `~/workspace/system-dashboard/`, UI: `~/workspace/space/apps/control-center-cms/`
+- **Video Automation / Reel Room** — 영상 1개에서 롱폼·숏츠·썸네일·인트로를 만드는 로컬 우선 영상 자동화 도구와 웹 UI. 로컬 도구 저장소: `~/workspace/video-automation/`, 웹 앱 저장소: `~/workspace/space/apps/reel-room/`
+- **shdkej.github.io** — 개인 위키·블로그 웹 페이지. 저장소: `~/workspace/shdkej.github.io/`
+
+### 지원·운영 저장소
+
+- **Dotfiles** — 개인 개발 환경·셸·에디터 설정. 저장소: `~/workspace/dotfiles/`
+
+### Space 정적 페이지
+
+정적 사이트의 단일 목록은 `~/workspace/space/infra-aws-static-sites/sites/registry.json`을 따른다.
+
+- **Instagram Maker** — 인스타그램 스토리·릴스 커버용 9:16 장면 편집기. `instagram-maker.aws.shdkej.com`
+- **Status** — 정적 상태 대시보드. `status.aws.shdkej.com`
+- **Travel Ops** — 세계여행 계획 보드. `travel.aws.shdkej.com`
+- **Schengen Calculator** — 장기 여행용 90/180일 솅겐 계산기. `schengen.aws.shdkej.com`
+- **Card News Library** — 사진 인사이트 카드뉴스 공개 아카이브. `library.aws.shdkej.com`
+- **Infinity 공개 대시보드** — Infinity Intent 대시보드. `infinity.aws.shdkej.com`
+- **Virtue** — Lambda 점수화와 연결된 환생·덕 쌓기 웹 앱. `virtue.aws.shdkej.com`
+- **Control Center CMS** — Status·서비스 레지스트리 운영 CMS. `cms.oracle.shdkej.com`
+- **Reel Room 공개 웹 UI** — 릴스 제작용 영상 자동화 웹 UI. `reel.oracle.shdkej.com`
+
+### 참조 우선순위
+
+1. 서비스별 실제 저장소와 README
+2. Infinity 대상 작업이면 `~/workspace/knowledge-lab/source/openclaw-system/docs/INFINITY_OPERATING_RULES.md`와 `~/workspace/knowledge-lab/infinity/INTENTS.md`를 먼저 읽고, 그다음 해당 Intent와 실제 저장소 README를 확인
+3. 인프라·배포 작업이면 `~/workspace/space/`와 정적 사이트 `registry.json`
+4. 공통 판단·워크플로우·스킬 규칙이면 이 문서와 `~/workspace/prompt-archive/`
+
+### 운영 문서 연결
+
+- 전체 서비스·프로젝트 목록: 이 문서(`~/workspace/prompt-archive/LLM.md`)
+- Infinity 운영 정본: `~/workspace/knowledge-lab/source/openclaw-system/docs/INFINITY_OPERATING_RULES.md`
+- Infinity 실제 저장소: `~/workspace/knowledge-lab/infinity/`
+- Space 및 배포 구성: `~/workspace/space/`
+- 개인 모니터링 구성: `~/workspace/monitoring_personal/`
+- 프롬프트·워크플로우 아카이브: `~/workspace/prompt-archive/`
+- Space 정적 페이지 단일 목록: `~/workspace/space/infra-aws-static-sites/sites/registry.json`
+
 ### 핵심 철학
 
 - **"의욕은 낮고, 지속성은 높게"** — 장기 관점의 지속 가능한 성장을 추구한다
