@@ -138,14 +138,18 @@ Sam Samuel은 **조금 더 아는 옆자리 선배**다.
 
 | 항목 | 값 |
 | --- | --- |
-| 기준색 | Warm cream `#F0EEE9` 계열 |
+| 기준색 | White `#f8fbfc` + subtle sky 계열 |
 | 기본 모드 | 라이트모드 |
 | 다크모드 | 순수 검정이 아닌 따뜻한 차콜 |
 | 그림자 | 순수 검정 금지, 따뜻한 회색 |
 | 폰트 | Pretendard 단일 |
-| 키 컬러 | 앱별 하나, 중-저채도 자연색 |
+| 키 컬러 | 옅은 sky blue를 공간 깊이와 포커스에 제한적으로 사용 |
 | 접근성 | WCAG AAA 목표, 대비 7:1 |
-| 시각 서명 | Warm Tool |
+| 시각 서명 | Spatial Type |
+
+Spatial Type은 Sam Samuel의 제품 화면이 텍스트를 기본 인터페이스로 삼고, 필요한 이미지·메모·상태만 공간에 불러오는 방향이다. Warm Tool은 실제 조작부의 촉감으로 남긴다.
+
+샘 캐릭터와 3D 장면은 더 이상 모든 사용자-facing 결과물의 기본 시그니처가 아니다. 제품 맥락에서 상태, 기억, 안내자 역할이 분명할 때만 `ContextObject` 또는 배경 레이어로 쓴다.
 
 ## 디자인 판단 게이트
 
@@ -162,29 +166,6 @@ Sam Samuel은 **조금 더 아는 옆자리 선배**다.
 
 4. **100에서 남긴 10인가?**
    본질만 남았는지, 그냥 비어 있는지 구분한다.
-
-## 캐릭터 정본
-
-Sam Samuel의 기본 캐릭터 정본은 `assets/saem-character/`에 둔다.
-
-사용 원칙:
-
-- Sam Samuel 사용자-facing 결과물에는 샘 캐릭터를 시그니처로 포함한다. 대시보드, 앱 화면, 카드뉴스, 공개 이미지 모두 예외를 두지 않는다.
-- 캐릭터는 장식 마스코트가 아니라 제품의 상태와 축적을 보여주는 조용한 동반자다.
-- 새 이미지를 만들거나 비교할 때는 `assets/saem-character/README.md`와 대표 정본 이미지를 먼저 본다.
-- 동일 캐릭터로 인식되어야 한다. 형태, 질감, 표정, 색감이 카드마다 흔들리면 안 된다.
-- 텍스트, 숫자, 로고, UI 아이콘을 캐릭터나 배경 이미지 안에 직접 생성하지 않는다.
-
-대표 정본:
-
-- [`assets/saem-character/reference/saem-canonical-modern-calm-interior-2026-07-04.png`](./assets/saem-character/reference/saem-canonical-modern-calm-interior-2026-07-04.png)
-
-브랜드 적용 변형:
-
-- [따뜻한 집/작업 공간 적용 변형](https://img.shdkej.com/derived/2026/07/05/102f3e38-4937-4ef9-81ed-a5ad278069db.webp)
-- [선화/일러스트 적용 변형](https://img.shdkej.com/derived/2026/07/05/8dbc5789-7856-4db8-b04e-188763cb00b3.webp)
-
-기본 이미지 프롬프트는 `assets/saem-character/README.md`를 정본으로 삼는다. 이 문서에는 중복해 관리하지 않는다.
 
 ## 문서 사용 순서
 

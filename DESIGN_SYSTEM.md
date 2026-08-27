@@ -11,14 +11,14 @@
 
 ## 디자인 정의
 
-Sam Samuel의 제품 디자인은 **Calm Technology 기반의 Warm Minimalism**이다.
+Sam Samuel의 제품 디자인은 **Calm Technology 기반의 Spatial Type**이다.
 
 ```text
-Calm Technology x Warm Minimalism x Human-Centered x Reflective x Cyclical UX
+Calm Technology x Spatial Type x Human-Centered x Reflective x Cyclical UX
 ```
 
 - **Calm Technology**: 필요한 순간에만 정보를 전면에 보여준다.
-- **Warm Minimalism**: 웜 뉴트럴, 부드러운 곡선, 촉각적 표면, 자연광 같은 깊이로 차갑지 않은 명료함을 만든다.
+- **Spatial Type**: 텍스트를 기본 화면 상태로 두고, 필요한 콘텐츠만 공간에 불러오는 타이포그래피 기반 인터페이스다.
 - **Human-Centered**: AI와 자동화는 사용자의 판단을 대체하지 않는다.
 - **Reflective Design**: 사용자가 자기 상태와 패턴을 돌아볼 수 있게 한다.
 - **Cyclical UX**: 다시 이어갈 가치가 있는 흐름에서 다음 재진입점을 남긴다.
@@ -31,16 +31,164 @@ Calm Technology x Warm Minimalism x Human-Centered x Reflective x Cyclical UX
 4. 다음 행동과 재진입점이 남아 있는가?
 5. 위 원칙을 해치지 않는 범위에서 따뜻한 촉감과 개성을 더했는가?
 
-`Zen Design`, `Neumorphism`, `Glassmorphism`, `Soft UI`는 정체성 이름이 아니다. 필요할 때 일부 표현 기법으로만 쓴다.
+`Zen Design`, `Neumorphism`, `Glassmorphism`, `Soft UI`, `Vision Pro style`은 정체성 이름이 아니다. 필요할 때 일부 표현 기법으로만 쓴다.
+
+## Spatial Type
+
+Spatial Type은 공식 디자인 용어가 아니라 Sam Samuel 제품의 작업명이다. 한국어로는 **공간형 타이포그래피 인터페이스**다.
+
+핵심 정의:
+
+- 텍스트가 화면의 기본 상태다.
+- 이미지는 고정 카드가 아니라 문맥에 따라 호출되는 객체다.
+- 투명 객체는 형태가 아니라 역할로 정의한다.
+- 버튼보다 문장형 행동 제안을 우선한다.
+- 카드·패널·박스를 기본 구조로 삼지 않는다.
+
+### 핵심 원칙
+
+1. **텍스트가 화면의 기본 상태**
+   화면은 먼저 현재 상태, 현재 목표, 다음 행동, 필요한 맥락을 텍스트로 말한다. 이미지와 미디어는 처음부터 펼치지 않고 필요할 때만 나타난다.
+
+2. **이미지는 호출되는 객체**
+   이미지는 카드 안에 고정하지 않는다. 특정 문장, 선택, 행동에 반응해 나타나는 `ContextObject`로 다룬다.
+
+3. **투명 객체는 역할로 정의**
+   `Card`, `Panel`, `Box` 같은 형태명보다 `TextAnchor`, `ContextObject`, `RevealSurface`, `ActionPrompt`, `FocusField`, `MemoryObject`처럼 존재 이유를 먼저 쓴다.
+
+4. **공간은 장식이 아니라 상태**
+   배경은 비어 있는 흰 면이 아니라 객체가 나타날 수 있는 공간의 상태를 보여준다. 깊이, 빛, 흐름은 선택과 주의의 방향을 돕는 데만 쓴다.
+
+5. **배경 이미지와 콘텐츠 이미지를 분리**
+   Layer 0의 빛, 질감, 추상적 배경 이미지는 공간 상태를 만들기 위해 쓸 수 있다. 사용자가 판단하거나 다루는 사진, 영상, 그래프, 메모는 `ContextObject`이며 필요할 때만 호출한다.
+
+### 레이어 모델
+
+```text
+Layer 0 Canvas
+  white base + sky blue atmosphere + ambient light + spatial depth
+
+Layer 1 Typography Rail
+  상단 제목, 현재 상태, 날짜, 문장형 내비게이션, 다음 행동
+
+Layer 2 Focus Field
+  현재 작업이나 콘텐츠가 잠시 머무는 중심 영역
+
+Layer 3 Context Objects
+  사진, 영상, 차트, 메모, 링크, 진행 상태, 장소 정보
+
+Layer 4 Action Prompt
+  버튼보다 문장으로 다음 행동을 제안하는 영역
+```
+
+기본 장면:
+
+```text
+Idle      텍스트만 남고 객체 없음
+Focus     텍스트 강조 + 작은 관련 객체 등장
+Reveal    이미지나 정보가 서서히 나타남
+Explore   여러 객체가 공간적 간격을 유지하며 등장
+Complete  객체가 사라지고 완료 문장과 다음 루프만 남음
+```
+
+### Spatial Type 컴포넌트 분류
+
+기본 설계는 Button, Card, Modal에서 시작하지 않는다. 아래 순서로 시작한다.
+
+**Text Components**
+
+- `DisplayText`: 화면의 핵심 문장
+- `PrimaryQuestion`: 사용자가 지금 답해야 하는 질문
+- `CurrentState`: 현재 상태
+- `ContextLabel`: 시간, 출처, 위치 같은 보조 좌표
+- `SupportingCopy`: 판단을 돕는 짧은 설명
+- `PromptText`: 다음 행동 제안
+- `CommandText`: 사용자 명령 또는 입력
+- `QuoteText`: 기억할 문장
+
+**Spatial Components**
+
+- `TextAnchor`: 텍스트를 기준으로 위치를 잡는 기준점
+- `FocusField`: 현재 주의를 모으는 공간
+- `RevealSurface`: 콘텐츠가 나타나는 투명한 표면
+- `SpatialShelf`: 보조 객체가 잠시 머무는 가장자리 공간
+- `AmbientLayer`: 배경의 빛과 깊이
+- `DepthPlane`: 앞뒤 레이어
+- `ObjectAnchor`: 객체 위치 기준
+
+**Context Object Components**
+
+- `ImageObject`
+- `VideoObject`
+- `MemoryObject`
+- `DataObject`
+- `QuoteObject`
+- `ReferenceObject`
+- `ProgressObject`
+
+객체 계약 예시:
+
+```yaml
+object:
+  type: image
+  source: travel/istanbul-01
+  anchor: headline
+  visibility: on-demand
+  reveal: fade-scale
+  dismiss: tap-outside
+  depth: 2
+  maxWidth: 420px
+```
+
+**Interaction Components**
+
+- `Summon`: 필요할 때 콘텐츠를 공간으로 불러낸다.
+- `Peek`: 전체를 열지 않고 일부만 보여준다.
+- `Reveal`: 숨은 객체를 선명하게 드러낸다.
+- `Dismiss`: 객체를 다시 공간으로 흡수한다.
+- `Expand`: 객체를 더 크게 본다.
+- `Focus`: 주의를 한 영역으로 모은다.
+- `Scrub`: 시간이나 순서를 훑는다.
+- `Cycle`: 다음 장면으로 넘긴다.
+- `Confirm`: 중요한 결정을 확정한다.
+
+### 투명 객체 규칙
+
+투명 객체는 glassmorphism이 아니다.
+
+금지:
+
+- 모든 요소에 blur 적용
+- 모든 요소에 반투명 카드 적용
+- 모든 요소에 그림자 적용
+- 모든 요소를 둥근 사각형으로 감싸기
+
+권장:
+
+- 투명도는 정보의 중요도를 표현한다.
+- blur는 깊이 분리에만 사용한다.
+- border는 객체 형태보다 상태를 표시한다.
+- shadow는 떠 있음이 필요한 경우에만 사용한다.
+- surface는 콘텐츠가 나타나는 순간에만 생성한다.
+
+객체 상태:
+
+```text
+idle     보이지 않거나 거의 투명
+peek     일부만 표시
+focus    선명하게 표시
+active   콘텐츠와 행동 표시
+dismiss  다시 공간으로 흡수
+```
 
 ## 자유도 프레임워크
 
 | 영역 | 고정 | 유연 |
 | --- | --- | --- |
-| 철학 | Calm Technology 기반 Warm Minimalism | 없음 |
-| 텍스처 | Warm Tool 정신 | 그림자, 표면 처리, 세부 수치 |
-| 컬러 | semantic 토큰, warm neutral 기본 | 앱별 primary 색 |
-| 타이포 | Pretendard, 4단계 스케일 | 구체 사이즈 |
+| 철학 | Calm Technology 기반 Spatial Type | 없음 |
+| 텍스처 | 투명 객체는 역할 기반, Warm Tool은 보조 촉감 | 그림자, 표면 처리, 세부 수치 |
+| 컬러 | semantic 토큰, white + subtle sky 기본 | 앱별 primary 색 |
+| 타이포 | Pretendard, 역할 기반 spatial type scale | 구체 사이즈 |
 | 간격 | 토큰 기반 그리드 | 값과 단계 수 |
 | 곡률 | 용도별 radius 토큰 | 구체 px |
 | 컴포넌트 | 핵심 8종, 접근성 | variant, API, 시각 표현 |
@@ -126,7 +274,7 @@ Capture -> Reflect -> Rebalance -> Next -> Return
 
 ## Warm Tool
 
-Sam Samuel의 시각적 서명은 **따뜻한 도구**다.
+Sam Samuel의 촉감 보조 언어는 **따뜻한 도구**다. 다만 제품 UI의 1차 문법은 Spatial Type이다. Warm Tool은 버튼, 입력, 복구 경로, 실제 조작부에만 충분히 남기고, 전체 화면을 카드와 패널로 채우는 이유가 되면 안 된다.
 
 고정 원칙:
 
@@ -148,42 +296,6 @@ Sam Samuel의 시각적 서명은 **따뜻한 도구**다.
 );
 ```
 
-## 시그니처 훅
-
-모든 Sam Samuel 사용자-facing 결과물은 샘 캐릭터를 시그니처로 포함한다. 대시보드, 앱 화면, 카드뉴스, 공개 이미지 모두 예외를 두지 않는다.
-
-시그니처 훅은 하나만 둔다. 샘 캐릭터가 들어간 화면에서 추가 3D/모션 모먼트를 쓰더라도, 샘의 존재감과 사용자의 콘텐츠 가독성을 흔들지 않는 보조 표현이어야 한다.
-
-고정 원칙:
-
-- 한 화면의 임팩트 모먼트는 1개.
-- 샘 캐릭터는 장식용 스티커가 아니라 제품의 상태, 축적, 동반자성을 보여주는 시각 신호다.
-- 기반 색, 레이아웃, 가독성을 훅이 흔들지 않는다.
-- 깊이는 과한 베벨이나 네온이 아니라 빛, 반사, 시차로 만든다.
-- `prefers-reduced-motion`을 존중한다.
-- 콘텐츠 가독성이 항상 우선이다.
-
-앱별 예:
-
-- 데이터/대시보드: 3D 카드 틸트, 스튜디오 조명 반사
-- 히어로/랜딩: 거대 타이포 시차, 스크롤 reveal
-- 제품/갤러리: 부유 패널, 호버 스포트라이트
-- 도구/유틸: 스프링, 자석 스냅 같은 물리감 있는 micro motion
-
-## WebGL / 3D
-
-진짜 입체 상호작용이 제품 가치라면 Three.js로 구현한다. 다만 stage 감각만 필요하거나 성능·접근성·일정상 full 3D가 과하면 video, image sequence, CSS parallax, static image fallback을 쓸 수 있다. fallback은 핵심 데이터를 숨기는 장식 루프가 아니라 같은 공간 감각을 더 가볍게 전달하는 대체 경로여야 한다.
-
-원칙:
-
-- 단일 HTML 실험은 importmap으로 three ESM을 CDN 로드할 수 있다.
-- 3D 색은 CSS 변수에서 읽는다.
-- 장식용 3D보다 제품 데이터를 입체로 옮긴다.
-- 모션 문법은 진입 -> 유휴 -> 조작 -> 물러남.
-- 모바일 캔버스는 `touch-action: pan-y`를 유지한다.
-- WebGL 실패 시 레이아웃은 유지하고 fallback을 보여준다.
-- 라이트/다크 x 데스크탑/모바일 4조합 스크린샷으로 검증한다.
-
 ## 상태 변형
 
 모든 인터랙티브 컴포넌트는 기본 상태를 가진다.
@@ -203,18 +315,31 @@ semantic 토큰만 사용한다.
 
 ```css
 :root {
-  --color-bg: #f0eee9;
-  --color-surface: #faf8f4;
-  --color-surface-hover: #e7e4dd;
-  --color-text-primary: #211f1c;
-  --color-text-secondary: #6e6a63;
-  --color-text-muted: #9b968d;
-  --color-primary: #211f1c;
+  --canvas: #f8fbfc;
+  --surface: rgba(255, 255, 255, 0.62);
+  --surface-strong: rgba(255, 255, 255, 0.82);
+  --sky-100: #eaf7fb;
+  --sky-200: #d8f0f7;
+  --sky-300: #bfe5ef;
+  --sky-accent: #8acfe0;
+  --ink: #182329;
+  --ink-secondary: #46575d;
+  --ink-muted: #5f7076;
+  --line-soft: rgba(72, 117, 128, 0.14);
+  --focus: #6bbfd3;
+
+  --color-bg: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-strong);
+  --color-text-primary: var(--ink);
+  --color-text-secondary: var(--ink-secondary);
+  --color-text-muted: var(--ink-muted);
+  --color-primary: var(--ink);
   --color-danger: #c44536;
   --color-success: #2d5a27;
   --color-warning: #d4a026;
-  --color-border: rgba(45, 40, 30, 0.08);
-  --color-border-focus: rgba(45, 40, 30, 0.2);
+  --color-border: var(--line-soft);
+  --color-border-focus: rgba(107, 191, 211, 0.42);
   --color-overlay: rgba(30, 27, 22, 0.4);
 }
 
@@ -237,10 +362,13 @@ semantic 토큰만 사용한다.
 
 규칙:
 
-- 기본은 warm neutral, `#F0EEE9` 계열이다.
+- 기본은 화이트톤 `#f8fbfc`에 아주 옅은 스카이블루 깊이를 더한다.
+- 스카이블루는 버튼 칠이 아니라 포커스 이동, 선택된 텍스트, 객체 등장 영역, 공간 깊이, 상태 변화에 쓴다.
+- `--ink`와 `--ink-secondary`는 `--canvas` 위 일반 텍스트 7:1 이상을 목표로 한다.
+- `--ink-muted`는 필수 정보를 담는 일반 텍스트에 쓰지 않는다. 시간·출처·비활성 보조 정보처럼 중요도가 낮은 메타에만 쓴다.
 - 순수 `#FFFFFF`, 순수 `#000000`은 넓은 면적에 쓰지 않는다.
 - 주요 액션 색은 앱별 하나만 고른다.
-- 키 컬러는 중-저채도 자연색이고 화면의 10% 이내로 쓴다.
+- 키 컬러는 중-저채도이고 화면의 10% 이내로 쓴다.
 
 ## 타이포그래피
 
@@ -250,21 +378,25 @@ Pretendard 단일 폰트를 쓴다.
 font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 ```
 
-스케일은 4단계다.
+Spatial Type의 타이포그래피는 일반적인 Heading / Body / Caption보다 역할을 먼저 정의한다.
 
-| 토큰 | 역할 | 굵기 |
-| --- | --- | --- |
-| heading-lg | 페이지 타이틀 | 700 |
-| heading-md | 섹션 제목 | 600 |
-| body | 본문 | 400 |
-| caption | 보조 텍스트 | 400 |
+| 토큰 | 역할 | 권장 크기 | 굵기 |
+| --- | --- | --- | --- |
+| hero-statement | 화면의 핵심 문장 | 48-72px | 600-700 |
+| primary-question | 사용자가 답할 질문 | 28-40px | 600 |
+| current-state | 현재 상태 | 18-24px | 500-600 |
+| supporting-copy | 판단 보조 문장 | 16-20px | 400 |
+| action-prompt | 다음 행동 제안 | 14-16px | 500-600 |
+| context-label | 시간·출처·위치 | 11-13px | 400-600 |
+| temporal-meta | 날짜·진행·보조 좌표 | 11-13px | 400 |
 
 규칙:
 
-- `heading-lg`는 페이지당 최대 1개.
-- `caption`만으로 주요 정보를 전달하지 않는다.
+- `hero-statement`는 화면당 최대 1개.
+- 큰 텍스트와 작은 메타 텍스트 사이의 대비로 좌표를 만든다.
+- `context-label`만으로 주요 정보를 전달하지 않는다.
 - `font-display: swap` 필수.
-- 굵기는 400, 600, 700만 사용한다.
+- 굵기는 400, 500, 600, 700만 사용한다.
 - viewport width에 따라 폰트 크기를 스케일하지 않는다.
 
 ## 간격과 곡률
@@ -291,20 +423,9 @@ font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemF
 
 카드는 8px 안팎을 기본으로 하되, 기존 제품 시스템이 다르면 그 시스템을 따른다. 과한 라운딩으로 장난감처럼 보이면 실패다.
 
-## 핵심 컴포넌트
+## 전통 컴포넌트
 
-새 UI는 먼저 이 8종으로 해결한다.
-
-| 컴포넌트 | 역할 | 필수 variant |
-| --- | --- | --- |
-| Button | 액션 | primary, secondary, danger |
-| Input | 텍스트 입력 | default, textarea |
-| Select | 옵션 선택 | default |
-| Modal | 오버레이 | dialog, sheet |
-| Toast | 비차단 알림 | default, success, error |
-| Badge | 상태/라벨 | default, success, warning |
-| InputGroup | Label + Input | default |
-| Card | Header + Content + Footer | default |
+Button, Input, Select, Modal, Toast, Badge, InputGroup, Card는 여전히 필요하다. 다만 새 제품의 기본 출발점은 아니다. Spatial Type으로 표현할 수 없는 명확한 조작, 입력, 승인, 오류 복구, 접근성 필요가 있을 때만 쓴다.
 
 행동 규칙:
 
@@ -314,6 +435,8 @@ font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemF
 - Modal은 focus trap, ESC 닫기, `role="dialog"`, `aria-modal="true"`를 갖는다.
 - Toast는 3~5초 표시, 최대 동시 3개.
 - Badge는 짧게 쓰고 색만으로 의미를 전달하지 않는다.
+- Card는 반복 아이템, 모달, 실제로 프레임이 필요한 도구에만 쓴다.
+- 페이지 섹션을 카드처럼 감싸는 방식은 기본값이 아니다.
 
 ## 제품 패턴
 
@@ -327,7 +450,6 @@ font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemF
 
 기본 패턴과 필수 규칙:
 
-- `CharacterStage / FloatingHUD`: 3D/canvas/video/parallax stage 위에 조작층을 얹는다. stage는 장식 배경이 아니라 제품 상태나 성격을 드러내야 하며, 전면 조작층은 대비·포커스·터치 영역을 보장한다.
 - `AppShell / Navigation`: PageHeader, Topbar, Sidebar, MobileBottomNav, BackAction. 현재 위치, 대표 액션 1개, 안전한 귀환 경로가 보여야 한다.
 - `Status / Ops Surface`: StatusDot, MetricPill, HealthBadge, ActivityFeed, TreeRow. 색만으로 상태를 말하지 말고, 원인이나 다음 행동으로 이어준다.
 - `Data & List Interaction`: SearchBox, FilterBar, Tabs, SortableRow, CompactTable, LoadMore. 모바일에서는 핵심 필드 3개 이하를 우선 노출하고, table은 비교·스캔이 핵심일 때만 쓴다.
@@ -335,8 +457,12 @@ font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemF
 - `State Components`: Empty, Loading, Error, Permission, Offline, DirtyState. 빈 상태는 다음 행동 1개, 로딩은 레이아웃 점프 방지, 에러는 원인·재시도·대체 경로를 제공한다.
 - `AI / Result Surface`: ResultCard, ReasonBlock, LimitationNote, Accept/Edit/Retry. 결론·근거·한계를 분리하고, 사용자가 저장·수정·거절·다시 시도할 수 있어야 한다.
 - `Content / Card-News`: EditorialCard, CoverCard, StepCard, GalleryViewer, ThreadDraftBlock. 관찰 -> 인사이트 -> 적용 후보가 보존되어야 하며, 긴 문장은 카드나 문단을 나눈다.
+- `Spatial Type Surface`: TypographyRail, FocusField, ContextObject, ActionPrompt, RevealSurface, MemoryObject. 사용자가 보는 첫 화면, 여행/기억/콘텐츠 화면, 홈페이지, 창작 도구에서는 이 패턴을 먼저 검토한다.
+- `Character / 3D Context`: 샘 캐릭터, 3D 장면, WebGL, image sequence, parallax는 기본 시그니처가 아니다. 제품 맥락에서 상태, 기억, 안내자 역할이 분명할 때만 `ContextObject` 또는 `AmbientLayer`로 호출한다. 텍스트 좌표보다 앞서 화면의 주인공이 되면 Spatial Type 실패다.
 
-운영 화면은 조용하고 밀도 있게 만든다. 랜딩처럼 큰 히어로와 장식 카드로 풀지 않는다.
+운영 화면은 조용하고 밀도 있게 만든다. 랜딩처럼 큰 히어로와 장식 카드로 풀지 않는다. 홈페이지는 프레임·피드·카드의 반복을 줄이고, 배경과 콘텐츠가 하나의 장면으로 이어지게 설계한다.
+
+홈페이지에서는 위 범용 패턴을 기본 적용하지 않는다. AppShell, 카드, 피드형 메타 정보는 사용자의 다음 행동에 꼭 필요할 때만 제한적으로 쓰며, 배경과 콘텐츠의 융화를 해치면 제거한다.
 
 ## 모션
 
@@ -403,6 +529,7 @@ type ComponentContract = {
 전부 고정이다.
 
 - 일반 텍스트 명암비 7:1 목표.
+- `--ink-muted`는 일반 텍스트에 쓰지 않는다. 이 토큰만으로 핵심 상태, 질문, 행동을 전달하면 실패다.
 - 컬러만으로 의미 전달 금지.
 - 모든 인터랙티브 요소는 Tab으로 도달 가능해야 한다.
 - 포커스 인디케이터는 명확해야 한다.
@@ -438,6 +565,11 @@ Mobile 402px 기준:
 - 모바일에서 가로 넘침, 텍스트 겹침, 터치 영역 문제가 없는가?
 - 데스크탑에서 위계와 밀도가 맞는가?
 - 접근성 대비, aria, keyboard, reduced motion을 확인했는가?
+- 홈페이지라면 프레임, 기기 목업, 피드형 부가 UI, 반복 카드가 없는가?
+- 홈페이지라면 배경과 콘텐츠가 하나의 장면으로 융화되는가?
+- Spatial Type 화면이라면 텍스트가 기본 상태이고 콘텐츠 객체는 필요할 때만 등장하는가?
+- 투명 객체가 형태가 아니라 역할로 정의되어 있는가?
+- 스카이블루가 버튼 칠이 아니라 포커스, 깊이, 상태 변화에 쓰였는가?
 - 공개/배포 화면이면 라이브 URL에서 실제 반영을 확인했는가?
 
 ## 벤치마크
