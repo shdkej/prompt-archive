@@ -4,7 +4,7 @@ description: >
   시드(주제·경험 조각·초안·제품 컨셉)를 받아 모드별로 후보를 뽑는다.
   지원 모드: inflow (시드 한 문장→파생 키워드 5→유입 제목 5→픽, 주력), blog (블로그 제목), threads (Threads 첫 줄), youtube (유튜브 제목·썸네일 카피), app-name (앱·서비스 이름), product-name (제품·기능 이름).
   공통 흐름: 시드 깊이 추출 → Divergent 생성 → Convergent 선별 → 자가 체크.
-  Sam Samuel 톤 강제(유튜브는 후크 허용 예외). research-06 점수 산식 + Content_Strategy 매트릭스(콘텐츠 모드) / youtube 신호(유튜브 모드) / naming 신호·카테고리(이름 모드).
+  Sam Samuel 톤 강제(유튜브는 후크 허용 예외). research-06 점수 산식 + Content_Strategy 매트릭스(콘텐츠 모드) / youtube 신호 + research-37 선택 압력 게이트(유튜브·여행/라이프스타일) / naming 신호·카테고리(이름 모드).
   트리거: "키워드 뽑아줘", "키워드 뽑아서 제목", "유입 문장", "제목 후보", "유튜브 제목", "앱 이름 후보", "/keyword-title", "블로그 제목", "Threads 첫 줄"
 ---
 
@@ -17,7 +17,7 @@ description: >
 ## 반드시 먼저 읽을 문서
 
 **공통**
-- `references/tone.md` — 톤 절대 규칙 + 자가 체크 6항목
+- `references/tone.md` — 톤 절대 규칙 + 모드별 자가 체크
 
 **inflow 모드 (주력 — 한 문장으로 키워드+제목 한 번에)**
 - `references/inflow.md` — 2단계 흐름(키워드 5 발굴 → 유입 제목 5) + 출력 포맷
@@ -30,6 +30,7 @@ description: >
 **유튜브 모드 (youtube)**
 - `references/signals-youtube.md` — 유튜브 신호 6종 + CuriosityGap 0.25 산식
 - `references/tone.md` §3 "YouTube 제목" 분기 — 후크 허용·거짓 낚시 금지
+- 여행·라이프스타일 제목이면 `references/signals-youtube.md` §7 "research-37 선택 압력 게이트"를 반드시 적용
 
 **이름 모드 (app-name · product-name)**
 - `references/signals-naming.md` — 네이밍 신호 6종 + 점수 산식
@@ -98,6 +99,7 @@ optional:
     ├── 만다라트 축 매핑
     ├── PersonalDepth 산정
     ├── threads 모드면 계정 테마 게이트 적용 — 미니멀·실용성·소비취향 공유 중 하나를 첫 줄 후보의 선택/대비에 반영
+    ├── 여행·라이프스타일 시드면 research-37 선택 압력 게이트 적용 — 장소 감상/일정 나열 대신 비용·변화·불편·삶의 선택·관계 사건 중 하나를 반영
     ├── 시드 키워드 5~15개 생성 (tone.md 통과 필터)
     │   └── [선택] scripts/searchad_keyword.py → related_top으로 검색량 큰 연관어 발굴해 보강
     ├── [선택] scripts/datalab_trend.py 호출 → Velocity·Direction 실측 (키 없으면 LLM 추론 fallback)
@@ -109,6 +111,7 @@ optional:
   [유튜브 모드 — youtube]
     ├── tone.md §3 "YouTube 제목" 분기 적용 (후크 허용·거짓 낚시 금지)
     ├── 검색 키워드(Searchability) 후보 추출 — 사람들이 실제 치는 명사구
+    ├── 여행·라이프스타일 시드면 research-37 선택 압력 게이트 적용 — `장소명 + 선택 압력 + 기대와 다른 결론`
     ├── [선택] scripts/youtube_keyword.py 호출 → median_view 기반 Searchability 실측 (키 없으면 fallback)
     │   ※ 유튜브 Searchability는 데이터랩 아닌 YouTube API로 — 플랫폼 역전 주의 (signals-youtube §6)
     ├── 제목 후보 생성 (호기심 갭형·숫자대비형·변화형)
@@ -127,10 +130,11 @@ optional:
     └── 카테고리 다양성 룰 적용 (categories §3) — 최소 4개 카테고리에서 출력
 
 [3] 자가 체크
-    ├── tone.md 6항목 통과 (유튜브는 §5 "YouTube 모드 자가체크" 6항목 적용)
+    ├── tone.md 자가체크 통과 (유튜브는 §5 "YouTube 모드 자가체크" 적용)
     ├── 콘텐츠 모드: 기존 글 중복 80%+ 여부
     ├── Threads 모드: 기존 Threads 글 흐름(여행 선언→최근 여행 후기)과 톤은 이어가되, 첫 줄·썸네일 후보가 미니멀/실용성/소비취향 공유 테마와 맞는지
-    ├── 유튜브 모드: 거짓 낚시·공포 마케팅 없음 / 검색 키워드 1개+ 포함
+    ├── 여행·라이프스타일 제목: 비용·변화·불편·삶의 선택·관계 사건 중 하나가 있는지
+    ├── 유튜브 모드: 거짓 낚시·공포 마케팅 없음 / 검색 키워드 1개+ 포함 / 선택 압력 게이트 통과
     ├── 이름 모드: 카테고리 분산 ≥ 4개 / 자동 폐기 조건 통과
     └── 통과 못한 후보는 재생성 1회 후 폐기
 
@@ -239,7 +243,7 @@ optional:
 - **버려도 되는 것**: ... + 이유
 
 ## 자가 체크
-- [ ] tone.md 6항목 통과 ({N}/N)
+- [ ] tone.md 모드별 자가 체크 통과 ({N}/N)
 - [ ] 자동 폐기 조건 통과 (signals-naming.md §5)
 - [ ] 카테고리 분산 ≥ 4개 ({실제 분포})
 - [ ] 자극/차가운 기업 톤 단어 없음
@@ -271,8 +275,9 @@ slug는 시드에서 핵심 명사 2~3개 추출 → kebab-case.
   - 유튜브 모드 → YouTube Data API(`scripts/youtube_keyword.py`)로 Searchability 실측. **데이터랩으로 대체 금지** (네이버 검색량과 유튜브 조회수는 자주 역전됨 — signals-youtube §6).
 - 콘텐츠 모드: 시드에 1인칭 경험 신호 없으면 (PersonalDepth ≤ 0.2) 출력 거부 + 시드 보강 요청.
 - 유튜브 모드: PersonalDepth 제약 없음 (시청자가 주어). 단 검색 키워드(Searchability ≤ 0.2)가 없으면 노출 경로 0으로 보고 폐기. Searchability는 `youtube_keyword.py`로 실측(키 있을 때), vidIQ/TubeBuddy로 정밀 보완은 사용자 선택.
+- 여행·라이프스타일 제목: 장소명·명소·일정·맛집·팁만 있고 `비용/변화/불편/삶의 선택/관계 사건`이 없으면 점수와 무관하게 재생성한다. 1회 재생성 후에도 없으면 `선택 압력 부족`으로 낮은 후보에만 둔다.
 - 이름 모드: 카테고리 분산이 3개 이하면 재추림 1회. 그래도 안 되면 출력하되 "다양성 부족" 경고.
-- 톤 자가 체크 4/6 이하면 출력 거부 + 시드 재요청.
+- 톤 자가 체크 통과 기준 미달이면 출력 거부 + 시드 재요청.
 - 이름 모드는 LLM 자가 판단으로 끝. 도메인·상표·SNS 핸들 실측은 **사용자 책임** (출력에 체크리스트만 제공).
 
 ---
