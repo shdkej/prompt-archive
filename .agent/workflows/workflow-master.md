@@ -30,6 +30,22 @@ Infinity 작업(`infinity`, `INTENTS.md`, `reports/{id}/`, `artifacts/{id}/`가 
 - 코드/문서 변경은 끝냈지만 HTML 리포트를 직접 쓸 수 없는 경우, 변경 파일, 검증 결과, 커밋/푸시 상태, 다음 액션을 구조화해서 반환해 상위 Heartbeat가 HTML 리포트를 만들 수 있게 합니다.
 - Infinity intent는 채팅 요약 또는 `.md` report만으로 archived 처리하지 않습니다.
 
+## Git Completion Gate
+
+Any task that creates or changes a repo artifact is not complete at local save
+or local commit. Before a completion report, the owner must stage only the
+intended paths, commit, non-force push, fetch the target branch, and prove the
+current commit is remote-visible. For Knowledge Lab operational changes, run:
+
+```
+/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/verify_git_publish.sh \
+  /home/ubuntu/workspace/knowledge-lab main -- <changed-path> ...
+```
+
+The report must name the commit and the successful remote proof. If the proof
+fails, the state is blocked—not complete—and unrelated dirty files must not be
+staged as a workaround.
+
 ## Infinity Marketer Learning Loop
 
 Infinity/Virtue 마케팅 intent(`marketing-*`, activation, onboarding, retention, monetization, positioning, AI value/proxy 등)를 처리할 때 workflow-master는 Marketer가 기존 마케팅 산출물을 먼저 학습하도록 지시합니다.
