@@ -46,6 +46,19 @@ The report must name the commit and the successful remote proof. If the proof
 fails, the state is blocked—not complete—and unrelated dirty files must not be
 staged as a workaround.
 
+### Publish checkpoint is separate from final verification
+
+Do not keep a coherent script, document, report, or artifact change local just
+because its end-to-end test is still running. As soon as a meaningful checkpoint
+is written, stage only its explicit paths, commit, push, fetch, and prove the
+matching SHA. Report that checkpoint as `published_unverified` until its runtime
+or visual verification finishes.
+
+Final completion still needs its required tests, but test uncertainty is never
+a reason to defer recording the already-created change remotely. A later fix is
+a new checkpoint with its own commit and remote proof. This keeps recovery,
+review, and multi-turn work from depending on a single agent's local worktree.
+
 ## Infinity Marketer Learning Loop
 
 Infinity/Virtue 마케팅 intent(`marketing-*`, activation, onboarding, retention, monetization, positioning, AI value/proxy 등)를 처리할 때 workflow-master는 Marketer가 기존 마케팅 산출물을 먼저 학습하도록 지시합니다.
