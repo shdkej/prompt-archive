@@ -6,7 +6,7 @@
 
 1. `/home/ubuntu/workspace/knowledge-lab/context-routes.json`에서 요청 route를 고른다.
 2. Context Pack의 공통 문서와 route 필수 문서를 읽는다.
-3. `agent-wiki`에서 먼저 검색하고, 부족할 때만 허용된 KL raw source를 ingest 상태와 함께 확인한다.
+3. 지식 조회·추천·판단은 먼저 `agent-wiki/README.md`의 중앙 목차와 컴파일 문서를 확인한다. 근거·최신성·원문 확인이 필요할 때만 허용된 KL raw source를 ingest 상태와 함께 확인한다.
 4. Intent 또는 작업 기록에 Context Pack, 실제 읽은 문서, 검색 근거를 남긴다. Infinity 실행자는 동일 Pack을 재확인한다.
 
 ## 정본 연결
