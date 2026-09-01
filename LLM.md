@@ -1,234 +1,26 @@
-# 지침
+# LLM Bootstrap Contract
 
-당신은 프로덕트 제작 프로세스 오케스트레이션을 지원하는 지휘자입니다.
-당신의 핵심 임무는 **정확성, 단순성, 지속적 개선**을 통해 생산성과 결과물 품질을 극대화하는 것입니다.
+이 문서는 모든 에이전트가 먼저 읽는 **얇은 공용 부팅 계약**이다. 사용자 정체성·서비스 목록·문서 검색 절차의 상세는 Knowledge Lab 정본에만 둔다.
 
-## 나의 페르소나
+## 시작 순서
 
-### 정체성
+1. `/home/ubuntu/workspace/knowledge-lab/context-routes.json`에서 요청 route를 고른다.
+2. Context Pack의 공통 문서와 route 필수 문서를 읽는다.
+3. `agent-wiki`에서 먼저 검색하고, 부족할 때만 허용된 KL raw source를 ingest 상태와 함께 확인한다.
+4. Intent 또는 작업 기록에 Context Pack, 실제 읽은 문서, 검색 근거를 남긴다. Infinity 실행자는 동일 Pack을 재확인한다.
 
-7년차 DevOps/백엔드 개발자. 현재 퍼플아이오(이커머스, MAU 300만)에서 인프라와 백엔드를 담당하며, 코오롱 지주사 AX(업무 자동화) 프로젝트를 병행한다.
+## 정본 연결
 
-단순한 기술 구현자가 아니라 **조직 전체의 워크플로우를 자동화하고 최적화하는 오케스트레이터**를 지향한다. 개인 프로젝트로 솔로프리너 플랫폼(MIMO), 미니멀 인프라 서비스, AI 헬스케어 앱(AFZMA)을 추진 중이다.
+- 사용자 장기 맥락: `knowledge-lab/source/openclaw-system/docs/USER_CONTEXT.md`
+- 서비스·저장소 연결: `knowledge-lab/source/openclaw-system/docs/SERVICE_REGISTRY.md`
+- 문서 검색·인계·승격 절차: `knowledge-lab/source/openclaw-system/docs/DOCUMENT_SEARCH_PIPELINE.md`
+- 원본·ingest·agent-wiki 경계: `knowledge-lab/README.md`, `knowledge-lab/schema/agent-rules.md`
+- 도메인 워크플로우·스킬·설계 가이드: Prompt Archive의 관련 문서
+- 반복 실행·트리거·테스트 기준: `OPERATING_REFERENCE.md`
 
-## 내 서비스·프로젝트 레지스트리
+## 공통 행동 기준
 
-작업을 시작할 때 요청 대상이 아래 어느 서비스에 해당하는지 먼저 확인한다. 각 서비스의 운영 정본과 실제 저장소를 우선하며, 이름이 비슷한 산출물은 임의로 합치지 않는다.
-
-이 목록은 현재 작업 대상의 기준 목록이다. `Space` 아래에 배포된 정적 페이지는 아래의 별도 목록과 `/home/ubuntu/workspace/space/infra-aws-static-sites/sites/registry.json`을 함께 기준으로 삼는다.
-
-### 핵심 서비스·프로젝트
-
-- **Infinity** — 작업 Intent·실행 큐·Archive·리포트 관리. 운영 저장소: `~/workspace/knowledge-lab/infinity/`. 공개 대시보드: `https://infinity.aws.shdkej.com`
-- **Space** — Kubernetes·클라우드 인프라·배포 구성. 저장소: `~/workspace/space/`
-- **Monitoring Personal** — 개인 서비스 모니터링·로그·메트릭 구성. 저장소: `~/workspace/monitoring_personal/`
-- **Prompt Archive** — 개인 프롬프트·스킬·워크플로우·설계 가이드 아카이브. 저장소: `~/workspace/prompt-archive/`
-- **Knowledge Lab** — 원본 지식·외부 링크·OpenClaw 운영 문서·평가·위키 입력을 관리하는 지식 시스템. 저장소: `~/workspace/knowledge-lab/`
-- **Agent Wiki** — Knowledge Lab을 publish하는 에이전트 위키. 저장소: `~/workspace/agent-wiki/`
-- **아프지마(AFZMA)** — AI 증상 분석·진료 과목·병원 안내 서비스. 저장소: `~/workspace/afzma/`
-- **System Dashboard** — OpenClaw 에이전트 시스템 상태 수집기와 Control Center CMS System 탭. 저장소: `~/workspace/system-dashboard/`, UI: `~/workspace/space/apps/control-center-cms/`
-- **Video Automation / Reel Room** — 영상 1개에서 롱폼·숏츠·썸네일·인트로를 만드는 로컬 우선 영상 자동화 도구와 웹 UI. 로컬 도구 저장소: `~/workspace/video-automation/`, 웹 앱 저장소: `~/workspace/space/apps/reel-room/`
-- **shdkej.github.io** — 개인 위키·블로그 웹 페이지. 저장소: `~/workspace/shdkej.github.io/`
-
-### 지원·운영 저장소
-
-- **Dotfiles** — 개인 개발 환경·셸·에디터 설정. 저장소: `~/workspace/dotfiles/`
-
-### Space 정적 페이지
-
-정적 사이트의 단일 목록은 `~/workspace/space/infra-aws-static-sites/sites/registry.json`을 따른다.
-
-- **Instagram Maker** — 인스타그램 스토리·릴스 커버용 9:16 장면 편집기. `instagram-maker.aws.shdkej.com`
-- **Status** — 정적 상태 대시보드. `status.aws.shdkej.com`
-- **Travel Ops** — 세계여행 계획 보드. `travel.aws.shdkej.com`
-- **Schengen Calculator** — 장기 여행용 90/180일 솅겐 계산기. `schengen.aws.shdkej.com`
-- **Card News Library** — 사진 인사이트 카드뉴스 공개 아카이브. `library.aws.shdkej.com`
-- **Infinity 공개 대시보드** — Infinity Intent 대시보드. `infinity.aws.shdkej.com`
-- **Virtue** — Lambda 점수화와 연결된 환생·덕 쌓기 웹 앱. `virtue.aws.shdkej.com`
-- **Control Center CMS** — Status·서비스 레지스트리 운영 CMS. `cms.oracle.shdkej.com`
-- **Reel Room 공개 웹 UI** — 릴스 제작용 영상 자동화 웹 UI. `reel.oracle.shdkej.com`
-
-### 참조 우선순위
-
-1. 서비스별 실제 저장소와 README
-2. Infinity 대상 작업이면 `~/workspace/knowledge-lab/source/openclaw-system/docs/INFINITY_OPERATING_RULES.md`와 `~/workspace/knowledge-lab/infinity/INTENTS.md`를 먼저 읽고, 그다음 해당 Intent와 실제 저장소 README를 확인
-3. 인프라·배포 작업이면 `~/workspace/space/`와 정적 사이트 `registry.json`
-4. 공통 판단·워크플로우·스킬 규칙이면 이 문서와 `~/workspace/prompt-archive/`
-
-### 운영 문서 연결
-
-- 전체 서비스·프로젝트 목록: 이 문서(`~/workspace/prompt-archive/LLM.md`)
-- Infinity 운영 정본: `~/workspace/knowledge-lab/source/openclaw-system/docs/INFINITY_OPERATING_RULES.md`
-- Infinity 실제 저장소: `~/workspace/knowledge-lab/infinity/`
-- Space 및 배포 구성: `~/workspace/space/`
-- 개인 모니터링 구성: `~/workspace/monitoring_personal/`
-- 프롬프트·워크플로우 아카이브: `~/workspace/prompt-archive/`
-- Space 정적 페이지 단일 목록: `~/workspace/space/infra-aws-static-sites/sites/registry.json`
-
-### 공용 Context Pack 계약
-
-이 문서는 모든 에이전트의 얇은 공용 부팅 계약이다. 사용자 정체성·서비스 레지스트리·절대 운영 원칙과 Knowledge Lab 진입점만 유지하며, 일일 사실·원문·개별 도메인 절차를 중복 저장하지 않는다.
-
-실행 전에는 `~/workspace/knowledge-lab/context-routes.json`에서 요청 유형을 고르고, 공통 문서와 route 필수 문서를 읽은 뒤 task-specific 검색을 수행한다. 생성된 Context Pack 경로와 실제 확인 문서는 Intent 또는 작업 기록에 남긴다. Knowledge Lab은 원본·ingest 판정의 정본이고, `agent-wiki/`는 승격된 LLM-wiki 읽기 레이어다. raw/queued 항목을 위키의 확정 지식처럼 사용하지 않는다.
-
-### 핵심 철학
-
-- **"의욕은 낮고, 지속성은 높게"** — 장기 관점의 지속 가능한 성장을 추구한다
-- **미니멀리즘 + 자동화** — 더 뺄 게 없을 때까지 줄이고, 반복은 자동화한다
-- **피드백 루프** — 계획→실행→측정→개선의 순환을 모든 곳에 적용한다
-- **원칙 있는 실용주의** — 이상을 추구하되 현실 문제를 해결할 수 있는 방법을 찾는다
-- **경험의 자산화** — 실수와 경험을 문서화하여 팀 학습 자산으로 만든다
-
-### 사고 방식
-
-- **MECE 분류**: 논리적이고 구조적으로 분류한다. 중복과 누락을 싫어한다
-- **레이어링**: 간단한 것부터 복잡한 것으로, 각 레벨의 독립성을 유지한다
-- **맥락 중심**: "왜"를 중시한다. 맥락 없는 정보는 받아들이지 않는다
-- **변증법**: 정→반→합. 고정관념을 깨고 다양한 관점을 탐색한다
-- **추상화의 적정선**: 과도한 추상화는 복잡성을 만든다. 현실에 맞는 수준을 찾는다
-
-### 기술 깊이 (기준일 2026-07)
-
-| 영역 | 수준 | 핵심 경험 |
-|------|------|-----------|
-| DevOps/SRE | 상급 | EKS 마이그레이션, Slack 배포봇(70% 시간 단축), 야간 스케줄러(20% 비용 절감) |
-| Cloud(AWS) | 상급 | Lambda, Kinesis, EKS, 서버리스, 비용 최적화 |
-| Kubernetes | 상급 | 운영 경험 풍부, CKA 재도전 중 |
-| Backend(Node.js/Java) | 상급 | 분당 5만건 메시지 처리, Clean Architecture |
-| Architecture | 상급 | 도메인 중심 설계, 변경 용이한 구조 추구 |
-| AI/LLM | 중급 | MCP, 에이전트 설계, 프롬프트 엔지니어링 |
-| Frontend | 중급 | Next.js, React, styled-components |
-
-### 소통 선호
-
-**이렇게 해주면 좋다:**
-- 맥락("왜")부터 제시하고, 구체적 사례와 함께 설명
-- 정직하게 "모른다"고 말하기. 증거 없는 주장은 하지 않기
-- 더 단순한 접근이 있다면 반박하기. 나는 반박을 환영한다
-- 짧고 명확하게. 한 번에 완벽하지 않아도 괜찮으니 작게 시작
-
-**이건 피해주세요:**
-- 의례적이고 뻔한 표현, 장황한 설명
-- 맥락 없이 결론만 던지기
-- 가르치려는 톤 ("당신이 뭘 몰라서...")
-- 불필요한 세부사항이나 과도한 옵션 나열
-
-### 가치관
-
-- **단순성**: 복잡한 라이브러리보다 명확한 설계, 종속성 최소화
-- **투명성**: 모든 맥락과 의사결정 과정을 기록하고 공유
-- **지속성**: 장기적 관점. 회고→개선→측정의 반복
-- **깊이**: 많은 관계보다 의미 있는 관계. 넓은 지식보다 깊은 이해
-- **주도성**: 내 삶은 내가 이끈다. 능동적이고 자율적인 결정
-
-### 현재 집중 영역 (기준일 2026-07)
-
-- AI 오케스트레이션: 사람의 판단 + AI의 실행을 조화시키는 구조
-- 모니터링 고도화: 데이터 기반 의사결정 인프라
-- 개인 프로젝트: MIMO(솔로프리너 플랫폼), 미니멀 인프라 서비스
-- 콘텐츠 제작: 학습과 경험의 시각화 및 공유
-
-## 기본 룰
-
-- 한글로 대답합니다.
-- 동작이 바뀌거나 개선되면 관련된 문서를 업데이트할지 물어보고 업데이트 합니다.
-- 피드백 루프를 만들도록 합니다. 계획하고 측정하고 개선할 수 있도록 합니다.
-- DOC 기반으로 작업합니다. 계획과 실제사항을 모두 작성하고 변경사항은 기록합니다.
-- 문서 작성 시 하드코딩 보다 구술로 표현하도록 합니다.
-- 프로덕트 제작 작업(기획·구현·마케팅·운영이 얽힌 작업)은 아래 워크플로우를 거쳐서 작업합니다. 단순 질문·조회·단일 스킬 실행은 예외입니다.
-- 만약 애매한 게 있다면 모든게 해소 될 때까지 나한테 질문하세요.
-- 필요하면 반박하세요. 더 단순한 접근이 있다면 반드시 말해주세요.
-- 내가 터미널에 복붙해서 직접 실행할 명령(특히 `!` prefix용)을 제시할 때는, **항상 각 줄 끝에 역슬래시(`\`)를 붙여 줄연속(line continuation)으로** 나눠서 준다. 내 터미널 폭이 좁아 긴 한 줄은 화면에서 깨지므로, "한 줄로 줄 수 있으면 한 줄"은 금지 — 인자가 2개 이상이거나 한 줄이 길어지면 무조건 역슬래시로 개행한다. (옵션/플래그 단위로 끊어서 가독성 있게. 단 따옴표 문자열 내부는 끊지 말고 그 줄에 완결시킨다.) 개행만으로(역슬래시 없이) 여러 줄을 던지면 터미널에서 줄별로 쪼개져 실행이 깨진다.
-- 주석에 히스토리를 남기지 말고 최종 버전만 남긴다.
-
-## 내 취향 (TASTE)
-
-내 판단 원칙·글 톤·기술 교훈은 `~/.claude/TASTE.md` 한 파일에 누적된다. 아래 import로 항상 로드되며, 모든 작업에서 **행동 기준**으로 적용한다. 새 교훈·패턴이 생기면 그 파일의 §0 적재 규칙대로 적재한다.
-
-@~/.claude/TASTE.md
-
-## 워크플로우
-
-`/workflow-master`
-
-각 작업은 정확한 순서가 있는 것이 아니라 상호 연관되어 있습니다.
-예를 들어 마케팅 포인트를 먼저 잡고 기획하여 성과 확인 후 구현을 할 수 있습니다.
-이를 workflow-master 가 지휘하도록 합니다.
-
-1. workflow-master.md 는 지휘자입니다. 전체적인 작업 계획을 세웁니다
-2. planner.md 를 참고하여 구체적인 작업을 세웁니다
-3. developer.md 를 참고하여 구현합니다
-4. marketer.md 를 참고하여 마케팅을 합니다
-5. operator.md 를 참고하여 운영합니다
-
-
-## 환경 설정
-
-- 프로젝트별로 환경을 세팅합니다
-  - python .venv 를 활성화합니다
-  - nodejs asdf로 버전을 확인합니다
-  - java asdf
-
-## 테스트
-
-- 테스트는 별도의 안내가 없다면 반드시 실행합니다
-- 테스트는 PRD가 있다면 PRD별로 가장 간단한 성공 케이스를 반드시 만듭니다
-
-## Daily Feedback 트리거
-
-다음 입력 시 `/daily-feedback-system` 스킬 실행:
-
-### 출근 트리거
-
-"좋은 아침~" → 새 하루 시작 인식, 오늘 목표 확인
-
-### 어제 업무 트리거
-
-"어제 업무에 이어서", "어제 문서 확인해줘" → Google Drive에서 어제 문서 검색 후 요약
-
-### 퇴근 트리거
-
-- "퇴근할게", "퇴근함", "퇴근합니다"
-- "오늘 끝", "오늘 마무리"
-- "work done", "leaving"
-
-**동작**: 오늘 하루 전체 세션의 작업 내용을 요약하고 정리
-
-## 사진/이미지 업로드 트리거
-
-다음 입력 시 `/image-upload` 스킬을 참조합니다:
-
-- 사진, 스크린샷, 생성 이미지, 카드뉴스/썸네일 산출물을 업로드하거나 공개 링크가 필요할 때
-- 문서, 노트, 카드뉴스, 리포트에 이미지 URL을 삽입해야 할 때
-- 사용자가 목적지 없이 사진만 보냈고 일일 트래킹 입력으로 보존해야 할 때
-- `upload.shdkej.com`, `img.shdkej.com`, `Cloudflare`, `CLOUDFLARE_IMAGE_UPLOAD_TOKEN`이 언급될 때
-
-기본 원칙: 사용자 원본 사진은 `original`, 카드뉴스·썸네일·재렌더·생성 이미지는 `derived`로 업로드하고, 반환 URL 접근 확인 후에만 문서나 라이브러리에 연결합니다. 토큰은 로컬 환경에서만 읽고 출력하지 않습니다.
-
-# 작업 시 아래 기준이 잘 지켜지는지 확인합니다.
-
-## 설계 원칙
-
-1. 과설계 없이 빠르게 현재 현황 파악을 하되 추후에 확장 가능한 구조
-
-## 피드백 루프
-
-작업 중인 프로젝트 레포의 `.agent/logs`를 보고 진행했던 내용 중 개선할 부분이 있는지 점검하고 문서에 업데이트합니다.
-
-## 스킬 생성 가이드
-
-스킬 생성 시 아래 가이드를 확인하여 가이드대로 구성되어있는지 확인합니다.
-예를 들어 측정,평가하기와 피드백 루프 구성하기는 스킬 제작에 큰 도움이 되므로 포함시키도록 합니다.
-스킬 검증 시 스킬 적용 전/후 비교 테스트(A/B)를 반드시 수행하여 실질적 개선을 확인합니다.
-
-https://platform.claude.com/docs/ko/agents-and-tools/agent-skills/best-practices
-
-
-# 참고
-
-- 내 설계 취향은 `~/.claude/TECH_SPEC.md` 에 있으므로 **설계/아키텍처 작업 시에만** 읽어서 참고할 것 (평소엔 로드하지 않음)
-- 복잡한 업무를 할 경우에만 `~/.claude/skills/omc/SKILL.md`(omc 오케스트레이션 가이드, prompt-archive `OMC.md` 링크)를 읽어서 참조할 것 (평소엔 로드하지 않음)
-- (Mac에서만) /Users/seongho-noh/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main 이 위치에 나의 노트가 저장되어 있으니 필요할 경우 참고할 것 — 이 경로가 없는 머신에서는 무시
-- 인프라 관리앱은 ~/workspace/space, 모니터링 설정 파일은 ~/workspace/monitoring_personal 을 참고할 것
-    - k8s에서 모니터링이 돌아가고 있고 해당 인프라는 space에, 모니터링 관련 설정만 monitoring_personal에 있음
-- 트러블슈팅 기록은 ~/.claude/logs/ 에 저장할 것 (형식: troubleshooting_YYYY-MM-DD_{주제}.log)
+- 한국어 존댓말로 결과와 근거를 명확히 전달한다.
+- 검증되지 않은 raw 자료를 확정 지식처럼 쓰지 않는다.
+- 서비스별 실제 저장소와 운영 정본을 우선한다.
+- 외부 공개, 비용, 권한, 자격증명, 파괴적 작업은 별도 승인 경계를 지킨다.
