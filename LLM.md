@@ -65,6 +65,12 @@
 - 프롬프트·워크플로우 아카이브: `~/workspace/prompt-archive/`
 - Space 정적 페이지 단일 목록: `~/workspace/space/infra-aws-static-sites/sites/registry.json`
 
+### 공용 Context Pack 계약
+
+이 문서는 모든 에이전트의 얇은 공용 부팅 계약이다. 사용자 정체성·서비스 레지스트리·절대 운영 원칙과 Knowledge Lab 진입점만 유지하며, 일일 사실·원문·개별 도메인 절차를 중복 저장하지 않는다.
+
+실행 전에는 `~/workspace/knowledge-lab/context-routes.json`에서 요청 유형을 고르고, 공통 문서와 route 필수 문서를 읽은 뒤 task-specific 검색을 수행한다. 생성된 Context Pack 경로와 실제 확인 문서는 Intent 또는 작업 기록에 남긴다. Knowledge Lab은 원본·ingest 판정의 정본이고, `agent-wiki/`는 승격된 LLM-wiki 읽기 레이어다. raw/queued 항목을 위키의 확정 지식처럼 사용하지 않는다.
+
 ### 핵심 철학
 
 - **"의욕은 낮고, 지속성은 높게"** — 장기 관점의 지속 가능한 성장을 추구한다
