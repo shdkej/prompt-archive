@@ -139,7 +139,7 @@ python3 scripts/youtube_keyword.py --keywords "신혼여행,세계여행,세계�
 ## 7. research-37 선택 압력 게이트 — 여행·라이프스타일 제목
 
 > 출처: `infinity/artifacts/research-37/channel-top-bottom-lessons-20260828.md`
-> KL 승격: `agent-wiki/content/docs/concepts/title-selection-pressure.mdx`
+> KL 승격: `agent-wiki/content/docs/insights/title-selection-pressure.mdx`
 
 여행·라이프스타일 제목은 `장소명` 자체가 아니라 `그 장소에서 생긴 선택 압력`을 팔아야 한다. research-37의 채널별 상위/하위 제목 비교에서 강한 제목은 비용, 변화, 위험/불편, 삶의 선택, 관계 사건을 장소와 붙였고, 약한 제목은 일정·맛집·산책·4K·무편집·내부 일상에 머물렀다.
 
