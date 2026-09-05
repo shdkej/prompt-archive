@@ -2,6 +2,11 @@
 
 개인 프롬프트/스킬/가이드 자산 아카이브.
 
+## 재사용 프롬프트
+
+- [`YOUTUBE_EXPLAINER_MOTION_PROMPT.md`](./YOUTUBE_EXPLAINER_MOTION_PROMPT.md) — 1~3초 유튜브 설명 모션(Remotion) 제작·검수 계약
+- [`DAILY_ARCHIVE_CARD_PROMPT.md`](./DAILY_ARCHIVE_CARD_PROMPT.md) — 데일리 아카이브 카드 그림·조판·검수 계약
+
 ## Skills 색인
 
 | 스킬 | 설명 | 언제 쓰는가 |
