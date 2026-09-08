@@ -26,3 +26,13 @@
 - 외부 공개, 비용, 권한, 자격증명, 파괴적 작업은 별도 승인 경계를 지킨다.
 - 앱·웹앱을 만들거나 변경할 때는 대상 소스 저장소에 `README.md`를 반드시 작성·갱신한다. README는 최소한 목적, 사용자 문제, 핵심 기능, 실행/개발 방법, 데이터·외부 의존성, 테스트·배포 방법, 알려진 한계를 담는다.
 - 프로젝트 안내와 README의 정보 구조는 MECE하게 만든다. 같은 설명을 여러 섹션에 반복하지 않고, 서로 겹치지 않는 범주로 전체를 빠짐없이 설명한다. 구현 중 결정·범위·완료 기준은 KL 중앙 문서에, 소스별 사용법과 기술 상세는 해당 프로젝트 README에 둔다.
+
+## 배포 소유권과 저장소 경계
+
+배포 유형은 구현 저장소와 배포 저장소의 책임을 먼저 분리한다. `Space`는 인프라·배포 선언·GitOps만 소유하며, 서비스 코드의 임시 보관소가 아니다.
+
+- **정적 사이트**: `space/infra-aws-static-sites/sites/<app>/` 안에서 소스/정적 산출물과 AWS 배포를 함께 관리한다. `registry.json` 등록 → Terraform 인프라 반영 → `dist/` 변경 push가 기본 경로다.
+- **Lambda**: 함수 코드와 테스트·패키징은 `/home/ubuntu/workspace/services/<service>/`의 **독립 Git 저장소**가 소유한다. Space에는 그 배포에 필요한 IAM·Lambda·API Gateway/Function URL·CloudFront 연결 Terraform만 둔다.
+- **Next.js**: 앱 코드, `package.json`, lockfile, `Dockerfile`, 테스트와 앱 README는 `/home/ubuntu/workspace/apps/<app>/`의 **독립 Git 저장소**가 소유한다. Space에는 이미지 참조, Kubernetes `Deployment`/`Service`/`Ingress`, Argo CD 애플리케이션 같은 배포 선언만 둔다.
+
+신규 Lambda·Next.js 작업 또는 기존 항목의 실질적 수정은 Space 안에 코드를 추가하는 것으로 끝내지 않는다. SAM은 먼저 독립 워크스페이스 폴더와 저장소를 만들고, 목적·로컬 실행·빌드·테스트·배포 계약을 담은 README 및 표준 실행 명령을 구성한 뒤 Space의 배포 선언을 연결할 책임이 있다. 현재 `space/infra-aws-static-sites/lambda/`와 `space/apps/`의 코드는 레거시 배치이므로, 새 항목의 본보기가 아니다. 해당 항목을 다음에 크게 수정할 때도 같은 경계로 이전한다.
