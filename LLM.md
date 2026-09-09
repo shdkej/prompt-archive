@@ -36,3 +36,7 @@
 - **Next.js**: 앱 코드, `package.json`, lockfile, `Dockerfile`, 테스트와 앱 README는 `/home/ubuntu/workspace/apps/<app>/`의 **독립 Git 저장소**가 소유한다. Space에는 이미지 참조, Kubernetes `Deployment`/`Service`/`Ingress`, Argo CD 애플리케이션 같은 배포 선언만 둔다.
 
 신규 Lambda·Next.js 작업 또는 기존 항목의 실질적 수정은 Space 안에 코드를 추가하는 것으로 끝내지 않는다. SAM은 먼저 독립 워크스페이스 폴더와 저장소를 만들고, 목적·로컬 실행·빌드·테스트·배포 계약을 담은 README 및 표준 실행 명령을 구성한 뒤 Space의 배포 선언을 연결할 책임이 있다. 현재 `space/infra-aws-static-sites/lambda/`와 `space/apps/`의 코드는 레거시 배치이므로, 새 항목의 본보기가 아니다. 해당 항목을 다음에 크게 수정할 때도 같은 경계로 이전한다.
+
+## 반복 가능한 운영 기록
+
+배포·모니터링·운영 경로를 새로 만들거나 바꾸거나 확인한 작업은, 구현 저장소와 연결된 배포 저장소의 문서에 **소스 정본, 구성요소 관계, 배포·검증 순서, 사용하지 않는 레거시 경로**를 함께 갱신한다. 완료 보고에는 수정한 문서 경로와 바뀐 규칙을 반드시 명시하고, source commit·배포 revision·실제 검증 결과·남은 검증 경계를 구분해 적는다. 문서가 없는 상태에서 구두 보고만으로 반복 가능한 운영 절차를 완료 처리하지 않는다.
