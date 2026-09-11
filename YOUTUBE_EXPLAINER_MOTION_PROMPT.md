@@ -18,7 +18,7 @@
 - 화면: 오프화이트(`#F8FAF8`) 바탕, 48px 격자, 검은 선과 제한된 검정 면. 라이트·정돈·차분한 인포그래픽이다.
 - 주인공: **개념 하나 + 객체 관계 하나 + 결론 라벨 하나**. 장면마다 카드/아이콘을 무작정 늘리지 않는다.
 - 텍스트: Pretendard. 이미지 생성 모델에게 한글 조판을 맡기지 않는다.
-- 기본 등장 순서: `상단 문장 → 왼쪽 출발 객체 → 연결선/관계 라벨 → 오른쪽 결과 객체 → 하단 결론`.
+- 기본 등장 순서: `상단 문장 → 왼쪽 출발 객체 → 연결선/중앙 관계 객체 → 오른쪽 결과 객체 → 하단 결론`.
 
 ## 2. 가변 입력 계약
 
@@ -28,7 +28,7 @@
   <headline>상단에 보일 14~26자 문장</headline>
   <source_label>왼쪽 객체 안의 짧은 라벨, 최대 7자</source_label>
   <source_object>왼쪽을 상징하는 객체: 사람, 도구, 장소, 생각 등</source_object>
-  <relation_label>연결선 위의 짧은 관계 문구, 최대 8자</relation_label>
+  <relation_label>중앙 관계 객체 안의 짧은 관계 문구, 최대 8자</relation_label>
   <result_label>오른쪽 객체 안의 결론 라벨, 최대 2줄·각 9자</result_label>
   <result_object>오른쪽을 상징하는 객체: 도시, 선택, 변화, 결과 등</result_object>
   <takeaway>하단에 밑줄로 강조할 결론, 최대 12자</takeaway>
@@ -72,21 +72,21 @@ OUTPUT CONTRACT
 VISUAL SYSTEM
 - Canvas: warm off-white #F8FAF8 with a subtle 48px square grid (#DCE4DE at low opacity). No gradients, photos, glass UI, shadows, or 3D effects.
 - Color: #161616 for type and linework. Use the selected accent only for the result object fill or a small emphasis, never as a second competing visual system.
-- Type: one bold headline at the top center; labels must be short and have clear hierarchy. Use a Korean-friendly weight 700–800, tight but readable tracking.
+- Type: one bold headline at the top center; labels must be short and have clear hierarchy. Use a Korean-friendly weight 700–800, tight but readable tracking. **모든 라벨은 자신이 속한 객체의 정확한 시각적 중심에 둔다.**
 - Shapes: thin 3px black strokes, 24–30px corner radius, calm breathing room. Use simple original line icons made from SVG paths; no emoji, stock icon sets, logos, maps, or screenshots.
 - Layout: place the object relationship group in the visual center. Keep a minimum 90px gap between the lowest object edge and the takeaway. Keep at least 110px horizontal outer margins. Center the *whole group*, not each individual object.
 
 COMPOSITION
 1. Headline: top-center, approximately y=120–170.
 2. Source object: left-center, around x=380, y=420. A white outlined object, 300–360px wide.
-3. Relation: a horizontal connecting line through the group center with a short label floating above it. The label must never touch either object.
+3. Relation: a horizontal connecting line through the group center, interrupted by a small outlined relation capsule at the exact center. Put `relation_label` centered inside that capsule; never float it above the line.
 4. Result object: right-center, around x=1450, y=420. It may use the selected accent fill, 320–390px wide.
 5. Takeaway: centered around y=875–925, with a 3–4px underline. It must not overlap the object group or subtitle-safe area.
 
 MOTION TIMELINE
 - 0.00–0.18s: grid is already visible; headline fades upward by 12–18px.
 - 0.18–0.55s: source object scales from 0.94 to 1.0 and fades in with a restrained spring.
-- 0.50–0.95s: connector line draws from left to right; relation label fades in after the line passes it.
+- 0.50–0.95s: connector line draws from left to right; the central relation capsule appears as the line reaches it and `relation_label` fades in at its center.
 - 0.78–1.25s: result object fades/scales in. Its icon appears 3–5 frames after its surface.
 - 1.35–1.70s: takeaway rises 10px and underlines itself.
 - Hold the complete composition for at least 0.55s. No looping, bouncing, camera movement, blur, or exit animation.
@@ -101,7 +101,7 @@ IMPLEMENTATION RULES
 DO NOT
 - Do not use a card-grid dashboard, multiple parallel ideas, generic AI imagery, over-decoration, thick black frames, or excessive rounded boxes.
 - Do not place a large object, rule, or text inside the bottom subtitle-safe area.
-- Do not let labels collide, wrap awkwardly, or touch the connector line.
+- Do not float labels between objects. Every source, relation, and result label must be centered within its own object/capsule. Do not let labels collide, wrap awkwardly, or touch a boundary.
 - Do not imitate a named creator, video, or brand. Apply only the abstract visual principles in this prompt.
 
 VALIDATION
@@ -127,7 +127,7 @@ HARD CONSTRAINTS: NO TEXT, NO LETTERS, NO NUMBERS, NO LOGOS, NO WATERMARKS, NO U
 
 1. 3초 안에 `무엇이 무엇으로 연결되는지`와 하단 결론을 읽을 수 있다.
 2. 전체 객체 그룹이 가로·세로 기준 시각적 중앙에 있고, 하단 결론과 최소 90px 이상 떨어져 있다.
-3. 상단 문장, 관계 라벨, 객체 라벨, 하단 결론 간에 겹침·잘림·과도한 줄바꿈이 없다.
+3. 상단 문장·하단 결론은 화면 기준 중앙, 출발·관계·결과 라벨은 각 객체 기준 중앙에 있으며, 겹침·잘림·과도한 줄바꿈이 없다.
 4. 각 객체는 0.2~0.5초 간격으로 순차 등장하며, 과장된 bounce·zoom·카메라 이동이 없다.
 5. 하단 18% 자막 안전 영역에 큰 객체나 라인이 침범하지 않는다.
 6. 모델 생성 이미지가 쓰였다면 이미지 속 글자·로고·워터마크가 없고, 한국어 텍스트는 모두 HTML/Pretendard로 렌더됐다.
