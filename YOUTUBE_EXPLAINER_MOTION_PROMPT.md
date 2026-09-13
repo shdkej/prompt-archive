@@ -108,7 +108,40 @@ VALIDATION
 Before declaring done, render and inspect frames at 0.0s, 0.8s, 1.5s, and the final frame. Confirm: (1) the relationship is readable in 3 seconds, (2) every Korean string is legible, (3) objects are centered as a group, (4) takeaway has clear separation, and (5) the MP4 duration and resolution match the input.
 ```
 
-## 4. GPT Image 보조 이미지 프롬프트 (선택)
+## 4. 실제 데이터 차트 컷
+
+숫자 흐름 하나를 설명할 때는 위의 객체 관계형 대신 이 차트 컷을 쓴다. 차트 자체가 주인공이며, 카드·아이콘·별도 비유 객체를 추가하지 않는다.
+
+### 데이터 입력 계약
+
+```xml
+<data_chart_input>
+  <metric>무엇을 세는지. 예: #sam OpenClaw 대화</metric>
+  <period>집계 기간. 예: 9.07 — 9.13</period>
+  <values>[날짜별 실제 정수값]</values>
+  <labels>[값과 같은 순서의 날짜/구간 라벨]</labels>
+  <scope>집계 원본·대상·포함/제외 기준</scope>
+  <summary>평균·최고·변곡점 등 검증된 한 줄 해석</summary>
+</data_chart_input>
+```
+
+### 절대 규칙
+
+- `values`는 확인 가능한 원본에서만 집계한다. 추정치, 채우기 값, 시각 균형을 위한 값 변경은 금지한다.
+- 집계 범위는 영상 안의 `metric` 또는 `period`와 함께 짧게 밝혀 수치의 의미를 숨기지 않는다.
+- 기본 구성은 **오프화이트 48px 그리드 → 상단 metric/합계/기간 → 중앙 선 차트 → 하단 검증된 요약**이다.
+- 차트는 데이터 포인트, 각 값, x축 날짜, 필요한 최소 y축 눈금만 남긴다. 굵은 축·불필요한 테두리·카드·보조 아이콘은 넣지 않는다.
+- 애니메이션은 제목 페이드인 후 선을 왼쪽에서 오른쪽으로 그리고, 각 점과 값을 순서대로 드러낸다. 3초 내 마지막 값과 요약까지 보이게 한다.
+- 색은 `#161616` 선/텍스트와 `#F7F7F3` 배경을 기본으로 한다. 강조색은 데이터 의미가 있을 때만 하나 사용한다.
+
+### 검수
+
+1. 렌더 전 `values` 합계·평균·최고값·날짜 라벨을 원본 집계와 대조한다.
+2. 최종 프레임에서 모든 값과 라벨이 읽히고, 선·점·값이 겹치지 않는지 확인한다.
+3. 값의 크기와 선의 높이 관계가 정확한지, 축 범위가 차이를 과장하거나 숨기지 않는지 확인한다.
+4. 영상 설명에는 `기간 / 집계 범위 / 실제 값 배열`을 함께 남긴다.
+
+## 5. GPT Image 보조 이미지 프롬프트 (선택)
 
 객체가 단순 선형 아이콘으로 부족할 때만 사용한다. 생성 결과에는 글자를 넣지 않고, Remotion에서 원형/사각 프레임과 한글 라벨을 따로 붙인다.
 
@@ -121,7 +154,7 @@ COMPOSITION: one centered subject, 1:1 square, generous empty margins on all sid
 HARD CONSTRAINTS: NO TEXT, NO LETTERS, NO NUMBERS, NO LOGOS, NO WATERMARKS, NO UI, NO MAPS, NO PHOTOREALISM, NO 3D, NO gradients, NO busy background, NO decorative frame.
 ```
 
-## 5. 사전 검수
+## 6. 사전 검수
 
 렌더 MP4를 재생하고 최종 프레임 이미지를 실제로 본 뒤 아래를 모두 통과해야 한다.
 
@@ -140,6 +173,6 @@ FAIL: [검수 번호] / [관찰된 문제] / [바꿀 변수 하나]
 예: FAIL: 2 / 오른쪽 객체가 하단 결론에 너무 가까움 / result object top을 70px 올리기
 ```
 
-## 6. 다음 사용 방식
+## 7. 다음 사용 방식
 
 주제와 위 XML만 보내면 됩니다. 기본값은 2.4초·16:9·오프화이트 격자·검정 선형 객체·하단 자막 안전 영역입니다.
