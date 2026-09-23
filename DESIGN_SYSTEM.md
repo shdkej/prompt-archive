@@ -444,6 +444,7 @@ Button, Input, Select, Modal, Toast, Badge, InputGroup, Card는 여전히 필요
 - Input은 `<label>`과 연결한다. placeholder는 label을 대체하지 않는다.
 - Select는 키보드 탐색을 지원한다.
 - Modal은 focus trap, ESC 닫기, `role="dialog"`, `aria-modal="true"`를 갖는다.
+- **하단 중앙 × 종료 신호**: 상세 보기·긴 스크롤·지식/미디어 탐색처럼 사용자가 잠시 들어갔다가 원래 화면으로 돌아오는 Modal·Sheet는 상단 `닫기` 텍스트 대신, 화면 하단 중앙에 고정한 작은 원형 `×`를 기본 종료 조작으로 쓴다. 이것은 Sam Samuel 화면의 반복 시그널이다. 시각 크기와 실제 터치 영역은 모두 최소 44×44px, `position: fixed`, `bottom: max(14px, env(safe-area-inset-bottom))`를 기본으로 하며, 모바일에서는 하단 안전 영역 위에 남긴다. `aria-label`을 제공하고 ESC·배경 클릭 닫기를 함께 유지한다. 파괴적 확인, 저장 여부 선택, 단일 단계의 짧은 확인창에는 쓰지 않는다.
 - Toast는 3~5초 표시, 최대 동시 3개.
 - Badge는 짧게 쓰고 색만으로 의미를 전달하지 않는다.
 - Card는 반복 아이템, 모달, 실제로 프레임이 필요한 도구에만 쓴다.
