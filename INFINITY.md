@@ -3,6 +3,8 @@ name: infinity
 description: Agent-First 의도 등록 스킬. 자유 형식으로 의도를 선언하면 infinity/INTENTS.md에 추가하고 push한다. 사용 시기 - (1) "이거 해줘", "모니터링 해줘" 등 에이전트에게 맡길 일, (2) "/infinity 뭐뭐 해줘", (3) Intent 상태 확인, (4) Gate 승인
 ---
 
+> **현재성 안내:** 이 문서는 초기 Agent-First 설계와 historical skill 참고용이다. 현재 Infinity 상태 원장·대시보드 접수 형식·중복 방지·원격 검증은 `/home/ubuntu/workspace/knowledge-lab/infinity/README.md`와 `source/openclaw-system/docs/INFINITY_OPERATING_RULES.md`를 정본으로 따른다. 이 문서의 자유 형식 한 줄 등록 예시는 현재 `INTENTS.md` 표준 블록 규칙을 대체하지 않는다.
+
 # Infinity — Agent-First Workflow
 
 > "내가 에이전트를 돌리는게 아니라 에이전트가 돌다가 나한테 알려주게 해야한다"
