@@ -329,7 +329,7 @@ semantic 토큰만 사용한다.
   --canvas: #fffdf2;
   --surface: rgba(255, 255, 255, 0.62);
   --surface-strong: rgba(255, 255, 255, 0.82);
-  --lemon-100: #fff9d6;
+  --lemon-100: #FCF9B7;
   --lemon-200: #fff1a8;
   --lemon-300: #f9df55;
   --lemon-accent: #d7aa16;
