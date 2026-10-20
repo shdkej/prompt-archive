@@ -15,7 +15,7 @@ Hallmark는 새 디자인 정체성을 만들거나 화면을 자동 생성하�
 
 - 허용 범위는 `audit`(코드 무수정 진단)과 `study`(참고 화면에서 구조·타이포 위계·색 역할을 추출)다. 결과는 개선 후보와 근거일 뿐, 디자인 정본이 아니다.
 - 사용 전에는 반드시 `BRAND.md` → `DESIGN.md` → 이 문서를 읽는다. 충돌하면 이 세 정본이 우선이며, Spatial Type, semantic token, Pretendard, 라이트 기본, 접근성, 사용자 주도권을 보존한다.
-- `study`는 픽셀 복제·유료 템플릿 재현을 하지 않는다. 추출한 원리는 Sam Samuel의 텍스트 기본 상태, white + subtle sky, 역할 기반 객체로 재해석하고 채택·기각 근거를 남긴다.
+- `study`는 픽셀 복제·유료 템플릿 재현을 하지 않는다. 추출한 원리는 Sam Samuel의 텍스트 기본 상태, warm white + subtle lemon, 역할 기반 객체로 재해석하고 채택·기각 근거를 남긴다.
 - `audit`은 우선순위 개선 목록만 낸다. 실제 반영 전에는 5초 테스트, semantic token, 접근성, 모바일 320/375/414/768px, 데스크톱 렌더를 다시 검증한다.
 - 기본 build/redesign, catalog/custom theme, 테마·매크로구조·내비게이션·푸터 순환, Hallmark 토큰·로그·스탬프의 영구 반영, 브랜드 팔레트·폰트·정보 구조·카피의 일괄 교체는 금지한다. 구조 폐기가 필요한 redesign은 사용자의 별도 승인을 받는다.
 - Hallmark가 만드는 소문자 `design.md`는 이 문서나 `DESIGN.md`를 대체하지 않으며, 자동 정본으로 읽지 않는다.
@@ -77,7 +77,7 @@ Spatial Type은 공식 디자인 용어가 아니라 Sam Samuel 제품의 작업
 
 ```text
 Layer 0 Canvas
-  white base + sky blue atmosphere + ambient light + spatial depth
+  warm white base + lemon atmosphere + ambient light + spatial depth
 
 Layer 1 Typography Rail
   상단 제목, 현재 상태, 날짜, 문장형 내비게이션, 다음 행동
@@ -198,7 +198,7 @@ dismiss  다시 공간으로 흡수
 | --- | --- | --- |
 | 철학 | Calm Technology 기반 Spatial Type | 없음 |
 | 텍스처 | 투명 객체는 역할 기반, Warm Tool은 보조 촉감 | 그림자, 표면 처리, 세부 수치 |
-| 컬러 | semantic 토큰, white + subtle sky 기본 | 앱별 primary 색 |
+| 컬러 | semantic 토큰, warm white + subtle lemon 기본 | 앱별 primary 색 |
 | 타이포 | Pretendard, 역할 기반 spatial type scale | 구체 사이즈 |
 | 간격 | 토큰 기반 그리드 | 값과 단계 수 |
 | 곡률 | 용도별 radius 토큰 | 구체 px |
@@ -326,18 +326,18 @@ semantic 토큰만 사용한다.
 
 ```css
 :root {
-  --canvas: #f8fbfc;
+  --canvas: #fffdf2;
   --surface: rgba(255, 255, 255, 0.62);
   --surface-strong: rgba(255, 255, 255, 0.82);
-  --sky-100: #eaf7fb;
-  --sky-200: #d8f0f7;
-  --sky-300: #bfe5ef;
-  --sky-accent: #8acfe0;
-  --ink: #182329;
-  --ink-secondary: #46575d;
-  --ink-muted: #5f7076;
+  --lemon-100: #fff9d6;
+  --lemon-200: #fff1a8;
+  --lemon-300: #f9df55;
+  --lemon-accent: #d7aa16;
+  --ink: #29281f;
+  --ink-secondary: #5b553d;
+  --ink-muted: #766f56;
   --line-soft: rgba(72, 117, 128, 0.14);
-  --focus: #6bbfd3;
+  --focus: #d7aa16;
 
   --color-bg: var(--canvas);
   --color-surface: var(--surface);
@@ -350,7 +350,7 @@ semantic 토큰만 사용한다.
   --color-success: #2d5a27;
   --color-warning: #d4a026;
   --color-border: var(--line-soft);
-  --color-border-focus: rgba(107, 191, 211, 0.42);
+  --color-border-focus: rgba(215, 170, 22, 0.42);
   --color-overlay: rgba(30, 27, 22, 0.4);
 }
 
@@ -373,7 +373,7 @@ semantic 토큰만 사용한다.
 
 규칙:
 
-- 기본은 화이트톤 `#f8fbfc`에 아주 옅은 스카이블루 깊이를 더한다.
+- 기본은 웜화이트 `#fffdf2`에 아주 옅은 레몬색 깊이를 더한다.
 - 스카이블루는 버튼 칠이 아니라 포커스 이동, 선택된 텍스트, 객체 등장 영역, 공간 깊이, 상태 변화에 쓴다.
 - `--ink`와 `--ink-secondary`는 `--canvas` 위 일반 텍스트 7:1 이상을 목표로 한다.
 - `--ink-muted`는 필수 정보를 담는 일반 텍스트에 쓰지 않는다. 시간·출처·비활성 보조 정보처럼 중요도가 낮은 메타에만 쓴다.

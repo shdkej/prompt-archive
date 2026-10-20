@@ -138,12 +138,12 @@ Sam Samuel은 **조금 더 아는 옆자리 선배**다.
 
 | 항목 | 값 |
 | --- | --- |
-| 기준색 | White `#f8fbfc` + subtle sky 계열 |
+| 기준색 | Warm white `#fffdf2` + subtle lemon 계열 |
 | 기본 모드 | 라이트모드 |
 | 다크모드 | 순수 검정이 아닌 따뜻한 차콜 |
 | 그림자 | 순수 검정 금지, 따뜻한 회색 |
 | 폰트 | Pretendard 단일 |
-| 키 컬러 | 옅은 sky blue를 공간 깊이와 포커스에 제한적으로 사용 |
+| 키 컬러 | 옅은 lemon yellow를 공간 깊이와 포커스에 제한적으로 사용 |
 | 접근성 | WCAG AAA 목표, 대비 7:1 |
 | 시각 서명 | Spatial Type |
 
