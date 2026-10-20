@@ -6,10 +6,25 @@ from __future__ import annotations
 import re
 import sys
 from pathlib import Path
+from urllib.parse import parse_qs, urlparse
 
 
 ITEM_RE = re.compile(r"^\s*(?:#{1,3}\s*)?\d+\.\s+\S")
 SEPARATOR_RE = re.compile(r"^\s*---\s*$")
+ITEM_RE = re.compile(r"^\s*(?:#{1,3}\s*)?(\d+)\.\s+(\S.*)$")
+LINK_RE = re.compile(r"^\s*(?:링크|원문)\s*:\s*(https?://\S+)")
+def validate_geeknews_links(lines: list[str], errors: list[str]) -> None:
+    for line_number, line in enumerate(lines, start=1):
+        link_match = LINK_RE.match(line)
+        if not link_match:
+            continue
+        url = link_match.group(1).rstrip(")],.")
+        parsed = urlparse(url)
+        if parsed.netloc.lower() not in {"news.hada.io", "www.news.hada.io"}:
+            continue
+        topic_id = parse_qs(parsed.query).get("id", [""])[0]
+        if not topic_id.isdigit():
+            errors.append(f"line {line_number}: GeekNews URL has no numeric topic id: {url}")
 
 
 def main() -> int:
@@ -56,6 +71,8 @@ def main() -> int:
             errors.append(
                 f"separator on line {idx + 1} must have blank lines before and after"
             )
+
+    validate_geeknews_links(lines, errors)
 
     if errors:
         for error in errors:

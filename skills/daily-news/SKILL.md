@@ -203,6 +203,8 @@ Step 2에서 추출한 원본 URL에 대해 `WebFetch`로 상세 내용을 가�
 - 각 뉴스 항목의 제목 줄과 다음 뉴스 항목 제목 줄 사이에는 반드시 `---`가 하나 이상 있어야 합니다.
 - Telegram으로 바로 보낼 때도 먼저 임시 파일에 초안을 저장하고, `python3 /home/ubuntu/workspace/prompt-archive/skills/daily-news/validate_ai_news_format.py <파일>`을 통과한 뒤 발송합니다.
 - 검증기가 실패하면 발송하지 말고, `---` 줄을 고친 뒤 다시 검증합니다.
+- 검증기는 모든 GeekNews 링크의 도메인과 숫자 Topic ID를 확인합니다. 제목·링크 대조는 자동 생성 단계에서 후보 페이지를 직접 열어 사람이 확인할 수 있는 근거로 수행하고, 확인한 URL을 그대로 보존합니다. Topic ID를 기억으로 조합하거나 제목만 보고 URL을 새로 만들지 않습니다.
+- 발송 직전에는 반드시 `python3 /home/ubuntu/workspace/prompt-archive/skills/daily-news/validate_ai_news_format.py <파일>`을 실행해 형식·링크 형식 검증을 통과시킨 뒤, 초안의 각 제목과 링크를 원문 페이지에서 한 번 더 대조합니다.
 - 검증기를 통과하지 못한 AI 뉴스는 사용자에게 보내지 않습니다.
 
 **인사말 예시** (매번 다르게):
