@@ -410,6 +410,59 @@ Spatial Type의 타이포그래피는 일반적인 Heading / Body / Caption보�
 - 굵기는 400, 500, 600, 700만 사용한다.
 - viewport width에 따라 폰트 크기를 스케일하지 않는다.
 
+### 문장 단위 줄바꿈
+
+Spatial Type에서 줄바꿈은 브라우저의 우연한 결과가 아니라 **문장 편집의 일부**다. `word-break: keep-all`만으로는 조사·어미가 고립되거나 의미가 이어지는 구가 갈라지는 문제를 막을 수 없으므로, 화면의 핵심 문장은 의미 단위 컴포넌트로 작성한다.
+
+우선순위:
+
+1. 쉼표·마침표·접속 전환점 뒤에서 끊는다.
+2. 문장의 의미 단위가 함께 이동하도록 묶는다.
+3. 조사·어미·고유명사·짧은 수식어가 혼자 다음 줄에 남지 않게 한다.
+4. 아주 좁은 화면에서만 의미 단위 내부의 자동 줄바꿈을 허용한다.
+
+권장 구현:
+
+```html
+<h1 class="display-copy">
+  <span class="display-copy__unit">이미지를 다시 보고,</span>
+  <span class="display-copy__unit">짧게 남겨 두세요.</span>
+</h1>
+```
+
+```css
+.display-copy {
+  max-inline-size: 760px;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  line-break: strict;
+  text-wrap: balance;
+}
+
+.display-copy__unit {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .display-copy__unit {
+    display: block;
+    white-space: normal;
+  }
+}
+```
+
+금지:
+
+- 문장 전체에 `white-space: nowrap`을 걸어 작은 화면에서 넘치게 만들기
+- `&nbsp;`를 남발해 모든 폭에서 같은 줄을 강제하기
+- 핵심 카피를 의미 확인 없이 브라우저 자동 줄바꿈에만 맡기기
+- 조사·어미 앞뒤에 임의의 `<br>`을 넣기
+
+의미 단위가 컨테이너보다 길어지는 경우에는 `nowrap`을 유지한 채 넘치게 두지 말고, 더 작은 의미 단위로 다시 편집한다. `nowrap`은 문장 전체가 아니라 짧은 단위를 보호하기 위한 구현이다.
+
+검수 시 데스크톱·태블릿·모바일에서 쉼표 기준의 의도한 흐름인지, 조사·어미가 앞말과 붙어 있는지, 한 단어만 고립되지 않는지, 실제 렌더에서 잘림·넘침이 없는지를 확인한다.
+
 ## 간격과 곡률
 
 간격은 토큰으로 관리한다.
