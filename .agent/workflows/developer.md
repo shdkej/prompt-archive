@@ -30,7 +30,7 @@ Analyst -> Architect -> Designer -> Developer -> QA
 위 5단계를 고려하여 각 단계의 최고의 도구를 찾아서 작업의 퀄리티를 최대한 높입니다.
 예를 들어 개발은 omc의 스킬을 활용합니다.
 
-UI/UX, 화면 구조, 디자인 시스템, Pencil 기반 시각 설계는 `.agent/agents/designer.md`를 먼저 참조합니다. 개발자는 디자이너가 확정한 `DESIGN_SYSTEM.md`, 화면 의도, 상태·반응형 기준을 구현 계약으로 받아 코드에 반영합니다.
+UI/UX, 화면 구조, 디자인 시스템, Pencil 기반 시각 설계는 `.agent/workflows/designer.md`를 먼저 참조합니다. 개발자는 디자이너가 확정한 `DESIGN_SYSTEM.md`, 화면 의도, 상태·반응형 기준을 구현 계약으로 받아 코드에 반영합니다.
 
 #### TDD
 
@@ -86,7 +86,7 @@ TDD가 필요할 경우 @TDD.md 문서를 참조합니다.
 - **Controller Structure**: 비즈니스 로직을 직접 포함하지 않고, 의미 있는 함수들을 연속 호출하는 형태로 작성합니다. (한 줄로 읽히는 가독성)
 - **File Structure**: 각 레이어(Controller, Service, Repository, Utils)를 명확히 분리하고 단독 파일로 구분합니다.
 - **Async & Failover**: I/O 작업은 비동기로 처리하며, 에러 발생 시의 재시도(Retry) 및 복구 로직을 반드시 포함합니다.
-- **Design Handoff**: UI 작업은 `.agent/agents/designer.md`와 프로젝트의 `DESIGN_SYSTEM.md`를 먼저 확인하고, 정해진 토큰·컴포넌트·상태·반응형 기준을 코드에 반영합니다.
+- **Design Handoff**: UI 작업은 `.agent/workflows/designer.md`와 프로젝트의 `DESIGN_SYSTEM.md`를 먼저 확인하고, 정해진 토큰·컴포넌트·상태·반응형 기준을 코드에 반영합니다.
 
 ### 2.5. 코드 정리 (Code Simplification) 🚨 필수
 
@@ -134,12 +134,12 @@ TDD가 필요할 경우 @TDD.md 문서를 참조합니다.
 1. ARCHITECTURE.md - 전체 구조와 기술 스택 확정
 2. ERD.md - 데이터 모델 설계
 3. API.md - API 있는 경우 명세 작성
-4. UI 구현 - `.agent/agents/designer.md`와 `DESIGN_SYSTEM.md` 확인 후 코드 반영
+4. UI 구현 - `.agent/workflows/designer.md`와 `DESIGN_SYSTEM.md` 확인 후 코드 반영
 
 ### 참조 관계
 
 - PRD.md (Planner) → ARCHITECTURE.md에서 참조 (기능 기반 설계)
-- `.agent/agents/designer.md` / DESIGN_SYSTEM.md → UI 코드에서 참조 (화면 구조, 컬러, 톤, 컴포넌트 규칙)
+- `.agent/workflows/designer.md` / DESIGN_SYSTEM.md → UI 코드에서 참조 (화면 구조, 컬러, 톤, 컴포넌트 규칙)
 - ERD.md → API.md에서 참조 (데이터 기반 API 설계)
 
 ## 스킬 활용
@@ -189,7 +189,7 @@ TDD가 필요할 경우 @TDD.md 문서를 참조합니다.
 
 ### UI/UX 스킬
 
-UI/UX 설계, 디자인 시스템 분석, 화면 구조 재편은 `.agent/agents/designer.md`가 소유합니다.
+UI/UX 설계, 디자인 시스템 분석, 화면 구조 재편은 `.agent/workflows/designer.md`가 소유합니다.
 
 개발자가 프론트엔드 구현을 맡을 때는 아래 입력을 먼저 확보합니다.
 

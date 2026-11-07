@@ -283,7 +283,7 @@ CMO + 프로젝트 오너: 결과와 고객/운영 증거를 반영해 다음 �
 | ---------------- | ---------------------------------------- |
 | PRD.md           | PERSONA.md (타겟), BRAND.md (톤앤매너)   |
 | ARCHITECTURE.md  | PRD.md (기능), ERD.md (데이터)           |
-| DESIGN_SYSTEM.md | BRAND.md (컬러, 톤), `.agent/agents/designer.md` |
+| DESIGN_SYSTEM.md | BRAND.md (컬러, 톤), `.agent/workflows/designer.md` |
 | MARKETING.md     | BRAND.md, STP.md, PRD.md                 |
 | OPERATIONS.md    | ARCHITECTURE.md (모니터링), PRD.md (FAQ) |
 
