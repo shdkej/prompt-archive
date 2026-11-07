@@ -110,9 +110,10 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
   - 콘텐츠 기획/제목/포맷/시리즈 방향
   - 제품 아이디어/제품 방향/포지셔닝
 - 우선 확인 경로:
-  - `/home/ubuntu/workspace/knowledge-lab/agent-wiki/content/docs/diary/YYYY-MM-DD.mdx`
-  - `/home/ubuntu/workspace/knowledge-lab/agent-wiki/log.md`
+  - `/home/ubuntu/workspace/knowledge-lab/agent-wiki/content/docs/index.mdx`와 관련 `content/docs/outputs/` 컴파일 노트
+  - `/home/ubuntu/workspace/knowledge-lab/logs/agent-wiki-query.md`
   - `/home/ubuntu/workspace/knowledge-lab/source/`
+- Agent Wiki에는 날짜별 diary를 만들거나 참조하지 않습니다.
 - 마스터가 Claude Code나 다른 실행자에게 위임할 때도 이 규칙을 프롬프트에 명시합니다. 즉, **마스터만 아는 규칙이 아니라 위임받는 실행자도 따라야 하는 시작 조건**으로 전달합니다.
 
 ### 2. 업무에 필요한 에이전트 설정
