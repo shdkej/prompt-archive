@@ -64,11 +64,13 @@
 | # | 원칙 | 한 줄 | 게이트 질문 (Y/N) |
 |---|------|-------|-------------------|
 | P1 | 권한 비대칭 | 읽기는 넓게, 쓰기는 좁게 | read-only 자격증명으로 시작, 쓰기는 별도 발급 + 최소 스코프인가? |
-| P2 | 격리 후 승격 | 본판에 직접 쓰지 않는다 | branch/plan/transaction/dry-run/staging에서 먼저 쓰는가? |
+| P2 | 변경 범위 분리 | 요청한 변경을 검증한 뒤 반영한다 | Git은 의도한 diff만, 데이터·인프라는 plan/transaction/dry-run/staging으로 범위를 분리했는가? |
 | P3 | 가역성 | 쓰기 전에 되돌릴 길부터 판다 | 롤백 수단(백업/down migration/soft delete)이 변경 **전에** 확보됐는가? |
 | P4 | 단일 게이트 | 쓰기 경로는 하나, 우회로 금지 | 사람·에이전트 모두 같은 리뷰/승인 경로를 통과하는가? |
 
-적용 예: DB 기본 DSN은 read-only 유저, 쓰기는 별도 유저+최소 스코프 / git은 branch→PR(main 직접 push 금지), Terraform은 plan까지·apply는 승인 후, k8s는 `--dry-run=server`→staging→prod / append-only·soft delete 우선, 위험 작업 직전 스냅샷, down migration 없는 DDL 머지 금지 / 스키마·인프라 변경은 PR이 유일 경로, 에이전트도 같은 게이트 통과("에이전트라서 자동 머지" 금지).
+적용 예: DB 기본 DSN은 read-only 유저, 쓰기는 별도 유저+최소 스코프 / Git은 `LLM.md` §5의 기본 경로에 따라 검증한 요청 변경만 기본 브랜치에 직접 commit/push / Terraform은 plan까지·apply는 승인 범위 안에서, k8s는 `--dry-run=server`→staging→prod / append-only·soft delete 우선, 위험 작업 직전 스냅샷, down migration 없는 DDL 적용 금지 / 스키마·인프라의 실제 적용은 해당 승인·검증 경계를 지킨다.
+
+2026-11-13 사용자가 “아니 메인에 머지해줘 앞으로 항상 메인에 푸시”라고 수정했다. 기존의 일률적인 branch→PR·main 직접 push 금지 지시는 이 결정으로 대체한다. 재사용 실행 기준의 정본은 `LLM.md` §5이며, Git 기본 경로 변경을 배포·비용·권한·파괴적 작업의 포괄 승인으로 확대하지 않는다.
 
 위반 로그: 쓰기 사고 시 `### [Pn 위반] 요약 / 위반 1줄 / 적용 1줄` 형식으로 여기 아래에 1분 안에 기록. (현재 기록 없음)
 
