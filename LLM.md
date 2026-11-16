@@ -45,7 +45,9 @@
 
 - 스킬 원본은 이 저장소의 `skills/`입니다. 현재 서버에서는 `/home/ubuntu/workspace/prompt-archive/skills`, 다른 PC에서는 그 PC에 clone한 `prompt-archive/skills`를 사용합니다. 전체 목록·도구별 연결·에이전트 범위는 `skills/catalog.json`, 사용·설치 방법은 `skills/README.md`가 정본입니다.
 - 작업에 맞는 스킬을 먼저 이 목록에서 찾고 해당 `SKILL.md`와 필요한 참조 파일을 읽습니다. 공용 스킬은 `skills/shared/`와 기존 루트 스킬, 역할별 스킬은 `skills/agents/`·`skills/native/`에 있습니다. `skills/archive/`는 비활성 비교본이며 실행 지침으로 자동 로드하지 않습니다.
-- 스킬 수정·추가는 저장소 원본에서 하고 검증 후 main에 반영합니다. `.openclaw/**/skills`·`.agents/skills`의 연결 위치에 별도 복사본을 만들지 않습니다. 새 스킬은 `catalog.json`에 설치 범위도 등록하고 `scripts/setup.sh` 또는 `scripts/setup.ps1`로 연결을 갱신합니다. 외부 도구의 자체 업데이트 뒤에는 원본과 설치 경로가 갈라졌는지 확인합니다.
+- **새 사용자 스킬 설치의 기본 목적지는 `prompt-archive/skills/shared/<스킬명>`입니다.** 직접 작성, GitHub·ClawHub 다운로드, Codex 스킬 설치 요청에 모두 적용합니다. 역할 전용 스킬은 기존 `skills/agents/<agent>/` 또는 `skills/native/<agent>/` 범위에 둡니다. 설치기가 목적지 옵션을 제공하면 이 저장소 경로를 명시합니다. 내장 설치 스킬의 기본 목적지보다 이 사용자 지정 경로를 우선합니다.
+- 설치기가 자체 경로에 먼저 내려받아야 하면 지원 파일·라이선스를 포함한 원본을 공용 저장소에 편입하고, 기존 실행 경로를 링크로 연결합니다. `.openclaw/**/skills`·`codex-home/skills`·`.codex/skills`·`.agents/skills`에 독립 복사본을 남긴 채 설치 완료로 보고하지 않습니다. **Codex `.system`과 패키지 관리자가 소유한 번들·플러그인·설치 캐시는 예외**로 해당 도구가 관리합니다.
+- 새 설치·수정·업데이트는 `skills/README.md`의 신규 설치 절차를 따릅니다. 원본과 `catalog.json` 등록, 연결 적용, 대상 도구의 발견 여부, 요청 변경의 main 반영까지 확인합니다. 외부 설치기나 업데이트가 연결을 실파일로 바꾸었는지도 점검합니다. 다운로드 성공만으로 완료 처리하지 않습니다.
 - 다른 PC에서 작업하기 전 저장소의 미반영 변경을 확인하고 `git pull --ff-only` 후 설치기의 `--check`로 연결을 검증합니다. 작업 중에는 스킬 버전을 바꾸지 않습니다. API 키·로그인·대화 DB·캐시는 공용 저장소에 넣지 않습니다.
 - 스킬의 `/home/ubuntu/...` 예시는 현재 서버 경로입니다. 다른 PC에서는 해당 checkout과 실행 환경을 확인해 경로를 해석하고, Linux 전용 도구나 OpenClaw 연동이 필요한 절차를 Windows 네이티브에서 실행 가능한 것으로 가정하지 않습니다. Infinity·Knowledge Lab·운영 데이터의 소유 위치는 기존 정본을 유지합니다.
 
