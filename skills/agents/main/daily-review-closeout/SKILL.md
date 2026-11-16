@@ -1,0 +1,26 @@
+---
+name: daily-review-closeout
+description: Process Korean daily-review reflections and close the review with the required record, spaced learning, archive card, the review-only calendar, and follow-up checks.
+---
+
+# Daily Review Closeout
+
+Use this skill whenever the user sends a daily reflection, daily thoughts, daily review, or a message that clearly describes that day's experiences and asks for 회고. Do not stop after writing the four-section message.
+
+## Required sequence
+
+**One closeout run means prepare → verify → deliver.** The review body being written or sent is not completion. Do not send the four-section review as an early standalone reply and then leave card/calendar work for a later turn. Prepare every deliverable before the final user-facing closeout.
+
+1. Read `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/LOCAL_REVIEW_AUTOMATION.md` and `/home/ubuntu/workspace/prompt-archive/DAILY_ARCHIVE_CARD_PROMPT.md`. For travel days, confirm current place and next movement with `hj`; do not invent them.
+2. Determine the review's local date and source evidence. Draft exactly `Keep`, `Problem`, `Action Item`, and `Tomorrow Expectation`; separate user facts from SAM's operational work and keep `Action Item` to one experiment.
+3. Save the full review to `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/daily-reviews/YYYY-MM-DD-review.md`. Add only genuinely reusable rules to `data/spaced_repetition_items.json`; otherwise record that none was added.
+4. Create one private daily archive card with the prescribed charcoal/crayon/Pretendard layout. Validate PNG and HTML and inspect the actual render; file existence is not validation.
+5. Read existing events, then write or update the same-day 5-minute headline and next-day sourced quote in the `회고` calendar only through `gog`. The next-day quote event runs 21:00–23:59 Asia/Seoul, not all day. Select a new quote for each day; check the previous 30 days of quote events in `회고` and do not reuse any quote from that period. Never create or update daily-review entries in the default/general calendar. Verify the quote's author and exact wording against a reliable text, include its source in the event description, avoid duplicates, and re-read `회고` to verify. If quote sourcing or calendar access fails, record the exact failure and leave the closeout incomplete; do not fall back to a guessed quote or a task event.
+6. Record one Threads demand-validation candidate internally; run its gate and never publish it without separate approval.
+7. Before delivery, re-read the review file and verify the four sections, card render check, the `회고` calendar re-query, Spaced decision, Threads candidate/gate, and delivery asset. Confirm the default/general calendar was not modified. Correct any mismatch now. If an event date is already past, record that it was added retrospectively rather than silently moving it.
+8. Only after preparation and checks, send the complete four-section review plus a concise `운영 처리` block in the original Slack thread. Attach the validated final daily archive PNG (1080×1350) in that same thread; if the channel tool requires separate text and media calls, send them consecutively as one closeout and verify both receipts before reporting completion. Never substitute the source illustration, HTML, or a path for the final PNG.
+9. If a required step fails after reasonable recovery, send one closeout that clearly says `미완료`, identifies the exact failed step and next action, and does not imply success. Do not report `완료` until the user-facing review and final PNG attachment receipts are both confirmed.
+
+## Output boundary
+
+After the four sections, append only a concise `운영 처리` block listing the saved file, Spaced result, card validation, calendar result, and Threads candidate. Never expose credentials, raw logs, or unverified travel details.

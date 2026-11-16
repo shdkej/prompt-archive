@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "registry": "https://clawhub.ai",
+  "slug": "linear-native-node",
+  "ownerHandle": "jwestburg",
+  "installedAt": 1793402722212,
+  "artifact": {
+    "kind": "archive",
+    "sha256": "ce1f95c0135a8d627fc57d80b3f1f6f150f2c52a62422f731621bb442856f432",
+    "integrity": "sha256-zh+VwBNajWJ/xX2As/H28VDyxSpiQi9zFiG7RChW9DI="
+  },
+  "skillFile": {
+    "path": "SKILL.md",
+    "sha256": "eb6f6095e1ba5d615397c5fe0b593ffbb12ac11c98436837a0257705a0b5272d"
+  },
+  "fileTreeSha256": "sha256:771715c507acb950cd8d7966c245a4ab28e4cc36af1dab03d3a77ba23bf03b2e",
+  "installedVersion": "1.0.22"
+}

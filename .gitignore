@@ -9,3 +9,5 @@ gather
 .env
 **/.env
 skills/keyword-title/outputs/
+__pycache__/
+*.pyc

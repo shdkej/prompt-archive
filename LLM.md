@@ -41,6 +41,14 @@
 - 도메인 워크플로우·스킬·설계 가이드: Prompt Archive의 관련 문서
 - 반복 실행·트리거·테스트 기준: `OPERATING_REFERENCE.md`
 
+### 공용 스킬 위치
+
+- 스킬 원본은 이 저장소의 `skills/`입니다. 현재 서버에서는 `/home/ubuntu/workspace/prompt-archive/skills`, 다른 PC에서는 그 PC에 clone한 `prompt-archive/skills`를 사용합니다. 전체 목록·도구별 연결·에이전트 범위는 `skills/catalog.json`, 사용·설치 방법은 `skills/README.md`가 정본입니다.
+- 작업에 맞는 스킬을 먼저 이 목록에서 찾고 해당 `SKILL.md`와 필요한 참조 파일을 읽습니다. 공용 스킬은 `skills/shared/`와 기존 루트 스킬, 역할별 스킬은 `skills/agents/`·`skills/native/`에 있습니다. `skills/archive/`는 비활성 비교본이며 실행 지침으로 자동 로드하지 않습니다.
+- 스킬 수정·추가는 저장소 원본에서 하고 검증 후 main에 반영합니다. `.openclaw/**/skills`·`.agents/skills`의 연결 위치에 별도 복사본을 만들지 않습니다. 새 스킬은 `catalog.json`에 설치 범위도 등록하고 `scripts/setup.sh` 또는 `scripts/setup.ps1`로 연결을 갱신합니다. 외부 도구의 자체 업데이트 뒤에는 원본과 설치 경로가 갈라졌는지 확인합니다.
+- 다른 PC에서 작업하기 전 저장소의 미반영 변경을 확인하고 `git pull --ff-only` 후 설치기의 `--check`로 연결을 검증합니다. 작업 중에는 스킬 버전을 바꾸지 않습니다. API 키·로그인·대화 DB·캐시는 공용 저장소에 넣지 않습니다.
+- 스킬의 `/home/ubuntu/...` 예시는 현재 서버 경로입니다. 다른 PC에서는 해당 checkout과 실행 환경을 확인해 경로를 해석하고, Linux 전용 도구나 OpenClaw 연동이 필요한 절차를 Windows 네이티브에서 실행 가능한 것으로 가정하지 않습니다. Infinity·Knowledge Lab·운영 데이터의 소유 위치는 기존 정본을 유지합니다.
+
 ## 3. 공통 행동·문서 작성 기준
 
 이 절은 모든 에이전트가 공유하는 행동 기준입니다. OpenClaw의 각 `SOUL.md`는 이 기준을 읽고 역할별 태도만 덧붙입니다. 실행·승인 절차는 `OPENCLAW_COMMON.md`와 각 `AGENTS.md`, 서비스별 구현·배포는 프로젝트 정본을 따릅니다.

@@ -7,20 +7,27 @@
 - [`YOUTUBE_EXPLAINER_MOTION_PROMPT.md`](./YOUTUBE_EXPLAINER_MOTION_PROMPT.md) — 1~3초 유튜브 설명 모션(Remotion) 제작·검수 계약
 - [`DAILY_ARCHIVE_CARD_PROMPT.md`](./DAILY_ARCHIVE_CARD_PROMPT.md) — 데일리 아카이브 카드 그림·조판·검수 계약
 
-## Skills 색인
+## 공용 스킬
 
-| 스킬 | 설명 | 언제 쓰는가 |
-| --- | --- | --- |
-| `skills/daily-news` | GeekNews(news.hada.io) 기사를 정리해 AI 뉴스레터(마크다운)를 생성. 취향 기반 자동 선별과 피드백 학습 포함 | GeekNews URL을 던질 때, "오늘 AI 뉴스 골라줘" |
-| `skills/keyword-title` | 시드(주제·초안·제품 컨셉)를 받아 모드별(blog/threads/app-name/product-name) 후보를 발산·선별하는 네이밍·제목 스킬 | 글 제목·서비스 이름을 뽑아야 할 때 |
+스킬 원본은 [`skills/`](skills/), 설치 범위와 연결 목록은 [`skills/catalog.json`](skills/catalog.json)이 소유합니다. OpenClaw 공용·워크스페이스·Codex native 폴더의 스킬을 여기서 관리하고, 각 실행 경로에는 링크를 둡니다. 역할별 범위와 같은 이름의 다른 버전은 보존합니다.
 
-전체 자산 목록과 설치 대상은 `scripts/setup.sh`가 단일 출처(source of truth)입니다. 단일 파일 스킬과 가이드 문서(DAILY-FEEDBACK-SYSTEM.md, OMC.md, WORKFLOW-MASTER.md 등)는 그 링크 목록을 참조하세요.
-
-## 설치
+[설치·Windows 연결·갱신·복구 안내](skills/README.md)를 먼저 읽으세요. Python 3.10+가 필요하며 기본 실행은 미리보기입니다.
 
 ```bash
 git clone https://github.com/shdkej/prompt-archive ~/workspace/prompt-archive
-~/workspace/prompt-archive/scripts/setup.sh
+cd ~/workspace/prompt-archive
+bash scripts/setup.sh --targets openclaw,codex
+bash scripts/setup.sh --targets openclaw,codex --apply
+bash scripts/setup.sh --targets openclaw,codex --check
 ```
 
-`setup.sh`는 `~/.claude/` 하위에 심볼릭 링크를 일괄 생성합니다. 디렉토리형 스킬(`skills/daily-news` 등)은 디렉토리째 링크됩니다.
+Windows Codex는 `py -3 scripts/setup_skills.py --targets codex --apply` 또는 `scripts/setup.ps1`을 사용합니다. Claude 연결은 `--targets claude`로 선택합니다. 기존 파일이 있으면 비교 후 백업을 만드는 `--replace`를 명시합니다.
+
+## 검증과 한계
+
+```bash
+python3 -m unittest discover -s scripts -p 'test_setup_skills.py' -v
+bash -n scripts/setup.sh
+```
+
+설치기는 기존 설정과 원본 백업, 링크 대상, 반복 실행을 검증합니다. API 키·대화 DB·개발 캐시는 공유하지 않습니다. 각 스킬의 외부 도구·인증·OS 의존성은 해당 PC에서 별도로 준비해야 하며, Git 갱신과 스킬 연결만으로 모든 실행 환경이 같아지지는 않습니다.

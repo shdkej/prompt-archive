@@ -1,0 +1,1615 @@
+{
+  "version": 1,
+  "packages": [
+    {
+      "path": "skills/daily-news",
+      "scope": "shared",
+      "openclaw": [
+        "skills/daily-news"
+      ],
+      "codex": [
+        {
+          "name": "daily-news",
+          "path": "skills/daily-news"
+        }
+      ]
+    },
+    {
+      "path": "skills/image-upload",
+      "scope": "shared",
+      "openclaw": [
+        "skills/image-upload"
+      ],
+      "codex": [
+        {
+          "name": "image-upload",
+          "path": "skills/image-upload"
+        }
+      ]
+    },
+    {
+      "path": "skills/keyword-title",
+      "scope": "shared",
+      "openclaw": [
+        "skills/keyword-title"
+      ],
+      "codex": [
+        {
+          "name": "keyword-title",
+          "path": "skills/keyword-title"
+        }
+      ]
+    },
+    {
+      "path": "skills/workflow-master",
+      "scope": "shared",
+      "openclaw": [
+        "skills/workflow-master"
+      ],
+      "codex": [
+        {
+          "name": "workflow-master",
+          "path": "skills/workflow-master"
+        }
+      ]
+    },
+    {
+      "path": "skills/shared/agent-reach",
+      "scope": "shared",
+      "openclaw": [
+        "skills/agent-reach"
+      ],
+      "codex": [
+        {
+          "name": "agent-reach",
+          "path": "skills/shared/agent-reach"
+        }
+      ]
+    },
+    {
+      "path": "skills/shared/frontend-design",
+      "scope": "shared",
+      "openclaw": [
+        "skills/frontend-design"
+      ],
+      "codex": [
+        {
+          "name": "frontend-design",
+          "path": "skills/shared/frontend-design"
+        }
+      ]
+    },
+    {
+      "path": "skills/shared/gstack",
+      "scope": "shared",
+      "openclaw": [
+        "skills/gstack"
+      ],
+      "codex": [],
+      "upstream": {
+        "url": "https://github.com/garrytan/gstack",
+        "revision": "4414f4cc9377a9df06c7847433fe567ba6398aa8",
+        "note": "OpenClaw generated harness; requires local gstack runtime. Preserve host-specific instructions."
+      }
+    },
+    {
+      "path": "skills/shared/gstack-qa",
+      "scope": "shared",
+      "openclaw": [
+        "skills/gstack-qa"
+      ],
+      "codex": [],
+      "upstream": {
+        "url": "https://github.com/garrytan/gstack",
+        "revision": "4414f4cc9377a9df06c7847433fe567ba6398aa8",
+        "note": "OpenClaw generated harness; requires local gstack runtime. Preserve host-specific instructions."
+      }
+    },
+    {
+      "path": "skills/shared/gstack-review",
+      "scope": "shared",
+      "openclaw": [
+        "skills/gstack-review"
+      ],
+      "codex": [],
+      "upstream": {
+        "url": "https://github.com/garrytan/gstack",
+        "revision": "4414f4cc9377a9df06c7847433fe567ba6398aa8",
+        "note": "OpenClaw generated harness; requires local gstack runtime. Preserve host-specific instructions."
+      }
+    },
+    {
+      "path": "skills/shared/gstack-ship",
+      "scope": "shared",
+      "openclaw": [
+        "skills/gstack-ship"
+      ],
+      "codex": [],
+      "upstream": {
+        "url": "https://github.com/garrytan/gstack",
+        "revision": "4414f4cc9377a9df06c7847433fe567ba6398aa8",
+        "note": "OpenClaw generated harness; requires local gstack runtime. Preserve host-specific instructions."
+      }
+    },
+    {
+      "path": "skills/shared/marketingskills",
+      "scope": "shared",
+      "openclaw": [
+        "skills/marketingskills"
+      ],
+      "codex": [
+        {
+          "name": "ab-testing",
+          "path": "skills/shared/marketingskills/skills/ab-testing"
+        },
+        {
+          "name": "ad-creative",
+          "path": "skills/shared/marketingskills/skills/ad-creative"
+        },
+        {
+          "name": "ads",
+          "path": "skills/shared/marketingskills/skills/ads"
+        },
+        {
+          "name": "ai-seo",
+          "path": "skills/shared/marketingskills/skills/ai-seo"
+        },
+        {
+          "name": "analytics",
+          "path": "skills/shared/marketingskills/skills/analytics"
+        },
+        {
+          "name": "aso",
+          "path": "skills/shared/marketingskills/skills/aso"
+        },
+        {
+          "name": "attribution",
+          "path": "skills/shared/marketingskills/skills/attribution"
+        },
+        {
+          "name": "churn-prevention",
+          "path": "skills/shared/marketingskills/skills/churn-prevention"
+        },
+        {
+          "name": "co-marketing",
+          "path": "skills/shared/marketingskills/skills/co-marketing"
+        },
+        {
+          "name": "cold-email",
+          "path": "skills/shared/marketingskills/skills/cold-email"
+        },
+        {
+          "name": "community-marketing",
+          "path": "skills/shared/marketingskills/skills/community-marketing"
+        },
+        {
+          "name": "competitor-profiling",
+          "path": "skills/shared/marketingskills/skills/competitor-profiling"
+        },
+        {
+          "name": "competitors",
+          "path": "skills/shared/marketingskills/skills/competitors"
+        },
+        {
+          "name": "content-strategy",
+          "path": "skills/shared/marketingskills/skills/content-strategy"
+        },
+        {
+          "name": "conversion-tracking",
+          "path": "skills/shared/marketingskills/skills/conversion-tracking"
+        },
+        {
+          "name": "copy-editing",
+          "path": "skills/shared/marketingskills/skills/copy-editing"
+        },
+        {
+          "name": "copywriting",
+          "path": "skills/shared/marketingskills/skills/copywriting"
+        },
+        {
+          "name": "cro",
+          "path": "skills/shared/marketingskills/skills/cro"
+        },
+        {
+          "name": "customer-research",
+          "path": "skills/shared/marketingskills/skills/customer-research"
+        },
+        {
+          "name": "directory-submissions",
+          "path": "skills/shared/marketingskills/skills/directory-submissions"
+        },
+        {
+          "name": "emails",
+          "path": "skills/shared/marketingskills/skills/emails"
+        },
+        {
+          "name": "events",
+          "path": "skills/shared/marketingskills/skills/events"
+        },
+        {
+          "name": "free-tools",
+          "path": "skills/shared/marketingskills/skills/free-tools"
+        },
+        {
+          "name": "image",
+          "path": "skills/shared/marketingskills/skills/image"
+        },
+        {
+          "name": "influencer-marketing",
+          "path": "skills/shared/marketingskills/skills/influencer-marketing"
+        },
+        {
+          "name": "launch",
+          "path": "skills/shared/marketingskills/skills/launch"
+        },
+        {
+          "name": "lead-magnets",
+          "path": "skills/shared/marketingskills/skills/lead-magnets"
+        },
+        {
+          "name": "link-building",
+          "path": "skills/shared/marketingskills/skills/link-building"
+        },
+        {
+          "name": "marketing-council",
+          "path": "skills/shared/marketingskills/skills/marketing-council"
+        },
+        {
+          "name": "marketing-ideas",
+          "path": "skills/shared/marketingskills/skills/marketing-ideas"
+        },
+        {
+          "name": "marketing-loops",
+          "path": "skills/shared/marketingskills/skills/marketing-loops"
+        },
+        {
+          "name": "marketing-plan",
+          "path": "skills/shared/marketingskills/skills/marketing-plan"
+        },
+        {
+          "name": "marketing-psychology",
+          "path": "skills/shared/marketingskills/skills/marketing-psychology"
+        },
+        {
+          "name": "offers",
+          "path": "skills/shared/marketingskills/skills/offers"
+        },
+        {
+          "name": "onboarding",
+          "path": "skills/shared/marketingskills/skills/onboarding"
+        },
+        {
+          "name": "paywalls",
+          "path": "skills/shared/marketingskills/skills/paywalls"
+        },
+        {
+          "name": "popups",
+          "path": "skills/shared/marketingskills/skills/popups"
+        },
+        {
+          "name": "pricing",
+          "path": "skills/shared/marketingskills/skills/pricing"
+        },
+        {
+          "name": "product-marketing",
+          "path": "skills/shared/marketingskills/skills/product-marketing"
+        },
+        {
+          "name": "programmatic-seo",
+          "path": "skills/shared/marketingskills/skills/programmatic-seo"
+        },
+        {
+          "name": "prospecting",
+          "path": "skills/shared/marketingskills/skills/prospecting"
+        },
+        {
+          "name": "public-relations",
+          "path": "skills/shared/marketingskills/skills/public-relations"
+        },
+        {
+          "name": "referrals",
+          "path": "skills/shared/marketingskills/skills/referrals"
+        },
+        {
+          "name": "reverse-engineer-marketing",
+          "path": "skills/shared/marketingskills/skills/reverse-engineer-marketing"
+        },
+        {
+          "name": "revops",
+          "path": "skills/shared/marketingskills/skills/revops"
+        },
+        {
+          "name": "sales-enablement",
+          "path": "skills/shared/marketingskills/skills/sales-enablement"
+        },
+        {
+          "name": "schema",
+          "path": "skills/shared/marketingskills/skills/schema"
+        },
+        {
+          "name": "seo-audit",
+          "path": "skills/shared/marketingskills/skills/seo-audit"
+        },
+        {
+          "name": "signup",
+          "path": "skills/shared/marketingskills/skills/signup"
+        },
+        {
+          "name": "site-architecture",
+          "path": "skills/shared/marketingskills/skills/site-architecture"
+        },
+        {
+          "name": "sms",
+          "path": "skills/shared/marketingskills/skills/sms"
+        },
+        {
+          "name": "social",
+          "path": "skills/shared/marketingskills/skills/social"
+        },
+        {
+          "name": "video",
+          "path": "skills/shared/marketingskills/skills/video"
+        }
+      ],
+      "upstream": {
+        "url": "https://github.com/coreyhaines31/marketingskills",
+        "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d"
+      }
+    },
+    {
+      "path": "skills/agents/main/agent-browser",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/agent-browser"
+      ],
+      "codex": [
+        {
+          "name": "agent-browser",
+          "path": "skills/agents/main/agent-browser"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/app-web-market-research",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/app-web-market-research"
+      ],
+      "codex": [
+        {
+          "name": "app-web-market-research",
+          "path": "skills/agents/main/app-web-market-research"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/daily-review-closeout",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/daily-review-closeout"
+      ],
+      "codex": [
+        {
+          "name": "daily-review-closeout",
+          "path": "skills/agents/main/daily-review-closeout"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/fixed-shell-shorts",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/fixed-shell-shorts"
+      ],
+      "codex": [
+        {
+          "name": "fixed-shell-shorts",
+          "path": "skills/agents/main/fixed-shell-shorts"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/gpx-route-map",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/gpx-route-map"
+      ],
+      "codex": [
+        {
+          "name": "gpx-route-map",
+          "path": "skills/agents/main/gpx-route-map"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/grill-me",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/grill-me"
+      ],
+      "codex": [
+        {
+          "name": "grill-me",
+          "path": "skills/agents/main/grill-me"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/infinity-intake-publish",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/infinity-intake-publish"
+      ],
+      "codex": [
+        {
+          "name": "infinity-intake-publish",
+          "path": "skills/agents/main/infinity-intake-publish"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/insight-card-maker",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/insight-card-maker"
+      ],
+      "codex": [
+        {
+          "name": "insight-card-maker",
+          "path": "skills/agents/main/insight-card-maker"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/linear-native-node",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/linear-native-node"
+      ],
+      "codex": [
+        {
+          "name": "linear-native-node",
+          "path": "skills/agents/main/linear-native-node"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/llm-obsidian-wiki",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/llm-obsidian-wiki"
+      ],
+      "codex": [
+        {
+          "name": "llm-obsidian-wiki",
+          "path": "skills/agents/main/llm-obsidian-wiki"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/photo-decision",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/photo-decision"
+      ],
+      "codex": [
+        {
+          "name": "photo-decision",
+          "path": "skills/agents/main/photo-decision"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/pt-claude-tmux",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/pt-claude-tmux"
+      ],
+      "codex": [
+        {
+          "name": "pt-claude-tmux",
+          "path": "skills/agents/main/pt-claude-tmux"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/thinking-partner",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/thinking-partner"
+      ],
+      "codex": [
+        {
+          "name": "thinking-partner",
+          "path": "skills/agents/main/thinking-partner"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/tool-curator",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/tool-curator"
+      ],
+      "codex": [
+        {
+          "name": "tool-curator",
+          "path": "skills/agents/main/tool-curator"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/travel-content-feedback",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/travel-content-feedback"
+      ],
+      "codex": [
+        {
+          "name": "travel-content-feedback",
+          "path": "skills/agents/main/travel-content-feedback"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/main/viral-short-form",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/viral-short-form"
+      ],
+      "codex": [
+        {
+          "name": "viral-short-form",
+          "path": "skills/agents/main/viral-short-form"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/agents/hj/trustedhousesitters-scraper",
+      "scope": "hj",
+      "openclaw": [
+        "workspace-hj/skills/trustedhousesitters-scraper"
+      ],
+      "codex": [
+        {
+          "name": "trustedhousesitters-scraper",
+          "path": "skills/agents/hj/trustedhousesitters-scraper"
+        }
+      ],
+      "agent": "hj"
+    },
+    {
+      "path": "skills/agents/hj/worldpackers-scraper",
+      "scope": "hj",
+      "openclaw": [
+        "workspace-hj/skills/worldpackers-scraper"
+      ],
+      "codex": [
+        {
+          "name": "worldpackers-scraper",
+          "path": "skills/agents/hj/worldpackers-scraper"
+        }
+      ],
+      "agent": "hj"
+    },
+    {
+      "path": "skills/native/design/design-taste-frontend",
+      "scope": "design",
+      "openclaw": [
+        "agents/design/agent/codex-home/skills/design-taste-frontend"
+      ],
+      "codex": [
+        {
+          "name": "design-taste-frontend",
+          "path": "skills/native/design/design-taste-frontend"
+        }
+      ],
+      "agent": "design"
+    },
+    {
+      "path": "skills/native/design/emil-design-eng",
+      "scope": "design",
+      "openclaw": [
+        "agents/design/agent/codex-home/skills/emil-design-eng"
+      ],
+      "codex": [
+        {
+          "name": "emil-design-eng",
+          "path": "skills/native/design/emil-design-eng"
+        }
+      ],
+      "agent": "design"
+    },
+    {
+      "path": "skills/native/design/impeccable",
+      "scope": "design",
+      "openclaw": [
+        "agents/design/agent/codex-home/skills/impeccable"
+      ],
+      "codex": [
+        {
+          "name": "impeccable",
+          "path": "skills/native/design/impeccable"
+        }
+      ],
+      "agent": "design"
+    },
+    {
+      "path": "skills/native/main/deep-research",
+      "scope": "genie",
+      "openclaw": [
+        "agents/genie/agent/codex-home/skills/deep-research"
+      ],
+      "codex": [
+        {
+          "name": "deep-research",
+          "path": "skills/native/main/deep-research"
+        }
+      ],
+      "agent": "genie"
+    },
+    {
+      "path": "skills/native/main/canvas-design",
+      "scope": "main",
+      "openclaw": [
+        "agents/main/agent/codex-home/skills/canvas-design"
+      ],
+      "codex": [
+        {
+          "name": "canvas-design",
+          "path": "skills/native/main/canvas-design"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/daily-news",
+      "scope": "main",
+      "openclaw": [
+        "agents/main/agent/codex-home/skills/daily-news"
+      ],
+      "codex": [
+        {
+          "name": "daily-news",
+          "path": "skills/daily-news"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/native/main/deep-research",
+      "scope": "main",
+      "openclaw": [
+        "agents/main/agent/codex-home/skills/deep-research"
+      ],
+      "codex": [
+        {
+          "name": "deep-research",
+          "path": "skills/native/main/deep-research"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/native/main/frontend-design",
+      "scope": "main",
+      "openclaw": [
+        "agents/main/agent/codex-home/skills/frontend-design"
+      ],
+      "codex": [
+        {
+          "name": "frontend-design",
+          "path": "skills/native/main/frontend-design"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/native/main/humanize-korean",
+      "scope": "main",
+      "openclaw": [
+        "agents/main/agent/codex-home/skills/humanize-korean"
+      ],
+      "codex": [
+        {
+          "name": "humanize-korean",
+          "path": "skills/native/main/humanize-korean"
+        }
+      ],
+      "agent": "main"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/ab-testing",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/ab-testing"
+      ],
+      "codex": [
+        {
+          "name": "ab-testing",
+          "path": "skills/shared/marketingskills/skills/ab-testing"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/ad-creative",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/ad-creative"
+      ],
+      "codex": [
+        {
+          "name": "ad-creative",
+          "path": "skills/shared/marketingskills/skills/ad-creative"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/ads",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/ads"
+      ],
+      "codex": [
+        {
+          "name": "ads",
+          "path": "skills/shared/marketingskills/skills/ads"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/ai-seo",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/ai-seo"
+      ],
+      "codex": [
+        {
+          "name": "ai-seo",
+          "path": "skills/shared/marketingskills/skills/ai-seo"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/analytics",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/analytics"
+      ],
+      "codex": [
+        {
+          "name": "analytics",
+          "path": "skills/shared/marketingskills/skills/analytics"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/aso",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/aso"
+      ],
+      "codex": [
+        {
+          "name": "aso",
+          "path": "skills/shared/marketingskills/skills/aso"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/attribution",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/attribution"
+      ],
+      "codex": [
+        {
+          "name": "attribution",
+          "path": "skills/shared/marketingskills/skills/attribution"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/churn-prevention",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/churn-prevention"
+      ],
+      "codex": [
+        {
+          "name": "churn-prevention",
+          "path": "skills/shared/marketingskills/skills/churn-prevention"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/co-marketing",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/co-marketing"
+      ],
+      "codex": [
+        {
+          "name": "co-marketing",
+          "path": "skills/shared/marketingskills/skills/co-marketing"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/cold-email",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/cold-email"
+      ],
+      "codex": [
+        {
+          "name": "cold-email",
+          "path": "skills/shared/marketingskills/skills/cold-email"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/community-marketing",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/community-marketing"
+      ],
+      "codex": [
+        {
+          "name": "community-marketing",
+          "path": "skills/shared/marketingskills/skills/community-marketing"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/competitor-profiling",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/competitor-profiling"
+      ],
+      "codex": [
+        {
+          "name": "competitor-profiling",
+          "path": "skills/shared/marketingskills/skills/competitor-profiling"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/competitors",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/competitors"
+      ],
+      "codex": [
+        {
+          "name": "competitors",
+          "path": "skills/shared/marketingskills/skills/competitors"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/content-strategy",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/content-strategy"
+      ],
+      "codex": [
+        {
+          "name": "content-strategy",
+          "path": "skills/shared/marketingskills/skills/content-strategy"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/conversion-tracking",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/conversion-tracking"
+      ],
+      "codex": [
+        {
+          "name": "conversion-tracking",
+          "path": "skills/shared/marketingskills/skills/conversion-tracking"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/copy-editing",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/copy-editing"
+      ],
+      "codex": [
+        {
+          "name": "copy-editing",
+          "path": "skills/shared/marketingskills/skills/copy-editing"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/copywriting",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/copywriting"
+      ],
+      "codex": [
+        {
+          "name": "copywriting",
+          "path": "skills/shared/marketingskills/skills/copywriting"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/cro",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/cro"
+      ],
+      "codex": [
+        {
+          "name": "cro",
+          "path": "skills/shared/marketingskills/skills/cro"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/customer-research",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/customer-research"
+      ],
+      "codex": [
+        {
+          "name": "customer-research",
+          "path": "skills/shared/marketingskills/skills/customer-research"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/directory-submissions",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/directory-submissions"
+      ],
+      "codex": [
+        {
+          "name": "directory-submissions",
+          "path": "skills/shared/marketingskills/skills/directory-submissions"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/emails",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/emails"
+      ],
+      "codex": [
+        {
+          "name": "emails",
+          "path": "skills/shared/marketingskills/skills/emails"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/events",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/events"
+      ],
+      "codex": [
+        {
+          "name": "events",
+          "path": "skills/shared/marketingskills/skills/events"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/free-tools",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/free-tools"
+      ],
+      "codex": [
+        {
+          "name": "free-tools",
+          "path": "skills/shared/marketingskills/skills/free-tools"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/image",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/image"
+      ],
+      "codex": [
+        {
+          "name": "image",
+          "path": "skills/shared/marketingskills/skills/image"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/influencer-marketing",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/influencer-marketing"
+      ],
+      "codex": [
+        {
+          "name": "influencer-marketing",
+          "path": "skills/shared/marketingskills/skills/influencer-marketing"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/launch",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/launch"
+      ],
+      "codex": [
+        {
+          "name": "launch",
+          "path": "skills/shared/marketingskills/skills/launch"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/lead-magnets",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/lead-magnets"
+      ],
+      "codex": [
+        {
+          "name": "lead-magnets",
+          "path": "skills/shared/marketingskills/skills/lead-magnets"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/link-building",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/link-building"
+      ],
+      "codex": [
+        {
+          "name": "link-building",
+          "path": "skills/shared/marketingskills/skills/link-building"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/marketing-council",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/marketing-council"
+      ],
+      "codex": [
+        {
+          "name": "marketing-council",
+          "path": "skills/shared/marketingskills/skills/marketing-council"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/marketing-ideas",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/marketing-ideas"
+      ],
+      "codex": [
+        {
+          "name": "marketing-ideas",
+          "path": "skills/shared/marketingskills/skills/marketing-ideas"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/marketing-loops",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/marketing-loops"
+      ],
+      "codex": [
+        {
+          "name": "marketing-loops",
+          "path": "skills/shared/marketingskills/skills/marketing-loops"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/marketing-plan",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/marketing-plan"
+      ],
+      "codex": [
+        {
+          "name": "marketing-plan",
+          "path": "skills/shared/marketingskills/skills/marketing-plan"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/marketing-psychology",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/marketing-psychology"
+      ],
+      "codex": [
+        {
+          "name": "marketing-psychology",
+          "path": "skills/shared/marketingskills/skills/marketing-psychology"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/offers",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/offers"
+      ],
+      "codex": [
+        {
+          "name": "offers",
+          "path": "skills/shared/marketingskills/skills/offers"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/onboarding",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/onboarding"
+      ],
+      "codex": [
+        {
+          "name": "onboarding",
+          "path": "skills/shared/marketingskills/skills/onboarding"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/paywalls",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/paywalls"
+      ],
+      "codex": [
+        {
+          "name": "paywalls",
+          "path": "skills/shared/marketingskills/skills/paywalls"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/popups",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/popups"
+      ],
+      "codex": [
+        {
+          "name": "popups",
+          "path": "skills/shared/marketingskills/skills/popups"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/pricing",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/pricing"
+      ],
+      "codex": [
+        {
+          "name": "pricing",
+          "path": "skills/shared/marketingskills/skills/pricing"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/product-marketing",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/product-marketing"
+      ],
+      "codex": [
+        {
+          "name": "product-marketing",
+          "path": "skills/shared/marketingskills/skills/product-marketing"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/programmatic-seo",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/programmatic-seo"
+      ],
+      "codex": [
+        {
+          "name": "programmatic-seo",
+          "path": "skills/shared/marketingskills/skills/programmatic-seo"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/prospecting",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/prospecting"
+      ],
+      "codex": [
+        {
+          "name": "prospecting",
+          "path": "skills/shared/marketingskills/skills/prospecting"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/public-relations",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/public-relations"
+      ],
+      "codex": [
+        {
+          "name": "public-relations",
+          "path": "skills/shared/marketingskills/skills/public-relations"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/referrals",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/referrals"
+      ],
+      "codex": [
+        {
+          "name": "referrals",
+          "path": "skills/shared/marketingskills/skills/referrals"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/reverse-engineer-marketing",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/reverse-engineer-marketing"
+      ],
+      "codex": [
+        {
+          "name": "reverse-engineer-marketing",
+          "path": "skills/shared/marketingskills/skills/reverse-engineer-marketing"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/revops",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/revops"
+      ],
+      "codex": [
+        {
+          "name": "revops",
+          "path": "skills/shared/marketingskills/skills/revops"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/sales-enablement",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/sales-enablement"
+      ],
+      "codex": [
+        {
+          "name": "sales-enablement",
+          "path": "skills/shared/marketingskills/skills/sales-enablement"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/schema",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/schema"
+      ],
+      "codex": [
+        {
+          "name": "schema",
+          "path": "skills/shared/marketingskills/skills/schema"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/seo-audit",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/seo-audit"
+      ],
+      "codex": [
+        {
+          "name": "seo-audit",
+          "path": "skills/shared/marketingskills/skills/seo-audit"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/signup",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/signup"
+      ],
+      "codex": [
+        {
+          "name": "signup",
+          "path": "skills/shared/marketingskills/skills/signup"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/site-architecture",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/site-architecture"
+      ],
+      "codex": [
+        {
+          "name": "site-architecture",
+          "path": "skills/shared/marketingskills/skills/site-architecture"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/sms",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/sms"
+      ],
+      "codex": [
+        {
+          "name": "sms",
+          "path": "skills/shared/marketingskills/skills/sms"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/social",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/social"
+      ],
+      "codex": [
+        {
+          "name": "social",
+          "path": "skills/shared/marketingskills/skills/social"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/shared/marketingskills/skills/video",
+      "scope": "marketing",
+      "openclaw": [
+        "agents/marketing/agent/codex-home/skills/video"
+      ],
+      "codex": [
+        {
+          "name": "video",
+          "path": "skills/shared/marketingskills/skills/video"
+        }
+      ],
+      "agent": "marketing"
+    },
+    {
+      "path": "skills/archive/main-workshop/daily-review-closeout",
+      "scope": "archive",
+      "openclaw": [],
+      "codex": [],
+      "agent": "main",
+      "promoted_from": "agents/main/agent/workshop-skills/daily-review-closeout",
+      "note": "Inactive variant: existing workspace skill wins. Preserved for comparison, not installed."
+    },
+    {
+      "path": "skills/agents/main/disk-cleanup-audit",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/disk-cleanup-audit"
+      ],
+      "codex": [
+        {
+          "name": "disk-cleanup-audit",
+          "path": "skills/agents/main/disk-cleanup-audit"
+        }
+      ],
+      "agent": "main",
+      "promoted_from": "agents/main/agent/workshop-skills/disk-cleanup-audit"
+    },
+    {
+      "path": "skills/agents/main/life-system-workflow-artifact-check",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/life-system-workflow-artifact-check"
+      ],
+      "codex": [
+        {
+          "name": "life-system-workflow-artifact-check",
+          "path": "skills/agents/main/life-system-workflow-artifact-check"
+        }
+      ],
+      "agent": "main",
+      "promoted_from": "agents/main/agent/workshop-skills/life-system-workflow-artifact-check"
+    },
+    {
+      "path": "skills/agents/main/nomad-product-content",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/nomad-product-content"
+      ],
+      "codex": [
+        {
+          "name": "nomad-product-content",
+          "path": "skills/agents/main/nomad-product-content"
+        }
+      ],
+      "agent": "main",
+      "promoted_from": "agents/main/agent/workshop-skills/nomad-product-content"
+    },
+    {
+      "path": "skills/agents/main/subtractive-content-persona",
+      "scope": "main",
+      "openclaw": [
+        "workspace/skills/subtractive-content-persona"
+      ],
+      "codex": [
+        {
+          "name": "subtractive-content-persona",
+          "path": "skills/agents/main/subtractive-content-persona"
+        }
+      ],
+      "agent": "main",
+      "promoted_from": "agents/main/agent/workshop-skills/subtractive-content-persona"
+    }
+  ],
+  "claude_files": [
+    {
+      "source": "LLM.md",
+      "target": "CLAUDE.md"
+    },
+    {
+      "source": "BRAND.md",
+      "target": "BRAND.md"
+    },
+    {
+      "source": "TECH_SPEC.md",
+      "target": "TECH_SPEC.md"
+    },
+    {
+      "source": "TASTE.md",
+      "target": "TASTE.md"
+    },
+    {
+      "source": "KOP.md",
+      "target": "KOP.md"
+    },
+    {
+      "source": "PA.md",
+      "target": "PA.md"
+    },
+    {
+      "source": "TDD.md",
+      "target": "TDD.md"
+    },
+    {
+      "source": "DAILY-FEEDBACK-SYSTEM.md",
+      "target": "skills/daily-feedback-system/SKILL.md"
+    },
+    {
+      "source": "OMC.md",
+      "target": "skills/omc/SKILL.md"
+    },
+    {
+      "source": "INFINITY.md",
+      "target": "skills/infinity/SKILL.md"
+    },
+    {
+      "source": "HARNESS-COMPARE.md",
+      "target": "skills/harness-compare/SKILL.md"
+    },
+    {
+      "source": ".agent/workflows/workflow-master.md",
+      "target": "agents/workflow-master.md"
+    },
+    {
+      "source": ".agent/workflows/planner.md",
+      "target": "agents/planner.md"
+    },
+    {
+      "source": ".agent/workflows/developer.md",
+      "target": "agents/developer.md"
+    },
+    {
+      "source": ".agent/workflows/marketer.md",
+      "target": "agents/marketer.md"
+    },
+    {
+      "source": ".agent/workflows/operator.md",
+      "target": "agents/operator.md"
+    }
+  ]
+}

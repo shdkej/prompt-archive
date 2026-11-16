@@ -1,0 +1,4 @@
+interface:
+  display_name: Daily Review Closeout
+  short_description: Close daily reflections through the full review workflow
+  default_prompt: Use $daily-review-closeout to process this daily reflection and complete every required follow-up.
