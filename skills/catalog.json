@@ -1544,6 +1544,79 @@
       ],
       "agent": "main",
       "promoted_from": "agents/main/agent/workshop-skills/subtractive-content-persona"
+    },
+    {
+      "path": "skills/shared/hallmark",
+      "scope": "shared",
+      "openclaw": [],
+      "codex": [
+        {
+          "name": "hallmark",
+          "path": "skills/shared/hallmark"
+        }
+      ],
+      "upstream": {
+        "url": "https://github.com/Nutlope/hallmark",
+        "revision": "04977e15f3dfd6ee4b74c887dac3eb52665d6c92",
+        "path": "skills/hallmark",
+        "license": "MIT",
+        "note": "Official skill subtree, all references/scripts/assets and MIT license retained. Use only audit/study under DESIGN_SYSTEM.md Hallmark profile; no hooks installed."
+      }
+    },
+    {
+      "path": "skills/shared/open-pencil",
+      "scope": "shared",
+      "openclaw": [],
+      "codex": [
+        {
+          "name": "open-pencil",
+          "path": "skills/shared/open-pencil"
+        }
+      ],
+      "upstream": {
+        "url": "https://github.com/open-pencil/open-pencil",
+        "revision": "367a2b95d34d505ecccb7e36a83d17e5ff972b5d",
+        "path": "skills/open-pencil",
+        "license": "MIT",
+        "note": "Official skill subtree, design-authoring reference and MIT license retained. Skill only; existing MCP/app/CLI configuration unchanged."
+      }
+    },
+    {
+      "path": "skills/shared/blender-skills",
+      "scope": "shared",
+      "openclaw": [],
+      "codex": [
+        {
+          "name": "blender-core",
+          "path": "skills/shared/blender-skills/skills/blender-core"
+        },
+        {
+          "name": "blender-hardsurface-modeling",
+          "path": "skills/shared/blender-skills/skills/blender-hardsurface-modeling"
+        },
+        {
+          "name": "blender-pbr-materials",
+          "path": "skills/shared/blender-skills/skills/blender-pbr-materials"
+        },
+        {
+          "name": "blender-export-pipelines",
+          "path": "skills/shared/blender-skills/skills/blender-export-pipelines"
+        },
+        {
+          "name": "blender-asset-qa",
+          "path": "skills/shared/blender-skills/skills/blender-asset-qa"
+        },
+        {
+          "name": "blender-lighting-lookdev",
+          "path": "skills/shared/blender-skills/skills/blender-lighting-lookdev"
+        }
+      ],
+      "upstream": {
+        "url": "https://github.com/EL4CTEO/blender-skills",
+        "revision": "9e7e04a603c125a0d17447ab97112fa70a865067",
+        "license": "MIT",
+        "note": "Community skill repository, complete source snapshot retained. Six asset-production skills registered for Codex. Targets Blender 5.2+/5.3; inspect APIs before using with older installed Blender. No MCP daemon installed."
+      }
     }
   ],
   "claude_files": [

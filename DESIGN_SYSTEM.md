@@ -649,4 +649,27 @@ Mobile 402px 기준:
 - Linear: 마이크로 인터랙션 품질
 - Muji: 철학이 스며든 소재감
 
+### 제작·상호작용 참고
+
+2026-11-18 공식 사이트·문서를 확인했다. 아래는 필요한 표현을 찾는 도구 목록이며, 테마를 통째로 적용하거나 모든 의존성을 설치하라는 뜻이 아니다. 실제 제품의 목적·기술 구성·접근성 기준을 먼저 지킨다.
+
+| 참고 | 사용할 때 | 적용 경계 |
+| --- | --- | --- |
+| [Animista](https://animista.net/) | CSS 등장·퇴장·눌림 모션의 시간과 가속도 비교 | 생성 CSS는 FreeBSD 라이선스. 필요한 키프레임만 가져오고 reduced motion을 보완한다. |
+| [Uiverse](https://uiverse.io/) | 버튼·입력·토글의 상태와 표면 표현 탐색 | UI 요소는 MIT 라이선스. 사이트 전체의 색·레이아웃을 복제하지 않고 선택한 요소의 출처와 고지를 보존한다. |
+| [React Bits](https://reactbits.dev/) | React 텍스트·배경·상호작용의 구현 예제 | 컴포넌트별 런타임·의존성을 확인한다. 정적 Vanilla JS 사이트를 예제 도입만으로 React로 옮기지 않는다. |
+| [Aceternity UI](https://ui.aceternity.com/) | React·Tailwind·Motion 기반 컴포넌트와 작은 상호작용 | 무료 컴포넌트와 유료 블록·템플릿의 이용 조건을 구분한다. 예제의 마케팅 문구·숫자는 가져오지 않는다. |
+| [Codrops](https://tympanus.net/codrops/hub/tutorials/) | 실제 데모·튜토리얼로 장면 전환, WebGL, Three.js 연출 연구 | 데모별 소스·라이선스·성능을 확인한다. 실험 효과를 제품 완료 품질로 간주하지 않는다. |
+| [Cloth Carousel](https://tympanus.net/Demos/ClothCarousel/) · [제작기](https://tympanus.net/codrops/2026/11/17/cloth-posters-webgpu/) | 스크롤·클릭 위치에 반응하는 천의 변형과 손맛 연구 | Nuxt 4·Tailwind 4·GSAP에 DomGL WebGPU·`@alpacka/scroll`을 결합한 물리·셰이더 사례다. 25×33 입자와 XPBD 제약으로 천을 풀고 클릭 지점부터 지연을 달리해 들어 올린다. 정지 시 시뮬레이션·렌더를 멈추고 KTX2를 쓴다. 원 데모는 WebGPU 필수이며 대체 화면이 없으므로 제품에서는 HTML 탐색·키보드·지원 브라우저 경로를 별도로 설계한다. |
+| [Spline](https://spline.design/) | 장면을 시각적으로 편집하고 상태·이벤트를 구성 | [전체 자체 호스팅 내보내기는 Enterprise](https://docs.spline.design/exporting-your-scene/web/exporting-as-self-hosted-project)다. [코드 내보내기](https://docs.spline.design/exporting-your-scene/web/exporting-as-code)의 애니메이션·이벤트 지원은 Vanilla JS·React에 한정되어 Three.js 내보내기와 다르다. 도입 전 배포 경로와 요금제를 확인한다. |
+| [Blender](https://www.blender.org/) | 실루엣·베벨·재질·UV·조명을 갖춘 3D 자산 제작 | 저작 도구이며 웹 런타임을 대체하지 않는다. 모델을 웹에서 쓸 형식·용량으로 내보내고 렌더러에서 다시 확인한다. |
+| [Poly Haven](https://polyhaven.com/) | HDRI·PBR 텍스처·모델의 출발점 | [자산은 CC0](https://polyhaven.com/license). 필요한 해상도만 사용하고 다운로드한 자산·원본 URL·변환 내역을 제품 저장소에 기록한다. |
+| [GSAP](https://gsap.com/docs/v3/) | 카메라·부품·HTML 상태의 시간 순서와 복귀 동작 구성 | 애니메이션 도구이며 모델링·재질·WebGL 렌더링을 대신하지 않는다. 단순 CSS 전환으로 충분하면 의존성을 추가하지 않는다. |
+
+CSS perspective·그림자·hover 효과와 실제 WebGL 장면을 구분한다. 물체를 돌리고 카메라로 접근하며 부품을 분해하는 요청에는 기하 구조·재질·조명·카메라·상태 복귀가 함께 필요하다. 도구를 더 설치했다는 사실보다 실제 화면의 실루엣, 접촉 그림자, 눌림 반응과 복귀 동작으로 결과를 판단한다.
+
+제품에 3D를 적용하면 데스크톱·모바일에서 기본 장면, 회전, 눌림, 선택, 분해, 복귀를 같은 조건으로 캡처해 비교한다. 기능 검증과 시각 품질 판정은 별도로 기록한다. 특정 제품의 다크 팔레트·3D 주인공 요청은 해당 제품 `DESIGN_SYSTEM.md`에 범위와 근거를 남기며 전역 브랜드 선호로 확대하지 않는다.
+
+검토·제작 지원 스킬은 [공용 스킬 안내](skills/README.md#디자인-지원-스킬)를 따른다. Hallmark는 위의 라이트 프로필 범위에서 보조 검토에 사용하고, OpenPencil은 편집 문서·도구 연결을 확인한 뒤 사용한다.
+
 핵심은 **100에서 10을 남기는 편집**이다. 남은 것은 명료하고, 자연스럽고, 따뜻해야 한다.

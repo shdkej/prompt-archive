@@ -100,6 +100,22 @@ openclaw skills --agent main list --json
 
 ## 외부 패키지 갱신
 
+### 디자인 지원 스킬
+
+2026-11-18 아래 저장소의 고정 커밋에서 스킬을 가져왔다. Hallmark·OpenPencil은 각 프로젝트의 공식 스킬이며, Blender 묶음은 커뮤니티 프로젝트다. 원본 `SKILL.md`·지원 파일·MIT 라이선스를 보존했고, 정확한 커밋은 `catalog.json`의 `upstream`에 기록한다.
+
+| 스킬 | 공용 원본 | 사용 경계 |
+| --- | --- | --- |
+| [Hallmark](https://github.com/Nutlope/hallmark/tree/04977e15f3dfd6ee4b74c887dac3eb52665d6c92/skills/hallmark) | [`shared/hallmark/SKILL.md`](shared/hallmark/SKILL.md) | 기존 디자인에서는 [DESIGN_SYSTEM.md의 Hallmark 라이트 프로필](../DESIGN_SYSTEM.md#hallmark-라이트-프로필)을 먼저 적용한다. `audit`·`study`의 보조 진단만 사용하며, 자동 테마·스탬프·훅 설치를 하지 않는다. 이미지 생성 API·렌더 브라우저 등 선택 기능의 실행 의존성은 별도다. |
+| [OpenPencil](https://github.com/open-pencil/open-pencil/tree/367a2b95d34d505ecccb7e36a83d17e5ff972b5d/skills/open-pencil) | [`shared/open-pencil/SKILL.md`](shared/open-pencil/SKILL.md) | `.fig` 검사·변환 또는 실행 중인 에디터 조작에 사용한다. 스킬 설치는 앱·CLI·MCP 설치나 열린 문서 연결을 뜻하지 않는다. 실제 도구 스키마와 문서를 확인하고 변경 뒤 export로 검증한다. |
+| [Blender Skills](https://github.com/EL4CTEO/blender-skills/tree/9e7e04a603c125a0d17447ab97112fa70a865067) | [`shared/blender-skills/skills/blender-core/SKILL.md`](shared/blender-skills/skills/blender-core/SKILL.md) | Blender 공식 배포물이 아닌 MIT 커뮤니티 스킬 묶음이다. 전체 소스를 보존하고 Codex에는 core·hardsurface-modeling·pbr-materials·export-pipelines·asset-qa·lighting-lookdev 6개만 등록한다. 원본은 Blender 5.2+/5.3을 대상으로 하므로 다른 버전에서는 API·엔진 enum을 확인해 작업 스크립트를 조정한다. |
+
+Blender 검증 진입점은 `shared/blender-skills/skills/blender-core/scripts/env_report.py`, `blender-asset-qa/scripts/qa_check.py`, `blender-asset-qa/scripts/review_shots.py`다. 뒤의 두 경로는 같은 `shared/blender-skills/skills/` 아래에 있다. 먼저 환경을 확인하고 해당 `SKILL.md`를 읽는다. 스킬 연결 검증만으로 Blender 버전 호환성·모델 품질·렌더 성공을 확인했다고 보고하지 않는다. Headless CLI 사용에는 Blender MCP 데몬이 필요하지 않다.
+
+이 설치의 적용 대상은 `bash scripts/setup.sh --targets codex --apply`이며 OpenClaw 설정은 변경하지 않는다. `--targets codex --check`로 링크를 검증하고 다음 Codex 턴 또는 새 세션에서 발견 여부를 확인한다. 기존 `skills.load.extraDirs`처럼 공용 디렉터리를 읽는 다른 도구가 있으면 해당 도구의 검색 범위는 기존 설정을 따른다. 캐시·실행 산출물·API 키는 이 원본에 넣지 않는다.
+
+### 기존 외부 패키지
+
 `shared/marketingskills`는 원래 저장소의 전체 소스와 MIT 라이선스를 보존한 스냅샷이다. 출처와 커밋은 `catalog.json`에 있다. `.git`·의존성·캐시는 제외했다. gstack은 설치된 OpenClaw 전용 생성 스킬과 라이선스를 보존하며, 별도 `~/.gstack` 런타임은 그대로 필요하다. gstack의 OpenClaw 전용 진입점은 Codex 기본 목록에 등록하지 않는다.
 
 외부 설치기·ClawHub·gstack 업그레이드는 기존 연결을 실파일로 바꿀 수 있다. 갱신은 별도 위치에서 검토하고 라이선스·지원 파일을 포함해 공용 원본을 갱신한 뒤 다시 `--check`한다. 공용 폴더와 에이전트별 변형을 이름만 보고 합치지 않는다.
