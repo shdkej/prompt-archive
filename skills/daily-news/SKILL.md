@@ -51,7 +51,7 @@ GeekNews 기사를 정리해 AI 뉴스레터를 만드는 스킬입니다.
 
 ## 경로 규칙 (중요)
 
-이 스킬은 임의의 작업 디렉토리에서 호출됩니다. 따라서 **모든 파일 경로는 스킬 디렉토리 `~/.claude/skills/daily-news/` 기준 절대 경로**를 사용합니다. 호출 위치(cwd) 기준 상대 경로를 쓰면 출력이 흩어지고 중복 필터링·피드백 학습이 깨집니다.
+이 스킬은 임의의 작업 디렉토리에서 호출됩니다. 따라서 **모든 파일 경로는 canonical checkout `/home/ubuntu/workspace/prompt-archive/skills/daily-news/` 기준 절대 경로 (OpenClaw에서 `~/.claude/skills/`를 가정하지 않음)**를 사용합니다. 호출 위치(cwd) 기준 상대 경로를 쓰면 출력이 흩어지고 중복 필터링·피드백 학습이 깨집니다.
 
 디렉토리 구성:
 - `SKILL.md` — 이 문서 (모드 라우팅 + 전체 워크플로우)
@@ -61,7 +61,7 @@ GeekNews 기사를 정리해 AI 뉴스레터를 만드는 스킬입니다.
 
 ## 모드 라우팅
 
-작업 시작 전, 모든 모드 공통으로 취향 프로필 `~/.claude/skills/daily-news/preferences.md`(관심/제외 주제, 이미 다룬 Topic ID, 선호 스타일)를 로드하고, 위 "톤 & 문체 규칙" 섹션을 준수합니다.
+작업 시작 전, 모든 모드 공통으로 취향 프로필 `/home/ubuntu/workspace/prompt-archive/skills/daily-news/preferences.md`(관심/제외 주제, 이미 다룬 Topic ID, 선호 스타일)를 로드하고, 위 "톤 & 문체 규칙" 섹션을 준수합니다.
 
 요청을 아래 세 가지 중 하나로 분류하고, 해당 섹션을 그대로 실행합니다.
 
@@ -88,7 +88,7 @@ URL이 없으면 사용자에게 URL 입력을 요청합니다.
 
 ### Step 1.5: 중복 뉴스 차단
 
-뉴스를 쓰기 전에 `~/.claude/skills/daily-news/output/`의 기존 `daily-news-*.md` 파일을 확인합니다.
+뉴스를 쓰기 전에 `/home/ubuntu/workspace/prompt-archive/skills/daily-news/output/`의 기존 `daily-news-*.md` 파일을 확인합니다.
 
 - 입력 URL의 GeekNews Topic ID, 원문 URL, 제목이 기존 출력에 이미 있으면 해당 항목은 제외합니다.
 - 특히 전날 파일(`daily-news-{어제 날짜}*.md`)에 나온 뉴스는 다시 발송하지 않습니다.
@@ -99,9 +99,17 @@ URL이 없으면 사용자에게 URL 입력을 요청합니다.
 
 ### Step 2: GeekNews 페이지 수집
 
-각 URL에 대해 `WebFetch`를 사용하여 페이지를 가져옵니다.
+GeekNews 페이지는 `WebFetch`가 HTTP 403을 반환할 수 있으므로 `curl`을 기본 수집기로 사용합니다. 403/접근 거부/빈 본문이면 WebFetch 재시도 대신 아래 명령을 사용합니다. HTTP 200이어도 차단 안내만 있는 본문은 실패로 판정합니다.
 
-**WebFetch 호출 시 프롬프트**:
+```bash
+curl -fsSL --retry 2 --retry-delay 1 \
+  -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36' \
+  'https://news.hada.io/topic?id={topic_id}'
+```
+
+종료 코드, 페이지의 Topic ID, 제목을 확인합니다. 확인에 실패하면 해당 기사를 제외하며 ID나 제목을 추측하지 않습니다.
+
+**수집 후 확인할 항목**:
 ```
 이 GeekNews 페이지에서 다음 정보를 정확히 추출해줘:
 1. 글 제목 (title)
@@ -111,15 +119,13 @@ URL이 없으면 사용자에게 URL 입력을 요청합니다.
 5. 주요 댓글 내용 (인사이트가 있는 것만)
 ```
 
-**병렬 처리**: URL이 여러 개인 경우 WebFetch를 병렬로 호출합니다.
-
-> 참고: GeekNews는 SSL 인증서 이슈로 `WebFetch`가 실패할 수 있습니다. 실패 시 `curl -sk`로 대체합니다 (모드 2의 Step 2 참조).
+**병렬 처리**: URL이 여러 개인 경우 curl 수집을 병렬 처리할 수 있습니다. TLS 인증서 검증을 끄는 `-k`/`--insecure`는 사용하지 않습니다.
 
 ### Step 3: 원본 문서 수집
 
 Step 2에서 추출한 원본 URL에 대해 `WebFetch`로 상세 내용을 가져옵니다.
 
-**WebFetch 호출 시 프롬프트**:
+**수집 후 확인할 항목**:
 ```
 이 문서/기사의 핵심 내용을 정리해줘:
 1. 주제와 핵심 메시지
@@ -237,7 +243,7 @@ URL 입력 없이 GeekNews에서 자동으로 AI/기술 관련 기사를 찾아 
 
 ### Step 1: 취향 프로필 로드
 
-`~/.claude/skills/daily-news/preferences.md` 파일을 읽어 현재 취향을 파악합니다.
+`/home/ubuntu/workspace/prompt-archive/skills/daily-news/preferences.md` 파일을 읽어 현재 취향을 파악합니다.
 
 확인할 항목:
 - 관심 주제와 가중치 (높음/중간/낮음)
@@ -250,16 +256,16 @@ URL 입력 없이 GeekNews에서 자동으로 AI/기술 관련 기사를 찾아 
 
 다음 두 페이지를 가져옵니다 (병렬 실행).
 
-**주의**: GeekNews는 SSL 인증서 이슈로 `WebFetch`가 실패합니다. 반드시 `curl -sk`를 사용해야 합니다.
+**주의**: GeekNews 목록 수집은 아래와 같이 TLS 검증을 유지하는 `curl -fsSL`을 사용합니다. 403이면 브라우저 User-Agent와 재시도를 적용하며, TLS 검증 우회(`-k`)는 사용하지 않습니다.
 
 **페이지 1: GeekNews 최신글**
 ```bash
-curl -sk https://news.hada.io/new
+curl -fsSL --retry 2 --retry-delay 1 -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36' https://news.hada.io/new
 ```
 
 **페이지 2: GeekNews GN+ (양질의 긴 글)**
 ```bash
-curl -sk https://news.hada.io/plus
+curl -fsSL --retry 2 --retry-delay 1 -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36' https://news.hada.io/plus
 ```
 
 HTML에서 `topic_row` div를 파싱하여 각 글의 topic ID, 제목, 원본 URL, 포인트 수, 댓글 수를 추출합니다.
@@ -268,7 +274,7 @@ HTML에서 `topic_row` div를 파싱하여 각 글의 topic ID, 제목, 원본 U
 
 **개별 기사 상세 내용 조회:**
 ```bash
-curl -sk 'https://news.hada.io/topic?id={topic_id}'
+curl -fsSL --retry 2 --retry-delay 1 -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36' 'https://news.hada.io/topic?id={topic_id}'
 ```
 (zsh에서 `?`가 glob으로 해석되므로 반드시 URL을 따옴표로 감싸야 합니다)
 
@@ -276,11 +282,11 @@ curl -sk 'https://news.hada.io/topic?id={topic_id}'
 
 Step 1에서 로드한 "이미 다룬 Topic ID" 목록과 비교하여 이미 다룬 글을 제외합니다.
 
-추가로 `~/.claude/skills/daily-news/output/` 디렉토리의 기존 뉴스 파일들에서 GeekNews URL을 grep하여 혹시 누락된 topic ID도 확인합니다:
+추가로 `/home/ubuntu/workspace/prompt-archive/skills/daily-news/output/` 디렉토리의 기존 뉴스 파일들에서 GeekNews URL을 grep하여 혹시 누락된 topic ID도 확인합니다:
 
 ```bash
 grep -ohP 'topic\?id=\d+' \
-  ~/.claude/skills/daily-news/output/daily-news-*.md | sort -u
+  /home/ubuntu/workspace/prompt-archive/skills/daily-news/output/daily-news-*.md | sort -u
 ```
 
 전날 뉴스와의 중복은 하드 블로커입니다. `daily-news-{어제 날짜}*.md`에 나온 Topic ID, 원문 URL, 제목과 겹치는 후보는 선별 점수와 무관하게 제외합니다. GeekNews가 아닌 외부 뉴스 URL도 기존 출력 파일에서 같은 URL이나 제목이 발견되면 제외합니다. 제목 비교는 소문자화, 연속 공백 1개로 정리, 말미 매체명/괄호 설명 제거 후 비교합니다.
@@ -342,7 +348,7 @@ GeekNews에서 다음 기사를 선별했습니다:
 
 ### Step 7: preferences.md 업데이트
 
-뉴스 생성 완료 후, 사용한 topic ID를 `~/.claude/skills/daily-news/preferences.md`의 "이미 다룬 Topic ID" 목록에 추가합니다.
+뉴스 생성 완료 후, 사용한 topic ID를 `/home/ubuntu/workspace/prompt-archive/skills/daily-news/preferences.md`의 "이미 다룬 Topic ID" 목록에 추가합니다.
 
 Edit 도구로 preferences.md의 Topic ID 줄에 새 ID를 append합니다.
 
@@ -360,10 +366,10 @@ Edit 도구로 preferences.md의 Topic ID 줄에 새 ID를 append합니다.
 
 ### Step 1: 최근 뉴스 파일 식별
 
-`~/.claude/skills/daily-news/output/` 디렉토리에서 가장 최근 생성된 `daily-news-*.md` 파일을 찾습니다.
+`/home/ubuntu/workspace/prompt-archive/skills/daily-news/output/` 디렉토리에서 가장 최근 생성된 `daily-news-*.md` 파일을 찾습니다.
 
 ```bash
-ls -t ~/.claude/skills/daily-news/output/daily-news-*.md | head -1
+ls -t /home/ubuntu/workspace/prompt-archive/skills/daily-news/output/daily-news-*.md | head -1
 ```
 
 ### Step 2: 피드백 분석
