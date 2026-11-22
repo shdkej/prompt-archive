@@ -36,6 +36,7 @@
 
 - 사용자 장기 맥락: `knowledge-lab/source/openclaw-system/docs/USER_CONTEXT.md`
 - 서비스·저장소 연결: `knowledge-lab/source/openclaw-system/docs/SERVICE_REGISTRY.md`
+- 사용자가 구매한 `minimalcollector.com`은 같은 소속의 앱에 서브도메인을 부여하는 대표 도메인이다. 앱 주소를 정할 때는 Knowledge Lab의 [Minimal Collector 항목](https://github.com/shdkej/knowledge-lab/blob/main/source/openclaw-system/docs/SERVICE_REGISTRY.md#minimal-collector)을 확인한다.
 - 문서 검색·인계·승격 절차: `knowledge-lab/source/openclaw-system/docs/DOCUMENT_SEARCH_PIPELINE.md`
 - 원본·ingest·agent-wiki 경계: `knowledge-lab/README.md`, `knowledge-lab/schema/agent-rules.md`
 - 도메인 워크플로우·스킬·설계 가이드: Prompt Archive의 관련 문서
