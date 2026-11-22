@@ -7,6 +7,12 @@ description: Process Korean daily-review reflections and close the review with t
 
 Use this skill whenever the user sends a daily reflection, daily thoughts, daily review, or a message that clearly describes that day's experiences and asks for 회고. Do not stop after writing the four-section message.
 
+## Trigger and Slack delivery guard (2026-11-22)
+
+- **Start on the first input.** A message headed `오늘의 잡상`, `데일리 잡상`, or otherwise containing the day's reflections is already the trigger. Begin this workflow in that same turn; do not first send only an acknowledgement, ask whether the skill is running, or wait for the user to request it again.
+- **Send the card once.** In Slack, send the final review text as a text-only message in the original thread, then upload the validated PNG exactly once to that same thread with `message(action="upload-file")`. Do not also include the PNG in the text message's `attachments`, forward a tool-returned image, or make a second upload. This avoids the duplicate file-only post observed when text and attachment were combined on 2026-11-22.
+- **Verify one visible image.** Read the original thread after delivery and confirm the review text and exactly one final PNG are present. If a duplicate file-only post appears, delete only that redundant post, re-read the thread, and confirm one PNG remains before reporting completion.
+
 ## Required sequence
 
 **One closeout run means prepare → verify → deliver.** The review body being written or sent is not completion. Do not send the four-section review as an early standalone reply and then leave card/calendar work for a later turn. Prepare every deliverable before the final user-facing closeout.
