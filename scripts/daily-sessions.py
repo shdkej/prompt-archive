@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""오늘(또는 지정 날짜)의 Claude Code 세션 요약 스크립트
+"""오늘(또는 지정 날짜)의 Claude Code 및 Codex 세션 요약 스크립트
 
 사용법:
   python3 daily-sessions.py          # 오늘
@@ -67,9 +67,7 @@ def dir_to_path(project_dir_name):
     return result or ("/" + "-".join(parts))
 
 
-def classify_project(project_dir_name):
-    """프로젝트 디렉토리명에서 원래 경로 복원 후 분류"""
-    path = dir_to_path(project_dir_name)
+def classify_path(path):
     categories = load_categories()
     home = str(Path.home())
     for pattern, category in categories.items():
@@ -77,12 +75,6 @@ def classify_project(project_dir_name):
         if expanded in path:
             return category
     return "기타"
-
-
-def extract_project_name(project_dir_name):
-    """디렉토리명에서 프로젝트 이름 추출"""
-    path = dir_to_path(project_dir_name)
-    return path.rstrip("/").split("/")[-1]
 
 
 def extract_user_messages(filepath, max_messages=10):
@@ -142,7 +134,7 @@ def is_diary_sync_session(filepath):
     return False
 
 
-def find_sessions(target_date):
+def find_claude_sessions(target_date):
     """대상 날짜에 수정된 세션 파일 탐색"""
     sessions = []
     if not CLAUDE_PROJECTS.exists():
@@ -164,12 +156,103 @@ def find_sessions(target_date):
                 sessions.append(
                     {
                         "file": f,
-                        "project_dir": project_dir.name,
+                        "path": dir_to_path(project_dir.name),
+                        "source": "Claude",
                         "mtime": mtime,
                     }
                 )
 
     sessions.sort(key=lambda s: s["mtime"])
+    return sessions
+
+
+def codex_session(filepath, day):
+    """한 세션의 현지 날짜별 실제 사용자 이벤트만 모은다."""
+    messages = []
+    last_time = None
+    cwd = None
+    first_request = True
+    pending = {}
+    with filepath.open(encoding="utf-8", errors="replace") as stream:
+        for line in stream:
+            try:
+                record = json.loads(line)
+            except ValueError:
+                continue
+            if not isinstance(record, dict):
+                continue
+            payload = record.get("payload")
+            if not isinstance(payload, dict):
+                continue
+            if record.get("type") == "session_meta":
+                source = payload.get("source")
+                if isinstance(source, dict) and "subagent" in source:
+                    return None
+                cwd = payload.get("cwd")
+                continue
+            if record.get("type") != "event_msg":
+                continue
+            kind = payload.get("type")
+            if kind == "task_started":
+                pending.clear()
+                continue
+            if kind == "user_message":
+                msg = payload.get("message")
+            elif kind == "item_completed":
+                item = payload.get("item")
+                if not isinstance(item, dict) or item.get("type") != "UserMessage":
+                    continue
+                msg = "\n".join(
+                    part["text"] for part in item.get("content", [])
+                    if isinstance(part, dict) and part.get("type") == "text"
+                    and isinstance(part.get("text"), str)
+                )
+            else:
+                continue
+            if not isinstance(msg, str):
+                continue
+            msg = msg.strip()
+            if not msg or msg.startswith(("# AGENTS.md instructions for ", "<environment_context>",
+                                          "<INSTRUCTIONS>", "<subagent_notification>")):
+                continue
+            if first_request:
+                if DIARY_SYNC_MARKER in msg:
+                    return None
+                first_request = False
+            try:
+                stamp = datetime.fromisoformat(record["timestamp"].replace("Z", "+00:00")).astimezone()
+            except (KeyError, ValueError, AttributeError):
+                continue
+            if stamp.date() != day:
+                continue
+            # 일부 버전은 동일 턴에서 두 이벤트 형식으로 같은 발화를 남긴다.
+            other = "item_completed" if kind == "user_message" else "user_message"
+            if pending.get((msg, other), 0):
+                pending[msg, other] -= 1
+                continue
+            pending[msg, kind] = pending.get((msg, kind), 0) + 1
+            last_time = stamp.replace(tzinfo=None)
+            if len(messages) < 5:
+                messages.append(msg[:200])
+    if messages and isinstance(cwd, str):
+        return {"path": cwd, "source": "Codex", "mtime": last_time, "messages": messages}
+
+
+def find_codex_sessions(target_date):
+    day = datetime.strptime(target_date, "%Y-%m-%d")
+    root = Path(os.environ.get("CODEX_HOME") or Path.home() / ".codex")
+    sessions = []
+    for folder in ("sessions", "archived_sessions"):
+        for filepath in (root / folder).rglob("rollout-*.jsonl"):
+            try:
+                # 시작 디렉터리가 전날이어도 오늘 재개한 세션을 포함한다.
+                if filepath.stat().st_mtime < day.timestamp():
+                    continue
+                session = codex_session(filepath, day.date())
+            except FileNotFoundError:
+                continue  # 실행 중 보관 폴더로 이동된 경우
+            if session:
+                sessions.append(session)
     return sessions
 
 
@@ -181,22 +264,25 @@ def main():
 
     print(f"# 세션 요약 - {target_date}\n")
 
-    sessions = find_sessions(target_date)
+    sessions = find_claude_sessions(target_date) + find_codex_sessions(target_date)
+    sessions.sort(key=lambda s: s["mtime"])
     if not sessions:
         print("세션 없음")
         return
 
     by_category = {}
     for s in sessions:
-        cat = classify_project(s["project_dir"])
+        cat = classify_path(s["path"])
         by_category.setdefault(cat, []).append(s)
 
     for cat, items in by_category.items():
         print(f"## {cat}\n")
         for i, s in enumerate(items, 1):
-            project_name = extract_project_name(s["project_dir"])
+            project_name = Path(s["path"]).name or s["path"]
             time_str = s["mtime"].strftime("%H:%M")
-            messages = extract_user_messages(s["file"])
+            messages = s["messages"] if s["source"] == "Codex" else extract_user_messages(s["file"])
+            if s["source"] == "Codex":
+                project_name += " [Codex]"
 
             print(f"**{i}. {project_name}** ({time_str})")
             if messages:

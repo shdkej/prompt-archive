@@ -162,6 +162,7 @@ ORDER BY last_visit_time DESC;
 2. **세션 수집 스크립트 실행**
    - 오늘: `python3 ~/workspace/prompt-archive/scripts/daily-sessions.py`
    - 어제/특정일: `python3 ~/workspace/prompt-archive/scripts/daily-sessions.py YYYY-MM-DD`
+   - Claude Code와 Codex 기록을 함께 수집한다. Codex는 `$CODEX_HOME`(기본 `~/.codex`)의 활성·보관 세션에서 현지 날짜에 작성한 사용자 요청을 세션당 최대 5개 표시한다.
 3. **Session Log 기록**: 출력(프로젝트명/분류/사용자 메시지) 기반 핵심 작업 요약을 일일 템플릿 "오늘의 작업 목록" 테이블(업무/개인/기타)에 **반드시 포함**. Google Drive 업로드 대상에 포함.
 4. 필요 시 개별 JSONL 읽어 상세 보강
 5. **Obsidian 다이어리 전체 읽기** (읽기 전용, 필수): 당일 `~/Obsidian/diary/YYYY-MM.md`의 `## MM-DD` 섹션 + `inbox.md` + 당일 수정된 관련 노트를 읽어서 다음을 모두 수집·반영:
