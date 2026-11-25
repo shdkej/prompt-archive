@@ -6,7 +6,7 @@ description: >-
 
 # Daily Review Closeout
 
-Use this skill whenever the user sends a daily reflection, daily thoughts, daily review, or a message that clearly describes that day's experiences and asks for 회고. Do not stop after writing the four-section message.
+Use this skill when a daily reflection is submitted, including a message headed `오늘의 잡상`, `데일리 잡상`, `오늘 회고`, or `데일리 회고`, or dated notes describing that day's experiences. These are triggers on their own; do not wait for an extra request to process them as a review. Do not stop after writing the four-section message.
 
 ## Trigger and Slack delivery guard (2026-11-25)
 
