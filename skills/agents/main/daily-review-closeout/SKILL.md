@@ -1,6 +1,7 @@
 ---
 name: daily-review-closeout
-description: Process Korean daily-review reflections and close the review with the required record, spaced learning, archive card, the review-only calendar, and follow-up checks.
+description: >-
+  필수 자동 트리거: 사용자가 Slack·채팅에 `오늘의 잡상`, `데일리 잡상`, `오늘 회고`, `데일리 회고`를 보내거나 날짜가 붙은 하루 경험·생각을 남기면 즉시 이 스킬을 읽고 같은 턴에서 회고 마감을 시작한다. “회고해줘”라는 별도 요청을 기다리거나 해석만 답하지 않는다. 4단 회고, 기록, 카드, 회고 캘린더, Threads 후보, 원 스레드 전달까지 마친다.
 ---
 
 # Daily Review Closeout
