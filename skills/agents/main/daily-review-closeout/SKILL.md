@@ -7,11 +7,12 @@ description: Process Korean daily-review reflections and close the review with t
 
 Use this skill whenever the user sends a daily reflection, daily thoughts, daily review, or a message that clearly describes that day's experiences and asks for 회고. Do not stop after writing the four-section message.
 
-## Trigger and Slack delivery guard (2026-11-22)
+## Trigger and Slack delivery guard (2026-11-25)
 
 - **Start on the first input.** A message headed `오늘의 잡상`, `데일리 잡상`, or otherwise containing the day's reflections is already the trigger. Begin this workflow in that same turn; do not first send only an acknowledgement, ask whether the skill is running, or wait for the user to request it again.
-- **Send the card once.** In Slack, send the final review text as a text-only message in the original thread, then upload the validated PNG exactly once to that same thread with `message(action="upload-file")`. Do not also include the PNG in the text message's `attachments`, forward a tool-returned image, or make a second upload. This avoids the duplicate file-only post observed when text and attachment were combined on 2026-11-22.
-- **Verify one visible image.** Read the original thread after delivery and confirm the review text and exactly one final PNG are present. If a duplicate file-only post appears, delete only that redundant post, re-read the thread, and confirm one PNG remains before reporting completion.
+- **Keep visual QA out of Slack delivery.** In this Slack path, an image block emitted from `functions.exec` with `image(...)` or `generatedImage(...)` becomes its own visible file post. Never use those helpers to inspect the card: that is not an internal preview. Inspect through a non-posting local visual tool (for example, the available desktop screenshot/viewer) and do not forward its image result. If no private visual inspection path is available, mark visual QA blocked; do not create a second Slack image as a workaround.
+- **Send the card once.** In Slack, send the final review text as a text-only message in the original thread, then use exactly one `message(action="upload-file")` call for the validated PNG in that thread. Do not put the PNG in text-message attachments, emit a screenshot/image block, or retry an upload whose receipt is uncertain; inspect the original thread first. The explicit upload is the only permitted Slack media post for this closeout.
+- **Verify one visible image.** Read the original thread after delivery and confirm the review text and exactly one final PNG are present. Count the thread's actual file attachments, not just tool receipts. If a duplicate file-only post appears, delete only the confirmed redundant post by its message timestamp, re-read the thread, and confirm one final PNG remains before reporting completion.
 
 ## Required sequence
 
