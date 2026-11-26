@@ -1,4 +1,4 @@
 interface:
-  display_name: Daily Review Closeout
-  short_description: Close daily reflections through the full review workflow
-  default_prompt: Use $daily-review-closeout to process this daily reflection and complete every required follow-up.
+  display_name: 데일리 회고 마감
+  short_description: 하루의 회고를 기록·카드·캘린더·전달까지 마감합니다
+  default_prompt: $daily-review-closeout 스킬을 사용해 이 하루 회고를 처리하고 필수 후속 절차를 모두 마쳐 주세요.
