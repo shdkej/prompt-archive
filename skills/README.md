@@ -13,6 +13,8 @@
 
 2026-11-26 사용자 요청으로 기존 `shared/`와 `agents/main/`·`agents/hj/`의 원본을 `skills/<스킬명>/`으로 모았다. `archive/main-workshop/daily-review-closeout`의 유효한 절차는 [`daily-review-closeout/SKILL.md`](daily-review-closeout/SKILL.md)에 통합하고 보관본과 카탈로그 중복 항목은 제거했다. 본문 선발송·크레용 카드·Tomorrow Expectation의 명언 대체 등 현행 정본과 충돌하는 과거 지침은 채택하지 않았다. 과거 원문은 Git 이력에서 확인한다. 이어서 `native/`의 7개 원본도 같은 깊이로 옮기고 빈 `native/`를 제거했다. 기존 `codex-home/skills` 실행 경로와 역할별 범위는 유지한다.
 
+OpenClaw는 `codex-home/skills/`를 스킬 검색 루트로 사용하지 않는다. native 전용 스킬도 해당 역할의 `<workspace>/skills/`에 같은 원본 링크를 등록해야 `skills_search`·`skills_read`로 발견된다. 이미 공용 검색에서 발견되는 `frontend-design`·`daily-news`·마케팅 스킬은 역할 워크스페이스에 중복 등록하지 않는다. native 실행 링크는 기존 호출 호환을 위해 유지한다.
+
 OpenClaw 번들·플러그인 패키지의 스킬, Codex `.system`, 설치 캐시, 폐기된 Workshop 제안 이력은 각 도구가 관리한다. 이 저장소의 스킬로 복제하지 않는다. 활성 Workshop 파일은 해당 워크스페이스 스킬로 승격했다. Workshop은 루트 밖 링크를 허용하지 않으므로 그 경로에 외부 링크를 만들지 않는다. Workshop 자동 학습 설정은 변경하지 않았다.
 
 ## Codex의 스킬 선택 순서
@@ -111,6 +113,8 @@ openclaw skills --agent main list --json
 native 추가 이전에서는 204개 파일의 내용·실행 권한과 카탈로그의 호출 이름·역할 범위가 그대로임을 확인했다. 설치 테스트 12개, 여섯 프로필의 경로 해석, native 실행 경로의 `SKILL.md` 이름 확인을 통과했다. 링크 8개만 재연결했고 전체 165개 연결 검사와 재적용 변경 0건을 확인했다. 개별 스킬 실행과 다른 PC 적용은 별도다.
 
 frontend-design 통합 후에도 설치 테스트 12개와 전체 연결 검사를 통과했다. 여섯 프로필이 단일 원본을 참조하고 OpenClaw main에서 통합 스킬 한 개를 발견했다. 기존 브랜드의 작은 수정·새 주제의 디자인·모바일/감소 모션 개선 세 상황에 지침을 적용해 충돌·누락을 검토했다. 실제 웹 제작이나 렌더 품질 실험은 수행하지 않았다.
+
+실제 Gateway 호출 검증에서 native 링크만으로는 OpenClaw 이름 검색에 나타나지 않는 누락을 발견했다. 2026-11-26 main 3개·design 3개·genie 1개를 해당 워크스페이스 검색 경로에도 연결했다. native 발견 회귀 테스트는 수정 전 7개 누락을 재현했고 수정 후 설치 테스트 13개·전체 172개 연결·7개 에이전트의 역할 범위 검사를 통과했다. main/design/genie는 `skills_search`와 `skills_read`로 7개 역할별 연결을 직접 읽고 샘플에 적용했으며, humanize-korean·impeccable 보조 참조도 읽었다. 실제 호출·오류·검증 한계는 Knowledge Lab `source/openclaw-system/docs/runtime/OPENCLAW_RUNTIME_MAINTENANCE.md`의 스킬 실제 호출 검증 절에 기록한다.
 
 ## 외부 패키지 갱신
 

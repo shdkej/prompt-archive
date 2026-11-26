@@ -612,7 +612,8 @@
       "path": "skills/design-taste-frontend",
       "scope": "design",
       "openclaw": [
-        "agents/design/agent/codex-home/skills/design-taste-frontend"
+        "agents/design/agent/codex-home/skills/design-taste-frontend",
+        "workspace-design/skills/design-taste-frontend"
       ],
       "codex": [
         {
@@ -626,7 +627,8 @@
       "path": "skills/emil-design-eng",
       "scope": "design",
       "openclaw": [
-        "agents/design/agent/codex-home/skills/emil-design-eng"
+        "agents/design/agent/codex-home/skills/emil-design-eng",
+        "workspace-design/skills/emil-design-eng"
       ],
       "codex": [
         {
@@ -640,7 +642,8 @@
       "path": "skills/impeccable",
       "scope": "design",
       "openclaw": [
-        "agents/design/agent/codex-home/skills/impeccable"
+        "agents/design/agent/codex-home/skills/impeccable",
+        "workspace-design/skills/impeccable"
       ],
       "codex": [
         {
@@ -654,7 +657,8 @@
       "path": "skills/deep-research",
       "scope": "genie",
       "openclaw": [
-        "agents/genie/agent/codex-home/skills/deep-research"
+        "agents/genie/agent/codex-home/skills/deep-research",
+        "workspace-genie/skills/deep-research"
       ],
       "codex": [
         {
@@ -668,7 +672,8 @@
       "path": "skills/canvas-design",
       "scope": "main",
       "openclaw": [
-        "agents/main/agent/codex-home/skills/canvas-design"
+        "agents/main/agent/codex-home/skills/canvas-design",
+        "workspace/skills/canvas-design"
       ],
       "codex": [
         {
@@ -696,7 +701,8 @@
       "path": "skills/deep-research",
       "scope": "main",
       "openclaw": [
-        "agents/main/agent/codex-home/skills/deep-research"
+        "agents/main/agent/codex-home/skills/deep-research",
+        "workspace/skills/deep-research"
       ],
       "codex": [
         {
@@ -724,7 +730,8 @@
       "path": "skills/humanize-korean",
       "scope": "main",
       "openclaw": [
-        "agents/main/agent/codex-home/skills/humanize-korean"
+        "agents/main/agent/codex-home/skills/humanize-korean",
+        "workspace/skills/humanize-korean"
       ],
       "codex": [
         {

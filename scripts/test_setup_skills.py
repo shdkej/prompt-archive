@@ -211,5 +211,36 @@ class SetupSkillsTests(unittest.TestCase):
         self.assertFalse(target.exists())
 
 
+class CatalogDiscoveryTests(unittest.TestCase):
+    def test_native_skills_are_also_discoverable_by_openclaw(self):
+        # OpenClaw does not discover CODEX_HOME/skills. Every native binding
+        # needs the same source in a shared root or its own workspace root.
+        catalog = json.loads((SCRIPT.parent.parent / 'skills/catalog.json').read_text())
+        packages = catalog['packages']
+        shared_sources = {
+            entry['path']
+            for package in packages if package['scope'] == 'shared'
+            for entry in package.get('codex', [])
+        }
+        shared_sources.update(
+            package['path'] for package in packages
+            if any(target.startswith('skills/') for target in package.get('openclaw', []))
+        )
+        for package in packages:
+            if not any('/codex-home/skills/' in target
+                       for target in package.get('openclaw', [])):
+                continue
+            agent = package['agent']
+            workspace = 'workspace' if agent == 'main' else f'workspace-{agent}'
+            discoverable = package['path'] in shared_sources or any(
+                other['path'] == package['path'] and other.get('agent') == agent
+                and any(target.startswith(f'{workspace}/skills/')
+                        for target in other.get('openclaw', []))
+                for other in packages
+            )
+            with self.subTest(agent=agent, source=package['path']):
+                self.assertTrue(discoverable, 'native-only link is invisible to OpenClaw')
+
+
 if __name__ == '__main__':
     unittest.main()
