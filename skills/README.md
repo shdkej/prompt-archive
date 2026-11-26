@@ -6,12 +6,13 @@
 
 | 위치 | 역할 |
 | --- | --- |
-| `<스킬명>/` | 공용·역할별 스킬 원본을 같은 깊이에 보관. 실제 설치 범위는 `catalog.json`의 `scope`·`agent`로 구분 |
+| [custom/](custom/) | 직접 제작한 스킬 원본 |
+| [external/](external/) | 외부 스킬 패키지와 그 로컬 수정본 |
 | `catalog.json` | 패키지 원본, 기존 OpenClaw 경로, Codex/Claude 프로필, 외부 출처의 설치 목록 |
 
-마케팅 에이전트의 53개 연결은 `marketingskills/skills`를 함께 참조한다. 외부 패키지는 라이선스·지원 파일을 포함한 내부 구조를 보존한다. `frontend-design/`은 공용·main이 함께 사용하는 단일 원본이다. 공용 버전의 타이포·색·배치 기준과 main 버전의 계획·검토·UI 문구·접근성 지침을 통합했다. 사용자 요구와 기존 브랜드를 우선하며, 라이선스는 원문 그대로 유지한다. 카탈로그의 shared·main 항목은 같은 원본에 대한 설치 연결이며 별도 스킬이 아니다. `deep-research/`도 한 원본에 main·genie 연결을 유지한다.
+마케팅 에이전트의 53개 연결은 `external/marketingskills/skills`를 함께 참조한다. 외부 패키지는 라이선스·지원 파일을 포함한 내부 구조를 보존한다. `external/frontend-design/`은 공용·main이 함께 사용하는 단일 원본이다. 공용 버전의 타이포·색·배치 기준과 main 버전의 계획·검토·UI 문구·접근성 지침을 통합했다. 사용자 요구와 기존 브랜드를 우선하며, 라이선스는 원문 그대로 유지한다. 카탈로그의 shared·main 항목은 같은 원본에 대한 설치 연결이며 별도 스킬이 아니다. `external/deep-research/`도 한 원본에 main·genie 연결을 유지한다.
 
-2026-11-26 사용자 요청으로 기존 `shared/`와 `agents/main/`·`agents/hj/`의 원본을 `skills/<스킬명>/`으로 모았다. `archive/main-workshop/daily-review-closeout`의 유효한 절차는 [`daily-review-closeout/SKILL.md`](daily-review-closeout/SKILL.md)에 통합하고 보관본과 카탈로그 중복 항목은 제거했다. 본문 선발송·크레용 카드·Tomorrow Expectation의 명언 대체 등 현행 정본과 충돌하는 과거 지침은 채택하지 않았다. 과거 원문은 Git 이력에서 확인한다. 이어서 `native/`의 7개 원본도 같은 깊이로 옮기고 빈 `native/`를 제거했다. 기존 `codex-home/skills` 실행 경로와 역할별 범위는 유지한다.
+2026-11-26 사용자 요청으로 기존 `shared/`와 `agents/main/`·`agents/hj/`의 원본을 `skills/<스킬명>/`으로 모았다. `archive/main-workshop/daily-review-closeout`의 유효한 절차는 [`custom/daily-review-closeout/SKILL.md`](custom/daily-review-closeout/SKILL.md)에 통합하고 보관본과 카탈로그 중복 항목은 제거했다. 본문 선발송·크레용 카드·Tomorrow Expectation의 명언 대체 등 현행 정본과 충돌하는 과거 지침은 채택하지 않았다. 과거 원문은 Git 이력에서 확인한다. 이어서 `native/`의 7개 원본도 같은 깊이로 옮기고 빈 `native/`를 제거했다. 기존 `codex-home/skills` 실행 경로와 역할별 범위는 유지한다.
 
 OpenClaw는 `codex-home/skills/`를 스킬 검색 루트로 사용하지 않는다. native 전용 스킬도 해당 역할의 `<workspace>/skills/`에 같은 원본 링크를 등록해야 `skills_search`·`skills_read`로 발견된다. 이미 공용 검색에서 발견되는 `frontend-design`·`daily-news`·마케팅 스킬은 역할 워크스페이스에 중복 등록하지 않는다. native 실행 링크는 기존 호출 호환을 위해 유지한다.
 
@@ -31,8 +32,8 @@ OpenClaw 번들·플러그인 패키지의 스킬, Codex `.system`, 설치 캐�
 새 사용자 스킬도 이 저장소를 원본으로 사용한다. 직접 만든 스킬과 GitHub·ClawHub 등에서 가져온 스킬에 같은 기준을 적용한다. 사용자가 별도 설치 위치를 지정하면 그 요청을 우선한다.
 
 1. `catalog.json`과 기존 파일에서 같은 이름·출처가 있는지 확인한다. 기존 항목의 업데이트인지 새 설치인지 구분하고, 이름만 같은 다른 변형을 덮어쓰지 않는다.
-2. 기본 원본 위치는 공용·역할 전용 모두 `skills/<스킬명>`이다. 역할 범위는 폴더가 아니라 카탈로그로 지정한다. 동명 스킬은 기존 내용과 비교해 통합 여부를 판단하고, 역할별 설치만을 이유로 원본을 복제하지 않는다. 원본 위치 통합을 설치 범위 확대로 해석하지 않는다.
-3. 설치기의 목적지 옵션을 명시한다. Codex `skill-installer`의 GitHub 다운로드 스크립트는 `--dest <이-PC의-prompt-archive>/skills`를 지원한다. 자체 위치에만 설치하는 도구는 설치 결과를 검토한 뒤 필요한 지원 파일·라이선스·출처 버전과 함께 공용 원본으로 편입한다. 공개 가능한 소스만 Git에 넣으며 인증·사용자 데이터·실행 산출물은 로컬에 둔다.
+2. 직접 제작 원본은 `skills/custom/<스킬명>`, 외부 원본은 `skills/external/<패키지명>`에 둔다. 역할 범위는 폴더가 아니라 카탈로그로 지정한다. 동명 스킬은 기존 내용과 비교해 통합 여부를 판단하고, 역할별 설치만을 이유로 원본을 복제하지 않는다. 원본 위치 통합을 설치 범위 확대로 해석하지 않는다.
+3. 설치기의 목적지 옵션을 명시한다. Codex `skill-installer`의 GitHub 다운로드 스크립트는 `--dest <이-PC의-prompt-archive>/skills/external`를 지원한다. 자체 위치에만 설치하는 도구는 설치 결과를 검토한 뒤 필요한 지원 파일·라이선스·출처 버전과 함께 공용 원본으로 편입한다. 공개 가능한 소스만 Git에 넣으며 인증·사용자 데이터·실행 산출물은 로컬에 둔다.
 4. `catalog.json`의 `packages`에 원본 `path`, 설치 `scope`, OpenClaw 연결 경로와 필요한 Codex/Claude 등록을 추가한다. `agent` 필드는 OpenClaw 역할 전용 연결에만 넣는다. 외부 패키지 출처와 고정 버전·커밋도 함께 기록한다. `codex` 목록은 Codex와 Claude 설치에 공통으로 사용한다.
 5. `scripts/setup.sh` 또는 `scripts/setup.ps1`로 필요한 도구만 미리보기·적용·`--check`한다. 기존 파일은 비교·백업 후 연결하며, 에이전트의 `codex-home/skills`도 새 복사본 대신 원본 링크를 사용한다.
 6. 대상 도구에서 새 스킬이 실제로 발견되는지 확인하고, 원본·목록·문서의 요청 변경만 main에 commit/push한다. 완료 보고에 원본 경로, 설치 범위, 발견 여부와 커밋을 남긴다. 다른 PC는 작업 시작 전에 같은 커밋을 받아 연결을 갱신한다.
@@ -41,10 +42,10 @@ OpenClaw 번들·플러그인 패키지의 스킬, Codex `.system`, 설치 캐�
 
 ```json
 {
-  "path": "skills/<스킬명>",
+  "path": "skills/custom/<스킬명>",
   "scope": "shared",
   "openclaw": ["skills/<스킬명>"],
-  "codex": [{"name": "<스킬명>", "path": "skills/<스킬명>"}]
+  "codex": [{"name": "<스킬명>", "path": "skills/custom/<스킬명>"}]
 }
 ```
 
@@ -124,11 +125,11 @@ frontend-design 통합 후에도 설치 테스트 12개와 전체 연결 검사�
 
 | 스킬 | 공용 원본 | 사용 경계 |
 | --- | --- | --- |
-| [Hallmark](https://github.com/Nutlope/hallmark/tree/04977e15f3dfd6ee4b74c887dac3eb52665d6c92/skills/hallmark) | [`hallmark/SKILL.md`](hallmark/SKILL.md) | 기존 디자인에서는 [DESIGN_SYSTEM.md의 Hallmark 라이트 프로필](../DESIGN_SYSTEM.md#hallmark-라이트-프로필)을 먼저 적용한다. `audit`·`study`의 보조 진단만 사용하며, 자동 테마·스탬프·훅 설치를 하지 않는다. 이미지 생성 API·렌더 브라우저 등 선택 기능의 실행 의존성은 별도다. |
-| [OpenPencil](https://github.com/open-pencil/open-pencil/tree/367a2b95d34d505ecccb7e36a83d17e5ff972b5d/skills/open-pencil) | [`open-pencil/SKILL.md`](open-pencil/SKILL.md) | `.fig` 검사·변환 또는 실행 중인 에디터 조작에 사용한다. 스킬 설치는 앱·CLI·MCP 설치나 열린 문서 연결을 뜻하지 않는다. 실제 도구 스키마와 문서를 확인하고 변경 뒤 export로 검증한다. |
-| [Blender Skills](https://github.com/EL4CTEO/blender-skills/tree/9e7e04a603c125a0d17447ab97112fa70a865067) | [`blender-skills/skills/blender-core/SKILL.md`](blender-skills/skills/blender-core/SKILL.md) | Blender 공식 배포물이 아닌 MIT 커뮤니티 스킬 묶음이다. 전체 소스를 보존하고 Codex에는 core·hardsurface-modeling·pbr-materials·export-pipelines·asset-qa·lighting-lookdev 6개만 등록한다. 원본은 Blender 5.2+/5.3을 대상으로 하므로 다른 버전에서는 API·엔진 enum을 확인해 작업 스크립트를 조정한다. |
+| [Hallmark](https://github.com/Nutlope/hallmark/tree/04977e15f3dfd6ee4b74c887dac3eb52665d6c92/skills/hallmark) | [`external/hallmark/SKILL.md`](external/hallmark/SKILL.md) | 기존 디자인에서는 [DESIGN_SYSTEM.md의 Hallmark 라이트 프로필](../DESIGN_SYSTEM.md#hallmark-라이트-프로필)을 먼저 적용한다. `audit`·`study`의 보조 진단만 사용하며, 자동 테마·스탬프·훅 설치를 하지 않는다. 이미지 생성 API·렌더 브라우저 등 선택 기능의 실행 의존성은 별도다. |
+| [OpenPencil](https://github.com/open-pencil/open-pencil/tree/367a2b95d34d505ecccb7e36a83d17e5ff972b5d/skills/open-pencil) | [`external/open-pencil/SKILL.md`](external/open-pencil/SKILL.md) | `.fig` 검사·변환 또는 실행 중인 에디터 조작에 사용한다. 스킬 설치는 앱·CLI·MCP 설치나 열린 문서 연결을 뜻하지 않는다. 실제 도구 스키마와 문서를 확인하고 변경 뒤 export로 검증한다. |
+| [Blender Skills](https://github.com/EL4CTEO/blender-skills/tree/9e7e04a603c125a0d17447ab97112fa70a865067) | [`external/blender-skills/skills/blender-core/SKILL.md`](external/blender-skills/skills/blender-core/SKILL.md) | Blender 공식 배포물이 아닌 MIT 커뮤니티 스킬 묶음이다. 전체 소스를 보존하고 Codex에는 core·hardsurface-modeling·pbr-materials·export-pipelines·asset-qa·lighting-lookdev 6개만 등록한다. 원본은 Blender 5.2+/5.3을 대상으로 하므로 다른 버전에서는 API·엔진 enum을 확인해 작업 스크립트를 조정한다. |
 
-Blender 검증 진입점은 `blender-skills/skills/blender-core/scripts/env_report.py`, `blender-asset-qa/scripts/qa_check.py`, `blender-asset-qa/scripts/review_shots.py`다. 뒤의 두 경로는 같은 `blender-skills/skills/` 아래에 있다. 먼저 환경을 확인하고 해당 `SKILL.md`를 읽는다. 스킬 연결 검증만으로 Blender 버전 호환성·모델 품질·렌더 성공을 확인했다고 보고하지 않는다. Headless CLI 사용에는 Blender MCP 데몬이 필요하지 않다.
+Blender 검증 진입점은 `external/blender-skills/skills/blender-core/scripts/env_report.py`, `blender-asset-qa/scripts/qa_check.py`, `blender-asset-qa/scripts/review_shots.py`다. 뒤의 두 경로는 같은 `external/blender-skills/skills/` 아래에 있다. 먼저 환경을 확인하고 해당 `SKILL.md`를 읽는다. 스킬 연결 검증만으로 Blender 버전 호환성·모델 품질·렌더 성공을 확인했다고 보고하지 않는다. Headless CLI 사용에는 Blender MCP 데몬이 필요하지 않다.
 
 Codex만 설치하려면 `bash scripts/setup.sh --targets codex --apply`와 `--targets codex --check`를 사용한다. 이 경우 OpenClaw 설정은 변경하지 않는다. OpenClaw에도 설치하려면 `--targets openclaw,codex`를 선택한다. 세 패키지는 기존 공용 검색 범위를 유지하도록 카탈로그에 OpenClaw 공용 연결도 등록되어 있다. 다음 Codex 턴 또는 새 세션에서 발견 여부를 확인한다. 캐시·실행 산출물·API 키는 이 원본에 넣지 않는다.
 

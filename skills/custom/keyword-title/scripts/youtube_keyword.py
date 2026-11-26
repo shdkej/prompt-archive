@@ -12,7 +12,7 @@ YouTube Data API v3 → keyword-title 유튜브 모드용 Searchability 신호.
 
 키 위치 (우선순위):
   1) 환경변수 GOG_YOUTUBE_API_KEY
-  2) skills/keyword-title/.env  (GOG_YOUTUBE_API_KEY=...)
+  2) skills/custom/keyword-title/.env  (GOG_YOUTUBE_API_KEY=...)
 
 쿼터 주의: search.list = 100 units/호출, videos.list = 1 unit. 일일 기본 10,000 units.
 """
@@ -118,7 +118,7 @@ def main():
     key = load_key()
     if not key:
         print(json.dumps({"ok": False, "reason": "no_api_key",
-                          "hint": "GOG_YOUTUBE_API_KEY 환경변수 또는 skills/keyword-title/.env 필요. "
+                          "hint": "GOG_YOUTUBE_API_KEY 환경변수 또는 skills/custom/keyword-title/.env 필요. "
                                   "키 없으면 스킬은 LLM 추론으로 진행."}, ensure_ascii=False))
         return
 

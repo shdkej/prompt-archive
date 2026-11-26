@@ -8,6 +8,6 @@ gather
 .vibe-ready/
 .env
 **/.env
-skills/keyword-title/outputs/
+skills/custom/keyword-title/outputs/
 __pycache__/
 *.pyc

@@ -129,7 +129,7 @@ python3 scripts/datalab_trend.py --keywords "키워드1,키워드2" --months 6 -
 
 ### Fallback
 - `ok=false`(키 없음/HTTP 오류)면 **기존 LLM 추정값으로 그대로 진행**. 외부 API는 정확도 보강일 뿐, 없어도 스킬은 동작한다.
-- 키는 `NAVER_CLIENT_ID`/`NAVER_CLIENT_SECRET` 환경변수 또는 `skills/keyword-title/.env` (gitignore됨).
+- 키는 `NAVER_CLIENT_ID`/`NAVER_CLIENT_SECRET` 환경변수 또는 `skills/custom/keyword-title/.env` (gitignore됨).
 
 > 데이터랩은 **상대값(0~100)**만 준다. 절대 검색량·연관어는 아래 검색광고 API로 보강.
 

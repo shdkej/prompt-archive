@@ -11,7 +11,7 @@
 사용:
   python3 searchad_keyword.py --keywords "신혼여행,세계여행" [--related 10]
 
-키 위치 (우선순위): 환경변수 → skills/keyword-title/.env
+키 위치 (우선순위): 환경변수 → skills/custom/keyword-title/.env
   NAVER_SEARCH_ACCESS_LICENSE
   NAVER_SEARCH_SECRET_KEY
   NAVER_SEARCH_CUSTOMER_ID   ← 검색광고 > 도구 > API 사용관리 의 고객 ID(숫자)

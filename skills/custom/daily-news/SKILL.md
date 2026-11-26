@@ -51,7 +51,7 @@ GeekNews 기사를 정리해 AI 뉴스레터를 만드는 스킬입니다.
 
 ## 경로 규칙 (중요)
 
-이 스킬은 임의의 작업 디렉토리에서 호출됩니다. 따라서 **모든 파일 경로는 canonical checkout `/home/ubuntu/workspace/prompt-archive/skills/daily-news/` 기준 절대 경로 (OpenClaw에서 `~/.claude/skills/`를 가정하지 않음)**를 사용합니다. 호출 위치(cwd) 기준 상대 경로를 쓰면 출력이 흩어지고 중복 필터링·피드백 학습이 깨집니다.
+이 스킬은 임의의 작업 디렉토리에서 호출됩니다. 따라서 **모든 파일 경로는 canonical checkout `/home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/` 기준 절대 경로 (OpenClaw에서 `~/.claude/skills/`를 가정하지 않음)**를 사용합니다. 호출 위치(cwd) 기준 상대 경로를 쓰면 출력이 흩어지고 중복 필터링·피드백 학습이 깨집니다.
 
 디렉토리 구성:
 - `SKILL.md` — 이 문서 (모드 라우팅 + 전체 워크플로우)
@@ -61,7 +61,7 @@ GeekNews 기사를 정리해 AI 뉴스레터를 만드는 스킬입니다.
 
 ## 모드 라우팅
 
-작업 시작 전, 모든 모드 공통으로 취향 프로필 `/home/ubuntu/workspace/prompt-archive/skills/daily-news/preferences.md`(관심/제외 주제, 이미 다룬 Topic ID, 선호 스타일)를 로드하고, 위 "톤 & 문체 규칙" 섹션을 준수합니다.
+작업 시작 전, 모든 모드 공통으로 취향 프로필 `/home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/preferences.md`(관심/제외 주제, 이미 다룬 Topic ID, 선호 스타일)를 로드하고, 위 "톤 & 문체 규칙" 섹션을 준수합니다.
 
 요청을 아래 세 가지 중 하나로 분류하고, 해당 섹션을 그대로 실행합니다.
 
@@ -88,7 +88,7 @@ URL이 없으면 사용자에게 URL 입력을 요청합니다.
 
 ### Step 1.5: 중복 뉴스 차단
 
-뉴스를 쓰기 전에 `/home/ubuntu/workspace/prompt-archive/skills/daily-news/output/`의 기존 `daily-news-*.md` 파일을 확인합니다.
+뉴스를 쓰기 전에 `/home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/output/`의 기존 `daily-news-*.md` 파일을 확인합니다.
 
 - 입력 URL의 GeekNews Topic ID, 원문 URL, 제목이 기존 출력에 이미 있으면 해당 항목은 제외합니다.
 - 특히 전날 파일(`daily-news-{어제 날짜}*.md`)에 나온 뉴스는 다시 발송하지 않습니다.
@@ -207,10 +207,10 @@ Step 2에서 추출한 원본 URL에 대해 `WebFetch`로 상세 내용을 가�
 - `---`는 각 항목 본문 직후, 다음 항목 제목 직전에 둡니다.
 - 발송 전 전체 메시지에서 뉴스 항목 N개라면 항목 사이 구분선 `---`가 최소 N-1개 들어갔는지 확인합니다.
 - 각 뉴스 항목의 제목 줄과 다음 뉴스 항목 제목 줄 사이에는 반드시 `---`가 하나 이상 있어야 합니다.
-- Telegram으로 바로 보낼 때도 먼저 임시 파일에 초안을 저장하고, `python3 /home/ubuntu/workspace/prompt-archive/skills/daily-news/validate_ai_news_format.py <파일>`을 통과한 뒤 발송합니다.
+- Telegram으로 바로 보낼 때도 먼저 임시 파일에 초안을 저장하고, `python3 /home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/validate_ai_news_format.py <파일>`을 통과한 뒤 발송합니다.
 - 검증기가 실패하면 발송하지 말고, `---` 줄을 고친 뒤 다시 검증합니다.
 - 검증기는 모든 GeekNews 링크의 도메인과 숫자 Topic ID를 확인합니다. 제목·링크 대조는 자동 생성 단계에서 후보 페이지를 직접 열어 사람이 확인할 수 있는 근거로 수행하고, 확인한 URL을 그대로 보존합니다. Topic ID를 기억으로 조합하거나 제목만 보고 URL을 새로 만들지 않습니다.
-- 발송 직전에는 반드시 `python3 /home/ubuntu/workspace/prompt-archive/skills/daily-news/validate_ai_news_format.py <파일>`을 실행해 형식·링크 형식 검증을 통과시킨 뒤, 초안의 각 제목과 링크를 원문 페이지에서 한 번 더 대조합니다.
+- 발송 직전에는 반드시 `python3 /home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/validate_ai_news_format.py <파일>`을 실행해 형식·링크 형식 검증을 통과시킨 뒤, 초안의 각 제목과 링크를 원문 페이지에서 한 번 더 대조합니다.
 - 검증기를 통과하지 못한 AI 뉴스는 사용자에게 보내지 않습니다.
 
 **인사말 예시** (매번 다르게):
@@ -243,7 +243,7 @@ URL 입력 없이 GeekNews에서 자동으로 AI/기술 관련 기사를 찾아 
 
 ### Step 1: 취향 프로필 로드
 
-`/home/ubuntu/workspace/prompt-archive/skills/daily-news/preferences.md` 파일을 읽어 현재 취향을 파악합니다.
+`/home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/preferences.md` 파일을 읽어 현재 취향을 파악합니다.
 
 확인할 항목:
 - 관심 주제와 가중치 (높음/중간/낮음)
@@ -282,11 +282,11 @@ curl -fsSL --retry 2 --retry-delay 1 -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWe
 
 Step 1에서 로드한 "이미 다룬 Topic ID" 목록과 비교하여 이미 다룬 글을 제외합니다.
 
-추가로 `/home/ubuntu/workspace/prompt-archive/skills/daily-news/output/` 디렉토리의 기존 뉴스 파일들에서 GeekNews URL을 grep하여 혹시 누락된 topic ID도 확인합니다:
+추가로 `/home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/output/` 디렉토리의 기존 뉴스 파일들에서 GeekNews URL을 grep하여 혹시 누락된 topic ID도 확인합니다:
 
 ```bash
 grep -ohP 'topic\?id=\d+' \
-  /home/ubuntu/workspace/prompt-archive/skills/daily-news/output/daily-news-*.md | sort -u
+  /home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/output/daily-news-*.md | sort -u
 ```
 
 전날 뉴스와의 중복은 하드 블로커입니다. `daily-news-{어제 날짜}*.md`에 나온 Topic ID, 원문 URL, 제목과 겹치는 후보는 선별 점수와 무관하게 제외합니다. GeekNews가 아닌 외부 뉴스 URL도 기존 출력 파일에서 같은 URL이나 제목이 발견되면 제외합니다. 제목 비교는 소문자화, 연속 공백 1개로 정리, 말미 매체명/괄호 설명 제거 후 비교합니다.
@@ -348,7 +348,7 @@ GeekNews에서 다음 기사를 선별했습니다:
 
 ### Step 7: preferences.md 업데이트
 
-뉴스 생성 완료 후, 사용한 topic ID를 `/home/ubuntu/workspace/prompt-archive/skills/daily-news/preferences.md`의 "이미 다룬 Topic ID" 목록에 추가합니다.
+뉴스 생성 완료 후, 사용한 topic ID를 `/home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/preferences.md`의 "이미 다룬 Topic ID" 목록에 추가합니다.
 
 Edit 도구로 preferences.md의 Topic ID 줄에 새 ID를 append합니다.
 
@@ -366,10 +366,10 @@ Edit 도구로 preferences.md의 Topic ID 줄에 새 ID를 append합니다.
 
 ### Step 1: 최근 뉴스 파일 식별
 
-`/home/ubuntu/workspace/prompt-archive/skills/daily-news/output/` 디렉토리에서 가장 최근 생성된 `daily-news-*.md` 파일을 찾습니다.
+`/home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/output/` 디렉토리에서 가장 최근 생성된 `daily-news-*.md` 파일을 찾습니다.
 
 ```bash
-ls -t /home/ubuntu/workspace/prompt-archive/skills/daily-news/output/daily-news-*.md | head -1
+ls -t /home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/output/daily-news-*.md | head -1
 ```
 
 ### Step 2: 피드백 분석

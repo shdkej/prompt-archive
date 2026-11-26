@@ -110,7 +110,7 @@ def build_plan(repo, user_dir, targets, profile, openclaw_dir):
             links[relative(user_dir / '.claude', value['target'])] = source
     if 'openclaw' in targets:
         load = changed_config.setdefault('skills', {}).setdefault('load', {})
-        # Source folders are flat; discover only the shared runtime bindings.
+        # Discover only the shared runtime bindings, across both source groups.
         # Loading the source root would expose every role's skills globally.
         for key, roots in [('extraDirs', [openclaw_dir / 'skills']),
                            ('allowSymlinkTargets', [repo / 'skills'])]:

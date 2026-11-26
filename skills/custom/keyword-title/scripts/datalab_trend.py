@@ -12,7 +12,7 @@ Velocity·Direction을 LLM 추정 대신 실측으로 교체할 때 호출한다
 
 키 위치 (우선순위):
   1) 환경변수 NAVER_CLIENT_ID / NAVER_CLIENT_SECRET
-  2) skills/keyword-title/.env  (NAVER_CLIENT_ID=... / NAVER_CLIENT_SECRET=...)
+  2) skills/custom/keyword-title/.env  (NAVER_CLIENT_ID=... / NAVER_CLIENT_SECRET=...)
 
 출력: JSON (stdout). 신호는 0.0~1.0 으로 정규화되어 signals-*.md 산식에 바로 투입.
 """
@@ -129,7 +129,7 @@ def main():
                 {
                     "ok": False,
                     "reason": "no_api_key",
-                    "hint": "NAVER_CLIENT_ID/SECRET 환경변수 또는 skills/keyword-title/.env 필요. "
+                    "hint": "NAVER_CLIENT_ID/SECRET 환경변수 또는 skills/custom/keyword-title/.env 필요. "
                     "키 없으면 스킬은 LLM 추론(signals 기본값)으로 진행.",
                 },
                 ensure_ascii=False,
