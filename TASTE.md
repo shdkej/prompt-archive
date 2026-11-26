@@ -190,6 +190,7 @@
 ### #Monitoring
 
 - **No Data면 새로 만들기 전에 동기화부터**: ①로컬 설정 vs k8s ConfigMap ②Prometheus `/targets` ③쿼리 메트릭명 vs 실제 수집명 ④모두 정상일 때만 새 exporter. 로컬·k8s 설정은 항상 함께 수정한다. (monitor-01 — 새 컴포넌트 0개로 해결)
+- **Grafana는 기존 대시보드 안에서 수정한다**: 사용자가 명시적으로 요청하지 않으면 새 대시보드를 만들지 않는다. 적용 범위는 [Monitoring의 Dashboard 계약](https://github.com/shdkej/monitoring_personal/blob/master/docs/DEPLOYMENT.md#dashboard-계약)을 따른다. (2026-11-26 사용자 직접 지시)
 
 ### #Workflow
 
