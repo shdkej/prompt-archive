@@ -16,7 +16,7 @@ from scrapling.fetchers import Fetcher
 logging.getLogger("scrapling").setLevel(logging.WARNING)
 
 ROOT = Path("/home/ubuntu/.openclaw/workspace-hj")
-SKILL_DIR = ROOT / "skills/worldpackers-scraper"
+SKILL_DIR = Path(__file__).resolve().parents[1]
 EXTRACTOR = SKILL_DIR / "scripts/extract_worldpackers.py"
 TMP = ROOT / "tmp-worldpackers-run/current"
 STATE = ROOT / "memory/worldpackers-eu-dev-seen.json"

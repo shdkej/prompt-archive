@@ -1,4 +1,4 @@
-<p align="center"><img src="../../assets/header.png" alt="Stop guessing what to post. Steal from the videos that blew up." width="100%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/vyralcontent/content-skills/main/assets/header.png" alt="Stop guessing what to post. Steal from the videos that blew up." width="100%"></p>
 
 # viral-short-form
 
@@ -34,4 +34,4 @@ This free skill works from general patterns. The paid product at [vyralcontent.c
 
 ## License
 
-MIT. See [LICENSE](../../LICENSE).
+MIT. See [LICENSE](https://github.com/vyralcontent/content-skills/blob/main/LICENSE).

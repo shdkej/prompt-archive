@@ -16,7 +16,7 @@ DATA_DIR = Path("/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/dat
 REPORT_DIR = Path("/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/travel-content-feedback")
 RUNS_DIR = DATA_DIR / "runs"
 FEEDBACK_PATH = DATA_DIR / "feedback.jsonl"
-RENDER_SCRIPT = WORKSPACE / "skills/travel-content-feedback/scripts/render_daily_test.py"
+RENDER_SCRIPT = Path(__file__).resolve().with_name("render_daily_test.py")
 
 
 def load_env_file(path):

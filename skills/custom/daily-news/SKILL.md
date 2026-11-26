@@ -220,7 +220,7 @@ Step 2에서 추출한 원본 URL에 대해 `WebFetch`로 상세 내용을 가�
 
 ### Step 6: 파일 저장
 
-- **경로**: `~/.claude/skills/daily-news/output/daily-news-{YYYY-MM-DD}.md` (호출 위치와 무관하게 항상 이 위치)
+- **경로**: `/home/ubuntu/workspace/prompt-archive/skills/custom/daily-news/output/daily-news-{YYYY-MM-DD}.md` (호출 위치와 무관하게 항상 이 위치)
 - 같은 날짜 파일이 있으면 `-2`, `-3` 등 suffix 추가
 - 저장 후 사용자에게 파일 경로와 간단한 요약 출력
 

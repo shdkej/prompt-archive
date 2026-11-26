@@ -50,14 +50,14 @@ description: Generate one daily Instagram/Threads travel-content test image from
 기본 실행:
 
 ```bash
-python3 /home/ubuntu/.openclaw/workspace/skills/travel-content-feedback/scripts/run_daily_test.py \
+python3 /home/ubuntu/workspace/prompt-archive/skills/custom/travel-content-feedback/scripts/run_daily_test.py \
   --context-json /path/to/context.json
 ```
 
 렌더링만 따로 확인할 때:
 
 ```bash
-python3 /home/ubuntu/.openclaw/workspace/skills/travel-content-feedback/scripts/render_daily_test.py \
+python3 /home/ubuntu/workspace/prompt-archive/skills/custom/travel-content-feedback/scripts/render_daily_test.py \
   --context-json /path/to/context.json \
   --out-dir /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/travel-content-feedback
 ```
@@ -115,7 +115,7 @@ poll로 대체한 경우에도 run metadata에는 `feedback_mode: poll_fallback`
 버튼 callback이나 사용자의 명시 답변을 받으면 아래 스크립트로 기록한다.
 
 ```bash
-python3 /home/ubuntu/.openclaw/workspace/skills/travel-content-feedback/scripts/record_feedback.py \
+python3 /home/ubuntu/workspace/prompt-archive/skills/custom/travel-content-feedback/scripts/record_feedback.py \
   --run-id 2026-08-06-kapadokya-001 \
   --signal like \
   --source telegram-button
@@ -126,7 +126,7 @@ python3 /home/ubuntu/.openclaw/workspace/skills/travel-content-feedback/scripts/
 `tf:{signal_code}:{short_id}` 형식의 callback이 이 세션으로 들어오면 `runs/*.json`의 `callback_map`에서 원래 `run_id`와 `signal`을 찾은 뒤 즉시 위 스크립트를 실행한다. 버튼 전송 후에는 Gateway 로그에 callback 수신과 `travel feedback callback recorded`가 남는지 확인한다. Gateway가 재시작·drain 중인 동안 클릭하면 Telegram에서 클릭 처리는 되더라도 OpenClaw가 받을 수 없으므로, `gateway ready` 이후에 다시 보내고 클릭해야 한다. 예:
 
 ```bash
-python3 /home/ubuntu/.openclaw/workspace/skills/travel-content-feedback/scripts/record_feedback.py \
+python3 /home/ubuntu/workspace/prompt-archive/skills/custom/travel-content-feedback/scripts/record_feedback.py \
   --run-id 2026-08-06-카파도키아-8ea9bae0 \
   --signal like \
   --source telegram-callback

@@ -9,5 +9,6 @@ gather
 .env
 **/.env
 skills/custom/keyword-title/outputs/
+skills/custom/daily-news/output/
 __pycache__/
 *.pyc

@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 OUT = Path(__file__).resolve().parents[1] / 'references' / 'structural-calm-reference.png'
 W,H=1080,1920
-FONT=Path('/home/ubuntu/.openclaw/agents/main/agent/codex-home/skills/canvas-design/canvas-fonts')
+FONT = Path(__file__).resolve().parents[3] / 'external/canvas-design/canvas-fonts'
 DISPLAY=str(FONT/'NationalPark-Bold.ttf'); MONO=str(FONT/'GeistMono-Regular.ttf')
 KOR='/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'; KORB='/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc'
 def ft(path,size): return ImageFont.truetype(path,size,index=0)

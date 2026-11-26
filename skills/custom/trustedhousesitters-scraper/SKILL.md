@@ -20,21 +20,21 @@ Global listings:
 
 ```bash
 . /home/ubuntu/.openclaw/workspace-hj/.venv-scrapling/bin/activate
-python /home/ubuntu/.openclaw/workspace-hj/skills/trustedhousesitters-scraper/scripts/extract_trustedhousesitters.py \
+python /home/ubuntu/workspace/prompt-archive/skills/custom/trustedhousesitters-scraper/scripts/extract_trustedhousesitters.py \
   --country united-kingdom
 ```
 
 Direct URL:
 
 ```bash
-python /home/ubuntu/.openclaw/workspace-hj/skills/trustedhousesitters-scraper/scripts/extract_trustedhousesitters.py \
+python /home/ubuntu/workspace/prompt-archive/skills/custom/trustedhousesitters-scraper/scripts/extract_trustedhousesitters.py \
   --url "https://www.trustedhousesitters.com/house-and-pet-sitting-assignments/united-kingdom/"
 ```
 
 Keyword filter + file output:
 
 ```bash
-python /home/ubuntu/.openclaw/workspace-hj/skills/trustedhousesitters-scraper/scripts/extract_trustedhousesitters.py \
+python /home/ubuntu/workspace/prompt-archive/skills/custom/trustedhousesitters-scraper/scripts/extract_trustedhousesitters.py \
   --country united-kingdom \
   --keyword london \
   --keyword dog \

@@ -37,7 +37,7 @@ Cron contract:
 
 ```bash
 . /home/ubuntu/.openclaw/workspace-hj/.venv-scrapling/bin/activate
-python /home/ubuntu/.openclaw/workspace-hj/skills/worldpackers-scraper/scripts/extract_worldpackers.py "https://www.worldpackers.com/search/europe/skill_web_development"
+python /home/ubuntu/workspace/prompt-archive/skills/custom/worldpackers-scraper/scripts/extract_worldpackers.py "https://www.worldpackers.com/search/europe/skill_web_development"
 ```
 
 ## Output fields
