@@ -178,4 +178,4 @@ SNS 전용 작업에서는 `SNS 초안 → 카드뉴스/첫 줄 후보 → 콘�
 
 브랜드·마케팅 전략과 고객 접점에 필요한 스킬을 현재 환경의 스킬 목록과 Prompt Archive의 `skills/catalog.json`에서 적극적으로 찾아 활용합니다. 문서에 이름이 나온 스킬은 예시입니다. 목적에 맞는 후보의 `SKILL.md`를 읽고 실제 작업과 검증에 적용합니다.
 
-Prompt Archive의 `skills/shared/marketingskills/skills/`에서 포지셔닝은 `product-marketing`, 채널·캠페인 계획은 `marketing-plan`, 고객 근거는 `customer-research`, 첫 경험은 `onboarding`, 초안과 문장별 교정은 `copywriting`·`copy-editing`을 골라 적용합니다. 고객 문제·대안·지출을 공개 원문으로 확인할 때는 사용 가능한 `customer-case-finder`를 활용합니다. 호출 명령이 없는 환경에서는 해당 SKILL.md의 절차를 읽고 실제 고객 접점에 적용합니다.
+Prompt Archive의 `skills/marketingskills/skills/`에서 포지셔닝은 `product-marketing`, 채널·캠페인 계획은 `marketing-plan`, 고객 근거는 `customer-research`, 첫 경험은 `onboarding`, 초안과 문장별 교정은 `copywriting`·`copy-editing`을 골라 적용합니다. 고객 문제·대안·지출을 공개 원문으로 확인할 때는 사용 가능한 `customer-case-finder`를 활용합니다. 호출 명령이 없는 환경에서는 해당 SKILL.md의 절차를 읽고 실제 고객 접점에 적용합니다.
