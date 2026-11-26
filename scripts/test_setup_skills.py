@@ -26,13 +26,13 @@ class SetupSkillsTests(unittest.TestCase):
         self.repo = self.root / 'repository with spaces'
         self.home = self.root / 'home'
         self.home.mkdir()
-        self.skill = self.repo / 'skills/shared/example'
+        self.skill = self.repo / 'skills/example'
         self.skill.mkdir(parents=True)
         (self.skill / 'SKILL.md').write_text('---\nname: example\ndescription: Example\n---\n')
         self.catalog = {'version': 1, 'packages': [
-            {'path': 'skills/shared/example', 'scope': 'shared',
+            {'path': 'skills/example', 'scope': 'shared',
              'openclaw': ['skills/example'],
-             'codex': [{'name': 'example', 'path': 'skills/shared/example'}]}
+             'codex': [{'name': 'example', 'path': 'skills/example'}]}
         ]}
         self.save_catalog()
 
@@ -83,6 +83,49 @@ class SetupSkillsTests(unittest.TestCase):
         self.assertEqual(len(backups), 1)
         self.assertEqual(backups[0].read_text(), 'unpublished local work')
 
+    def test_openclaw_migrates_discovery_without_exposing_role_skills(self):
+        state = self.home / 'custom-openclaw'
+        state.mkdir()
+        config = state / 'openclaw.json'
+        config.write_text(json.dumps({'agents': {'entries': {'main': {}}}, 'skills': {
+            'load': {'extraDirs': ['/existing', str(self.repo / 'skills/shared')],
+                     'watch': False}}}))
+        private = self.repo / 'skills/review'
+        private.mkdir()
+        (private / 'SKILL.md').write_text('---\nname: review\ndescription: Review\n---\n')
+        self.catalog['packages'].append({'path': 'skills/review', 'scope': 'main',
+            'agent': 'main', 'openclaw': ['workspace/skills/review'], 'codex': []})
+        self.save_catalog()
+        args = ('--targets', 'openclaw', '--openclaw-dir', str(state))
+        r = self.run_setup(*args, '--apply')
+        self.assertEqual(r.returncode, 0, r.stderr)
+        load = json.loads(config.read_text())['skills']['load']
+        self.assertEqual(load['extraDirs'], ['/existing', str(state / 'skills')])
+        self.assertFalse(load['watch'])
+        self.assertEqual((state / 'skills/example').resolve(), self.skill)
+        self.assertFalse((state / 'skills/review').exists())
+        self.assertEqual((state / 'workspace/skills/review').resolve(), private)
+        self.assertEqual(self.run_setup(*args, '--check').returncode, 0)
+
+    def test_relocation_repairs_dangling_link_and_preserves_backup(self):
+        target = self.home / '.agents/skills/example'
+        target.parent.mkdir(parents=True)
+        legacy = self.repo / 'skills/shared/example'
+        target.symlink_to(legacy, target_is_directory=True)
+        r = self.run_setup('--targets', 'codex', '--apply')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertTrue(target.is_symlink())
+        self.assertEqual(target.readlink(), legacy)
+        r = self.run_setup('--targets', 'codex', '--apply', '--replace')
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(target.resolve(), self.skill)
+        receipts = list((self.home / '.openclaw/backups/shared-skills').rglob('receipt.json'))
+        self.assertEqual(len(receipts), 1)
+        saved = Path(json.loads(receipts[0].read_text())['links'][0]['backup'])
+        self.assertTrue(saved.is_symlink())
+        self.assertEqual(saved.readlink(), legacy)
+        self.assertEqual(self.run_setup('--targets', 'codex', '--check').returncode, 0)
+
     def test_missing_source_prevents_all_mutations(self):
         self.catalog['packages'].append({'path': 'skills/missing', 'scope': 'shared',
                                         'openclaw': ['skills/missing'], 'codex': []})
@@ -92,12 +135,12 @@ class SetupSkillsTests(unittest.TestCase):
         self.assertEqual(list(self.home.iterdir()), [])
 
     def test_default_codex_does_not_expose_agent_skills(self):
-        private = self.repo / 'skills/agents/hj/travel'
+        private = self.repo / 'skills/travel'
         private.mkdir(parents=True)
         (private / 'SKILL.md').write_text('---\nname: travel\ndescription: Travel\n---\n')
-        self.catalog['packages'].append({'path': 'skills/agents/hj/travel', 'scope': 'hj',
+        self.catalog['packages'].append({'path': 'skills/travel', 'scope': 'hj',
                                         'openclaw': ['workspace-hj/skills/travel'],
-                                        'codex': [{'name': 'travel', 'path': 'skills/agents/hj/travel'}]})
+                                        'codex': [{'name': 'travel', 'path': 'skills/travel'}]})
         self.save_catalog()
         r = self.run_setup('--targets', 'codex', '--apply')
         self.assertEqual(r.returncode, 0, r.stderr)

@@ -110,13 +110,18 @@ def build_plan(repo, user_dir, targets, profile, openclaw_dir):
             links[relative(user_dir / '.claude', value['target'])] = source
     if 'openclaw' in targets:
         load = changed_config.setdefault('skills', {}).setdefault('load', {})
-        for key, roots in [('extraDirs', ['skills/shared']),
-                           ('allowSymlinkTargets', ['skills'])]:
+        # Source folders are flat; discover only the shared runtime bindings.
+        # Loading the source root would expose every role's skills globally.
+        for key, roots in [('extraDirs', [openclaw_dir / 'skills']),
+                           ('allowSymlinkTargets', [repo / 'skills'])]:
             values = load.setdefault(key, [])
             if not isinstance(values, list):
                 raise ValueError(f'skills.load.{key} must be an array')
-            for value in roots:
-                resolved = str(repo / value)
+            if key == 'extraDirs':
+                legacy = str(repo / 'skills/shared')
+                values[:] = [value for value in values if value != legacy]
+            for root in roots:
+                resolved = str(root)
                 if resolved not in values:
                     values.append(resolved)
     actions = []
