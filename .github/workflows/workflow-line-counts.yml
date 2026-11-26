@@ -1,0 +1,40 @@
+name: Update workflow file line counts
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.agent/workflows/planner.md'
+      - '.agent/workflows/developer.md'
+      - '.agent/workflows/marketer.md'
+      - '.agent/workflows/operator.md'
+      - 'scripts/workflow-line-counts.py'
+      - '.github/workflows/workflow-line-counts.yml'
+permissions:
+  contents: write
+concurrency:
+  group: workflow-line-counts-main
+  cancel-in-progress: false
+jobs:
+  update:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Rebuild counts from main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git switch -C main origin/main
+            python3 scripts/workflow-line-counts.py
+            git add -- data/workflow-line-counts.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m "Refresh workflow file line counts"
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1
