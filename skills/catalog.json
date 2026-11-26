@@ -707,7 +707,7 @@
       "agent": "main"
     },
     {
-      "path": "skills/frontend-design-main",
+      "path": "skills/frontend-design",
       "scope": "main",
       "openclaw": [
         "agents/main/agent/codex-home/skills/frontend-design"
@@ -715,7 +715,7 @@
       "codex": [
         {
           "name": "frontend-design",
-          "path": "skills/frontend-design-main"
+          "path": "skills/frontend-design"
         }
       ],
       "agent": "main"
