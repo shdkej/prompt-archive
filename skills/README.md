@@ -76,9 +76,10 @@ Claude는 `--targets claude`로 선택한다. 기존 가이드 연결도 유지�
 ## 두 PC의 갱신
 
 1. 변경은 이 저장소 원본에서 한다. 미반영 변경을 확인하고 요청 변경만 검증·commit/push한다.
-2. 다른 PC는 작업 시작 전 `git status --short`로 미반영 변경을 확인한다. 있으면 먼저 보존·통합하고 진행한다.
+2. 다른 PC는 작업 시작 전 Prompt Archive와 사용할 OpenClaw 워크스페이스 Git 저장소 각각에서 `git status --short`로 미반영 변경을 확인한다. 있으면 먼저 보존·통합하고, 설치 전에 각 저장소의 최신 기본 브랜치를 `git pull --ff-only`로 받는다.
 3. `git pull --ff-only` 후 설치 미리보기·적용·`--check`를 실행한다. 이번 경로 이전으로 기존 링크 대상이 달라진 PC에서는 미리보기의 충돌이 옛 원본 링크인지 확인한 뒤 `bash scripts/setup.sh --targets openclaw,codex --apply --replace`로 백업·재연결한다. Codex만 쓰는 PC는 `--targets codex`를 사용한다. 자동 reset, 강제 덮어쓰기, 작업 도중 갱신을 하지 않는다.
-4. 같은 작업을 인계할 때 `git rev-parse HEAD`를 기록한다. 새 스킬이 도구 목록에 나타나는지도 확인한다. Codex가 변경을 반영하지 않으면 새 세션 또는 재시작으로 확인한다.
+4. OpenClaw 워크스페이스가 Git 저장소라면 설치 뒤 추적 중인 `skills/*` 링크 변경은 해당 워크스페이스 저장소에 별도로 commit/push한다. Prompt Archive의 push만으로 워크스페이스 Git에 저장된 링크가 바뀌지는 않는다. 무관한 기억·작업 변경은 포함하지 않는다.
+5. 같은 작업을 인계할 때 `git rev-parse HEAD`를 기록한다. 새 스킬이 도구 목록에 나타나는지도 확인한다. Codex가 변경을 반영하지 않으면 새 세션 또는 재시작으로 확인한다.
 
 이 설치기는 Git pull·push나 예약 작업을 자동으로 실행하지 않는다. SAM-PC가 오프라인이면 갱신되지 않은 상태를 최신으로 보고하지 않는다.
 
