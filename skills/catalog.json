@@ -2,6 +2,17 @@
   "version": 1,
   "packages": [
     {
+      "path": "skills/custom/customer-case-finder",
+      "scope": "shared",
+      "openclaw": [],
+      "codex": [
+        {
+          "name": "customer-case-finder",
+          "path": "skills/custom/customer-case-finder"
+        }
+      ]
+    },
+    {
       "path": "skills/custom/daily-news",
       "scope": "shared",
       "openclaw": [
