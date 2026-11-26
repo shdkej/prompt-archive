@@ -178,8 +178,8 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
 | 지휘자 | `@.agent/workflows/workflow-master.md` | 전체 오케스트레이션     |
 | 기획   | `@.agent/workflows/planner.md`         | 업무의 큰그림·성공 조건·첫 실행 단계 |
 | 개발   | `@.agent/workflows/developer.md`       | 준비부터 구현·검증·위임된 배포까지 실행 책임 |
-| 마케팅 | `@.agent/workflows/marketer.md`        | 고객 접점 전체와 문장별 고객 언어 |
-| 운영   | `@.agent/workflows/operator.md`        | 지속 운영 부담·유지 주체·복구 |
+| 마케팅 | `@.agent/workflows/marketer.md`        | 메시징 전략·콘텐츠 제작·피드백 루프, 모든 접점의 고객 언어 |
+| 운영   | `@.agent/workflows/operator.md`        | 서비스의 안정적인 운영·고객 지원, 지속 운영 부담·유지 주체·복구 |
 
 ## 워크플로우 로그 관리
 
