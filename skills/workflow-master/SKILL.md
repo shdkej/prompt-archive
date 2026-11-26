@@ -127,10 +127,7 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
 
 ### 3. 업무 지시 (Assign Tasks)
 
-전체 진행 상황을 바탕으로 각 역할이 다음에 무엇을 해야 할지 구체적인 가이드를 제공합니다.
-
-- 예: "기획자님, 개발팀에서 A기능 스펙이 모호하다고 하니 보완해주세요."
-- 예: "마케터님, 다음 주 배포되는 B기능에 맞춰 티징 콘텐츠를 준비해주세요."
+각 역할에 목표·기존 근거·허용된 도구·쓰기 범위를 전달합니다. Genie 위임은 저장소의 `.agent/workflows/workflow-master.md` 중 ‘네 역할에 넘길 실제 지시’를 따릅니다. 이견에는 가능한 대안을 붙이고, 최종 기록에는 각 제안이 바꾼 결과나 보류한 이유를 남깁니다.
 
 ### 4. 컨텍스트 업데이트 (Update Context)
 
@@ -179,10 +176,10 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
 | 역할   | 에이전트                              | 설명                    |
 | ------ | ------------------------------------- | ----------------------- |
 | 지휘자 | `@.agent/workflows/workflow-master.md` | 전체 오케스트레이션     |
-| 기획   | `@.agent/workflows/planner.md`         | 요구사항 분석, PRD 작성 |
-| 개발   | `@.agent/workflows/developer.md`       | 설계 및 구현            |
-| 마케팅 | `@.agent/workflows/marketer.md`        | 브랜드, 마케팅 전략     |
-| 운영   | `@.agent/workflows/operator.md`        | 배포, 모니터링, CS      |
+| 기획   | `@.agent/workflows/planner.md`         | 업무의 큰그림·성공 조건·첫 실행 단계 |
+| 개발   | `@.agent/workflows/developer.md`       | 준비부터 구현·검증·위임된 배포까지 실행 책임 |
+| 마케팅 | `@.agent/workflows/marketer.md`        | 고객 접점 전체와 문장별 고객 언어 |
+| 운영   | `@.agent/workflows/operator.md`        | 지속 운영 부담·유지 주체·복구 |
 
 ## 워크플로우 로그 관리
 
