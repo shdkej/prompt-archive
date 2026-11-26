@@ -18,9 +18,9 @@ OpenClaw는 `codex-home/skills/`를 스킬 검색 루트로 사용하지 않는�
 
 OpenClaw 번들·플러그인 패키지의 스킬, Codex `.system`, 설치 캐시, 폐기된 Workshop 제안 이력은 각 도구가 관리한다. 이 저장소의 스킬로 복제하지 않는다. 활성 Workshop 파일은 해당 워크스페이스 스킬로 승격했다. Workshop은 루트 밖 링크를 허용하지 않으므로 그 경로에 외부 링크를 만들지 않는다. Workshop 자동 학습 설정은 변경하지 않았다.
 
-## Codex의 스킬 선택 순서
+## 스킬 선택 순서 — OpenClaw·Codex·Claude 공통
 
-사용자가 스킬을 지명하면 그 선택을 따른다. 자동 선택할 때는 요청과 산출물에 맞는 **직접 제작 스킬**을 먼저 사용한다. 해당 작업을 다루는 직접 제작 스킬이 없거나 추가 기능이 필요한 부분에는 **외부 스킬**을 사용한다.
+사용자가 스킬을 지명하면 그 선택을 따른다. 자동 선택할 때는 카탈로그의 역할·설치 범위 안에서 요청과 산출물에 맞는 **직접 제작 스킬(`custom/`) 후보와 해당 `SKILL.md`를 먼저 검토**하고, 적합한 스킬을 사용한다. 해당 작업을 다루는 직접 제작 스킬이 없거나 기능이 부족한 부분에는 **외부 스킬(`external/` 및 도구 제공 스킬)**을 사용한다. 이 순서는 모든 OpenClaw 워크스페이스와 Codex·Claude에 공통으로 적용한다. 관련 없는 직접 제작 스킬을 억지로 사용하거나 다른 역할의 전용 스킬까지 설치·실행하지 않는다.
 
 - **직접 제작**에는 사용자의 작업을 위해 자체 개발한 [`customer-case-finder`](custom/customer-case-finder/SKILL.md), `daily-news`, `image-upload`, `keyword-title`, `workflow-master`가 있다. 예를 들어 공개 커뮤니티에서 실제 고객 사례를 찾는 요청에는 `customer-case-finder`를, Threads 첫 줄 후보를 만드는 요청에는 `keyword-title`을 먼저 사용한다.
 - **외부**에는 외부 프로젝트에서 가져온 스킬과 도구 제공자가 배포한 스킬이 있다. `marketing-skills:*`, `agent-reach`, Hallmark, OpenPencil, Blender 스킬, gstack, Superpowers 등이 해당한다. 외부 원본을 로컬에서 수정한 경우에도 원래 출처를 따른다.
