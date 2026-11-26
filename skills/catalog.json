@@ -609,7 +609,7 @@
       "agent": "hj"
     },
     {
-      "path": "skills/native/design/design-taste-frontend",
+      "path": "skills/design-taste-frontend",
       "scope": "design",
       "openclaw": [
         "agents/design/agent/codex-home/skills/design-taste-frontend"
@@ -617,13 +617,13 @@
       "codex": [
         {
           "name": "design-taste-frontend",
-          "path": "skills/native/design/design-taste-frontend"
+          "path": "skills/design-taste-frontend"
         }
       ],
       "agent": "design"
     },
     {
-      "path": "skills/native/design/emil-design-eng",
+      "path": "skills/emil-design-eng",
       "scope": "design",
       "openclaw": [
         "agents/design/agent/codex-home/skills/emil-design-eng"
@@ -631,13 +631,13 @@
       "codex": [
         {
           "name": "emil-design-eng",
-          "path": "skills/native/design/emil-design-eng"
+          "path": "skills/emil-design-eng"
         }
       ],
       "agent": "design"
     },
     {
-      "path": "skills/native/design/impeccable",
+      "path": "skills/impeccable",
       "scope": "design",
       "openclaw": [
         "agents/design/agent/codex-home/skills/impeccable"
@@ -645,13 +645,13 @@
       "codex": [
         {
           "name": "impeccable",
-          "path": "skills/native/design/impeccable"
+          "path": "skills/impeccable"
         }
       ],
       "agent": "design"
     },
     {
-      "path": "skills/native/main/deep-research",
+      "path": "skills/deep-research",
       "scope": "genie",
       "openclaw": [
         "agents/genie/agent/codex-home/skills/deep-research"
@@ -659,13 +659,13 @@
       "codex": [
         {
           "name": "deep-research",
-          "path": "skills/native/main/deep-research"
+          "path": "skills/deep-research"
         }
       ],
       "agent": "genie"
     },
     {
-      "path": "skills/native/main/canvas-design",
+      "path": "skills/canvas-design",
       "scope": "main",
       "openclaw": [
         "agents/main/agent/codex-home/skills/canvas-design"
@@ -673,7 +673,7 @@
       "codex": [
         {
           "name": "canvas-design",
-          "path": "skills/native/main/canvas-design"
+          "path": "skills/canvas-design"
         }
       ],
       "agent": "main"
@@ -693,7 +693,7 @@
       "agent": "main"
     },
     {
-      "path": "skills/native/main/deep-research",
+      "path": "skills/deep-research",
       "scope": "main",
       "openclaw": [
         "agents/main/agent/codex-home/skills/deep-research"
@@ -701,13 +701,13 @@
       "codex": [
         {
           "name": "deep-research",
-          "path": "skills/native/main/deep-research"
+          "path": "skills/deep-research"
         }
       ],
       "agent": "main"
     },
     {
-      "path": "skills/native/main/frontend-design",
+      "path": "skills/frontend-design-main",
       "scope": "main",
       "openclaw": [
         "agents/main/agent/codex-home/skills/frontend-design"
@@ -715,13 +715,13 @@
       "codex": [
         {
           "name": "frontend-design",
-          "path": "skills/native/main/frontend-design"
+          "path": "skills/frontend-design-main"
         }
       ],
       "agent": "main"
     },
     {
-      "path": "skills/native/main/humanize-korean",
+      "path": "skills/humanize-korean",
       "scope": "main",
       "openclaw": [
         "agents/main/agent/codex-home/skills/humanize-korean"
@@ -729,7 +729,7 @@
       "codex": [
         {
           "name": "humanize-korean",
-          "path": "skills/native/main/humanize-korean"
+          "path": "skills/humanize-korean"
         }
       ],
       "agent": "main"

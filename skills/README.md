@@ -7,12 +7,12 @@
 | 위치 | 역할 |
 | --- | --- |
 | `<스킬명>/` | 공용·역할별 스킬 원본을 같은 깊이에 보관. 실제 설치 범위는 `catalog.json`의 `scope`·`agent`로 구분 |
-| `native/<agent>/` | 이름이 같은 별도 변형과 Codex native 스킬. 기존 agent home 연결 유지 |
+| `<스킬명>-<역할>/` | 내용이 다른 동명 변형의 원본. 예: `frontend-design-main/`. 실제 호출 이름은 카탈로그의 연결로 유지 |
 | `catalog.json` | 패키지 원본, 기존 OpenClaw 경로, Codex/Claude 프로필, 외부 출처의 설치 목록 |
 
-`deep-research`의 main·genie 연결은 같은 원본을 사용한다. 마케팅 에이전트의 53개 연결도 `marketingskills/skills`를 함께 참조한다. 외부 패키지는 라이선스·지원 파일을 포함한 내부 구조를 보존한다. 서로 다른 `frontend-design` 변형은 합치지 않고 공용·main native 범위를 유지한다.
+마케팅 에이전트의 53개 연결은 `marketingskills/skills`를 함께 참조한다. 외부 패키지는 라이선스·지원 파일을 포함한 내부 구조를 보존한다. 공용 `frontend-design/`과 main 전용 `frontend-design-main/`은 내용이 다른 변형이다. 둘 다 기존 호출 이름 `frontend-design`을 유지하며, main 프로필에서만 main 변형을 선택한다. `deep-research/`도 한 원본에 main·genie 연결을 유지한다.
 
-2026-11-26 사용자 요청으로 기존 `shared/`와 `agents/main/`·`agents/hj/`의 원본을 `skills/<스킬명>/`으로 모았다. `archive/main-workshop/daily-review-closeout`의 유효한 절차는 [`daily-review-closeout/SKILL.md`](daily-review-closeout/SKILL.md)에 통합하고 보관본과 카탈로그 중복 항목은 제거했다. 본문 선발송·크레용 카드·Tomorrow Expectation의 명언 대체 등 현행 정본과 충돌하는 과거 지침은 채택하지 않았다. 과거 원문은 Git 이력에서 확인한다.
+2026-11-26 사용자 요청으로 기존 `shared/`와 `agents/main/`·`agents/hj/`의 원본을 `skills/<스킬명>/`으로 모았다. `archive/main-workshop/daily-review-closeout`의 유효한 절차는 [`daily-review-closeout/SKILL.md`](daily-review-closeout/SKILL.md)에 통합하고 보관본과 카탈로그 중복 항목은 제거했다. 본문 선발송·크레용 카드·Tomorrow Expectation의 명언 대체 등 현행 정본과 충돌하는 과거 지침은 채택하지 않았다. 과거 원문은 Git 이력에서 확인한다. 이어서 `native/`의 7개 원본도 같은 깊이로 옮기고 빈 `native/`를 제거했다. 기존 `codex-home/skills` 실행 경로와 역할별 범위는 유지한다.
 
 OpenClaw 번들·플러그인 패키지의 스킬, Codex `.system`, 설치 캐시, 폐기된 Workshop 제안 이력은 각 도구가 관리한다. 이 저장소의 스킬로 복제하지 않는다. 활성 Workshop 파일은 해당 워크스페이스 스킬로 승격했다. Workshop은 루트 밖 링크를 허용하지 않으므로 그 경로에 외부 링크를 만들지 않는다. Workshop 자동 학습 설정은 변경하지 않았다.
 
@@ -21,13 +21,13 @@ OpenClaw 번들·플러그인 패키지의 스킬, Codex `.system`, 설치 캐�
 새 사용자 스킬도 이 저장소를 원본으로 사용한다. 직접 만든 스킬과 GitHub·ClawHub 등에서 가져온 스킬에 같은 기준을 적용한다. 사용자가 별도 설치 위치를 지정하면 그 요청을 우선한다.
 
 1. `catalog.json`과 기존 파일에서 같은 이름·출처가 있는지 확인한다. 기존 항목의 업데이트인지 새 설치인지 구분하고, 이름만 같은 다른 변형을 덮어쓰지 않는다.
-2. 기본 원본 위치는 공용·역할 전용 모두 `skills/<스킬명>`이다. 역할 범위는 폴더가 아니라 카탈로그로 지정한다. 이름이 같은 별도 native 변형은 `skills/native/<agent>/<스킬명>`을 유지한다. 원본 위치 통합을 설치 범위 확대로 해석하지 않는다.
+2. 기본 원본 위치는 공용·역할 전용 모두 `skills/<스킬명>`이다. 역할 범위는 폴더가 아니라 카탈로그로 지정한다. 이름이 같고 내용이 다른 변형은 `skills/<스킬명>-<역할>`로 구분하고, 카탈로그에서 기존 호출 이름에 연결한다. 원본 위치 통합을 설치 범위 확대로 해석하지 않는다.
 3. 설치기의 목적지 옵션을 명시한다. Codex `skill-installer`의 GitHub 다운로드 스크립트는 `--dest <이-PC의-prompt-archive>/skills`를 지원한다. 자체 위치에만 설치하는 도구는 설치 결과를 검토한 뒤 필요한 지원 파일·라이선스·출처 버전과 함께 공용 원본으로 편입한다. 공개 가능한 소스만 Git에 넣으며 인증·사용자 데이터·실행 산출물은 로컬에 둔다.
 4. `catalog.json`의 `packages`에 원본 `path`, 설치 `scope`, OpenClaw 연결 경로와 필요한 Codex/Claude 등록을 추가한다. `agent` 필드는 OpenClaw 역할 전용 연결에만 넣는다. 외부 패키지 출처와 고정 버전·커밋도 함께 기록한다. `codex` 목록은 Codex와 Claude 설치에 공통으로 사용한다.
 5. `scripts/setup.sh` 또는 `scripts/setup.ps1`로 필요한 도구만 미리보기·적용·`--check`한다. 기존 파일은 비교·백업 후 연결하며, 에이전트의 `codex-home/skills`도 새 복사본 대신 원본 링크를 사용한다.
 6. 대상 도구에서 새 스킬이 실제로 발견되는지 확인하고, 원본·목록·문서의 요청 변경만 main에 commit/push한다. 완료 보고에 원본 경로, 설치 범위, 발견 여부와 커밋을 남긴다. 다른 PC는 작업 시작 전에 같은 커밋을 받아 연결을 갱신한다.
 
-공용 스킬 한 개의 목록 예시는 다음과 같다. `<스킬명>`은 실제 `SKILL.md`의 `name`과 맞춘다.
+공용 스킬 한 개의 목록 예시는 다음과 같다. `<스킬명>`은 실제 `SKILL.md`의 `name`과 맞춘다. 동명 변형의 원본 `path`에는 역할 접미사를 붙일 수 있지만, `codex[].name`과 실행 경로의 마지막 이름은 원래 스킬 이름을 유지한다.
 
 ```json
 {
@@ -98,6 +98,8 @@ openclaw skills --agent main list --json
 설치 검증은 링크·원본·설정·발견 여부를 검증한다. 개별 스킬의 외부 API 호출·배포·메시지 발송을 실행하지 않는다. 기존 스킬의 절대 경로와 OS별 실행 의존성은 원문에 남아 있다. 공유된다고 Windows 네이티브에서 모든 스크립트가 실행되는 것은 아니다. 새 스킬은 지원 파일을 상대 경로로 참조하고 PC별 작업 경로·인증은 로컬 설정으로 주입한다.
 
 2026-11-26 이전 검증: 이동한 1,448개 파일을 기존 Git 원본과 대조해 `daily-review-closeout/SKILL.md` 외 내용이 동일함을 확인했다. 저장소 스크립트 테스트 15개, OpenClaw·Codex 연결 165개, 설정 유효성 검사를 통과했고 재적용은 변경 0건이었다. main에서 회고 스킬, hj에서 여행 스크레이퍼를 발견했으며 역할 스킬이 다른 에이전트의 공용 목록으로 확장되지 않음을 확인했다. 통합 회고 지침은 기존 날짜 수정·명언 검증·Slack 단일 전달 시나리오로 검토했다. 실제 회고 발송·캘린더 쓰기와 다른 PC 적용은 이 이전 검증에 포함하지 않았다.
+
+native 추가 이전에서는 204개 파일의 내용·실행 권한과 카탈로그의 호출 이름·역할 범위가 그대로임을 확인했다. 설치 테스트 12개, 여섯 프로필의 경로 해석, native 실행 경로의 `SKILL.md` 이름 확인을 통과했다. 링크 8개만 재연결했고 전체 165개 연결 검사와 재적용 변경 0건을 확인했다. 개별 스킬 실행과 다른 PC 적용은 별도다.
 
 ## 외부 패키지 갱신
 

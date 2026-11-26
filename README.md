@@ -9,7 +9,7 @@
 
 ## 공용 스킬
 
-스킬 원본은 [`skills/`](skills/), 설치 범위와 연결 목록은 [`skills/catalog.json`](skills/catalog.json)이 소유합니다. OpenClaw 공용·워크스페이스·Codex native 폴더의 스킬을 여기서 관리하고, 각 실행 경로에는 링크를 둡니다. 공용·역할별 원본은 `skills/<스킬명>/`으로 모으고 설치 범위는 카탈로그로 구분합니다. 같은 이름의 별도 native 버전은 `skills/native/`에 보존합니다.
+스킬 원본은 [`skills/`](skills/), 설치 범위와 연결 목록은 [`skills/catalog.json`](skills/catalog.json)이 소유합니다. OpenClaw 공용·워크스페이스·Codex native 폴더의 스킬을 여기서 관리하고, 각 실행 경로에는 링크를 둡니다. 공용·역할별 원본은 `skills/<스킬명>/`으로 모으고 설치 범위는 카탈로그로 구분합니다. native 스킬도 같은 위치에서 관리하며, 내용이 다른 동명 변형만 `frontend-design-main`처럼 폴더 이름으로 구분합니다.
 
 [설치·Windows 연결·갱신·복구 안내](skills/README.md)를 먼저 읽으세요. Python 3.10+가 필요하며 기본 실행은 미리보기입니다.
 
