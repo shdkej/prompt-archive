@@ -10,6 +10,8 @@
 | [external/](external/) | 외부 스킬 패키지와 그 로컬 수정본 |
 | `catalog.json` | 패키지 원본, 기존 OpenClaw 경로, Codex/Claude 프로필, 외부 출처의 설치 목록 |
 
+OpenClaw 제품 오너의 표시 이름은 피오이며 안정 agent ID와 역할 프로필은 `genie`로 유지한다. Windows 지니는 별도 실행 환경이다.
+
 마케팅 에이전트의 53개 연결은 `external/marketingskills/skills`를 함께 참조한다. 외부 패키지는 라이선스·지원 파일을 포함한 내부 구조를 보존한다. `external/frontend-design/`은 공용·main이 함께 사용하는 단일 원본이다. 공용 버전의 타이포·색·배치 기준과 main 버전의 계획·검토·UI 문구·접근성 지침을 통합했다. 사용자 요구와 기존 브랜드를 우선하며, 라이선스는 원문 그대로 유지한다. 카탈로그의 shared·main 항목은 같은 원본에 대한 설치 연결이며 별도 스킬이 아니다. `external/deep-research/`도 한 원본에 main·genie 연결을 유지한다.
 
 2026-11-26 사용자 요청으로 기존 `shared/`와 `agents/main/`·`agents/hj/`의 원본을 `skills/<스킬명>/`으로 모았다. `archive/main-workshop/daily-review-closeout`의 유효한 절차는 [`custom/daily-review-closeout/SKILL.md`](custom/daily-review-closeout/SKILL.md)에 통합하고 보관본과 카탈로그 중복 항목은 제거했다. 본문 선발송·크레용 카드·Tomorrow Expectation의 명언 대체 등 현행 정본과 충돌하는 과거 지침은 채택하지 않았다. 과거 원문은 Git 이력에서 확인한다. 이어서 `native/`의 7개 원본도 같은 깊이로 옮기고 빈 `native/`를 제거했다. 기존 `codex-home/skills` 실행 경로와 역할별 범위는 유지한다.
