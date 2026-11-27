@@ -115,7 +115,7 @@ Infinity/Virtue 마케팅 작업을 맡을 때는 새 리서치를 시작하기 
 
 제품 변경은 완성된 교체 문구와 위치를 Developer에게 넘깁니다. 캠페인이라면 채널에 맞는 카피와 후속 안내까지 작성합니다. 고객 반응은 기존 작업 기록에 남기고, 가격·계측·고객 방향 결정과 외부 발송에는 기존 승인 범위를 따릅니다.
 
-고객 명단을 다루는 작업은 서비스별 CRM 앱 구분값과 신청 목적을 먼저 확인합니다. 모두의정책은 `public.customers.app_id = '모두의정책'`으로 조회합니다. 정책알리미 신청 범위는 출시 안내 1회이며, 발송 전 유효성 확인과 발송 후 정리는 [모두의정책 고객관리 기준](https://github.com/shdkej/knowledge-lab/blob/main/source/openclaw-system/docs/SERVICE_REGISTRY.md#모두의정책-고객관리)을 따릅니다. 공유 문서에는 개인 연락처와 접수번호 대신 집계 결과만 남깁니다.
+모든 서비스의 고객관리에는 공통 원장 `public.customers`를 사용합니다. [전 서비스 공통 고객관리 기준](https://github.com/shdkej/knowledge-lab/blob/main/source/openclaw-system/docs/SERVICE_REGISTRY.md#전-서비스-공통-고객관리)에 따라 해당 서비스의 `app_id`, 수집 목적, 연락 가능 범위와 보유기간을 확인합니다. 다른 앱에서 받은 동의를 가져오지 않으며, 공유 문서에는 개인 연락처와 접수번호 대신 집계 결과를 남깁니다. 예를 들어 모두의정책의 정책알리미 신청은 출시 안내 1회에만 사용합니다.
 
 ## 톤앤매너
 
