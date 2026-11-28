@@ -209,7 +209,7 @@ Calm, tidy editorial background for a Korean card-news slide, warm white plaster
 
 샘은 Sam Samuel의 정본 캐릭터입니다. 자세와 행동은 바꿀 수 있지만, 캐릭터 정체성은 바꾸지 않습니다.
 
-정본 이미지와 기준 문서는 `/home/ubuntu/workspace/prompt-archive/assets/saem-character/`와 `/home/ubuntu/workspace/prompt-archive/BRAND.md`의 `캐릭터 정본: 샘(Saem)` 섹션입니다. 새 샘 캐릭터 이미지를 만들거나 기존 이미지를 비교할 때는 카드뉴스 실행 폴더보다 이 경로를 먼저 확인합니다.
+샘의 외형은 아래 불변 요소를 따릅니다. 이미지 대조에는 작업공간의 `space/apps/control-center-cms/public/assets/saem-character/saem-system-signature.png`를 사용합니다.
 
 정본 불변 요소:
 

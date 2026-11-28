@@ -1656,24 +1656,12 @@
       "target": "WRITING.md"
     },
     {
-      "source": "KOP.md",
-      "target": "KOP.md"
-    },
-    {
-      "source": "PA.md",
-      "target": "PA.md"
-    },
-    {
       "source": "TDD.md",
       "target": "TDD.md"
     },
     {
       "source": "DAILY-FEEDBACK-SYSTEM.md",
       "target": "skills/daily-feedback-system/SKILL.md"
-    },
-    {
-      "source": "OMC.md",
-      "target": "skills/omc/SKILL.md"
     },
     {
       "source": "INFINITY.md",
