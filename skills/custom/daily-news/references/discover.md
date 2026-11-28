@@ -56,8 +56,10 @@ Step 1에서 로드한 "이미 다룬 Topic ID" 목록과 비교하여 이미 �
 추가로 `$NEWS_DIR/output/` 디렉토리의 기존 뉴스 파일들에서 GeekNews URL을 grep하여 혹시 누락된 topic ID도 확인합니다:
 
 ```bash
-grep -ohP 'topic\?id=\d+' \
-  "$NEWS_DIR/output"/daily-news-*.md | sort -u
+if [ -d "$NEWS_DIR/output" ]; then
+  find "$NEWS_DIR/output" -maxdepth 1 -type f -name 'daily-news-*.md' \
+    -exec grep -ohE 'topic\?id=[0-9]+' {} + | sort -u
+fi
 ```
 
 전날 뉴스와의 중복은 하드 블로커입니다. `daily-news-{어제 날짜}*.md`에 나온 Topic ID, 원문 URL, 제목과 겹치는 후보는 선별 점수와 무관하게 제외합니다. GeekNews가 아닌 외부 뉴스 URL도 기존 출력 파일에서 같은 URL이나 제목이 발견되면 제외합니다. 제목 비교는 소문자화, 연속 공백 1개로 정리, 말미 매체명/괄호 설명 제거 후 비교합니다.

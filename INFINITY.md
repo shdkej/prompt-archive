@@ -35,7 +35,7 @@ description: 자유 형식 요청을 Infinity Intent로 접수하거나 /infinit
 
 클라우드는 조사·비교·초안처럼 미리 할 수 있는 일을 맡고, 로컬 세션은 파일·브라우저·테스트처럼 실제 환경과 권한이 필요한 일을 맡는다. 실행 위치를 고를 때는 현재 환경에서 결과를 직접 검증할 수 있는지 확인한다.
 
-복잡한 Intent를 로컬 Claude Code에 인계할 때는 목표, 제약, 완료 기준, 검증할 대상을 전달하고 [워크플로우 마스터](skills/custom/workflow-master/SKILL.md)를 먼저 확인한다.
+로컬 Claude Code에 복잡한 Intent, 단순하지 않은 코드 작업, 또는 규모와 관계없이 공통 동작을 바꾸는 작업을 맡길 때는 목표·제약·완료 기준·검증 대상을 전달한다. 대상 저장소의 workflow-master 지침을 먼저 확인하고, 별도 지침이 없으면 [공용 워크플로우 마스터](skills/custom/workflow-master/SKILL.md)를 따른다.
 
 ## 레퍼런스
 

@@ -149,6 +149,73 @@ class SetupSkillsTests(unittest.TestCase):
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertEqual((self.home / '.agents/skills/travel').resolve(), private)
 
+    def test_profile_rename_retires_only_selected_tools_managed_binding(self):
+        previous_source = self.repo / 'skills/previous'
+        self.catalog['packages'].append({
+            'path': 'skills/example', 'scope': 'main', 'codex': [{
+                'name': 'current', 'path': 'skills/example',
+                'previous_binding': {'name': 'previous', 'path': 'skills/previous'},
+            }],
+        })
+        self.save_catalog()
+        codex = self.home / '.agents/skills/previous'
+        claude = self.home / '.claude/skills/previous'
+        for target in (codex, claude):
+            target.parent.mkdir(parents=True)
+            target.symlink_to(previous_source, target_is_directory=True)
+
+        self.assertEqual(self.run_setup('--targets', 'codex', '--apply').returncode, 0)
+        self.assertTrue(codex.is_symlink())
+        args = ('--targets', 'codex', '--profile', 'main')
+        preview = self.run_setup(*args)
+        self.assertIn('"operation": "retire"', preview.stdout)
+        self.assertTrue(codex.is_symlink())
+        self.assertEqual(self.run_setup(*args, '--check').returncode, 1)
+        installed = self.run_setup(*args, '--apply')
+        self.assertEqual(installed.returncode, 0, installed.stderr)
+        self.assertFalse(codex.is_symlink())
+        self.assertTrue(claude.is_symlink())
+        self.assertEqual(codex.with_name('current').resolve(), self.skill)
+        backup = Path(json.loads(installed.stdout)['backup'])
+        receipt = json.loads((backup / 'receipt.json').read_text())
+        retired = [r for r in receipt['links'] if r.get('retired')]
+        self.assertEqual(len(retired), 1)
+        self.assertEqual(Path(retired[0]['backup']).readlink(), previous_source)
+        self.assertEqual(self.run_setup(*args, '--check').returncode, 0)
+        self.assertEqual(json.loads(self.run_setup(*args, '--apply').stdout)['changed'], 0)
+
+        # A custom link (even an indirect link to the previous source) survives.
+        indirect = self.home / 'alias'
+        indirect.symlink_to(previous_source, target_is_directory=True)
+        claude.unlink()
+        claude.symlink_to(indirect, target_is_directory=True)
+        args = ('--targets', 'claude', '--profile', 'main')
+        self.assertEqual(self.run_setup(*args, '--apply', '--replace').returncode, 0)
+        self.assertEqual(claude.readlink(), indirect)
+        claude.unlink()
+        claude.mkdir()
+        (claude / 'local.txt').write_text('keep')
+        self.assertEqual(self.run_setup(*args, '--check').returncode, 0)
+        self.assertEqual((claude / 'local.txt').read_text(), 'keep')
+
+    def test_retired_link_is_restored_after_later_failure(self):
+        module = installer_module()
+        old = self.home / 'previous'
+        source = self.repo / 'skills/previous'
+        old.symlink_to(source, target_is_directory=True)
+        config = self.home / 'openclaw.json'
+        config.write_bytes(b'concurrent edit')
+        action = {'target': old, 'source': source, 'conflict': False, 'retire': True}
+        with self.assertRaisesRegex(ValueError, 'changed'):
+            module.apply_plan([action], config, None, {}, True, self.home / 'backup')
+        self.assertEqual(old.readlink(), source)
+        # Revalidate ownership between preview and execution.
+        old.unlink()
+        old.write_text('user file')
+        with self.assertRaisesRegex(ValueError, 'Previous binding changed'):
+            module.apply_plan([action], config, None, {}, False, self.home / 'backup')
+        self.assertEqual(old.read_text(), 'user file')
+
     def test_bad_catalog_path_is_rejected(self):
         self.catalog['packages'][0]['openclaw'] = ['../../outside']
         self.save_catalog()

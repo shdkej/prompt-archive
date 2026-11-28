@@ -26,6 +26,20 @@ def linked_to(target, source):
         return False
 
 
+def points_directly_to(link, source, *, original=None):
+    # readlink also recognizes Windows junctions and works for a missing source.
+    try:
+        destination = os.path.normpath(os.readlink(link))
+    except (OSError, ValueError):
+        return False
+    if os.name == 'nt':
+        destination = destination.removeprefix('\\\\?\\')
+        if destination.startswith('UNC' + os.sep):
+            destination = os.sep * 2 + destination[4:]
+    parent = (original or link).parent
+    return os.path.normcase(os.path.abspath(parent / destination)) == os.path.normcase(str(source))
+
+
 def make_link(source, target):
     target.parent.mkdir(parents=True, exist_ok=True)
     if os.name == 'nt' and source.is_dir():
@@ -96,11 +110,16 @@ def build_plan(repo, user_dir, targets, profile, openclaw_dir):
                     raise ValueError(f'Missing SKILL.md: {source_skill}')
                 # Named profiles intentionally override shared variants by name.
                 if skill['name'] not in portable or package['scope'] == profile:
-                    portable[skill['name']] = source_skill
+                    portable[skill['name']] = skill
+    retirements = {}
     for tool, folder in [('codex', '.agents'), ('claude', '.claude')]:
         if tool in targets:
-            for name, source in portable.items():
-                links[relative(user_dir / folder / 'skills', name)] = source
+            for name, skill in portable.items():
+                skills_dir = user_dir / folder / 'skills'
+                links[relative(skills_dir, name)] = relative(repo, skill['path'])
+                previous = skill.get('previous_binding')
+                if previous:
+                    retirements[relative(skills_dir, previous['name'])] = relative(repo, previous['path'])
     if 'claude' in targets:
         # Keep existing guide/agent mappings; only existing source files are used.
         for value in catalog.get('claude_files', []):
@@ -134,6 +153,12 @@ def build_plan(repo, user_dir, targets, profile, openclaw_dir):
             raise ValueError(f'Target parent escapes tool directory: {target}')
         actions.append({'target': target, 'source': source,
                         'conflict': os.path.lexists(target)})
+    for target, source in retirements.items():
+        if target in links or not points_directly_to(target, source):
+            continue
+        if not target.parent.resolve().is_relative_to(user_dir):
+            raise ValueError(f'Target parent escapes tool directory: {target}')
+        actions.append({'target': target, 'source': source, 'conflict': False, 'retire': True})
     update_config = changed_config != config
     return actions, config_path, config_bytes, changed_config, update_config, links
 
@@ -153,10 +178,23 @@ def apply_plan(actions, config_path, config_bytes, config, update_config, backup
         for index, action in enumerate(actions):
             target, source = action['target'], action['source']
             saved = None
+            if action.get('retire'):
+                if not points_directly_to(target, source):
+                    raise ValueError(f'Previous binding changed during setup: {target}')
+                saved = backup / f'{index:03d}-{target.name}'
+                # Move only the link itself. Fail safely across filesystems.
+                target.rename(saved)
+                records.append((target, saved, True))
+                if not points_directly_to(saved, source, original=target):
+                    raise ValueError(f'Previous binding changed during setup: {target}')
+                journal['links'].append({'target': str(target), 'source': str(source),
+                                         'backup': str(saved), 'retired': True})
+                save()
+                continue
             if action['conflict']:
                 saved = backup / f'{index:03d}-{target.name}'
                 shutil.move(str(target), str(saved))
-            records.append((target, saved))
+            records.append((target, saved, False))
             journal['links'].append({'target': str(target), 'source': str(source),
                                      'backup': str(saved) if saved else None})
             save()
@@ -173,8 +211,11 @@ def apply_plan(actions, config_path, config_bytes, config, update_config, backup
                 raise ValueError('OpenClaw configuration changed during link installation; retry')
             write_atomic(config_path, (json.dumps(config, ensure_ascii=False, indent=2) + '\n').encode(), mode)
     except Exception:
-        for target, saved in reversed(records):
+        for target, saved, retired in reversed(records):
             if os.path.lexists(target):
+                if retired:
+                    # Another writer claimed the old name. Keep its entry and our backup.
+                    continue
                 remove_link(target)
             if saved is not None and os.path.lexists(saved):
                 shutil.move(str(saved), str(target))
@@ -211,7 +252,8 @@ def main():
             return 1 if actions or update else 0
         if not args.apply:
             print(json.dumps({'mode': 'preview', 'links': [
-                {'target': str(a['target']), 'source': str(a['source']), 'conflict': a['conflict']}
+                {'target': str(a['target']), 'source': str(a['source']), 'conflict': a['conflict'],
+                 **({'operation': 'retire'} if a.get('retire') else {})}
                 for a in actions], 'config_update': update}, ensure_ascii=False, indent=2))
             return 0
         if conflicts and not args.replace:

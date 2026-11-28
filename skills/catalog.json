@@ -554,7 +554,11 @@
       "codex": [
         {
           "name": "pt-session-tmux",
-          "path": "skills/custom/pt-session-tmux"
+          "path": "skills/custom/pt-session-tmux",
+          "previous_binding": {
+            "name": "pt-claude-tmux",
+            "path": "skills/custom/pt-claude-tmux"
+          }
         }
       ],
       "agent": "main"

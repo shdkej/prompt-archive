@@ -32,7 +32,7 @@ description: 주제·경험·초안에서 유입 키워드와 제목 후보를 �
 - `references/inflow.md` — 2단계 흐름(키워드 5 발굴 → 유입 제목 5) + 출력 포맷
 - 키워드 발굴은 `scripts/searchad_keyword.py`·`youtube_keyword.py` 실측 우선
 
-**콘텐츠 모드 (blog · threads)**
+**경험 중심 콘텐츠 모드 (blog · threads)**
 - `references/signals-content.md` — 바이럴 신호 7종 + Personal Depth 0.30 산식
 - `references/matrix.md` — 깊이×희소성 4사분면 + 만다라트 8축
 
@@ -75,8 +75,8 @@ required:
     파일 경로면 자동으로 읽어 컨텍스트 추출.
 
 optional:
-  mode: blog | threads | youtube | app-name | product-name (기본값: 자동 추론)
-  count: 3~10 (기본값: 모드별 디폴트 — blog 3·threads 3·youtube 5·app-name 5·product-name 5)
+  mode: inflow | blog | threads | youtube | app-name | product-name (기본값: 자동 추론)
+  count: 3~10 (기본값: 모드별 디폴트 — inflow 키워드 5·제목 5, blog 3·threads 3·youtube 5·app-name 5·product-name 5)
   platform: blog | threads | both (콘텐츠 모드 전용)
   include_low: boolean (기본값: false, 컷오프 미달도 표시)
 ```
@@ -90,7 +90,7 @@ optional:
     ├── 사용자 명시 모드 우선
     └── 없으면 시드 텍스트 분석으로 자동 추론
 
-[1] 시드 깊이 추출 ★ (신규)
+[1] 시드 분석 (위키·정보글은 아래 정보글 분기로 바로 이동)
     ├── 1인칭 경험 신호 (수치·도구·날짜·고유명사)
     ├── 핵심 메타포: 이 시드는 무엇을 닮았는가 (수첩? 도감? 거울? 게임?)
     ├── 반대축: 거부하는 것 (예: 도덕 설교·차가운 기업톤·무거움)
@@ -104,7 +104,12 @@ optional:
     ├── YouTube는 최종 5개에만 호출 (쿼터 절약 ≈500 units/회, 네이버 타겟이면 생략)
     └── 유입 제목 5 생성 (Searchability+CuriosityGap, 플랫폼 태그 🔍/▶️) → 사용자 픽
 
-  [콘텐츠 모드 — blog · threads]
+  [위키·출처 중심 정보글 — blog · threads]
+    ├── 본문이 답하는 질문, 확인 가능한 사실, 적용 범위를 추출
+    ├── blog는 답의 범위를 드러내는 제목, threads는 근거가 있는 선언형 첫 줄을 생성
+    └── 각 후보를 본문과 대조해 정확하고 구체적인 것을 선택. 경험 깊이·바이럴 점수·사분면은 생략
+
+  [경험 글 — blog · threads]
     ├── 만다라트 축 매핑
     ├── PersonalDepth 산정
     ├── threads 모드면 계정 테마 게이트 적용 — 미니멀·실용성·소비취향 공유 중 하나를 첫 줄 후보의 선택/대비에 반영
@@ -180,7 +185,7 @@ slug는 시드에서 핵심 명사 2~3개 추출 → kebab-case.
 - **외부 API는 선택적** (키 없으면 LLM 추론 fallback, 키 없이도 완전 동작):
   - 콘텐츠 모드 → 네이버 데이터랩(`scripts/datalab_trend.py`)으로 Velocity·Direction 실측 + 네이버 검색광고(`scripts/searchad_keyword.py`)로 절대 검색량·연관 키워드 발굴.
   - 유튜브 모드 → YouTube Data API(`scripts/youtube_keyword.py`)로 Searchability 실측. **데이터랩으로 대체 금지** (네이버 검색량과 유튜브 조회수는 자주 역전됨 — signals-youtube §6).
-- 콘텐츠 모드: 시드에 1인칭 경험 신호 없으면 (PersonalDepth ≤ 0.2) 출력 거부 + 시드 보강 요청.
+- 경험을 중심으로 쓰는 blog·threads: 시드에 1인칭 경험 신호 없으면 (PersonalDepth ≤ 0.2) 출력 거부 + 시드 보강 요청.
 - 유튜브 모드: PersonalDepth 제약 없음 (시청자가 주어). 단 검색 키워드(Searchability ≤ 0.2)가 없으면 노출 경로 0으로 보고 폐기. Searchability는 `youtube_keyword.py`로 실측(키 있을 때), vidIQ/TubeBuddy로 정밀 보완은 사용자 선택.
 - 여행·라이프스타일 제목: 장소명·명소·일정·맛집·팁만 있고 `비용/변화/불편/삶의 선택/관계 사건`이 없으면 점수와 무관하게 재생성한다. 1회 재생성 후에도 없으면 `선택 압력 부족`으로 낮은 후보에만 둔다.
 - 이름 모드: 카테고리 분산이 3개 이하면 재추림 1회. 그래도 안 되면 출력하되 "다양성 부족" 경고.
