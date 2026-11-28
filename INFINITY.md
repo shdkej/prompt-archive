@@ -1,81 +1,24 @@
 ---
 name: infinity
-description: Agent-First 의도 등록 스킬. 자유 형식으로 의도를 선언하면 infinity/INTENTS.md에 추가하고 push한다. 사용 시기 - (1) "이거 해줘", "모니터링 해줘" 등 에이전트에게 맡길 일, (2) "/infinity 뭐뭐 해줘", (3) Intent 상태 확인, (4) Gate 승인
+description: 자유 형식 요청을 Infinity Intent로 접수하거나 /infinity로 상태·승인·실행을 요청할 때 현재 운영 절차를 찾는다.
 ---
-
-> **현재성 안내:** 이 문서는 초기 Agent-First 설계와 historical skill 참고용이다. 현재 Infinity 상태 원장·대시보드 접수 형식·중복 방지·원격 검증은 `/home/ubuntu/workspace/infinity/README.md`와 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/INFINITY_OPERATING_RULES.md`를 정본으로 따른다. 이 문서의 자유 형식 한 줄 등록 예시는 현재 `INTENTS.md` 표준 블록 규칙을 대체하지 않는다.
 
 # Infinity — Agent-First Workflow
 
-> "내가 에이전트를 돌리는게 아니라 에이전트가 돌다가 나한테 알려주게 해야한다"
+사용자는 원하는 결과와 제약을 전달한다. 에이전트는 같은 Intent에 진행 상태와 완료 증거를 연결하고, 판단이 필요하면 대기 이유와 재개 조건을 남긴다.
 
-> 운영 시 `infinity/OPERATING_LESSONS.md`가 있으면 함께 읽고, 누적된 운영 교훈을 현재 intent 처리 방식에 반영한다.
-
-## Evaluator Read Budget
-
-OpenClaw evaluator처럼 감시/평가 목적으로 이 스킬을 호출하는 루틴은 아래 읽기 예산을 바꾸지 않는다.
-
-- `EVALUATION_NOTES.md`: 전체 로드 금지. 최신 맥락은 `tail -120` 상당의 마지막 120줄만 읽는다.
-- `OPERATING_LESSONS.md`: 전체 로드 금지. 관련 섹션 헤더 키워드로 필터한 뒤 해당 섹션만 읽는다.
-- 크론 실행 로그: 전체 로그 로드 금지. 최근 24시간 요약만 읽는다.
-
-조기 종료 게이트도 함께 적용한다.
-
-- 초기 스캔(위 3가지 읽기)에서 미해결 이슈가 없으면 추가 파일 읽기 없이 즉시 `NO_REPLY`를 반환한다.
-- 재현 가능한 이슈 1개가 확인되면 나머지 파일을 더 읽지 말고 즉시 종료한다.
+**목차** · [스킬 동작](#스킬-동작) · [설계 원칙](#설계-원칙) · [레퍼런스](#레퍼런스)
 
 ## 스킬 동작
 
-**중요: 이 스킬은 Intent 등록과 상태 관리가 기본 역할이다. 실제 실행은 `Cloud prepares, Local executes` 원칙을 따른다. 클라우드는 조사·비교·요약·계획·초안·모니터링처럼 오래 걸리고 성가신 선행 작업을 맡고, 파일/브라우저/터미널/테스트/배포처럼 권한과 실제 상태가 필요한 작업은 로컬에서 Claude Code가 처리한다.**
+| 요청 | 확인할 대상과 행동 |
+| --- | --- |
+| `/infinity <요청>` | 기존 Intent와 중복되는지 확인한다. 새 요청은 목표와 완료 기준을 정리해 현재 YAML 원장의 Inbox에 접수한다. [접수·라우팅 기준](https://github.com/shdkej/knowledge-lab/blob/main/source/openclaw-system/docs/INFINITY_OPERATING_RULES.md) |
+| `/infinity status` | [현재 원장](https://github.com/shdkej/infinity/blob/main/INTENTS.yaml)의 `lanes`에서 상태와 다음 행동을 읽는다. Waiting은 대기 담당과 재개 조건을 함께 확인한다. |
+| `/infinity 승인`, `/infinity approve` | 대상 Intent와 [승인 항목](https://github.com/shdkej/infinity/blob/main/GATES.md)을 특정하고, [권한 기준](https://github.com/shdkej/infinity/blob/main/PERMISSIONS.md)에 따라 승인 주체와 범위를 확인한다. |
+| `/infinity run` | [Heartbeat](https://github.com/shdkej/infinity/blob/main/heartbeat.md)에서 실행 선행 조건을 확인하고 [명령 실행 절차](https://github.com/shdkej/infinity/blob/main/docs/command-execution.md)를 따른다. |
 
-### 1. Intent 추가 (`/infinity <자유 형식>`) — 기본 동작
-
-사용자가 자유 형식으로 의도를 말하면:
-
-1. `infinity/INTENTS.md`의 `## Inbox`에 `- {입력 내용}` 한 줄 추가
-2. 커밋 & 푸시
-3. "Intent 등록 완료. 다음 Heartbeat에서 처리됩니다." 응답
-4. **여기서 끝. 분석, 구조화, 실행 등 추가 작업을 하지 않는다.**
-
-예시:
-- `/infinity layer2 안 돼`
-- `/infinity 보안교육 PA Flow 이번달까지`
-- `/infinity KOP 빌드 실패하면 알려줘`
-
-### 2. 상태 확인 (`/infinity status`)
-
-- `infinity/INTENTS.md`의 Active 섹션 표시
-- `infinity/GATES.md`의 대기 중 항목 표시
-
-### 3. 승인 (`/infinity 승인` 또는 `/infinity approve`)
-
-- `infinity/GATES.md` 대기 중 항목을 처리 완료로 이동
-- `infinity/INTENTS.md`에서 blocked → in_progress로 변경
-- 커밋 & 푸시
-
-### 4. 즉시 실행 (`/infinity run`)
-
-- RemoteTrigger로 `trig_01Fubp8g8UDKQtvuSkFofPuM` 즉시 실행
-
----
-
-# 설계 문서
-
-## 핵심 전환
-
-```
-[AS-IS] User-Driven (반응형)
-  사용자 → 트리거 → workflow-master → 에이전트 할당 → 실행 → 보고
-
-[TO-BE] Agent-First (자율형)
-  사용자 → 의도 선언 → 일상 복귀
-  에이전트 → Heartbeat 기상 → 의도 확인 → 자율 실행 → 결과 알림
-                                                ↑
-                                    (판단 필요시만 사용자 호출)
-```
-
-사용자는 **의도(Intent)와 판단(Gate)**만 담당한다.
-에이전트는 **실행, 진행, 보고**를 허용된 권한 안에서 자율적으로 수행한다.
+완료 처리에는 산출물과 보고서를 연결하고 원격 Archive 카드에서 결과 링크를 확인한다. 세부 절차는 [산출물 기준](https://github.com/shdkej/infinity/blob/main/ARTIFACT_RULES.md), 운영 품질 점검은 [Evaluator](https://github.com/shdkej/infinity/blob/main/docs/infinity-evaluator.md)를 따른다.
 
 ## 설계 원칙
 
@@ -89,254 +32,14 @@ OpenClaw evaluator처럼 감시/평가 목적으로 이 스킬을 호출하는 �
 | Reuse Before Create | 새 컴포넌트 생성 전 기존 리소스 활용 가능 여부를 먼저 확인 | Lesson Learn |
 | Cloud-Prep-First | 클라우드는 로컬 실행을 대체하지 않고 조사·정리·초안·순서화로 로컬 부담을 줄인다 | Infinity |
 
-## 실행 위치 라우팅
 
-Infinity에서 클라우드는 제한된 실행자가 아니라 **조사원 / 준비 담당 / 큐 관리자 / 반복 모니터링 담당**이다. 로컬은 권한과 실제 상태를 가진 **실행자**다.
+클라우드는 조사·비교·초안처럼 미리 할 수 있는 일을 맡고, 로컬 세션은 파일·브라우저·테스트처럼 실제 환경과 권한이 필요한 일을 맡는다. 실행 위치를 고를 때는 현재 환경에서 결과를 직접 검증할 수 있는지 확인한다.
 
-### Cloud가 맡는 일
-
-- 웹 조사, 문서/레포/이슈 읽기
-- 기술 선택지 비교, 라이브러리·도구 평가
-- 에러 메시지 기반 원인 후보 조사
-- 긴 문서 요약, 실행 계획 쪼개기
-- 코드 변경안/테스트 전략/커밋 메시지 초안
-- 반복 모니터링, 체크, 리마인드
-- 로컬에서 바로 실행할 수 있는 단계별 지시서 작성
-
-### Local Claude Code가 맡는 일
-
-- 파일 읽기/수정, 코드 실행, 테스트, 빌드
-- 브라우저/IDE/터미널 조작
-- 개인 로그인 세션, 로컬 DB/서비스, 로컬 네트워크 접근
-- 민감 데이터가 섞인 처리
-- 실제 커밋/푸시/배포 전 검증
-
-### Claude Code 위임 규칙
-
-- Infinity에서 Claude Code에 작업을 넘길 때는 항상 먼저 `workflow-master` 스킬/워크플로우를 사용하도록 지시한다.
-- Claude Code 프롬프트에는 `Required workflow: Use workflow-master first`를 명시한다.
-- 대상 레포에 `.agent/workflows/workflow-master.md`가 있으면 그 파일을 우선 읽고 따른다. 없으면 대상 레포의 `WORKFLOW_MASTER.md` 또는 `WORKFLOW-MASTER.md`를 확인하고, 둘 다 없으면 [워크플로우 마스터 스킬](skills/custom/workflow-master/SKILL.md)를 참고하게 한다.
-- workflow-master는 작업 복잡도를 판단하고, 필요한 경우 Planner/Developer/Marketer/Operator 관점으로 분해한 뒤 실행·검증을 진행한다.
-- 이 규칙은 Claude Code 내부 권한 프롬프트 생략 옵션(`--dangerously-skip-permissions`)과 별개이며, Infinity의 L2/L3 경계는 우회하지 않는다.
-- 2026-05-13 사용자 지시에 따라 L2는 에이전트가 영향 범위·롤백 가능성·비용·권한·타인 영향 여부를 확인한 뒤 자체 승인(`agent-approved L2`)할 수 있다. 단, 타인에게 메시지 발송, 공유 리소스 수정, 프로덕션/권한/시크릿/비용 관련 작업, 롤백 불명확 작업은 계속 사용자 명시 승인을 요구한다.
-
-### 라우팅 타입
-
-```ts
-type InfinityTaskMode =
-  | "research"        // 클라우드 조사/비교/요약
-  | "prepare"         // 클라우드 초안/계획/명령어 후보 작성
-  | "monitor"         // 클라우드 반복 체크/상태 감시
-  | "draft"           // 클라우드 문서/패치/메시지 초안
-  | "execute_local"   // 로컬 Claude Code 실행
-  | "verify_local"    // 로컬 테스트/빌드/브라우저 검증
-  | "needs_review";   // 승인/판단 필요
-```
-
-기본 판단:
-
-```ts
-if (task.requiresLocalState || task.requiresPermission || task.mutatesFiles) {
-  mode = "execute_local";
-} else if (task.isResearch || task.isSummarization || task.isComparison) {
-  mode = "research";
-} else if (task.isTediousButPreparatory) {
-  mode = "prepare";
-} else {
-  mode = "monitor";
-}
-```
-
-복잡한 Intent의 기본 흐름:
-
-```text
-Cloud: 조사 → 정리 → 실행 계획/패치 초안 생성
-Local Claude Code: 적용 → 실행 → 검증 → 결과 기록
-Cloud: 결과 해석 → 다음 단계 제안/보고
-```
-
-## 아키텍처
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    USER LAYER                           │
-│                                                         │
-│  INTENTS.md          의도 선언 (목표, 우선순위, 제약)     │
-│  Telegram            승인/거부, 진행 상황 수신           │
-│                                                         │
-├─────────────────────────────────────────────────────────┤
-│                    CONTROL LAYER                        │
-│                                                         │
-│  Heartbeat Agent     스케줄 기반으로 깨어남              │
-│    ├── Intent 읽기   INTENTS.md에서 활성 의도 확인       │
-│    ├── State 확인    현재 상태 점검 (git, files, etc.)   │
-│    ├── Dispatch      적절한 실행 에이전트에 작업 할당     │
-│    └── Gate Check    권한 레벨에 따라 자율 실행/승인 요청 │
-│                                                         │
-│  PERMISSIONS.md      권한 경계 정의                      │
-│  GATES.md            승인 대기 큐                        │
-│                                                         │
-├─────────────────────────────────────────────────────────┤
-│                    EXECUTION LAYER                      │
-│                                                         │
-│  기존 workflow-master   복잡한 작업 시 4-role 오케스트레이션 │
-│  단일 에이전트 실행      간단한 작업 시 focused 실행       │
-│  OMC 스킬               autopilot, ralph 등 활용         │
-│                                                         │
-├─────────────────────────────────────────────────────────┤
-│                    NOTIFICATION LAYER                   │
-│                                                         │
-│  GitHub Action       푸시 감지 → Telegram 알림 발송      │
-│  infinity/reports/   실행 결과 로그 (영구 저장)          │
-│                                                         │
-└─────────────────────────────────────────────────────────┘
-```
-
-## Intent 설계
-
-### 구조
-
-```markdown
-## [intent-id] 의도 이름
-- status: inbox | active | in_progress | waiting | archived
-- priority: critical | high | medium | low
-- heartbeat: 30m | 1h | 4h | daily | weekly
-- permission: L0 | L1 | L2
-- project: 프로젝트 경로 또는 이름
-- deadline: YYYY-MM-DD (선택)
-- goal: 이 의도가 달성되면 어떤 상태인지 한 줄로
-- success_criteria:
-  - 측정 가능한 기준
-- context: 관련 파일, URL, 참고 정보
-- constraints: 하지 말아야 할 것, 제약 조건
-```
-
-### 생명주기
-
-```
-Inbox ──→ Active ──→ in_progress ──→ archived
-             │             │
-             │             └──→ waiting (사용자 결정/외부 조건 대기) ──→ Active
-             │
-             └──→ archived/cancelled
-```
-
-## Heartbeat 동작 흐름
-
-```
-[Heartbeat 기상 (매 시간)]
-    │
-    ├── 1. Inbox 확인 → 자유 형식을 구조화하되 Active는 최대 3개만 유지
-    │
-    ├── 2. Active에서 활성 Intent 필터링
-    │   └── critical > high > medium > low, deadline 임박 우선
-    │
-    ├── 3. 각 Intent별 상태 점검
-    │   ├── 이전 리포트 확인 (infinity/reports/)
-    │   └── 다음 액션 결정
-    │
-    ├── 4. 권한 레벨 확인
-    │   ├── L0/L1 → 자율 실행
-    │   └── L2 → GATES.md 등록 + Telegram 승인 요청
-    │
-    ├── 5. 실행 (한 번에 하나의 Intent만)
-    │   ├── 간단 → 단일 에이전트
-    │   └── 복잡 → workflow-master 호출
-    │
-    ├── 6. 결과 기록 → infinity/reports/{intent-id}/{timestamp}.md
-    │
-    ├── 7. 완료된 Intent는 Archive 섹션 + infinity/intents/archive/로 이관
-    │
-    └── 8. 커밋 & 푸시 → GitHub Action → Telegram 알림
-```
-
-## Gate 승인 흐름
-
-```
-에이전트: L2 필요 → GATES.md 대기 등록 + Telegram 승인 요청
-    │
-    └── Intent status → blocked
-
-사용자: Telegram 알림 수신 → /infinity 승인 (Claude Code에서)
-    │
-    ├── 승인 → 다음 Heartbeat에서 실행
-    ├── 거부 → 대안 탐색
-    └── 수정 → 방향 조정 후 재실행
-```
-
-## 기존 시스템 통합
-
-Heartbeat Agent는 workflow-master의 **상위 계층**.
-기존 워크플로우를 대체하지 않고, 언제 어떤 워크플로우를 실행할지 결정하는 지휘관.
-
-| 기존 스킬 | Agent-First에서의 역할 |
-|-----------|----------------------|
-| `/workflow-master` | 복잡한 Intent 실행 시 4-role 오케스트레이션 |
-| `/kop-workflow` | KOP Intent 실행 시 호출 |
-| `/brand-monitor` | 브랜드 모니터링 Intent 실행 시 호출 |
-| `/daily-feedback-system` | daily heartbeat에서 자동 호출 |
-
-## 측정 지표
-
-| 지표 | 설명 | 목표 |
-|------|------|------|
-| 자율 실행률 | L0+L1 실행 / 전체 실행 | 70% 이상 |
-| Gate 응답 시간 | L2 요청 → 사용자 응답 | 30분 이내 |
-| Intent 완료율 | 완료 / 선언된 전체 | 주간 추적 |
-| 사용자 개입 횟수 | Heartbeat당 사용자 개입 | 감소 추세 |
-
-## 시스템 구조
-
-```
-infinity/
-├── INTENTS.md            # Inbox + Active(최대 3) + Waiting + Archive
-├── PERMISSIONS.md        # L0~L3 권한 경계
-├── GATES.md              # 승인 대기 큐
-├── ARTIFACT_RULES.md     # 산출물/리포트/아카이브 경로 규칙
-├── workflows/
-│   └── heartbeat.md      # Heartbeat Agent 프로토콜
-├── intents/active/       # 진행 중 상태/다음 액션
-├── intents/archive/      # 완료 Intent의 canonical index
-├── artifacts/{id}/       # 결과 산출물 (research/design/impl/data)
-├── reports/{id}/         # 실행 로그
-├── reports/heartbeat/    # 전역 heartbeat 요약
-├── drafts/               # legacy (freeze, 신규 작성 금지)
-└── scripts/notify.sh     # Telegram 알림 (로컬용)
-```
-
-경로 규칙 상세는 `infinity/ARTIFACT_RULES.md` 참조. 완료된 Intent의 canonical 결과는 `intents/archive/{id}.md`에 모은다 — reports/drafts에 흩어 두지 않는다.
-
-문서 역할은 `Intent 원장 / Artifact / Report`로 통일한다.
-
-- `Intent 원장`: `infinity/intents/archive/{id}.md`의 최종 상태와 링크 인덱스
-- `Artifact`: `infinity/artifacts/{id}/...`의 재사용 가능한 산출물 원문
-- `Report`: `infinity/reports/{id}/{timestamp}.md`의 실행 로그
-
-완료된 Intent에 대해 `Archive Intent`와 `Detail`을 별도 문서처럼 중복 생성하지 않는다. 같은 path를 가리키는 경우에는 하나의 `Intent 원장`으로 취급한다.
-
-## 권한 레벨
-
-| 레벨 | 이름 | 에이전트 행동 |
-|------|------|-------------|
-| L0 | 자율 | 실행 후 변화 있을 때만 알림 |
-| L1 | 알림 | 실행 후 결과 알림 |
-| L2 | 승인 | GATES.md 등록 + Telegram 승인 요청 |
-| L3 | 금지 | 실행하지 않음 |
-
-## Heartbeat
-
-- 스케줄: 매 시간 (원격 트리거, claude-sonnet-4-6)
-- Telegram 알림: KST 08~22시만, 08시에 아침 리캡
-- 원격 에이전트 = 관제탑 (계획, 분석, 파일 수정, 커밋)
-- 로컬 실행 필요 시 Telegram으로 안내
-
-## 핵심 원칙
-
-- **Reuse Before Create**: 새 컴포넌트 전에 기존 리소스 활용 확인
-- **Inbox 자유 형식**: 사용자는 양식 신경 쓰지 않음, 에이전트가 구조화
-- **완료 아카이브**: INTENTS.md는 활성만, 완료는 intents/archive/로 이관
+복잡한 Intent를 로컬 Claude Code에 인계할 때는 목표, 제약, 완료 기준, 검증할 대상을 전달하고 [워크플로우 마스터](skills/custom/workflow-master/SKILL.md)를 먼저 확인한다.
 
 ## 레퍼런스
+
+- [초기 설계 전문](https://github.com/shdkej/prompt-archive/blob/a548f6edfe5c9016fd61ecb99297f9f301308da5/INFINITY.md#설계-문서) — 아키텍처 도식, 실행 위치 결정 예시, 초기 측정 지표
 
 - [Paperclip](https://github.com/paperclipai/paperclip) — Heartbeat 아키텍처
 - [Superpowers](https://github.com/obra/superpowers) — Plan 기반 자율성

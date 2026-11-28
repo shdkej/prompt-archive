@@ -1,5 +1,7 @@
 # 작업 판단 기준
 
+**목차** · [0. 기준 갱신](#0-기준-갱신) · [1. 판단 원칙](#1-판단-원칙) · [2. 도구별 주의점](#2-도구별-주의점) · [3. 졸업 아카이브](#3-졸업-아카이브)
+
 ## 0. 기준 갱신
 
 - `[WORKFLOW:LEARNING]`, 고찰, 사용자가 직접 고치거나 구체적으로 평가한 회고에서 다음 결정에 쓸 기준을 뽑는다. 단순 저장 승인은 선호로 기록하지 않는다.
@@ -62,5 +64,5 @@
 
 ## 3. 졸업 아카이브
 
-- PA·SharePoint·MS365의 도구별 교훈은 power-automate 스킬의 `references/lessons-learned.md`에서 관리한다.
+- PA·SharePoint·MS365의 도구별 교훈은 해당 작업 환경에 설치된 `power-automate` 스킬의 `references/lessons-learned.md`에서 관리한다.
 - Infinity 마케팅 작업에서 이전 산출물을 계승하는 절차는 [workflow-master](skills/custom/workflow-master/SKILL.md)에서 관리한다.
