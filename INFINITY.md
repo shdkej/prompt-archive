@@ -115,7 +115,7 @@ Infinity에서 클라우드는 제한된 실행자가 아니라 **조사원 / �
 
 - Infinity에서 Claude Code에 작업을 넘길 때는 항상 먼저 `workflow-master` 스킬/워크플로우를 사용하도록 지시한다.
 - Claude Code 프롬프트에는 `Required workflow: Use workflow-master first`를 명시한다.
-- 대상 레포에 `.agent/workflows/workflow-master.md`가 있으면 그 파일을 우선 읽고 따른다. 없으면 `WORKFLOW-MASTER.md` 또는 prompt-archive의 workflow-master 문서를 참고하게 한다.
+- 대상 레포에 `.agent/workflows/workflow-master.md`가 있으면 그 파일을 우선 읽고 따른다. 없으면 대상 레포의 `WORKFLOW_MASTER.md` 또는 `WORKFLOW-MASTER.md`를 확인하고, 둘 다 없으면 Prompt Archive의 `WORKFLOW_MASTER.md`를 참고하게 한다.
 - workflow-master는 작업 복잡도를 판단하고, 필요한 경우 Planner/Developer/Marketer/Operator 관점으로 분해한 뒤 실행·검증을 진행한다.
 - 이 규칙은 Claude Code 내부 권한 프롬프트 생략 옵션(`--dangerously-skip-permissions`)과 별개이며, Infinity의 L2/L3 경계는 우회하지 않는다.
 - 2026-05-13 사용자 지시에 따라 L2는 에이전트가 영향 범위·롤백 가능성·비용·권한·타인 영향 여부를 확인한 뒤 자체 승인(`agent-approved L2`)할 수 있다. 단, 타인에게 메시지 발송, 공유 리소스 수정, 프로덕션/권한/시크릿/비용 관련 작업, 롤백 불명확 작업은 계속 사용자 명시 승인을 요구한다.

@@ -1660,7 +1660,7 @@
       "target": "TDD.md"
     },
     {
-      "source": "DAILY-FEEDBACK-SYSTEM.md",
+      "source": "DAILY_FEEDBACK_SYSTEM.md",
       "target": "skills/daily-feedback-system/SKILL.md"
     },
     {
@@ -1668,7 +1668,7 @@
       "target": "skills/infinity/SKILL.md"
     },
     {
-      "source": "HARNESS-COMPARE.md",
+      "source": "HARNESS_COMPARE.md",
       "target": "skills/harness-compare/SKILL.md"
     },
     {
