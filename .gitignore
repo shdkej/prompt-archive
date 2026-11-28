@@ -12,3 +12,7 @@ skills/custom/keyword-title/outputs/
 skills/custom/daily-news/output/
 __pycache__/
 *.pyc
+
+# Space 상태판에서 읽는 줄 수 집계만 게시한다.
+/data/*
+!/data/workflow-line-counts.json
