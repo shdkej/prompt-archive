@@ -5,6 +5,23 @@ description: 공용 카드뉴스(세로 6장) 제작 스킬. insight 모드(사�
 
 # Insight Card Maker
 
+**목차**
+
+- [Hard Defaults (모든 모드 공통)](#hard-defaults-모든-모드-공통)
+- [Copy Humanize Gate](#copy-humanize-gate)
+- [Page Role Gate](#page-role-gate)
+- [Layout Variety Rule](#layout-variety-rule)
+- [Card 1 Title Gate](#card-1-title-gate)
+- [Card 6 CTA Rule](#card-6-cta-rule)
+- [News Mode Image Classes](#news-mode-image-classes)
+- [Cards 2-5 Generated Asset Direction](#cards-2-5-generated-asset-direction)
+- [Saem Character Rule](#saem-character-rule)
+- [Mode Rules](#mode-rules)
+- [Canonical Files](#canonical-files)
+- [Workflow](#workflow)
+- [Pre-Publish Checklist](#pre-publish-checklist)
+- [Reporting](#reporting)
+
 공용 카드뉴스 제작 스킬입니다. 두 가지 모드를 모두 처리합니다.
 
 - `insight` 모드: 사진/스크린샷과 함께 인사이트, 문구, 관찰, 여행 노트, 발행 앵글, 또는 Instagram/Threads 스타일 카드 요청.

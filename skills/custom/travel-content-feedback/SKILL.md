@@ -5,6 +5,17 @@ description: Generate one daily Instagram/Threads travel-content test image from
 
 # Travel Content Feedback
 
+**목차**
+
+- [개요](#개요)
+- [운영 원칙](#운영-원칙)
+- [매일 실행 흐름](#매일-실행-흐름)
+- [렌더링 스크립트](#렌더링-스크립트)
+- [Telegram 피드백](#telegram-피드백)
+- [피드백 저장 형식](#피드백-저장-형식)
+- [Cron 등록 증거](#cron-등록-증거)
+- [품질 기준](#품질-기준)
+
 ## 개요
 
 마스터의 현재 여행 위치와 진행도를 바탕으로 매일 **이미지 1장짜리 콘텐츠 가설**을 빠르게 만들고, Telegram에서 `좋아요 / 안돼요` 피드백을 받아 취향을 학습한다.

@@ -5,6 +5,8 @@ description: Register an Infinity intent only after its scoped files are committ
 
 # Infinity intake publish gate
 
+**목차** · [Required gate](#required-gate) · [Failure handling](#failure-handling) · [Boundaries](#boundaries)
+
 Use this skill before returning an Infinity intent ID or saying that an Infinity task has been accepted.
 
 ## Required gate

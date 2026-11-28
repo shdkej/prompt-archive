@@ -5,6 +5,15 @@ description: purple tmux 소켓을 통해 pt/purplemux가 실행한 Claude Code 
 
 # pt Claude tmux
 
+**목차**
+
+- [세션 찾기](#세션-찾기)
+- [동작하기 전에 inspect](#동작하기-전에-inspect)
+- [reset 후 간단한 프롬프트 전송](#reset-후-간단한-프롬프트-전송)
+- [임의 텍스트 전송](#임의-텍스트-전송)
+- [수동으로 attach](#수동으로-attach)
+- [안전 수칙](#안전-수칙)
+
 사용자가 `pt` / purplemux 안에서 실행 중인 Claude 세션에 대해 물어볼 때 사용합니다.
 
 ## 세션 찾기

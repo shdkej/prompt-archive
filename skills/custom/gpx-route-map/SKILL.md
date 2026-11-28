@@ -5,6 +5,8 @@ description: GPX 트랙을 Mapbox 경로 이미지/여행 추억 포스터로 �
 
 # GPX Route Map
 
+**목차** · [Canonical Files](#canonical-files) · [Workflow](#workflow) · [Notes](#notes)
+
 사용자가 GPX/XML 경로 파일을 보내거나, 한 장짜리 경로 지도를 요청하거나, Mapbox로 경로를 렌더링할 수 있는지 묻거나, YouTube·Threads·일일 회고·세계 여행 추억용 여행 경로 비주얼을 원할 때 사용합니다.
 
 핵심 규칙: 큰 GPX XML을 채팅에 붙여넣거나 다시 읽지 마세요. `/home/ubuntu/.openclaw/media/inbound/` 아래의 로컬 파일 경로나 이미 저장된 GPX 경로를 우선 사용하고, 요약 수치와 출력 이미지만 보고합니다.

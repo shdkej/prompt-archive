@@ -20,6 +20,43 @@ OpenClaw는 `codex-home/skills/`를 스킬 검색 루트로 사용하지 않는�
 
 OpenClaw 번들·플러그인 패키지의 스킬, Codex `.system`, 설치 캐시, 폐기된 Workshop 제안 이력은 각 도구가 관리한다. 이 저장소의 스킬로 복제하지 않는다. 활성 Workshop 파일은 해당 워크스페이스 스킬로 승격했다. Workshop은 루트 밖 링크를 허용하지 않으므로 그 경로에 외부 링크를 만들지 않는다. Workshop 자동 학습 설정은 변경하지 않았다.
 
+## 직접 제작 스킬 목차
+
+### 조사·비교
+
+- 앱·웹 시장 조사 — [app-web-market-research](custom/app-web-market-research/SKILL.md)
+- 고객 문제와 대응 사례 조사 — [customer-case-finder](custom/customer-case-finder/SKILL.md)
+- 외부 AI 저장소와 내 설정 비교 — [harness-compare](custom/harness-compare/SKILL.md)
+- 도구 후보 수집·평가 — [tool-curator](custom/tool-curator/SKILL.md)
+
+### 콘텐츠·미디어
+
+- GeekNews 뉴스레터와 선별 피드백 — [daily-news](custom/daily-news/SKILL.md)
+- 키워드·제목·이름 후보 생성 — [keyword-title](custom/keyword-title/SKILL.md)
+- 여행·제품 경험을 1인 메이커 문체로 작성 — [nomad-product-content](custom/nomad-product-content/SKILL.md)
+- 특정 독자에게 편지형 존댓말로 작성 — [subtractive-content-persona](custom/subtractive-content-persona/SKILL.md)
+- 인사이트·뉴스 카드뉴스 제작 — [insight-card-maker](custom/insight-card-maker/SKILL.md)
+- 고정 프레임의 세로 쇼츠 제작 — [fixed-shell-shorts](custom/fixed-shell-shorts/SKILL.md)
+- 유튜브용 가로 설명 컷 제작 — [youtube-explainer-motion](custom/youtube-explainer-motion/SKILL.md)
+- 사진·짧은 여행 영상 업로드 — [image-upload](custom/image-upload/SKILL.md)
+- 사진 분류와 후속 활용 결정 — [photo-decision](custom/photo-decision/SKILL.md)
+- 여행 콘텐츠 반응 수집·반영 — [travel-content-feedback](custom/travel-content-feedback/SKILL.md)
+
+### 회고·워크플로우
+
+- 하루 회고 마감·비공개 카드 제작 — [daily-review-closeout](custom/daily-review-closeout/SKILL.md)
+- 목표·에이전트·산출물 간 운영 흐름 점검 — [life-system-workflow-artifact-check](custom/life-system-workflow-artifact-check/SKILL.md)
+- 역할별 작업 조율과 검증 — [workflow-master](custom/workflow-master/SKILL.md)
+- Infinity 접수와 게시 확인 — [infinity-intake-publish](custom/infinity-intake-publish/SKILL.md)
+
+### 운영·여행 도구
+
+- 디스크 정리 후보와 영향 점검 — [disk-cleanup-audit](custom/disk-cleanup-audit/SKILL.md)
+- tmux에서 Claude 세션 조작 — [pt-claude-tmux](custom/pt-claude-tmux/SKILL.md)
+- GPX 경로 지도 생성 — [gpx-route-map](custom/gpx-route-map/SKILL.md)
+- TrustedHousesitters 공고 수집 — [trustedhousesitters-scraper](custom/trustedhousesitters-scraper/SKILL.md)
+- Worldpackers 공고 수집 — [worldpackers-scraper](custom/worldpackers-scraper/SKILL.md)
+
 ## 스킬 선택 순서 — OpenClaw·Codex·Claude 공통
 
 사용자가 스킬을 지명하면 그 선택을 따른다. 자동 선택할 때는 카탈로그의 역할·설치 범위 안에서 요청과 산출물에 맞는 **직접 제작 스킬(`custom/`) 후보와 해당 `SKILL.md`를 먼저 검토**하고, 적합한 스킬을 사용한다. 해당 작업을 다루는 직접 제작 스킬이 없거나 기능이 부족한 부분에는 **외부 스킬(`external/` 및 도구 제공 스킬)**을 사용한다. 이 순서는 모든 OpenClaw 워크스페이스와 Codex·Claude에 공통으로 적용한다. 관련 없는 직접 제작 스킬을 억지로 사용하거나 다른 역할의 전용 스킬까지 설치·실행하지 않는다.

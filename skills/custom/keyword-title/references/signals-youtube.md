@@ -1,5 +1,15 @@
 # YouTube Title Signals (유튜브 제목·썸네일 카피 맥락)
 
+**목차**
+
+- [1. 신호 목록 (6종)](#1-신호-목록-6종)
+- [2. 점수 산식](#2-점수-산식)
+- [3. 각 신호의 LLM 평가 가이드](#3-각-신호의-llm-평가-가이드)
+- [4. blog/threads 신호와의 차이 요약](#4-blogthreads-신호와의-차이-요약)
+- [5. 자동 폐기 조건](#5-자동-폐기-조건)
+- [6. 외부 API 연동 — YouTube Data API (Searchability 1순위) + 데이터랩(보조)](#6-외부-api-연동--youtube-data-api-searchability-1순위--데이터랩보조)
+- [7. research-37 선택 압력 게이트 — 여행·라이프스타일 제목](#7-research-37-선택-압력-게이트--여행라이프스타일-제목)
+
 > 콘텐츠 모드(blog·threads)의 `signals-content.md`와 **다른 평가축**을 쓴다.
 > 블로그는 "내가 겪은 이야기"(PersonalDepth 0.30 최상위)가 핵심이지만,
 > 유튜브 제목은 **"시청자가 아직 못 본 결과·변화"**가 주인공이다.
