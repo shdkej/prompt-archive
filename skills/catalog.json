@@ -13,19 +13,6 @@
       ]
     },
     {
-      "path": "skills/custom/daily-archive-card",
-      "scope": "shared",
-      "openclaw": [
-        "skills/daily-archive-card"
-      ],
-      "codex": [
-        {
-          "name": "daily-archive-card",
-          "path": "skills/custom/daily-archive-card"
-        }
-      ]
-    },
-    {
       "path": "skills/custom/daily-news",
       "scope": "shared",
       "openclaw": [

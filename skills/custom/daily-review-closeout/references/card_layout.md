@@ -6,7 +6,7 @@
 
 1. 현지 날짜, 최종 회고, 내일의 단 한 가지 의도를 입력값으로 확정한다. 도시를 확인할 수 없으면 도시 표기를 생략한다.
 2. 책의 인쇄 페이지를 닮은 편집형 카드로 HTML/CSS 조판한다. 기본 카드에는 사진·삽화·아이콘을 넣지 않는다.
-3. Knowledge Lab의 `source/openclaw-system/scripts/reviews/validate_daily_archive_card.py`로 PNG와 HTML을 검증하고 실제 렌더를 눈으로 확인한다.
+3. Python 3와 Pillow가 설치된 환경에서 Knowledge Lab의 `source/openclaw-system/` 디렉터리를 기준으로 `python3 scripts/reviews/validate_daily_archive_card.py FINAL_PNG INDEX_HTML`을 실행한다. 최종 PNG와 HTML 경로를 순서대로 전달한 뒤, 비공개 뷰어로 최종 PNG를 열어 §6을 확인한다.
 4. `사전 검수`를 통과하지 못하면 문제 요소 하나만 고쳐 다시 렌더한다.
 
 ### 조판 고정 원칙
@@ -18,7 +18,7 @@
 
 ### 제목 게이트
 
-- 제목은 직접 즉흥 작성하지 않고 `prompt-archive/skills/custom/keyword-title/SKILL.md`를 먼저 읽은 뒤 `blog` 모드로 후보를 만든다.
+- 제목이 이미 확정됐으면 원문을 보존한다. 새 제목이 필요하면 `prompt-archive/skills/custom/keyword-title/SKILL.md`를 먼저 읽은 뒤 `blog` 모드로 후보를 만든다.
 - 시드는 그날의 실제 장면·판단·감정에서 추출하고, 장소명이나 감탄만 반복하는 제목은 후보에서 낮춘다.
 - 후보는 최소 3개를 만든 뒤 `구체성`, `장면성`, `호기심`, `사용자 말투`, `카드에서 3초 안에 읽히는지`를 자가 점검해 1개를 선택한다.
 - 선택한 제목은 카드 1장의 제목 영역에만 넣고, 카드에 넣을 삽화가 별도로 승인된 경우에도 이미지에는 글자나 제목을 생성하지 않고, 문안은 조판 단계에서 넣는다.

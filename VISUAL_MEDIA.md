@@ -8,7 +8,7 @@ Threads와 Instagram에서는 첫 이미지와 본문 첫 줄이 같은 선택�
 
 ## 데일리 아카이브 카드
 
-최종 회고와 내일의 의도를 책 한 페이지로 조판한다. 기본 카드는 사진 없이 만들고, 카드에 들어갈 문구는 HTML/CSS로 배치한다. 입력값부터 PNG 렌더 검수까지 [daily-archive-card 스킬](skills/custom/daily-archive-card/SKILL.md)을 사용한다.
+최종 회고와 내일의 의도를 책 한 페이지로 조판한다. 기본 카드는 사진 없이 만들고, 카드에 들어갈 문구는 HTML/CSS로 배치한다. 입력값부터 PNG 렌더 검수까지 [회고 마감 스킬의 카드 제작 규격](skills/custom/daily-review-closeout/references/card_layout.md)을 따른다.
 
 ## 유튜브 설명 모션
 
