@@ -1,1 +1,0 @@
-skills/custom/workflow-master/SKILL.md
