@@ -1,6 +1,6 @@
 ---
-name: pt-claude-tmux
-description: purple tmux 소켓을 통해 pt/purplemux가 실행한 Claude Code 세션에 attach하고 제어합니다. 사용자가 기존 pt Claude 세션을 inspect, reset, 입력 전송(send input), capture, 또는 continue하려 할 때 사용합니다.
+name: pt-session-tmux
+description: pt/purplemux가 띄운 Claude Code pane을 찾아 캡처하거나 제어한다. 기존 세션 확인·재연결·입력 전송·리셋 요청에 사용한다.
 ---
 
 # pt Claude tmux

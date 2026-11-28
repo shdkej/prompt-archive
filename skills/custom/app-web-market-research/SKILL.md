@@ -1,6 +1,6 @@
 ---
 name: app-web-market-research
-description: "앱 비교, 웹서비스 비교, 시장조사, 경쟁앱 분석, 트렌딩 앱, 설치 수·DAU·MAU·웹 트래픽·시장규모·마케팅 채널 확인 요청에 사용한다."
+description: 앱·웹서비스의 시장 규모와 경쟁 구도를 조사한다. 경쟁 앱의 설치 수·활성 사용자·트래픽·마케팅 채널을 비교하거나 트렌딩 서비스를 찾을 때 사용한다.
 ---
 
 # App/Web Market Research

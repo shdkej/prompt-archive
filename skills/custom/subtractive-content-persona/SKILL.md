@@ -1,6 +1,6 @@
 ---
 name: "subtractive-content-persona"
-description: "캐러셀 또는 숏폼 스크립트의 페르소나 기반 콘텐츠를 편지형 공유와 담백한 고백의 한국어 존댓말로 작성"
+description: 특정 독자 한 명에게 경험을 나누는 한국어 존댓말로 캐러셀이나 숏폼 대본을 작성한다. 편지처럼 담백한 고백을 원하거나 지정한 서브 페르소나의 목소리로 써 달라는 요청에 사용한다.
 ---
 
 # Subtractive Content Persona

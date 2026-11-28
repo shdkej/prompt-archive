@@ -546,15 +546,15 @@
       "agent": "main"
     },
     {
-      "path": "skills/custom/pt-claude-tmux",
+      "path": "skills/custom/pt-session-tmux",
       "scope": "main",
       "openclaw": [
         "workspace/skills/pt-claude-tmux"
       ],
       "codex": [
         {
-          "name": "pt-claude-tmux",
-          "path": "skills/custom/pt-claude-tmux"
+          "name": "pt-session-tmux",
+          "path": "skills/custom/pt-session-tmux"
         }
       ],
       "agent": "main"

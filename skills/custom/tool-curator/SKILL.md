@@ -1,6 +1,6 @@
 ---
 name: tool-curator
-description: ClawHub, ClawSkills, LobeHub Skills, OpenHunt, Product Hunt 같은 소스에서 사용자의 실제 워크플로우와 평가 기준에 맞춰 AI 도구와 에이전트 skill을 큐레이션합니다. 새 도구를 추천할 때, 반복 발견 파이프라인을 구축할 때, 개방성/확장성으로 제품을 비교할 때, 도구 발견을 cron 기반 워크플로우로 전환할 때 사용하세요.
+description: ClawHub·Product Hunt 등에서 사용자 워크플로우에 맞는 AI 도구와 에이전트 스킬을 찾아 비교한다. 도구 추천, 개방성·확장성 평가, 반복 큐레이션이나 발견 작업의 cron 설계를 요청할 때 사용한다.
 ---
 
 # Tool Curator

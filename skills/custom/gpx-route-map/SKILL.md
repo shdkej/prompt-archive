@@ -1,6 +1,6 @@
 ---
 name: gpx-route-map
-description: GPX 트랙을 Mapbox 경로 이미지/여행 추억 포스터로 렌더링하는 스킬. 원시 GPX XML을 채팅 컨텍스트에 불러오지 않는 것이 핵심 규칙. 사용 시기 - (1) 사용자가 GPX/XML 경로 파일을 보낼 때, (2) 경로 지도·여행 경로 비주얼(YouTube/Threads/일일 회고/세계 여행 추억용) 요청, (3) insight-card-maker의 여행 카드에 공간 맥락 이미지가 필요할 때.
+description: GPX 트랙이나 경로 XML을 Mapbox 지도 이미지로 렌더링한다. 여행 경로 포스터, 회고·카드뉴스에 넣을 이동 지도, 영상에 쓸 경로 비주얼을 요청할 때 사용한다.
 ---
 
 # GPX Route Map

@@ -1,6 +1,6 @@
 ---
 name: "nomad-product-content"
-description: "인스타그램 캐러셀·숏폼에 여행·작은 앱·1인 메이커 페르소나를 적용한다."
+description: 여행에서 관찰한 불편, 작은 앱 실험, 1인 메이커의 운영 경험을 건조하고 짧은 문체로 쓴다. 미니멀 유목 메이커 관점의 Instagram 캐러셀이나 숏폼 대본을 요청할 때 사용한다.
 ---
 
 # Nomad Product Content

@@ -52,7 +52,7 @@ OpenClaw 번들·플러그인 패키지의 스킬, Codex `.system`, 설치 캐�
 ### 운영·여행 도구
 
 - 디스크 정리 후보와 영향 점검 — [disk-cleanup-audit](custom/disk-cleanup-audit/SKILL.md)
-- tmux에서 Claude 세션 조작 — [pt-claude-tmux](custom/pt-claude-tmux/SKILL.md)
+- tmux에서 Claude 세션 조작 — [pt-session-tmux](custom/pt-session-tmux/SKILL.md). OpenClaw의 기존 문서 경로는 `workspace/skills/pt-claude-tmux`입니다. 기존 설치에서 이 링크의 이전 원본이 사라졌다면 설치 미리보기로 충돌 목록을 확인하고, 해당 링크만 충돌할 때 `--apply --replace`로 백업 후 다시 연결합니다.
 - GPX 경로 지도 생성 — [gpx-route-map](custom/gpx-route-map/SKILL.md)
 - TrustedHousesitters 공고 수집 — [trustedhousesitters-scraper](custom/trustedhousesitters-scraper/SKILL.md)
 - Worldpackers 공고 수집 — [worldpackers-scraper](custom/worldpackers-scraper/SKILL.md)

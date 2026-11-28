@@ -1,6 +1,6 @@
 ---
 name: image-upload
-description: 사진/이미지 파일과 짧은 mp4 여행 기록 클립을 Cloudflare 업로드 저장소에 올리고 공개 URL을 받아 검증·기록한다. 사용 시기 - (1) 사용자가 사진, 스크린샷, 생성 이미지, 카드뉴스/썸네일 산출물 업로드나 링크화를 요청할 때, (2) 문서·노트·카드뉴스·리포트에 이미지 URL을 삽입해야 할 때, (3) 단독 사진이나 짧은 여행 영상을 일일 트래킹 입력으로 보존해야 할 때, (4) upload.shdkej.com, img.shdkej.com, CLOUDFLARE_IMAGE_UPLOAD_TOKEN 언급 시.
+description: 사진·스크린샷·생성 이미지·짧은 여행 MP4를 Cloudflare에 업로드하고 공개 URL을 검증·기록한다. 파일 링크화, 문서에 넣을 이미지 URL, 일일 트래킹용 여행 미디어 보존 요청에 사용한다.
 ---
 
 # Image Upload

@@ -1,6 +1,6 @@
 ---
 name: life-system-workflow-artifact-check
-description: 나-목표-에이전트-문서(디테일) 4레이어 운영 구조가 실제로 돌고 있는지 점검하는 스킬. 레이어 간 방화벽(상태값만 전달, 블록 타임 준수, 일방향 흐름)과 Bottom-Up 압축을 검사한다. 사용 시기 - (1) "4레이어", "시스템 점검", "흐름이 잘 도는지 봐줘", "PDCA", "오늘 목표" 언급 시, (2) 일일/주간 회고에서 목표-실행-산출물-workflow-master 적용을 함께 볼 때, (3) cron/heartbeat의 하루 운영 루프 점검.
+description: 나·목표·에이전트·문서의 4레이어 운영 흐름을 점검한다. 일일·주간 회고나 cron·heartbeat에서 목표가 실행·산출물로 이어졌는지, 레이어 경계와 블록 타임이 지켜졌는지 확인할 때 사용한다.
 ---
 
 # life-system-workflow-artifact-check
