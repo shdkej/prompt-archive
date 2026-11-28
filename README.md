@@ -2,10 +2,15 @@
 
 개인 프롬프트/스킬/가이드 자산 아카이브.
 
-## 재사용 프롬프트
+## 콘텐츠 문서
 
-- [`YOUTUBE_EXPLAINER_MOTION_PROMPT.md`](./YOUTUBE_EXPLAINER_MOTION_PROMPT.md) — 1~3초 유튜브 설명 모션(Remotion) 제작·검수 계약
-- [`DAILY_ARCHIVE_CARD_PROMPT.md`](./DAILY_ARCHIVE_CARD_PROMPT.md) — 데일리 아카이브 카드 그림·조판·검수 계약
+| 작업 | 관리 문서 |
+| --- | --- |
+| 내 말투로 쓰기, 댓글 달기, 회고 다듬기 | [말투와 회고](VOICE.md) |
+| 소재 고르기, 블로그·Threads 초안 쓰기, 발행 전 검수 | [콘텐츠 전략과 글쓰기](WRITING_TECHNIQUES.md) |
+| 첫 이미지 고르기, 회고 카드·유튜브 설명 모션 만들기 | [시각·영상](VISUAL_MEDIA.md) |
+
+콘텐츠 기준이 바뀌면 해당 항목을 현재 적용할 문장으로 고친다. 날짜별 변경 경위는 Git 기록에서 확인한다.
 
 ## 공용 스킬
 
