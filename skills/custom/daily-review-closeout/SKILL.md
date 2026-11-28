@@ -20,7 +20,7 @@ description: >-
 
 **한 번의 회고 마감은 준비 → 검증 → 전달까지다.** 회고 본문을 작성하거나 보냈다고 완료된 것이 아니다. 4단 회고를 먼저 단독 답변으로 보내고 카드·캘린더 작업을 다음 턴으로 미루지 않는다. 사용자에게 최종 마감을 전달하기 전에 모든 산출물을 준비한다.
 
-1. `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/reviews/LOCAL_REVIEW_AUTOMATION.md`를 읽고, `/home/ubuntu/workspace/prompt-archive/DAILY_ARCHIVE_CARD_PROMPT.md`는 전체를 읽는다. 두 문서가 현재 회고·카드 규칙의 정본이다. 여행 중에는 `hj`에게 현재 장소와 다음 이동을 확인한다. 장소·감정·원인을 만들지 않고, 확인되지 않은 도시는 카드에서 생략한다.
+1. `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/reviews/LOCAL_REVIEW_AUTOMATION.md`를 읽고, 카드 생성 전 [daily-archive-card](../daily-archive-card/SKILL.md)와 그 제작 규격 전문을 읽는다. 여행 중에는 `hj`에게 현재 장소와 다음 이동을 확인한다. 장소·감정·원인을 만들지 않고, 확인되지 않은 도시는 카드에서 생략한다.
 
 2. 회고의 현지 날짜와 원문 근거를 확인한다. 본문은 정확히 `Keep`, `Problem`, `Action Item`, `Tomorrow Expectation` 네 섹션으로 작성한다. 사용자의 사실과 SAM의 운영 작업을 구분하고, `Action Item`은 실험 한 가지로 제한한다.
    - `Keep`에서는 `[사실]`과 `[Insight]`를, `Problem`에서는 `[사실]`과 `[Why]`를 구분한다. `Tomorrow Expectation`에는 그 실험에서 기대하는 장면이나 신호를 쓴다. 출처를 확인한 명언은 다음 날 캘린더 이벤트에 둔다. 내부 도구·파일 경로·검증 상세는 4단 본문 뒤의 `운영 처리`에만 적는다.
@@ -28,8 +28,7 @@ description: >-
 
 3. 원문 근거와 회고 전문을 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/daily-reviews/YYYY-MM-DD-review.md`에 저장한다. 같은 날짜 파일이 있으면 먼저 읽고 관련 근거를 보존하면서 정정 내용을 반영한다. 별도 회고 파일을 중복 생성하지 않는다. 실제로 재사용할 수 있는 규칙만 `data/spaced_repetition_items.json`에 추가하고, 없으면 추가하지 않았다고 기록한다.
 
-4. `DAILY_ARCHIVE_CARD_PROMPT.md`의 현재 책 페이지형 편집 양식에 따라 비공개 데일리 아카이브 카드 한 장을 만든다. 따뜻한 아이보리 종이, 상·하단 점선 프레임, 본문과 충분히 떨어진 중간 굵기의 중앙 명조 제목, 굵은 번호형 Keep/Problem/Action Item/Tomorrow Expectation 제목, 동일 크기로 들여쓴 본문, 넉넉한 여백을 사용한다. 쪽수 대신 오른쪽 아래에 날짜를 둔다. 큰 제목만 중앙 정렬하고 네 섹션 제목과 본문은 모두 왼쪽 정렬한다. 상위 래퍼를 중앙 정렬해 섹션 제목까지 그 정렬을 상속하게 하지 않는다. 삽화·사진은 기본으로 넣지 않는다. PNG·HTML을 검증하고 실제 렌더가 정확한 배치 규칙을 따르는지 확인한다. 시각적 대칭을 이유로 규칙을 바꾸지 않는다. 정본과 다른 부분이 있으면 그 차이만 수정하고, 재렌더·재검증·육안 재확인을 마친 뒤 업로드한다.
-   - `python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/reviews/validate_daily_archive_card.py FINAL_PNG INDEX_HTML`을 실행한다. 카드 계약의 시각 조건 일곱 가지를 모두 확인하고, 카드의 `validation.txt`에 렌더 파일·비공개 뷰어·시간대를 포함한 현지 시각·`PASS` 또는 `FAIL: 항목 / 관찰된 문제 / 고칠 변수`를 기록한다. 검증기 통과만으로 육안 검수를 완료 처리하지 않는다.
+4. `daily-archive-card`로 확정된 회고의 비공개 카드 한 장을 만든다. 최종 PNG·HTML과 검증기 결과를 확인하고, PNG를 직접 열어 확인한 기록을 카드 폴더의 `validation.txt`에 남긴다. 재렌더한 경우 최종본으로 재검증한 뒤 업로드한다.
 
 5. 기존 이벤트를 조회한 뒤 `gog`로 `회고` 캘린더에만 당일 5분 헤드라인과 출처를 확인한 다음 날 명언을 생성하거나 갱신한다. 다음 날 명언은 종일 일정이 아니라 Asia/Seoul 기준 21:00–23:59 시간 이벤트로 기록한다. 매일 새 명언을 고르고, `회고` 캘린더의 최근 30일 명언 이벤트를 확인해 그 기간에 쓴 문구는 재사용하지 않는다. 기본·일반 캘린더에 데일리 회고 항목을 생성하거나 수정하지 않는다. 신뢰할 수 있는 문헌으로 명언의 저자와 정확한 문구를 검증하고 이벤트 설명에 출처를 넣는다. 중복을 막고 `회고` 캘린더를 다시 조회해 확인한다. 명언 출처 확인이나 캘린더 접근에 실패하면 정확한 실패 내용을 기록하고 마감을 미완료로 남긴다. 추측한 명언이나 할 일 이벤트로 대체하지 않는다.
    - 신뢰할 수 있는 원전을 사용한다. 저자가 불확실하거나 오인용으로 알려진 문구는 제외한다. 정확한 원문과 직접 확인할 수 있는 출처 링크를 보존하고, 번역문에는 번역임을 표시한다. 제목은 고정 접두사 없이 `<인용문> — <저자>`로 쓴다. 같은 날짜에 명언 이벤트가 있으면 문구나 제목이 바뀌어도 기존 이벤트를 갱신한다. 해당 캘린더를 재조회해 날짜·시간대·시작과 종료 시각·문구·출처를 확인한다. 이 작업에서는 기본·일반 캘린더를 조회하지 않는다.
