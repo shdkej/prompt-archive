@@ -70,7 +70,7 @@ description: "상단 훅·하단 시리즈 표기는 고정하고 중앙 콘텐�
 
 ## 유튜브 설명컷
 
-중앙 설명컷은 [유튜브 설명 모션 계약](/home/ubuntu/workspace/prompt-archive/YOUTUBE_EXPLAINER_MOTION_PROMPT.md)을 따른다. 특히 오프화이트 48px 격자, `출발 객체 → 관계선 → 결과 객체`, 결론 하나를 유지한다. 한국어 텍스트는 이미지 모델이 아니라 코드/타이포 레이어로 렌더한다.
+중앙 설명컷은 [youtube-explainer-motion 스킬](../youtube-explainer-motion/SKILL.md)의 객체 관계 또는 데이터 차트 규격을 따른다. 특히 오프화이트 48px 격자, `출발 객체 → 관계선 → 결과 객체`, 결론 하나를 유지한다. 한국어 텍스트는 이미지 모델이 아니라 코드/타이포 레이어로 렌더한다.
 
 세로 숏츠에서는 이 설명 그래픽을 중앙 콘텐츠 창에 넣고, 바깥의 고정 셸과 섞지 않는다.
 

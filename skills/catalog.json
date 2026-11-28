@@ -65,6 +65,19 @@
       ]
     },
     {
+      "path": "skills/custom/youtube-explainer-motion",
+      "scope": "shared",
+      "openclaw": [
+        "skills/youtube-explainer-motion"
+      ],
+      "codex": [
+        {
+          "name": "youtube-explainer-motion",
+          "path": "skills/custom/youtube-explainer-motion"
+        }
+      ]
+    },
+    {
       "path": "skills/external/agent-reach",
       "scope": "shared",
       "openclaw": [

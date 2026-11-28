@@ -12,4 +12,4 @@ Threads와 Instagram에서는 첫 이미지와 본문 첫 줄이 같은 선택�
 
 ## 유튜브 설명 모션
 
-개념 사이의 관계 하나를 전달할 때는 객체와 연결선을 쓴다. 수치의 흐름이 핵심이면 원본 데이터로 차트 컷을 만든다. 장면 입력, 자막 안전 영역, MP4 출력과 프레임 검수는 [유튜브 설명 모션 제작 프롬프트](YOUTUBE_EXPLAINER_MOTION_PROMPT.md)를 따른다.
+개념 사이의 관계 하나를 전달할 때는 객체와 연결선을 쓴다. 수치의 흐름이 핵심이면 원본 데이터로 차트 컷을 만든다. 장면 입력, 자막 안전 영역, MP4 출력과 프레임 검수는 [youtube-explainer-motion 스킬](skills/custom/youtube-explainer-motion/SKILL.md)을 사용한다.
