@@ -39,8 +39,6 @@ description: 자유 형식 요청을 Infinity Intent로 접수하거나 /infinit
 
 ## 레퍼런스
 
-- [초기 설계 전문](https://github.com/shdkej/prompt-archive/blob/a548f6edfe5c9016fd61ecb99297f9f301308da5/INFINITY.md#설계-문서) — 아키텍처 도식, 실행 위치 결정 예시, 초기 측정 지표
-
 - [Paperclip](https://github.com/paperclipai/paperclip) — Heartbeat 아키텍처
 - [Superpowers](https://github.com/obra/superpowers) — Plan 기반 자율성
 - [gstack](https://news.hada.io/topic?id=27756) — Think→Ship 파이프라인
