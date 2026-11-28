@@ -177,12 +177,12 @@ Card 6은 변경 없이 복사하는 정적 이미지가 아니라, 동적 가�
 
 ## Canonical Files
 
-- 공용 렌더러: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/make_insight_cards.py`
-- 저장된 사진 무작위 선택기: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/select_r2_card_photo.py`
+- 공용 렌더러: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/content/make_insight_cards.py`
+- 저장된 사진 무작위 선택기: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/content/select_r2_card_photo.py`
 - 공용 템플릿/config 디렉터리: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/card-news/templates/`
 - 출력 루트: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/card-news/runs/`
 - 카드뉴스 라이브러리 데이터: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/card-news/library/items.json`
-- 카드뉴스 라이브러리 빌더: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/build_card_news_library.py`
+- 카드뉴스 라이브러리 빌더: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/content/build_card_news_library.py`
 - 카드뉴스 라이브러리 페이지: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/card-news/library/index.html`
 - 배포된 카드뉴스 라이브러리: `https://library.aws.shdkej.com`
 - 배포 복사 대상: `/home/ubuntu/workspace/space/infra-aws-static-sites/sites/library/dist/index.html`
@@ -198,7 +198,7 @@ Card 6은 변경 없이 복사하는 정적 이미지가 아니라, 동적 가�
    - Card 1 배경은 이미지를 생성하기 전에 저장된 사진 무작위 선택기를 먼저 시도:
 
 ```bash
-python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/select_r2_card_photo.py --json
+python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/content/select_r2_card_photo.py --json
 ```
 
    - 선택기는 먼저 `UPLOAD_IMAGE_RANDOM_URL` 또는 `https://upload.shdkej.com/random`을 호출합니다. 엔드포인트는 기본적으로 `original/` 이미지 폴더로 향해야 하며 (카드뉴스 렌더 등 가공 에셋은 `derived/` 소속), JSON 또는 공개 `302 Location` 리다이렉트 둘 다 유효합니다. 업로드 토큰이 거부되면 인증 없이 재시도. 엔드포인트 불가 시 `R2_PHOTO_MANIFEST_URL`, 또는 `R2_PHOTO_BUCKET` + `R2_PHOTO_ENDPOINT_URL` / `CLOUDFLARE_R2_ENDPOINT_URL`로 대체. 모두 불가하거나 선택된 파일이 사용자 오리지널 이미지로 검증되지 않으면 Card 1 대체 이미지를 만들지 말고 발행 전 중단합니다.
@@ -225,7 +225,7 @@ python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/sele
 7. 공용 렌더러로 렌더링:
 
 ```bash
-python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/make_insight_cards.py \
+python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/content/make_insight_cards.py \
   --config /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/card-news/templates/<name>.json \
   --out /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/card-news/runs/<name>
 ```
@@ -246,8 +246,8 @@ python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/make
 12. 라이브러리 재빌드 및 배포:
 
 ```bash
-python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/build_card_news_library.py
-python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/build_card_news_library.py --check-stage
+python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/content/build_card_news_library.py
+python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/content/build_card_news_library.py --check-stage
 ```
 
 - `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/card-news/library/index.html`을 `/home/ubuntu/workspace/space/infra-aws-static-sites/sites/library/dist/index.html`로 복사.
@@ -298,7 +298,7 @@ curl -I -L --max-time 20 -s https://library.aws.shdkej.com/downloads/<card-news-
 - [ ] 업로드된 URL이 모두 HTTP 200을 반환한다.
 - [ ] 라이브러리 항목에 6장 카드 URL이 모두 포함된다.
 - [ ] `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/card-news/library/index.html`을 `/home/ubuntu/workspace/space/infra-aws-static-sites/sites/library/dist/index.html`로 복사했고, 정적 ZIP도 `sites/library/dist/downloads/`에 있다.
-- [ ] commit/push 직전 `python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/build_card_news_library.py --check-stage`가 통과했다. `items.json`, slug별 template/source-assets, 공개 HTML, red-team 반영 후 최종 library 변경이 staged/unstaged로 갈라져 있지 않다.
+- [ ] commit/push 직전 `python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/content/build_card_news_library.py --check-stage`가 통과했다. `items.json`, slug별 template/source-assets, 공개 HTML, red-team 반영 후 최종 library 변경이 staged/unstaged로 갈라져 있지 않다.
 - [ ] `library.aws.shdkej.com` 원격 배포까지 완료했다. `openclaw-backups` 커밋만으로 완료 처리하지 않았고, S3/CloudFront 또는 GitHub Actions 배포 후 공개 HTML에서 새 `id`/제목을 `curl`로 확인했다.
 - [ ] 공개 다운로드 ZIP URL이 HTTP 200을 반환한다.
 - [ ] 라이브러리 발행 성공 시 카드 이미지를 채팅으로 보내지 않았다 (명시 요청 예외). 채팅 전달 시 6장이 순서대로, 첫 첨부 텍스트에 제목 포함.

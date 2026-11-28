@@ -68,7 +68,7 @@ description: 사진·스크린샷을 Decisions 방식의 명시적 기준으로 
 - 사용자가 인사이트·카드뉴스·공유용 콘텐츠를 명시했거나 이미 카드뉴스 제작 맥락이 활성화된 경우에는 일일 분류만으로 종료하지 말고 `DATA_CAPTURE_RULES.md`의 Photo To Shareable Output과 `insight-card-maker` 경로를 따릅니다. 이 스킬에서 사진을 기록하는 선택 자체는 카드뉴스 업로드·배포 승인이 아닙니다.
 - 모든 사진은 `data/daily-tracking/YYYY-MM-DD.md`에 URL, 가벼운 범주, 핵심 맥락, 분류 결과를 기록합니다. 같은 사진/메시지는 중복 기록하지 않습니다.
 - `memory`는 일일 기록만 남기며 분석을 덧붙이지 않습니다. `observation`은 회고에 쓸 관찰일 때만 `photo-insights/insight-log.md`에 승격합니다. `insight`는 반복을 뒷받침하는 과거 기록이 확인된 경우에만 가설을 `hypotheses.md`에 추가하고, 단일 사진이면 가설로 만들지 않습니다. `application`은 구체적인 작은 변경 제안이 있을 때 `application-candidates.md`에도 후보로 추가합니다.
-- 기록은 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/record_photo_decision.py`를 호출합니다. 이 스크립트가 중복 확인 → Decisions API 호출 → API 선택값 적용 → 로컬 기록을 수행합니다. `source_id`는 재처리 때도 같은 Slack 메시지 ID나 media ID를 씁니다. 촬영일을 모르면 `recorded_at`을 생략해 현재 KST로 기록합니다.
+- 기록은 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/photos/record_photo_decision.py`를 호출합니다. 이 스크립트가 중복 확인 → Decisions API 호출 → API 선택값 적용 → 로컬 기록을 수행합니다. `source_id`는 재처리 때도 같은 Slack 메시지 ID나 media ID를 씁니다. 촬영일을 모르면 `recorded_at`을 생략해 현재 KST로 기록합니다.
 
 ```json
 {
@@ -89,7 +89,7 @@ description: 사진·스크린샷을 Decisions 방식의 명시적 기준으로 
 JSON을 Base64로 인코딩한 뒤 Gateway 실행 도구의 `env`에 `PHOTO_DECISION_INPUT_B64`로 전달합니다. `command`는 다음처럼 지정합니다. 키 값을 명령에 넣지 않으며, Gateway 환경의 `OPENAI_API_KEY`를 상속받습니다.
 
 ```sh
-printf '%s' "$PHOTO_DECISION_INPUT_B64" | base64 --decode | python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/record_photo_decision.py
+printf '%s' "$PHOTO_DECISION_INPUT_B64" | base64 --decode | python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/photos/record_photo_decision.py
 ```
 
 - JSON 출력의 `status`와 `route`를 확인합니다. `promotion_suppressed_daily_limit: true`면 승격 대신 일일 기록만 남긴 것이므로 그 사실을 응답에 짧게 밝혀줍니다. API 요청이 전송된 뒤 타임아웃 등으로 결과가 불명확하면 자동 재실행하지 않습니다. 요청 ID·사용량을 확인하거나 사용자에게 확인한 뒤 재시도합니다.

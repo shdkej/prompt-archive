@@ -19,7 +19,7 @@ description: 앱·웹서비스의 시장 규모와 경쟁 구도를 조사한다
 
 ## 먼저 읽을 문서
 
-- `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/APP_WEB_RESEARCH_STATS_SOURCES.md`
+- `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/research/APP_WEB_RESEARCH_STATS_SOURCES.md`
 
 이 문서의 소스 목록과 지표별 우선순위를 기본값으로 쓴다.
 

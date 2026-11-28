@@ -39,7 +39,7 @@ intended paths, commit, non-force push, fetch the target branch, and prove the
 current commit is remote-visible. For Knowledge Lab operational changes, run:
 
 ```
-/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/verify_git_publish.sh \
+/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/runtime/verify_git_publish.sh \
   /home/ubuntu/workspace/knowledge-lab main -- <changed-path> ...
 ```
 
@@ -302,4 +302,4 @@ CMO + 프로젝트 오너: 결과와 고객/운영 증거를 반영해 다음 �
 
 - 원장: `/home/ubuntu/.openclaw/workspace/system/data/quality-gates/decisions.jsonl`
 - 형식: `{"date":"YYYY-MM-DD","id":"슬러그","decision":"채택안 한 줄","project":"프로젝트","source":"결론이 기록된 파일 경로"}`
-- 정본: `/home/ubuntu/.openclaw/workspace/system/docs/LIFE_SYSTEM_WORKFLOW_ARTIFACT.md` 지연 게이트 소절
+- 정본: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/reviews/LIFE_SYSTEM_WORKFLOW_ARTIFACT.md` 지연 게이트 소절

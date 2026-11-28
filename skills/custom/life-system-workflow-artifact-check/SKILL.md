@@ -79,7 +79,7 @@ description: 나·목표·에이전트·문서의 4레이어 운영 흐름을 �
 
 필수:
 
-- `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/LIFE_SYSTEM_WORKFLOW_ARTIFACT.md`
+- `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/reviews/LIFE_SYSTEM_WORKFLOW_ARTIFACT.md`
 - `/home/ubuntu/.openclaw/workspace/USER.md`
 - `/home/ubuntu/.openclaw/workspace/AGENTS.md`
 
@@ -205,8 +205,8 @@ Telegram/OpenClaw 출력은 짧은 섹션 + 불릿으로 작성한다. 표는 �
 - 내일 블록 조정:
 ```
 
-- 점검을 마치면 4지표 판정을 확인하되, `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/quality-gates/layer-check.jsonl`의 당일 라인은 밤 데일리 리뷰(23:00)만 append한다. 07:00 리캡/아침 점검은 당일 라인을 쓰지 않고, 어제 라인이 비어 있을 때만 정본 문서 기준으로 백필한다. 기록 형식의 정본은 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/LIFE_SYSTEM_WORKFLOW_ARTIFACT.md`의 필수 품질 게이트 섹션이다.
-- 이어서 지연 게이트(E1~E4)를 판정해 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/quality-gates/effectiveness.jsonl`에 append한다. 절차의 정본은 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/LIFE_SYSTEM_WORKFLOW_ARTIFACT.md`의 지연 게이트 소절이다.
+- 점검을 마치면 4지표 판정을 확인하되, `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/quality-gates/layer-check.jsonl`의 당일 라인은 밤 데일리 리뷰(23:00)만 append한다. 07:00 리캡/아침 점검은 당일 라인을 쓰지 않고, 어제 라인이 비어 있을 때만 정본 문서 기준으로 백필한다. 기록 형식의 정본은 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/reviews/LIFE_SYSTEM_WORKFLOW_ARTIFACT.md`의 필수 품질 게이트 섹션이다.
+- 이어서 지연 게이트(E1~E4)를 판정해 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/quality-gates/effectiveness.jsonl`에 append한다. 절차의 정본은 `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/reviews/LIFE_SYSTEM_WORKFLOW_ARTIFACT.md`의 지연 게이트 소절이다.
 
 ## 판정 기준
 

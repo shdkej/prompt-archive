@@ -23,7 +23,7 @@ description: ClawHub·Product Hunt 등에서 사용자 워크플로우에 맞는
 
 - **실행 규칙 정본: 이 파일** — 소스, 선별, 상한, 발송, 단언, 최종 라인까지 반복 실행의 전 계약.
 - **시각 템플릿 정본**: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/tool-curator/fixed-template-email.html` (canonical HTML) + `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/data/tool-curator/fixed-template.md` (잠금 규칙 요약). 색·구조·잔디 체계·모바일 padding 등 시각 디테일은 저 두 파일이 정답이며 여기 복제하지 않는다.
-- **사건 이력**: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/TOOL_CURATION_WORKFLOW.md` — 목적과 날짜별 장애/복구 기록. 규칙이 아니라 근거 보관소다.
+- **사건 이력**: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/content/TOOL_CURATION_WORKFLOW.md` — 목적과 날짜별 장애/복구 기록. 규칙이 아니라 근거 보관소다.
 - **점수 차원/저장된 워크플로우 형태**: `references/criteria.md`, `references/workflow.md`.
 
 ## 핵심 아이디어와 평가 기준

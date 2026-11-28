@@ -15,9 +15,9 @@ description: GPX 트랙이나 경로 XML을 Mapbox 지도 이미지로 렌더링
 
 ## Canonical Files
 
-- Renderer: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/render_gpx_mapbox_route.py`
+- Renderer: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/content/render_gpx_mapbox_route.py`
 - Output root: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/mapbox-route-tests/`
-- World travel ledger: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/WORLD_TRAVEL_PROJECT.md`
+- World travel ledger: `/home/ubuntu/workspace/knowledge-lab/source/openclaw-system/docs/projects/WORLD_TRAVEL_PROJECT.md`
 
 ## Workflow
 
@@ -27,7 +27,7 @@ description: GPX 트랙이나 경로 XML을 Mapbox 지도 이미지로 렌더링
 2. 스크립트로 렌더링합니다.
 
 ```bash
-python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/render_gpx_mapbox_route.py \
+python3 /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/content/render_gpx_mapbox_route.py \
   /path/to/source.gpx \
   --out /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/reports/mapbox-route-tests/<slug>.png \
   --theme atlas \

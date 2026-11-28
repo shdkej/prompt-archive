@@ -26,7 +26,7 @@ Use this skill before returning an Infinity intent ID or saying that an Infinity
 11. Run exactly:
 
    ```
-   /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/verify_git_publish.sh <prepared-checkout> main -- <all scoped intake paths>
+   /home/ubuntu/workspace/knowledge-lab/source/openclaw-system/scripts/runtime/verify_git_publish.sh <prepared-checkout> main -- <all scoped intake paths>
    ```
 
 12. Return the intent ID only after the script exits `0`. Preserve its local and remote SHA in the intent or intake record.
