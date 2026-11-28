@@ -26,6 +26,17 @@
       ]
     },
     {
+      "path": "skills/custom/harness-compare",
+      "scope": "shared",
+      "openclaw": [],
+      "codex": [
+        {
+          "name": "harness-compare",
+          "path": "skills/custom/harness-compare"
+        }
+      ]
+    },
+    {
       "path": "skills/custom/image-upload",
       "scope": "shared",
       "openclaw": [
@@ -1679,10 +1690,6 @@
     {
       "source": "INFINITY.md",
       "target": "skills/infinity/SKILL.md"
-    },
-    {
-      "source": "HARNESS_COMPARE.md",
-      "target": "skills/harness-compare/SKILL.md"
     },
     {
       "source": ".agent/workflows/workflow-master.md",

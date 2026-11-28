@@ -1,6 +1,6 @@
 ---
 name: harness-compare
-description: "GitHub 레포를 내 AI 시스템/설정과 비교 분석하는 스킬. Claude Code 하네스, 멀티에이전트 오케스트레이션, 자동 개선 시스템, AI 워크플로우, 프롬프트 엔지니어링 등 모든 AI 관련 레포 대상. GitHub URL이 주어지면 클론 → 분류 → 구조 분석 → 내 시스템과 비교 → 배울 점/독특한 접근 도출. 사용 시기 - (1) GitHub URL + 비교/분석/참고/어때 키워드, (2) '이 레포 분석해줘', (3) '내 설정이랑 비교해줘', (4) AI/에이전트/오케스트레이션/자동화 관련 레포 URL 언급 시."
+description: GitHub의 AI 하네스·에이전트·워크플로우 저장소를 사용자의 현재 설정과 비교하고, 구조 차이와 적용할 아이디어를 근거 파일과 함께 정리한다. 저장소 URL을 주며 내 설정과의 비교나 참고할 점을 요청할 때 사용한다.
 ---
 
 # Harness Compare — GitHub AI 시스템 비교 분석
@@ -13,7 +13,7 @@ GitHub의 AI 관련 레포를 클론하여 내 시스템과 비교 분석한다.
 | 유형 | 예시 | 비교 초점 |
 |------|------|----------|
 | Claude Code 하네스/설정 | 스킬, 에이전트, 훅 | 내 Claude Code 설정과 1:1 비교 |
-| 멀티에이전트 오케스트레이션 | CrewAI, AutoGen, LangGraph | 내 workflow-master/OMC 오케스트레이션과 패턴 비교 |
+| 멀티에이전트 오케스트레이션 | CrewAI, AutoGen, LangGraph | 내 workflow-master 오케스트레이션과 패턴 비교 |
 | 자동 개선/자율 시스템 | Auto-GPT, self-improving agents | 내 infinity/agent-first 시스템과 자율성 비교 |
 | AI 워크플로우/파이프라인 | LangChain, Haystack | 내 파이프라인 설계와 비교 |
 | 프롬프트/설정 아카이브 | awesome-prompts, dotfiles | 구조화/관리 방식 비교 |
@@ -28,7 +28,7 @@ GitHub의 AI 관련 레포를 클론하여 내 시스템과 비교 분석한다.
 
 ### Phase 1: 클론 및 분류
 
-1. `/tmp/{repo}-compare`에 shallow clone (`git clone --depth 1`)
+1. `mktemp -d` 등으로 이번 비교 전용 임시 디렉터리를 새로 만들고, 그 안에 shallow clone한다 (`git clone --depth 1`).
 2. 파일 트리 수집 (`find -type f`, `.git` 제외)
 3. **레포 유형 자동 판별** — 파일 패턴으로 분류:
 
@@ -93,12 +93,12 @@ GitHub의 AI 관련 레포를 클론하여 내 시스템과 비교 분석한다.
 
 ### Phase 3: 내 시스템 매칭
 
-타겟 유형에 따라 내 시스템의 대응 영역을 로드한다:
+타겟 유형에 따라 현재 설치된 비교 대상을 확인한다. 아래 경로와 도구는 후보이며, 확인된 설정만 비교에 쓴다.
 
 | 타겟 유형 | 내 시스템 비교 대상 |
 |----------|-------------------|
 | Claude Code 하네스 | `~/.claude/skills/`, `~/.claude/agents/`, `settings.json` |
-| 멀티에이전트 오케스트레이션 | workflow-master, OMC 에이전트 카탈로그, 팀 파이프라인 |
+| 멀티에이전트 오케스트레이션 | workflow-master, 역할별 워크플로우 문서, 팀 파이프라인 |
 | 자동 개선/자율 시스템 | infinity (agent-first), heartbeat, daily-feedback-system |
 | AI 워크플로우 | CLAUDE.md 워크플로우, 스킬 체이닝 구조 |
 | 프롬프트 아카이브 | prompt-archive 레포, 스킬 description 패턴 |
@@ -171,7 +171,7 @@ GitHub의 AI 관련 레포를 클론하여 내 시스템과 비교 분석한다.
 
 ### Phase 6: 정리
 
-1. `/tmp/{repo}-compare` 삭제
+1. 이번 비교에서 직접 생성한 임시 디렉터리만 정리한다.
 2. 보고서 요약 출력
 
 ## 에러 핸들링
@@ -189,4 +189,4 @@ GitHub의 AI 관련 레포를 클론하여 내 시스템과 비교 분석한다.
 - 타겟의 단점을 지적하지 않는다. "배울 점"과 "방향의 차이"만 구분한다
 - 내 시스템이 무조건 좋다고 가정하지 않는다. 객관적으로 비교한다
 - 분석 결과를 파일로 저장하지 않는다. 터미널 출력만 한다 (필요 시 사용자가 요청)
-- 타겟이 Python 프레임워크면 코드를 읽고 설계를 이해한다. 실행하지는 않는다
+- 비교 대상은 파일을 읽어 분석한다. 대상 저장소의 설치·실행은 비교 절차에 포함하지 않는다.
