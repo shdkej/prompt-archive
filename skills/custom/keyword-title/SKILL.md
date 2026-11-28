@@ -313,10 +313,10 @@ slug는 시드에서 핵심 명사 2~3개 추출 → kebab-case.
 
 ## 변경 정책
 
-- 공통 말투 피드백은 Prompt Archive의 [말투와 회고](../../../VOICE.md)에서 해당 기준을 갱신한다. 제목 모드별 점검 조건은 `references/tone.md`에서 관리한다.
+- 공통 말투 피드백은 Prompt Archive의 [말투와 회고](../../../WRITING.md#내-말투로-다듬기)에서 해당 기준을 갱신한다. 제목 모드별 점검 조건은 `references/tone.md`에서 관리한다.
 - 콘텐츠 신호 가중치가 바뀌면 → `references/signals-content.md` 수정
 - 유튜브 신호 가중치가 바뀌면 → `references/signals-youtube.md` 수정
 - 네이밍 신호 가중치가 바뀌면 → `references/signals-naming.md` 수정
 - 카테고리 추가/삭제는 → `references/naming-categories.md` 수정
-- 사분면 정의가 바뀌면 → `references/matrix.md` 수정 ([글쓰기 문서의 콘텐츠 맵](../../../WRITING_TECHNIQUES.md#블로그-콘텐츠-맵)과 동기화)
+- 사분면 정의가 바뀌면 → `references/matrix.md` 수정 ([글쓰기 문서의 콘텐츠 맵](../../../WRITING.md#블로그-콘텐츠-맵)과 동기화)
 - 이 SKILL.md 자체는 트리거·모드·흐름·출력 포맷만 다룬다. 세부 기준은 references에.

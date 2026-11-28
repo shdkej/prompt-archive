@@ -1648,8 +1648,12 @@
       "target": "TECH_SPEC.md"
     },
     {
-      "source": "TASTE.md",
-      "target": "TASTE.md"
+      "source": "DECISIONS.md",
+      "target": "DECISIONS.md"
+    },
+    {
+      "source": "WRITING.md",
+      "target": "WRITING.md"
     },
     {
       "source": "KOP.md",

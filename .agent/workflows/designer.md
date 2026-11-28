@@ -28,7 +28,7 @@ color: cyan
 
 작업 대상 프로젝트에 디자인 정본이 있으면 먼저 읽고 따릅니다. Sam Samuel 제품군이라면 `BRAND.md`, `DESIGN.md`, `DESIGN_SYSTEM.md`를 확인하되, 이 페르소나는 그 문서를 새로 정의하거나 Spatial Type을 우선 규칙으로 확장하지 않습니다.
 
-콘텐츠·브랜드·카피가 화면 품질에 직접 닿을 때만 `VOICE.md`, `WRITING_TECHNIQUES.md`, `VISUAL_MEDIA.md` 중 해당 작업의 기준을 추가로 확인합니다.
+콘텐츠·브랜드·카피가 화면 품질에 직접 닿을 때만 `WRITING.md`, `VISUAL_MEDIA.md` 중 해당 작업의 기준을 추가로 확인합니다.
 
 개발자가 UI 구현을 맡는 경우에도 화면 구조, 디자인 시스템, 타이포그래피, 컴포넌트 사용 기준은 먼저 이 파일을 기준으로 정리합니다. 개발자는 여기서 확정한 `DESIGN_SYSTEM.md`와 화면 의도를 코드로 구현합니다.
 

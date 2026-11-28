@@ -86,7 +86,7 @@ description: 프로덕트 제작 프로세스의 **메타 지휘자**입니다. 
 
 1. 마스터는 에이전트의 작업 결과와 워크플로우 로그를 분석하여 실패 패턴을 파악합니다
 2. 마스터가 해당 에이전트의 `.md` 파일에 교훈/규칙/체크리스트를 **직접 추가**합니다
-3. 수정 내용을 `~/.claude/TASTE.md`에도 기록하여 세션 간 맥락을 유지합니다
+3. 다른 작업에도 적용할 판단이면 `~/.claude/DECISIONS.md`의 해당 기준을 갱신합니다. 문장 표현에 대한 피드백은 `~/.claude/WRITING.md`에 반영합니다
 4. 다음 작업부터는 개선된 파일을 기반으로 동작하여 같은 실수를 반복하지 않습니다
 
 이를 통해 에이전트들은 작업을 거듭할수록 **실무에 더 익숙해지고**, 마스터의 개입이 점차 줄어듭니다.
@@ -203,7 +203,7 @@ Infinity/Virtue 마케팅 intent(`marketing-*`, activation, onboarding, retentio
 - Marketer prompt에 반드시 기존 `INTENTS.md` Archive 요약, `artifacts/marketing-*`, `reports/marketing-*/*.html`, 관련 Virtue `apps/web/docs/` 문서를 읽게 합니다.
 - Infinity에 `MARKETING_LEARNINGS.md`가 있으면 Marketer가 이 파일을 1순위로 읽게 합니다. 이 파일은 report 원문보다 높은 우선순위의 현재 마케팅 판단 원장입니다.
 - 새 산출물은 선행 산출물의 기준을 "계승"하거나 "수정"하는 방식으로 작성하게 하고, 충돌/변경 지점은 따로 표시하게 합니다.
-- Marketer가 반복 기준을 발견하면 `MARKETING_LEARNINGS.md`, `~/.claude/TASTE.md`, 또는 프로젝트 운영 문서에 승격할 후보를 반환하게 합니다.
+- Marketer가 반복 기준을 발견하면 `MARKETING_LEARNINGS.md`, `~/.claude/DECISIONS.md`, 또는 프로젝트 운영 문서에 승격할 후보를 반환하게 합니다.
 - 마케팅 report에는 `계승한 기준`, `이번에 새로 배운 것`, `다음 작업에 넘길 규칙`, `MARKETING_LEARNINGS.md 승격 후보` 섹션을 포함하게 합니다.
 - 특히 Virtue에서는 first value 매핑(J1/J2/J4=`deed_saved`, J3=`deed_judged`), `deed_save_capped`의 availability/friction 해석, synthetic/mock/self-test 제외, 작은 표본의 decision-grade 승격 금지를 기본 전제로 둡니다.
 - Marketer는 공개 카피, 가격, 계측, dashboard, session replay, 배포, 외부 발송, 비용, 권한, 개인정보 변경을 직접 실행하지 않고 proposal-only 또는 approval-needed로 분리합니다.
@@ -220,7 +220,7 @@ touch ~/.claude/logs/workflow_{날짜}_{프로젝트명}.log
 1. `~/workspace/prompt-archive/scripts/workflow-audit.sh` 실행 결과(SessionStart hook이 자동 출력)를 본다. 미봉인/미회수 후보는 이 출력이 정답이다 — 수동 grep으로 재스캔하지 않는다.
    - **INCOMPLETE 후보**: 닫는 `[END]`가 없거나 END가 INCOMPLETE이면서, 다른 로그가 `CONTINUES_FROM`으로 종결하지 않은 로그만 진짜 후보다(본문에 COMPLETE가 있거나 후속 로그가 닫았으면 오탐 — `[END] status=COMPLETE CLOSED_BY:{후속로그}`로 봉인만 한다).
    - 이어서 할지 물을 때 잔여 작업을 **[에이전트 실행 가능] / [사용자 전용]**으로 구분하고, 사용자 전용 항목은 1회만 알린 뒤 `[END] status=WAITING:USER`로 격하해 반복 질문을 멈춘다.
-2. 상시 로드된 `~/.claude/TASTE.md`(판단 원칙·글 톤·기술 함정)를 현재 작업에 대조해 관련 교훈 확인
+2. 상시 로드된 `~/.claude/DECISIONS.md`(판단 원칙·기술 함정)를 현재 작업에 대조해 관련 교훈 확인
 3. **산출물 운명 판정 (지연 측정)**: 직전 로그 하나가 아니라 **미회수 PENDING 잔액 전체**(audit 출력)를 대상으로 사용자에게 **1줄로** 물어 운명을 확정한다 (예: "지난번 3건 중 그대로 쓴 거 / 고친 거 / 버린 거?"). 응답을 `[WORKFLOW:FATE]`로 **해당 OUTPUT이 등록된 로그**에 같은 전역 id로 append하고 **채택/수정/폐기 비율**을 산출한다. 폐기율이 높으면 그 원인을 `[WORKFLOW:LEARNING]`으로 적재한다 (← 이 비율이 다음 행동을 바꾸는 지점). 90일 넘게 미회수인 PENDING은 묻지 않고 `EXPIRED`로 닫는다.
 
 ### 로그 태그
@@ -231,7 +231,7 @@ touch ~/.claude/logs/workflow_{날짜}_{프로젝트명}.log
 | --------------------- | ---------------------------------------- | ----------------------------------------------- |
 | `[WORKFLOW:CONTEXT]`  | 환경/제약/이전 워크플로우 관계가 있을 때 | `CONTINUES_FROM:` 으로 이전 로그 연결 가능      |
 | `[WORKFLOW:DECISION]` | 방향전환(Pivot) 시, 수렴 시 제안 기각    | 상황, 선택지, 결정, 근거를 기록. 검토 단계에서 쳐낸 제안은 `rejected={역할}:{N}`으로 카운트 — 폐기는 여기서 측정된다 |
-| `[WORKFLOW:LEARNING]` | 재사용 가능한 교훈 발생 시               | `~/.claude/TASTE.md`에 적재. `#{카테고리}` 태깅 |
+| `[WORKFLOW:LEARNING]` | 재사용 가능한 교훈 발생 시               | `~/.claude/DECISIONS.md`에 적재. `#{카테고리}` 태깅 |
 | `[WORKFLOW:METRICS]`  | 종료 시 정량 요약                        | 허영 지표(산출물 수·리뷰 건수) 지양. **채택/수정/폐기 비율** 등 다음 결정을 바꾸는 지표 우선 |
 | `[WORKFLOW:OUTPUT]`   | 종료 시 산출물마다                       | `id={MMDD}-{주제}-m1 status=PENDING "{설명}"`. id는 전역 유일(파일 간 매칭용). 운명은 다음 세션에 확정 (지연 측정). 단 `VERIFY:*-LIVE PASS` 등 라이브 검증을 통과한 산출물은 묻지 않고 `status=ADOPTED`로 즉시 등록 |
 | `[WORKFLOW:FATE]`     | 다음 세션 시작 시 운명 확정              | `id={전역id} {ADOPTED\|MODIFIED\|DISCARDED\|EXPIRED}` + 채택/수정/폐기 비율. OUTPUT이 등록된 로그에 append |
@@ -249,7 +249,7 @@ touch ~/.claude/logs/workflow_{날짜}_{프로젝트명}.log
 
 ### 교훈 적재
 
-`[WORKFLOW:LEARNING]` 태그가 있으면 워크플로우 종료 시 `~/.claude/TASTE.md`에 §0 적재 규칙(분류 게이트 → 단일 템플릿 → 섹션 끝 append)대로 추가합니다. 적재 직후 줄 수를 확인해 **600줄을 넘으면 같은 세션에서 압축을 제안**합니다.
+`[WORKFLOW:LEARNING]` 태그가 있으면 워크플로우 종료 시 `~/.claude/DECISIONS.md`에 §0 적재 규칙(분류 게이트 → 단일 템플릿 → 섹션 끝 append)대로 추가합니다. 적재 직후 줄 수를 확인해 **600줄을 넘으면 같은 세션에서 압축을 제안**합니다.
 
 **상세 가이드:** `WORKFLOW-DEBUG-GUIDE.md` 참조
 
